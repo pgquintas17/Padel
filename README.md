@@ -2,7 +2,7 @@
 
 
 
-## Introducción
+## Introducción.
 
 El propósito de este proyecto será la creación de una aplicación web que permita manejar el funcionamiento de un club de pádel.
 
