@@ -1,0 +1,148 @@
+/*=-footer-=*/
+	footer {
+		color: #fff;
+		background-attachment: fixed;
+		background-color:#222;
+        background-image: url(https://s7.postimg.org/uyf0oioaz/footer-bg.png);
+		background-size: cover;
+		background-position: bottom;
+		width: 100%;
+	}
+	footer p {
+		color: #ccc;				
+	}
+	footer a {
+		color: #ccc;				
+	}
+	.social-pet li {
+		display: inline-block;
+		margin-right: 10px;
+	}
+	.social-pet li a {
+		height: 35px;
+		width: 35px;
+		border-radius: 50%;
+		text-align: center;
+		display: block;
+		line-height: 35px;
+		background-color: #3a5a95;
+		color: #fff;
+	}
+	.social-pet li:nth-child(2) a {
+		background-color: #57aced;
+	}
+	.social-pet li:nth-child(3) a {
+		background-color: #dd4f43;
+	}
+	.social-pet li:nth-child(4) a {
+		background-color: #6b27b2;
+	}
+	.social-pet li a:hover {
+		background-color: #0141a2;
+	}
+	.social-pet li a:hover i {
+		transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+	}
+	.f-address li {
+		display: inline-block;
+	}
+	.f-address li i {
+		color: #2995de;
+		font-size: 18px;
+	}
+	.f-address li a {
+		color: #ccc;
+	}
+	/*=-Copyright-=*/
+	.copyright {
+		background-color: #111;
+		padding: 12px 0;
+        font-size:14px;
+	}
+
+	/*=-Nav-=*/
+	/* Change this breakpoint if you change the breakpoint of the navbar */
+
+	header nav a {
+		color: #ccc;
+		font-weight: bold;
+	}
+
+	header a:hover {
+		color: #fff;
+		font-weight: bolder;
+	}
+
+	@media (min-width: 992px) {
+		.animate {
+		  animation-duration: 0.3s;
+		  -webkit-animation-duration: 0.3s;
+		  animation-fill-mode: both;
+		  -webkit-animation-fill-mode: both;
+		}
+	  }
+	  
+	  @keyframes slideIn {
+		0% {
+		  transform: translateY(1rem);
+		  opacity: 0;
+		}
+		100% {
+		  transform:translateY(0rem);
+		  opacity: 1;
+		}
+		0% {
+		  transform: translateY(1rem);
+		  opacity: 0;
+		}
+	  }
+	  
+	  @-webkit-keyframes slideIn {
+		0% {
+		  -webkit-transform: transform;
+		  -webkit-opacity: 0;
+		}
+		100% {
+		  -webkit-transform: translateY(0);
+		  -webkit-opacity: 1;
+		}
+		0% {
+		  -webkit-transform: translateY(1rem);
+		  -webkit-opacity: 0;
+		}
+	  }
+	  
+	  .slideIn {
+		-webkit-animation-name: slideIn;
+		animation-name: slideIn;
+	  }
+
+	  /*=-Formulario-=*/
+
+	  #formulario{
+		position: relative;
+		left: 10%;
+		width: 80%;
+		display: block;
+		padding: 20px;
+		border-style: double;
+		background-color: gainsboro;
+			/*#70a4b1;*/
+		box-shadow: -5px -5px #888;
+		margin-top: 20px;
+		
+	}
+
+	html {
+		height: 100%;
+		width: 100%;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	body {
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+	}
