@@ -217,7 +217,7 @@ FOREIGN KEY(`ID_PISTA`) REFERENCES `pista` (`ID_PISTA`)
 CREATE TABLE `enfrentamiento` (
   `ID_ENFRENTAMIENTO` int(45) NOT NULL AUTO_INCREMENT,
   `RESULTADO` varchar(3) COLLATE latin1_spanish_ci DEFAULT NULL,
-  `FECHA` datetime NOT NULL,
+  `FECHA` date DEFAULT NULL,
   `HORA` time DEFAULT NULL,
   `SET1` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
   `SET2` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
