@@ -14,20 +14,6 @@ SET time_zone = "+00:00";
 
 
 
-
-
-
--- ------------------------------REVISAR NULLS AUTOGENERAR IDs
-
-
-
-
-
-
-
-
-
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -71,7 +57,7 @@ CREATE TABLE `usuario` (
 --
 
 CREATE TABLE `pista` (
-  `ID_PISTA` int(45)  NOT NULL AUTO_INCREMENT,
+  `ID_PISTA` int(45)  NOT NULL,
   `ESTADO` tinyint(1) NOT NULL,
 
 PRIMARY KEY(`ID_PISTA`)  
@@ -97,7 +83,7 @@ CREATE TABLE `horas` (
 --
 -- Estructura de tabla para la tabla `campeonato`
 --
--- -------------------------------------------------------------------FALTA EL AUTO GENERAR IDS
+
 CREATE TABLE `campeonato` (
   `ID_CAMPEONATO` int(45) NOT NULL AUTO_INCREMENT,
   `NOMBRE` varchar(45) COLLATE latin1_spanish_ci NOT NULL,
@@ -168,13 +154,9 @@ FOREIGN KEY(`ID_CATEGORIA`) REFERENCES `categoria` (`ID_CATEGORIA`)
 
 CREATE TABLE `grupo` (
   `ID_GRUPO` int(45) NOT NULL AUTO_INCREMENT,
-  `ID_CAMPEONATO` int(45) NOT NULL,
-  `ID_CATEGORIA` int(45) NOT NULL,
   `ID_CATCAMP` int(45) NOT NULL,
 
 PRIMARY KEY (`ID_GRUPO`),
-FOREIGN KEY(`ID_CAMPEONATO`) REFERENCES `campeonato` (`ID_CAMPEONATO`),
-FOREIGN KEY(`ID_CATEGORIA`) REFERENCES `categoria` (`ID_CATEGORIA`),
 FOREIGN KEY(`ID_CATCAMP`) REFERENCES `campeonato_categoria` (`ID_CATCAMP`)
 
 
@@ -190,14 +172,13 @@ CREATE TABLE `pareja` (
   `NOMBRE_PAREJA` varchar(25) COLLATE latin1_spanish_ci NOT NULL,
   `CAPITAN` varchar(45) COLLATE latin1_spanish_ci NOT NULL,
   `MIEMBRO` varchar(45) COLLATE latin1_spanish_ci NOT NULL,
-  `ID_CATEGORIA` int(45) DEFAULT NULL,
+  `FECHA_INSCRIP` datetime NOT NULL,
   `ID_GRUPO` int(45) DEFAULT NULL,
   `ID_CATCAMP` int(45) NOT NULL,
 
 PRIMARY KEY (`ID_PAREJA`),
 FOREIGN KEY(`CAPITAN`) REFERENCES `usuario` (`LOGIN`),
 FOREIGN KEY(`MIEMBRO`) REFERENCES `usuario` (`LOGIN`),
-FOREIGN KEY(`ID_CATEGORIA`) REFERENCES `categoria` (`ID_CATEGORIA`),
 FOREIGN KEY(`ID_GRUPO`) REFERENCES `grupo` (`ID_GRUPO`),
 FOREIGN KEY(`ID_CATCAMP`) REFERENCES `campeonato_categoria` (`ID_CATCAMP`)
 
