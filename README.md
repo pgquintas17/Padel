@@ -33,12 +33,12 @@ La implementación de la aplicación se llevará a cabo usando el modelo vista-c
 
 ## Cambios Paula:
 
-- [ ] Eliminar comentarios modelos
-- [ ] Eliminar método SEARCH() y añadir mostrarTodos()
+- [x] Eliminar comentarios modelos
+- [x] Eliminar método SEARCH() y añadir mostrarTodos()
 - [ ] Función crearFiltros()
-- [ ] Función consultarDatos()
+- [x] Función consultarDatos()
 - [ ] Función generarGrupos()
-- [ ] Modificar métodos ADD() cuando el id es autogenerado
-- [ ] Repasar atributos de todas los modelos
+- [x] Modificar métodos ADD() cuando el id es autogenerado
+- [x] Repasar atributos de todas los modelos
 - [ ] Crear objetos tipo Set (preguntar alfonso)
-- [ ] Eliminar PAREJACAMPEONATO_MODEL.php
+- [x] Eliminar PAREJACAMPEONATO_MODEL.php
