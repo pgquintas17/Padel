@@ -11,8 +11,6 @@ class RESERVA_MODEL
 	var $bd; 
 	
 
-
-
  	function __construct($id_reserva,$id_pista,$hora,$fecha,$login){
         $this->id_reserva = $id_reserva;
         $this->id_pista = $id_pista; 
@@ -24,148 +22,104 @@ class RESERVA_MODEL
 	}
 
 	
+	function ADD() {
+
+		$sql = "INSERT RESERVA (
+                    id_pista,
+                    hora,
+                    fecha,
+                    login
+				)
+				VALUES (
+                    '$this->id_pista',
+                    '$this->hora',
+                    '$this->fecha',
+                    '$this->login'
+				)";
+
+		if (!$this->mysqli->query($sql)) 
+			return 'Error en la inserción';
+		else
+			return 'Inserción realizada con éxito'; 
+
+	}
 	
 
-	function ADD(){
-
-
-		if (($this->id_reserva <> '')){ 
-
-		
-        $sql = "SELECT * FROM RESERVA WHERE (id_reserva = '$this->id_reserva')";
-
-		if (!$result = $this->mysqli->query($sql)){ 
-			return 'No se ha podido conectar con la base de datos'; 
-		}
-		else { 
-			if ($result->num_rows == 0){ 
-				
-				$sql = "INSERT RESERVA (
-					        id_reserva,
-                            id_pista,
-                            hora,
-                            fecha,
-                            login
-					    )
-						VALUES (
-						    '$this->id_reserva',
-                            '$this->id_pista',
-                            '$this->hora',
-                            '$this->fecha',
-                            '$this->login'
-						)";
-
-
-				if (!$this->mysqli->query($sql)) { 
-					return 'Error en la inserción';
-				}
-				else{ 
-					return 'Inserción realizada con éxito'; 
-				}
-
+	function crearFiltros($filtros) {
+		$toret = "( ";
+		int n = 
+		foreach($filtros as $filtro) {
+			switch($filtro) {
+				case "id_pista":
+					$toret .= "(id_pista LIKE '%$this->id_pista%')";
+					break;
+				case "hora":
+					$toret .= "(hora LIKE '%$this->hora%')";
+					break;
+				case "fecha":
+					$toret .= "(fecha LIKE '%$this->fecha%')";
+					break;
+				case "login":
+					$toret .= "(login LIKE '%$this->login%')";
+					break;
 			}
-			else 
-				return 'Ya existe en la base de datos'; 
+			$toret .= " && ";
 		}
-    }
-    else{ 
+		$toret = chop($toret," && ");
+		$toret .= " )";
 
-        return 'Introduzca un valor'; 
+		$sql = "select * from RESERVA where " . $toret;
 
-	}
-
-    }
-    
-
-	
-	
-
-
-	function SEARCH()
-{ 	
-    $sql = "select 
-                id_reserva,
-                id_pista,
-                hora,
-                fecha,
-                login,
-                id_grupo
-
-       	    from RESERVA where
-
-                    ( (id_reserva LIKE '%$this->id_reserva%') &&
-                      (id_pista LIKE '%$this->id_pista%') &&
-                      (hora LIKE '%$this->hora%') &&
-                      (fecha LIKE '%$this->fecha%') &&
-                      (login LIKE '%$this->login%') )";
-
-    
-    if (!($resultado = $this->mysqli->query($sql))){
-		return 'Error en la consulta sobre la base de datos';
-	}
-    else{ 
-		return $resultado;
-	}
-} 
-
-function crearFiltros($filtros) {
-	$toret = ""
-	foreach($filtros as $filtro) {
-		switch($filtro) {
-			case 
+    	if (!($resultado = $this->mysqli->query($sql))) {
+			return 'Error en la consulta sobre la base de datos';
 		}
+    	else 
+			return $resultado;
 	}
-}
 
 
-
-
-
+	function mostrarTodos() {
 		
-		
-		
-		function DELETE()
-		{	
-		    $sql = "SELECT * FROM RESERVA  WHERE (id_reserva = '$this->id_reserva') ";
+		$sql = "select * from RESERVA";
+
+    	if (!($resultado = $this->mysqli->query($sql)))
+			return 'Error en la consulta sobre la base de datos';
+    	else
+			return $resultado;
+	}
+
+			
+	function DELETE() {	
+
+		$sql = "SELECT * FROM RESERVA  WHERE (id_reserva = '$this->id_reserva') ";    
+		$result = $this->mysqli->query($sql);
+
+		if (!$result)
+    		return 'No se ha podido conectar con la base de datos';
 		    
-		    $result = $this->mysqli->query($sql);
-		    
-		    if ($result->num_rows == 1)
-		    {
+		if ($result->num_rows == 1) {
 		    	
-		        $sql = "DELETE FROM RESERVA WHERE (id_reserva = '$this->id_reserva')";
+		    $sql = "DELETE FROM RESERVA WHERE (id_reserva = '$this->id_reserva')";    
+		    $this->mysqli->query($sql);
 		        
-		        $this->mysqli->query($sql);
-		        
-		    	return "Borrado correctamente";
-		    } 
-		    else
-		        return "No existe";
+		    return "Borrado correctamente";
 		} 
+		else
+		    return "No existe";
+	} 
 
 		
-		
-		
-		function RellenaDatos()
-		{	
-		    $sql = "SELECT * FROM RESERVA WHERE (id_reserva = '$this->id_reserva')";
+	function consultarDatos() {
+			
+		$sql = "SELECT * FROM RESERVA WHERE (id_reserva = '$this->id_reserva')";
 		    
-		    if (!($resultado = $this->mysqli->query($sql))){
-				return 'No existe en la base de datos'; 
-			}
-		    else{ 
-				$result = $resultado->fetch_array();
-				return $result;
-			}
-        } 
-        
-
-        function reservaUsuario()
-        {
-            $sql = "SELECT * FROM RESERVA WHERE (login = '$this->login')"; 
-            $resultado = $this->mysqli->query($sql);
-            return $resultado->fetch_array();
-        } 
+		if (!($resultado = $this->mysqli->query($sql)))
+			return 'No existe en la base de datos'; 
+		else{ 
+			$result = $resultado->fetch_array();
+			return $result;
+		}
+    }  
 
 }
 
