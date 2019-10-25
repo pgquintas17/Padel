@@ -191,6 +191,7 @@ FOREIGN KEY(`ID_CATCAMP`) REFERENCES `campeonato_categoria` (`ID_CATCAMP`)
 
 CREATE TABLE `partido` (
   `ID_PARTIDO` int(45) NOT NULL AUTO_INCREMENT,
+  `RESULTADO` varchar(3) COLLATE latin1_spanish_ci DEFAULT NULL,
   `HORA` time NOT NULL,
   `FECHA` date NOT NULL,
   `PROMOCION` tinyint(1) NOT NULL,
