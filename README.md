@@ -35,10 +35,10 @@ La implementación de la aplicación se llevará a cabo usando el modelo vista-c
 
 - [x] Eliminar comentarios modelos
 - [x] Eliminar método SEARCH() y añadir mostrarTodos()
-- [ ] Función crearFiltros()
+- [x] Función crearFiltros()
 - [x] Función consultarDatos()
 - [ ] Función generarGrupos()
 - [x] Modificar métodos ADD() cuando el id es autogenerado
-- [x] Repasar atributos de todas los modelos
+- [ ] Repasar atributos de todas los modelos
 - [ ] Crear objetos tipo Set (preguntar alfonso)
 - [x] Eliminar PAREJACAMPEONATO_MODEL.php
