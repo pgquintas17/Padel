@@ -114,7 +114,43 @@ class CAMPEONATO_MODEL
 			$result = $resultado->fetch_array();
 			return $result;
 		}
-    }
+	}
+	
+
+	function crearFiltros($filtros) {
+		$toret = "( ";
+		int n = 
+		foreach($filtros as $filtro) {
+			switch($filtro) {
+				case "nombre":
+					$toret .= "(nombre LIKE '%$this->nombre%')";
+					break;
+				case "fecha_inicio":
+					$toret .= "(fecha_inicio LIKE '%$this->fecha_inicio%')";
+					break;
+				case "fecha_fin":
+					$toret .= "(fecha_fin LIKE '%$this->fecha_fin%')";
+					break;
+					case "fecha_inicio_inscripciones":
+					$toret .= "(fecha_inscipciones LIKE '%$this->fecha_inicio_inscripciones%')";
+					break;
+				case "fecha_fin_inscripciones":
+					$toret .= "(fecha_fin_inscripciones LIKE '%$this->fecha_fin_inscripciones%')";
+					break;
+			}
+			$toret .= " && ";
+		}
+		$toret = chop($toret," && ");
+		$toret .= " )";
+
+		$sql = "select * from CAMPEONATO where " . $toret;
+
+    	if (!($resultado = $this->mysqli->query($sql))) {
+			return 'Error en la consulta sobre la base de datos';
+		}
+    	else 
+			return $resultado;
+	}
 
 }
 

@@ -99,7 +99,28 @@ class PISTA_MODEL
     }
 
 
+	function crearFiltros($filtros) {
+		$toret = "( ";
+		int n = 
+		foreach($filtros as $filtro) {
+			switch($filtro) {
+				case "estado":
+					$toret .= "(estado LIKE '%$this->estado%')";
+					break;
+			}
+			$toret .= " && ";
+		}
+		$toret = chop($toret," && ");
+		$toret .= " )";
 
+		$sql = "select * from PISTA where " . $toret;
+
+    	if (!($resultado = $this->mysqli->query($sql))) {
+			return 'Error en la consulta sobre la base de datos';
+		}
+    	else 
+			return $resultado;
+	}
 
 
 }

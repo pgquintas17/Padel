@@ -135,7 +135,42 @@ class ENFRENTAMIENTO_MODEL
 			$result = $resultado->fetch_array();
 			return $result;
 		}
-    }
+	}
+	
+
+	function crearFiltros($filtros) {
+		$toret = "( ";
+		int n = 
+		foreach($filtros as $filtro) {
+			switch($filtro) {
+				case "fecha":
+					$toret .= "(fecha LIKE '%$this->fecha%')";
+					break;
+				case "pareja1":
+					$toret .= "((pareja1 LIKE '%$this->pareja1%')";
+					$toret .= " | (pareja2 LIKE '%$this->pareja1%'))";
+					break;
+				case "pareja2":
+					$toret .= "((pareja1 LIKE '%$this->pareja2%')";
+					$toret .= " | (pareja2 LIKE '%$this->pareja2%'))";
+					break;
+				case "id_pista":
+					$toret .= "(id_pista LIKE '%$this->id_pista%')";
+					break;
+			}
+			$toret .= " && ";
+		}
+		$toret = chop($toret," && ");
+		$toret .= " )";
+
+		$sql = "select * from ENFRENTAMIENTO where " . $toret;
+
+    	if (!($resultado = $this->mysqli->query($sql))) {
+			return 'Error en la consulta sobre la base de datos';
+		}
+    	else 
+			return $resultado;
+	}
 
 
 

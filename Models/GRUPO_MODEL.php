@@ -94,7 +94,31 @@ class GRUPO_MODEL
 			$result = $resultado->fetch_array();
 			return $result;
 		}
-    } 
+	}
+	
+	
+	function crearFiltros($filtros) {
+		$toret = "( ";
+		int n = 
+		foreach($filtros as $filtro) {
+			switch($filtro) {
+				case "id_catcamp":
+					$toret .= "(id_catcamp LIKE '%$this->id_catcamp%')";
+					break;
+			}
+			$toret .= " && ";
+		}
+		$toret = chop($toret," && ");
+		$toret .= " )";
+
+		$sql = "select * from GRUPO where " . $toret;
+
+    	if (!($resultado = $this->mysqli->query($sql))) {
+			return 'Error en la consulta sobre la base de datos';
+		}
+    	else 
+			return $resultado;
+	}
 
 
 }
