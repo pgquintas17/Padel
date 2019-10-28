@@ -106,7 +106,7 @@ PRIMARY KEY (`ID_CAMPEONATO`)
 CREATE TABLE `categoria` (
   `ID_CATEGORIA` int(45) NOT NULL AUTO_INCREMENT,
   `SEXO` varchar(2) COLLATE latin1_spanish_ci NOT NULL,
-  `NIVEL` varchar(45) COLLATE latin1_spanish_ci NOT NULL,
+  `NIVEL` int(1) COLLATE latin1_spanish_ci NOT NULL,
 
 PRIMARY KEY (`ID_CATEGORIA`)
 
@@ -220,9 +220,9 @@ CREATE TABLE `enfrentamiento` (
   `RESULTADO` varchar(3) COLLATE latin1_spanish_ci DEFAULT NULL,
   `FECHA` date DEFAULT NULL,
   `HORA` time DEFAULT NULL,
-  `SET1` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
-  `SET2` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
-  `SET3` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `SET1` varchar(3) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `SET2` varchar(3) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `SET3` varchar(3) COLLATE latin1_spanish_ci DEFAULT NULL,
   `PAREJA1` int(45) NOT NULL,
   `PAREJA2` int(45) NOT NULL,
   `ID_PISTA` int(45) DEFAULT NULL,
