@@ -36,7 +36,7 @@ CREATE TABLE `usuario` (
   `APELLIDOS` varchar(45) COLLATE latin1_spanish_ci NOT NULL,
   `PASSWORD` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
   `FECHA_NAC` date NOT NULL,
-  `TELEFONO` varchar(21) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `TELEFONO` varchar(21) COLLATE latin1_spanish_ci NOT NULL,
   `EMAIL` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
   `GENERO` varchar(9) COLLATE latin1_spanish_ci NOT NULL,
   `PERMISO` int(1) NOT NULL,
@@ -150,6 +150,7 @@ FOREIGN KEY(`ID_CATEGORIA`) REFERENCES `categoria` (`ID_CATEGORIA`)
 CREATE TABLE `grupo` (
   `ID_GRUPO` int(45) NOT NULL AUTO_INCREMENT,
   `ID_CATCAMP` int(45) NOT NULL,
+  `N_PAREJAS` int(2) NOT NULL,
 
 PRIMARY KEY (`ID_GRUPO`),
 FOREIGN KEY(`ID_CATCAMP`) REFERENCES `campeonato_categoria` (`ID_CATCAMP`)
