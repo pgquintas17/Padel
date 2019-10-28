@@ -22,15 +22,10 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `padelweb`
 --
-
--- --------------------------------------------------------
+--
 DROP DATABASE IF EXISTS `padelweb`;
 CREATE DATABASE `padelweb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-
-
-
--- --------------------------------------------------------
-
+USE `padelweb`; 
 --
 -- Estructura de tabla para la tabla `usuario`
 --
@@ -206,7 +201,7 @@ FOREIGN KEY(`LOGIN1`) REFERENCES `usuario` (`LOGIN`),
 FOREIGN KEY(`LOGIN2`) REFERENCES `usuario` (`LOGIN`),
 FOREIGN KEY(`LOGIN3`) REFERENCES `usuario` (`LOGIN`),
 FOREIGN KEY(`LOGIN4`) REFERENCES `usuario` (`LOGIN`),
-FOREIGN KEY(`ID_PISTA`) REFERENCES `pista` (`ID_PISTA`)
+FOREIGN KEY(`ID_RESERVA`) REFERENCES `reserva` (`ID_RESERVA`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
@@ -226,11 +221,13 @@ CREATE TABLE `enfrentamiento` (
   `PAREJA1` int(45) NOT NULL,
   `PAREJA2` int(45) NOT NULL,
   `ID_RESERVA` int(45) DEFAULT NULL,
+  `ID_GRUPO` int(45) NOT NULL,
 
 PRIMARY KEY (`ID_ENFRENTAMIENTO`),
 FOREIGN KEY(`PAREJA1`) REFERENCES `pareja` (`ID_PAREJA`),
 FOREIGN KEY(`PAREJA2`) REFERENCES `pareja` (`ID_PAREJA`),
-FOREIGN KEY(`ID_PISTA`) REFERENCES `pista` (`ID_PISTA`)
+FOREIGN KEY(`ID_RESERVA`) REFERENCES `reserva` (`ID_PISTA`),
+FOREIGN KEY(`ID_GRUPO`) REFERENCES `grupo` (`ID_GRUPO`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
