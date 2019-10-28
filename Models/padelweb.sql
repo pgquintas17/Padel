@@ -199,7 +199,7 @@ CREATE TABLE `partido` (
   `LOGIN2` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
   `LOGIN3` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
   `LOGIN4` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
-  `ID_PISTA` int(45) DEFAULT NULL,
+  `ID_RESERVA` int(45) DEFAULT NULL,
 
 PRIMARY KEY (`ID_PARTIDO`),
 FOREIGN KEY(`LOGIN1`) REFERENCES `usuario` (`LOGIN`),
@@ -225,7 +225,7 @@ CREATE TABLE `enfrentamiento` (
   `SET3` varchar(3) COLLATE latin1_spanish_ci DEFAULT NULL,
   `PAREJA1` int(45) NOT NULL,
   `PAREJA2` int(45) NOT NULL,
-  `ID_PISTA` int(45) DEFAULT NULL,
+  `ID_RESERVA` int(45) DEFAULT NULL,
 
 PRIMARY KEY (`ID_ENFRENTAMIENTO`),
 FOREIGN KEY(`PAREJA1`) REFERENCES `pareja` (`ID_PAREJA`),
