@@ -9,7 +9,7 @@
 
   <link type="text/css" rel="stylesheet" href="bootstrap/css/custom.css">
 
-  <link type="text/css" rel="stylesheet" href="./Views/css/custom.css">
+  <link type="text/css" rel="stylesheet" href="../Views/css/custom.css">
 
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
@@ -32,10 +32,10 @@
           <ul class="navbar-nav ml-auto">
             <button type="button" class="btn btn-dark">
             <a class="nav-link" style="margin-top: 0,75%; font-size: 120%" href="#">Inicio</a>
-            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acceder">
-            <a class="nav-link" style="margin-top: 0,75%; font-size: 120%; "  data-toggle="modal" data-target="#acceder" href="#">Mi zona</a>
-            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acceder">
-            <a class="nav-link" style="margin-top: 0,75%; font-size: 120%; "  data-toggle="modal" data-target="#acceder" href="#">Reservar</a>
+            <button type="button" class="btn btn-dark" data-toggle="modal" >
+            <a class="nav-link" style="margin-top: 0,75%; font-size: 120%; "  data-toggle="modal"  href="#">Mi zona</a>
+            <button type="button" class="btn btn-dark" data-toggle="modal" >
+            <a class="nav-link" style="margin-top: 0,75%; font-size: 120%; "  data-toggle="modal" href="#">Reservar</a>
 
 
             
@@ -45,12 +45,12 @@
     
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
-                    <a class="navbar-brand" style="margin-top: 3%;"  data-toggle="modal" data-target="#acceder" href="#">Acceder</a>
+                    <a class="navbar-brand" style="margin-top: 3%;"  data-toggle="modal"  href="#">Login</a>
 
             <!--Si está conectado-->
             <li class="nav-item">
               <!--perfil-->
-              <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acceder">
+              <button type="button" class="btn btn-dark" data-toggle="modal" >
               <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
             </li>
             
@@ -102,70 +102,178 @@
 
 
 
+
+
+
+
+
+
          <!-- Jumbotron -->
-      <div  id="espacio_info" class="jumbotron">
-        <h1>Noticias</h1>
-
-
-
- <!-- Slide -->
-      <div style=" margin-bottom: 10px; height:10%; width: 20%;" id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-
-        <div class="carousel-inner">
-          <div id="fotoSlide" class="carousel-item active">
-            <img class="d-block w-100" src="Img/nubes.png" alt="First slide">
-          </div>
-        <div id="fotoSlide" class="carousel-item">
-            <img class="d-block w-100" src="Img/Foto2.jpg" alt="Second slide">
-        </div>
-        <div id="fotoSlide" class="carousel-item">
-          <img class="d-block w-100" src="Img/Foto3.jpg" alt="Third slide">
-        </div>
-        </div>
-
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-    </div>
-
-    <!-- FIn de slide -->
+    <div  id="espacio_info" class="jumbotron">
+        <h1 style="margin-top: 1%">Mi zona</h1>
 
 
 
 
 
       <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-lg-4">
-          <h2>¡Hazte socio!</h2>
-          <p id="centrar" class="text-danger">¡Plazas limitadas!</p>
-          <p id="justificar">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna. </p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+      <div style="margin-top: 2.5%; padding: 1%" class="row">
+
+
+        <div class="col-lg-3" id="espaciozona">
+          <h2 style="margin-bottom: 10%">Usuarios <img height="30" width="30" src="../Icons/user.png"></h2>
+
+          <ul class="nav flex-column" id="menuzona">
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Añadir usuario</a>
+            </li>
+            <br>
+
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Ver usuarios</a>
+            </li>
+            <br>
+
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Borrar usuario</a>
+            </li>
+            
+          </ul>
+          
         </div>
-        <div class="col-lg-4">
-          <h2>Nuevos campeonatos</h2>
-          <p id="justificar">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+
+
+
+      <div class="col">
+        </div>
+
+
+
+        <div class="col-lg-3" id="espaciozona">
+          <h2 style="margin-bottom: 10%">Reservas <img height="30" width="30" src="../Icons/book.png"></h2>
+         
+          <ul class="nav flex-column" id="menuzona">
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Añadir reserva</a>
+            </li>
+            <br>
+
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Ver reservas</a>
+            </li>
+            <br>
+
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Borrar reserva</a>
+            </li>
+            
+          </ul>
        </div>
-        <div class="col-lg-4">
-          <h2>Nuevas reglas</h2>
-          <p id="justificar">Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+
+
+
+       <div class="col" >
         </div>
+
+
+
+
+
+       <div class="col-lg-3" id="espaciozona">
+          <h2 style="margin-bottom: 10%">Campeonatos <img height="20" width="20" src="../Icons/trophy.png"></h2>
+          
+          <ul class="nav flex-column" id="menuzona">
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Añadir campeonato</a>
+            </li>
+            <br>
+
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Ver campeonatos</a>
+            </li>
+            <br>
+
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Borrar campeonato</a>
+            </li>
+            
+          </ul>
+        </div>
+
+     
+      </div>
+
+        
+      <div style="margin-top: 2.5%; padding: 1%" class="row">
+
+
+
+        <div class="col-lg-3" id="espaciozona">
+          <h2 style="margin-bottom: 10%">Partidos <img height="30" width="30" src="../Icons/ball.png"></h2>
+
+          <ul class="nav flex-column" id="menuzona">
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Añadir partido</a>
+            </li>
+            <br>
+
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Ver partidos</a>
+            </li>
+            <br>
+
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Borrar partido</a>
+            </li>
+            
+          </ul>
+          
+        </div>
+
+
+<div class="col" >
+        </div>
+        
+
+
+
+        
+      <div class="col-lg-3" id="espaciozona">
+          <h2 style="margin-bottom: 10%">Pistas <img height="30" width="30" src="../Icons/court.png"></h2>
+
+          <ul class="nav flex-column" id="menuzona">
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Añadir pista</a>
+            </li>
+            <br>
+
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Ver pistas</a>
+            </li>
+            <br>
+
+            <li class="nav-item">
+              <a class="btn btn-dark" href="#">+Borrar pista</a>
+            </li>
+            
+          </ul>
+          
+        </div>
+
+
+        <div class="col" >
+        </div>
+       <div class="col-lg-3" >
+        </div>
+
+        
+
       </div>
         
-      </div>
+
+
+
+    </div>
 
 
 

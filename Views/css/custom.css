@@ -135,6 +135,78 @@
 		
 	}
 
+
+	#limit{
+		border-style: solid;
+		border-width: 0.5px;
+	}
+
+	#tituloP{
+		padding: 5px;
+	}
+
+	#espacio_info{
+		border-style: solid;
+		border-width: 0.5px;
+		margin-top: 10px;
+		text-align: center;
+		padding-top: 2px;
+	}
+
+
+	#slider{
+		margin-bottom: 10px;
+	}
+
+	
+
+
+	#justificar{
+		text-align: justify;
+	}
+
+	#centrar{
+		text-align: center;
+	}
+
+	#tablas{
+		border-style: solid;
+		border-width: 2.5px;
+		border-radius: 5px;
+		border-color: #222;
+	}
+
+	#formularioscentro{
+		margin-top: 2%;
+		margin-left: 25%;
+		margin-right: 25%;
+	}
+
+	#espaciozona{
+		
+		
+		color:#363940;
+		background-color: #a6a6a6;
+		padding-top: 2.5%;
+		padding-bottom: 2.5%;
+		border-radius: 10px;
+	}
+
+	#menuzona{
+		
+		text-align: center;
+	}
+
+	#perfilform{
+		background-color: #363940;
+		color:#D0D7DA;
+		padding: 2.5%;
+		border-radius: 10px;
+	}
+
+
+
+
 	html {
 		height: 100%;
 		width: 100%;
@@ -143,6 +215,6 @@
 	}
 
 	body {
-		margin-bottom: 20px;
-		padding-bottom: 20px;
+		margin-bottom: 0px;
+		padding-bottom: 0px;
 	}
