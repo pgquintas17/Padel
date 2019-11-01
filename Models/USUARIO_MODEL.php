@@ -25,7 +25,7 @@ class USUARIO_MODEL
 		$this->email = $email; 
         $this->genero = $genero;
         $this->permiso = $permiso; 
-		include_once '../Models/BdAdmin.php'; 
+		include_once 'Models/BdAdmin.php'; 
 		$this->mysqli = ConectarBD();  
 	}
 

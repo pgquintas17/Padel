@@ -1,4 +1,3 @@
-
 <?php
     
 class PAREJA_MODEL
@@ -118,28 +117,6 @@ class PAREJA_MODEL
 			return $result;
 		}
 	}
-	
-
-	function DELETEUSUARIO(){
-
-		$sql = "SELECT * FROM PAREJA  WHERE ((capitan = '$this->capitan') | (miembro = '$this->capitan')) ";
-		$result = $this->mysqli->query($sql);
-
-		if (!$result)
-    		return 'No se ha podido conectar con la base de datos';
-		    
-		if ($result->num_rows > 0) {
-		    	
-		    $sql = "DELETE FROM PAREJA WHERE ((capitan = '$this->capitan') | (miembro = '$this->capitan'))";
-		    $this->mysqli->query($sql);
-		        
-		    return "Borrado correctamente";
-		} 
-		else
-		    return "No existe";
-
-
-	}
 
 
 	function crearFiltros($filtros) {
@@ -148,7 +125,7 @@ class PAREJA_MODEL
 		foreach($filtros as $filtro) {
 			switch($filtro) {
 				case "nombre_pareja":
-					$toret .= "(nombre_pareja LIKE '%$this->nombre_pareja%')";
+					$toret .= "(nombre_pareja = $this->nombre_pareja)";
 					break;
 				case "capitan":
 					$toret .= "(capitan LIKE '%$this->capitan%')";
@@ -157,10 +134,10 @@ class PAREJA_MODEL
 					$toret .= "(miembro LIKE '%$this->miembro%')";
 					break;
 				case "id_grupo":
-					$toret .= "(id_grupo LIKE '%$this->id_grupo%')";
+					$toret .= "(id_grupo = $this->id_grupo)";
 					break;
 				case "id_catcamp":
-					$toret .= "(id_catcamp LIKE '%$this->id_catcamp%')";
+					$toret .= "(id_catcamp = $this->id_catcamp)";
 					break;
 			}
 			$toret .= " && ";

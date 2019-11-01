@@ -1,4 +1,3 @@
-
 <?php
     
 class GRUPO_MODEL
