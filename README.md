@@ -42,3 +42,6 @@ La implementación de la aplicación se llevará a cabo usando el modelo vista-c
 - [ ] Repasar atributos de todas los modelos
 - [ ] Crear objetos tipo Set (preguntar alfonso)
 - [x] Eliminar PAREJACAMPEONATO_MODEL.php
+- [ ] Cambiar en controller el pasar por REQUEST los valores a pasar un objeto del modelo
+- [ ] Quitar llamadas a BD en modelos y añadir getters y setters
+- [ ] Hacer MODELS genérico con las llamadas a BD ($tabla,$valores) ($valores array(clave,valor))
