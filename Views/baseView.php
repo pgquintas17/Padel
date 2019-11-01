@@ -52,30 +52,24 @@
                                 <a class="nav-link" href="#">PARTIDOS</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">USUARIOS</a>
+                                <a class="nav-link" href="/index.php?controller=adminUsuarios">USUARIOS</a>
                             </li>
                           <?php
 
                             }else { //Si no es admin
                         ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">PISTAS</a>
+                                <a class="nav-link" href="#">RESERVAR PISTA</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">CAMPEONATOS</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">PARTIDOS</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">USUARIOS</a>
+                                <a class="nav-link" href="#">APUNTARSE A CAMPEONATOS</a>
                             </li>
                         <?php
                             }
                         ?>
                             <li class="nav-item">
                             <!--perfil-->
-                                <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+                                <a class="nav-link" href="/index.php?controller=perfil"><i class="fas fa-user"></i></a>
                             </li>
                             <li class="nav-item">
                             <!--desconexión-->
