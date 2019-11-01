@@ -130,7 +130,17 @@ class USUARIO_MODEL
 
 	function mostrarTodos() {
 		
-		$sql = "select * from USUARIO";
+		$sql = "select 
+					login,
+					nombre,
+					apellidos,
+					password,
+					fecha_nac,
+					telefono,
+					email,
+					genero,
+					permiso 
+				from USUARIO";
 
     	if (!($resultado = $this->mysqli->query($sql)))
 			return 'Error en la consulta sobre la base de datos';

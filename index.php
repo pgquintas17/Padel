@@ -9,8 +9,8 @@
             if(Utils::nivelPermiso(2)){ //Si tiene permisos de administrador
                 switch($_REQUEST["controller"]){
                     case "adminUsuarios":
-                        //require_once('Controllers/adminUsuariosController.php');
-                        new AdminUsuariosController();
+                        require_once('Controllers/adminUsuarioController.php');
+                        new AdminUsuarioController();
                         exit;
                         break;
                     case "adminPista":
