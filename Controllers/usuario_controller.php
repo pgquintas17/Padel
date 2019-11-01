@@ -90,11 +90,11 @@
             break;
             
 
-		case 'SHOWCURRENT': 
+		case 'DETAILS': 
 
 			$USUARIO = new USUARIO_MODEL($_REQUEST['login'], '', '', '', '', '', '', '', ''); 
 			$valores = $USUARIO->consultarDatos(); 
-			new USERS_SHOWCURRENT($valores); 
+			new USERS_DETAILS($valores); 
             break;
 
 
