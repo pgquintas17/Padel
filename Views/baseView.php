@@ -1,5 +1,9 @@
 <?php
-    abstract class baseView {
+
+    require_once('Services/Utils.php');
+    
+    
+    abstract class BaseView {
 
         private $usuario;
 
@@ -25,36 +29,73 @@
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
             </head>
             <body>
-                <header>
-                    <nav class="navbar navbar-expand-lg navbar-inverse bg-dark">
-                        <a class="navbar-brand" href="#">PADELweb</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                        <div style="margin-left: 5%" id="navbarSupportedContent">
-                                <ul class="navbar-nav ml-auto">
-                                    <button type="button" class="btn btn-dark">
-                                    <a class="nav-link" style="margin-top: 0,75%; font-size: 120%" href="#">Inicio</a>
-                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acceder">
-                                    <a class="nav-link" style="margin-top: 0,75%; font-size: 120%; "  data-toggle="modal" data-target="#acceder" href="#">Mi zona</a>
-                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acceder">
-                                    <a class="nav-link" style="margin-top: 0,75%; font-size: 120%; "  data-toggle="modal" data-target="#acceder" href="#">Reservar</a>
-                                </ul>
-                        </div>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ml-auto">
-                                <a class="navbar-brand" style="margin-top: 3%;"  data-toggle="modal" data-target="#acceder" href="#">Acceder</a>
-                                <!--Si está conectado-->
-                                <li class="nav-item">
-                                    <!--perfil-->
-                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acceder"><a class="nav-link" href="#"><i class="fas fa-user"></i></a></button>
-                                </li>
-                                <!--Si no está conectado-->
-                                <li class="nav-item">
-                                    <button type="button" style="margin-top: 10px;" class="btn btn-dark"><i class="fas fa-sign-in-alt"></i></button>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </header>
+            <header>
+                <nav class="navbar navbar-expand-lg navbar-inverse bg-dark">
+                    <a class="navbar-brand" href="index.php">PADELweb</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                        <?php
+                        if(Utils::conectado()){ //Si está conectado
+                            if(Utils::nivelPermiso(2)){ //Si es admin
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">PISTAS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">CAMPEONATOS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">PARTIDOS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">USUARIOS</a>
+                            </li>
+                          <?php
+
+                            }else { //Si no es admin
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">PISTAS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">CAMPEONATOS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">PARTIDOS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">USUARIOS</a>
+                            </li>
+                        <?php
+                            }
+                        ?>
+                            <li class="nav-item">
+                            <!--perfil-->
+                                <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+                            </li>
+                            <li class="nav-item">
+                            <!--desconexión-->
+                                <a class="nav-link" href='/index.php?controller=logout'><i class="fas fa-power-off"></i></a>
+                            </li>
+                            <?php
+
+                                }
+                                else{ //Si no está conectado
+                            ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href='/index.php?controller=login'><i class="fas fa-sign-in-alt"></i></a>
+                            </li>
+                            <?php
+                                } 
+                            ?>      
+                        </ul>
+                    </div>
+                </nav>
+            </header>
                 <main class="container"> <!-- render -->
                     <?php $this->_render();?>
                 </main>
