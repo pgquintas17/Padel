@@ -1,7 +1,6 @@
-
 <?php
 
- class CAMPEONATOCATEGORIA_MODEL
+ class CAMPEONATO_CATEGORIA_MODEL
  {	
 	var $id_catcamp;
  	var $id_campeonato; 
@@ -108,15 +107,18 @@
 		}
 	}
 	
-	//Si N_PLAZAS aumenta con cada inscripción, se podría usar esta función, si no, usar COUNT en parejas
 	function getNParejas(){
 		
-		$sql = "SELECT N_PLAZAS FROM CAMPEONATO_CATEGORIA WHERE (id_catcamp = '$this->id_catcamp')";
-
-		if (!($resultado = $this->mysqli->query($sql)))
-			return 'No existe en la base de datos'; 
-		else
-			return $resultado;
+		$sql = "SELECT * FROM CAMPEONATO_CATEGORIA WHERE ((id_catcamp = '$this->id_catcamp'))";
+		
+		$resultado = $this->mysqli->query($sql);
+		
+		if ($resultado->num_rows == 0)
+			return 'La categoría no existe';
+		else{
+			$tupla = $resultado->fetch_array();
+			return $tupla['n_plazas'];
+		}
 	}
 
 
