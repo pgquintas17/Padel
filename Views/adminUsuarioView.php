@@ -46,7 +46,7 @@
                     $url = "/index.php?controller=adminUsuarios&action=DETAILS&login=". $login;
         ?>
                     <tr class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                        <td><a href="<?php echo $url ?>"><?php echo $this->fila['login']; ?></a></td>
+                        <td><?php echo $this->fila['login']; ?></td>
                         <td><?php echo $this->fila['nombre']; ?></td>
                         <td><?php echo $this->fila['email']; ?></td>
                     </tr>
