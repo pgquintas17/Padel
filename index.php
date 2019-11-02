@@ -59,7 +59,7 @@
                     exit;
                     break;
                 default:
-                    require_once('Controllerss/indexController.php');
+                    require_once('Controllers/indexController.php');
                     new IndexController();
                     exit;
                     break;  
