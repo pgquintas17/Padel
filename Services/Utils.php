@@ -17,9 +17,12 @@ class Utils {
 	
 	static function nivelPermiso($nivelRequerido){
 		$login = $_SESSION['login'];
-		require_once('Models/USUARIO_MODEL.php');
-		$control = new USUARIO_MODEL($login,0,0,0,0,0,0,0,$nivelRequerido);
-		$resultado = $control->comprobarNivelAcceso();
+		require_once('Models/usuarioModel.php');
+		$control = new UsuarioModel();
+		$control->setLogin($login);
+		require_once('Mappers/usuarioMapper.php');
+		$controlMapper = new UsuarioMapper();
+		$resultado = $controlMapper->comprobarNivelAcceso($control,$nivelRequerido);
 		if($resultado == true)
 			return true;
 		else

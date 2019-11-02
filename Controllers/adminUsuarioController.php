@@ -7,7 +7,6 @@
 
 		function __construct() {
 
-
 			if(isset($_REQUES["action"])) {
 				switch($_REQUEST["action"]) {
 
@@ -16,9 +15,10 @@
 							//new UsuariosADDView(); 
 							echo "hola";
 						else{
-
-							$modelo = get_data_form();  
-							$respuesta = $modelo->ADD(); 
+							require_once('Mappers/usuarioMapper.php');
+							$usuarioMapper = new UsuarioMapper();
+							$usuario = get_data_form();  
+							$usuarioMapper->ADD($usuario); 
 							echo "Usuario añadido";
 							header('Location: Controllers/adminUsuariosController.php');
 						}
@@ -26,9 +26,12 @@
 
 
 					case 'DELETE': 
-						require_once('../Models/USUARIO_MODEL.php');
-						$USUARIO = new USUARIO_MODEL($_REQUEST['login'], '', '', '', '', '', '', '', ''); 
-						$respuesta = $USUARIO->DELETE(); 
+						require_once('../Models/usuarioModel.php');
+						$usuario = new UsuarioModel();
+						$usuario->setLogin($_REQUEST['login']);
+						require_once('Mappers/usuarioMapper.php');
+						$usuarioMapper = new UsuarioMapper();
+						$respuesta = $usuarioMapper->DELETE($usuario); 
 						echo "Usuario Eliminado"; 
 						header('Location: Controllers/adminUsuariosController.php');
 
@@ -36,9 +39,12 @@
 						
 
 					case 'DETAILS': 
-						require_once('../Models/USUARIO_MODEL.php');
-						$USUARIO = new USUARIO_MODEL($_REQUEST['login'], '', '', '', '', '', '', '', ''); 
-						$valores = $USUARIO->consultarDatos();
+						require_once('../Models/usuarioModel.php');
+						$usuario = new UsuarioModel();
+						$usuario->setLogin($_REQUEST['login']);
+						require_once('Mappers/usuarioMapper.php');
+						$usuarioMapper = new UsuarioMapper();
+						$valores = $usuarioMapper->consultarDatos($usuario);
 						require_once('Views/usuarioDetailsView.php');
 						(new UsuarioDetailsView('','','','',$valores))->render();
 						break;
@@ -51,13 +57,29 @@
 
 				}
 			} else { //mostrar todos los elementos
-				require_once('Models/USUARIO_MODEL.php');
-				$usuarios = new USUARIO_MODEL('','', '', '', '', '', '', '', '');
-				$listaUsuarios = $usuarios->mostrarTodos();
-				$datos = array('login','nombre','apellidos','passwd','fecha_nac','telefono','email','genero','permiso'); 
+				require_once('Mappers/usuarioMapper.php');
+				$usuarioMapper = new UsuarioMapper();
+				$listaUsuarios = $usuarioMapper->mostrarTodos();
+				$datos = array('login','nombre','passwd','fecha_nac','telefono','email','genero','permiso'); 
 				require_once('Views/adminUsuarioView.php');
 				(new AdminUsuarioView('','','',$datos,$listaUsuarios))->render();
 			}
+		}
+
+
+		function getDataForm(){
+			require_once('../Models/usuarioModel.php');
+			$usuario = new UsuarioModel;
+			$usuario->setLogin($_REQUEST["login"]);
+			$usuario->setNombre($_REQUEST["nombre"]);
+			$usuario->setPassword($_REQUEST["password"]);
+			$usuario->setFechaNac($_REQUEST["fechaNac"]);
+			$usuario->setTelefono($_REQUEST["telefono"]);
+			$usuario->setEmail($_REQUEST["email"]);
+			$usuario->setGenero($_REQUEST["genero"]);
+			$usuario->setPermiso($_REQUEST["permiso"]);
+
+			return $usuario;
 		}
 	}
 

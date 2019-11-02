@@ -1,7 +1,7 @@
 <?php
 
     require_once('Views/baseView.php');
-    require_once('Models/USUARIO_MODEL.php');
+    require_once('Models/usuarioModel.php');
     class UsuarioDetailsView extends baseView {
 
         private $usuario;

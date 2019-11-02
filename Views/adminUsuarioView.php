@@ -1,7 +1,7 @@
 <?php
 
     require_once('Views/baseView.php');
-    require_once('Models/USUARIO_MODEL.php');
+    require_once('Models/usuarioModel.php');
 
     class AdminUsuarioView extends baseView {
 
@@ -41,14 +41,15 @@
             <tbody>
         <?php
 
-                while($this->fila = ($this->listaUsuarios)->fetch_assoc()) {          
-        
+                while($this->fila = ($this->listaUsuarios)->fetch_assoc()) {
+                    $login = $this->fila['login'];          
+                    $url = "Controllers/adminUsuarioController.php?action=DETAILS&login=". $login;
         ?>
-                <tr class='clickeable-row' onclick="window.location='Controllers/adminUsuarioController.php?action=DETAILS&login=<?php echo $this->fila['login']?>'" style="cursor:pointer;">
-                <td><?php echo $this->fila['login']; ?></td>
-                <td><?php echo $this->fila['nombre']; ?></td>
-                <td><?php echo $this->fila['email']; ?></td>
-                </tr>
+                    <tr class='clickeable-row' onclick="window.location='<?php echo $url ?>';" style="cursor:pointer;">
+                        <td><?php echo $this->fila['login']; ?></td>
+                        <td><?php echo $this->fila['nombre']; ?></td>
+                        <td><?php echo $this->fila['email']; ?></td>
+                    </tr>
                 
         <?php
         
