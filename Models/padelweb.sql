@@ -41,8 +41,7 @@ GRANT ALL PRIVILEGES ON abp35_padelweb.* TO 'padelweb'@'localhost' IDENTIFIED BY
 
 CREATE TABLE `usuario` (
   `LOGIN` varchar(45) COLLATE latin1_spanish_ci NOT NULL,
-  `NOMBRE` varchar(80) COLLATE latin1_spanish_ci NOT NULL,
-  `APELLIDOS` varchar(45) COLLATE latin1_spanish_ci NOT NULL,
+  `NOMBRE` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
   `PASSWORD` varchar(30) COLLATE latin1_spanish_ci NOT NULL,
   `FECHA_NAC` date NOT NULL,
   `TELEFONO` varchar(21) COLLATE latin1_spanish_ci NOT NULL,
