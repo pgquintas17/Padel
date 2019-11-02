@@ -3,7 +3,7 @@
 class Utils {
 
     static function conectado(){
-	    if (!isset($_SESSION['login']))
+	    if (!isset($_SESSION['Usuario']))
 		    return false;
 	    else
 		    return true;
@@ -16,8 +16,8 @@ class Utils {
 	}
 	
 	static function nivelPermiso($nivelRequerido){
-		$login = $_SESSION['login'];
 		require_once('Models/usuarioModel.php');
+		$login = $_SESSION['Usuario']->getLogin();
 		$control = new UsuarioModel();
 		$control->setLogin($login);
 		require_once('Mappers/usuarioMapper.php');

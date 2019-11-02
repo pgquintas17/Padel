@@ -9,7 +9,6 @@ class IndexView extends baseView {
     private $errs;
 
     function __construct($msg=null, $errs=null, $usuario=null) {
-        $this->usuario = $usuario;
         $this->msg = $msg;
         $this->errs = $errs;
         parent::__construct($this->usuario);

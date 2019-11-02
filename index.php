@@ -4,9 +4,9 @@
     session_start();
 
     if(isset($_REQUEST['controller'])) {
-        if(Utils::conectado()) {
+        if(Utils::conectado()) { 
 
-            if(Utils::nivelPermiso(2)){ //Si tiene permisos de administrador
+            if($_SESSION['Usuario']->getPermiso() == 2){ //Si tiene permisos de administrador
                 switch($_REQUEST["controller"]){
                     case "adminUsuarios":
                         require_once('Controllers/adminUsuarioController.php');
@@ -74,14 +74,14 @@
                     break;
                 default:
                     require_once('Controllers/indexController.php');
-                    new indexController();
+                    new IndexController();
                     exit;
                     break;
             }
         }
     }else {
         require_once('Controllers/indexController.php');
-        new indexController();
+        new IndexController();
         exit;
     }
 

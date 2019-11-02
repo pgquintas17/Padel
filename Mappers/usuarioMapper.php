@@ -130,7 +130,6 @@ require_once('Models/usuarioModel.php');
             $sql = "select 
                         login,
                         nombre,
-                        password,
                         fecha_nac,
                         telefono,
                         email,
@@ -154,7 +153,7 @@ require_once('Models/usuarioModel.php');
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'No existe en la base de datos'; 
             else{ 
-                $result = $resultado->fetch_array();
+                $result = $resultado->fetch_array(MYSQLI_NUM);
                 return $result;
             }
         }
@@ -164,20 +163,18 @@ require_once('Models/usuarioModel.php');
         function Login($usuario){
 
             $login = $usuario->getLogin();
+            $passwd = $usuario->getPassword();
 
             $sql = "SELECT * FROM USUARIO
-                WHERE  (login = '$login')";
+                WHERE  (login = '$login' AND password = '$passwd')";
             
             $resultado = $this->mysqli->query($sql);
             
             if ($resultado->num_rows == 0)
-                return 'El login no existe';
+                return 'Error con el login o contraseña.';
             else{
-                $tupla = $resultado->fetch_array();
-                if ($tupla['password'] == $usuario->getPassword())
-                    return true;
-                else
-                    return 'La contraseña para este usuario no es correcta';
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                return new UsuarioModel($tupla[0], $tupla[1], $tupla[2], $tupla[3], $tupla[4], $tupla[5], $tupla[6], $tupla[7]);        
             }
         }
     

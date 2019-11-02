@@ -12,7 +12,6 @@
         private $listaUsuarios;
 
         function __construct($msg=null, $errs=null, $usuario=null, $fila=null, $listaUsuarios=null) {
-            $this->usuario = $usuario;
             $this->msg = $msg;
             $this->errs = $errs;
             parent::__construct($this->usuario);
@@ -25,6 +24,9 @@
           <!-- Jumbotron -->
       <div  id="espacio_info" class="jumbotron">
         <h1>Usuarios</h1><br>
+        <div class="row justify-content-md-center">
+            <a class="bg-ligth text-dark" href='/index.php?controller=adminUsuarios&action=ADD'><i class="fas fa-plus-circle fa-2x"></i></a>
+        </div><br>
 
         
 
@@ -43,7 +45,7 @@
 
                 while($this->fila = ($this->listaUsuarios)->fetch_assoc()) {
                     $login = $this->fila['login'];          
-                    $url = "/Controllers/adminUsuarioController.php?action=DETAILS&login=". $login;
+                    $url = "/index.php?controller=adminUsuarios&action=DETAILS&username=". $login;
         ?>
                     <tr class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                         <td><?php echo $this->fila['login']; ?></td>

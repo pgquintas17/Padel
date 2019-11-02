@@ -12,12 +12,14 @@
                 switch($_POST['action']) {
                     //Si es un POST de login
                     case "login":
-                        $usuario = new UsuarioModel($_REQUEST['username'],'',$_REQUEST['passwd'],'','','','','');
+                        $usuario = new UsuarioModel();
+                        $usuario->setLogin($_REQUEST['username']);
+                        $usuario->setPassword($_REQUEST['passwd']);
                         $usuarioMapper = new UsuarioMapper();
                         $respuesta = $usuarioMapper->Login($usuario);
 
-                        if ($respuesta){
-                            $_SESSION['login'] = $_REQUEST['username'];
+                        if ($respuesta != null){
+                            $_SESSION['Usuario'] = $respuesta;
                             header('Location: index.php');
                         }
                         else {

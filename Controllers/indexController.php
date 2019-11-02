@@ -9,10 +9,10 @@ class IndexController {
 		$usuario = null;
 
 		if (Utils::conectado()) {
-			$usuario = $_SESSION['login'];
+			$usuario = $_SESSION['Usuario'];
 		}
 		
-		(new indexView($usuario))->render();
+		(new IndexView($usuario))->render();
 	}
 }
 

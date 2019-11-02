@@ -91,7 +91,50 @@ class UsuarioModel {
 
 	public function setPermiso($permiso){
 		$this->permiso = $permiso;
-	}  
+	} 
+	
+	
+
+	public function validarRegistro(){
+
+		$errores = array();
+
+		if (strlen($this->login) == 0 || strlen($this->login) < 15) {
+			$errores["login"] = "El login no puede superar los 15 caracteres ni ser vacío";
+		}
+		if (strlen($this->password) < 6 || strlen($this->passwd) == 0) {
+			$errores["passwordd"] = "La contraseña debe tener como mínimo 6 caracteres";
+		}
+		if (strlen($this->Nombre) == 0 || strlen($this->nombre) < 100) {
+			$errores["nombre"] = "El nombre no puede estar vacio";
+		}
+		if ($this->genero == null) {
+			$errores["genero"] = "Debe seleccionarse un género";
+		}
+		if ($this->fecha_nac == null) {
+			$errores["fecha_nac"] = "Debe seleccionarse una fecha de nacimiento";
+		}
+		if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+			$errores["email"] = "El formato del email es incorrecto";
+		}
+		if ($this->permiso == null) {
+			$errores["permiso"] = "Debe seleccionarse una categoría para el usuario";
+		}
+		if (!$this->validarTelefono($this->telefono)) {
+			$errores["telefono"] = "Debe seleccionarse un género";
+		}
+			return $errores;
+	}
+
+	function validarTelefono($telefono) {
+		$expresion = '/^[9|6|7][0-9]{8}$/'; 
+		if(preg_match($expresion, $telefono)){ 
+			echo true; 
+		}
+		else{ 
+			echo false; 
+		} 
+	}
 
 
 }
