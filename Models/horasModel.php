@@ -1,26 +1,24 @@
 
 <?php
     
-class CATEGORIA_MODEL
-{
- 	var $id_categoria; 
-    var $sexo;
-    var $nivel;  
+class HorasModel {
+
+ 	var $id; 
+    var $hora;  
 	var $bd; 
 	
 
- 	function __construct($id_categoria,$sexo,$nivel){
-        $this->id_categoria = $id_categoria;
-        $this->sexo = $sexo; 
-		$this->nivel = $nivel;
+ 	function __construct($id,$hora){
+        $this->id = $id;
+        $this->hora = $hora;
 		include_once '../Models/BdAdmin.php'; 
 		$this->mysqli = ConectarBD();  
 	}
 
-	
+
 	function mostrarTodos() {
 		
-		$sql = "select * from CATEGORIA";
+		$sql = "select * from HORAS";
 
     	if (!($resultado = $this->mysqli->query($sql)))
 			return 'Error en la consulta sobre la base de datos';
@@ -28,10 +26,9 @@ class CATEGORIA_MODEL
 			return $resultado;
 	}
 	
-	
-	function consultarDatos() {	
 
-		$sql = "SELECT * FROM CATEGORIA WHERE (id_categoria = '$this->id_categoria')";
+	function consultarDatos() {	
+		$sql = "SELECT * FROM HORAS WHERE (id = '$this->id')";
 		    
 		if (!($resultado = $this->mysqli->query($sql)))
 			return 'No existe en la base de datos'; 
@@ -40,6 +37,8 @@ class CATEGORIA_MODEL
 			return $result;
 		}
     }
+ 
+
 
 }
 

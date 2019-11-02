@@ -1,7 +1,7 @@
 <?php
     
-class PAREJA_MODEL
-{
+class ParejaModel {
+
  	var $id_pareja; 
  	var $nombre_pareja;
  	var $capitan; 

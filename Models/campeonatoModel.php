@@ -1,8 +1,8 @@
 
 <?php
     
-class CAMPEONATO_MODEL
-{
+class CampeonatoModel {
+
  	var $id_campeonato; 
  	var $nombre;
  	var $fecha_inicio; 

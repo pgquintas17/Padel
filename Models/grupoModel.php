@@ -1,7 +1,7 @@
 <?php
     
-class GRUPO_MODEL
-{
+class GrupoModel {
+
  	var $id_grupo; 
     var $id_catcamp;
 	var $bd; 

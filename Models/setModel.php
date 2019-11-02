@@ -1,8 +1,8 @@
 
 <?php
     
-class SET_MODEL
-{
+class SetModel {
+	
  	var $n_set; 
     var $punt_pareja1;  
 	var $punt_pareja2; 

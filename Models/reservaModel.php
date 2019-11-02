@@ -1,8 +1,7 @@
 
 <?php
     
-class RESERVA_MODEL
-{
+class ReservaModel {
  	var $id_reserva; 
  	var $id_pista;
  	var $hora; 

@@ -1,8 +1,8 @@
 
 <?php
     
-class PARTIDO_MODEL
-{
+class PartidoModel {
+	
 	var $id_partido;
 	var $resultado; 
  	var $hora;

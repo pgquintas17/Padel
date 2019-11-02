@@ -1,7 +1,7 @@
 <?php
 
- class CAMPEONATO_CATEGORIA_MODEL
- {	
+ class CampeonatoCategoriaModel {
+	 	
 	var $id_catcamp;
  	var $id_campeonato; 
 	var $id_categoria;

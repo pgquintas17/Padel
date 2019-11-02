@@ -1,8 +1,8 @@
 
 <?php
     
-class PISTA_MODEL
-{
+class PistaModel {
+
  	var $id_pista; 
     var $estado;  
 	var $bd; 

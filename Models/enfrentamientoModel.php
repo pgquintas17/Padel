@@ -1,8 +1,8 @@
 
 <?php
     
-class ENFRENTAMIENTO_MODEL
-{
+class EnfrentamientoModel {
+
  	var $id_enfrentamiento; 
  	var $resultado;
  	var $fecha; 
