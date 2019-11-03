@@ -103,7 +103,7 @@ require_once('Models/usuarioModel.php');
         }
 
 
-        function DELETE() {	
+        function DELETE($usuario) {	
 
             $login = $usuario->getLogin();
 		

@@ -3,9 +3,9 @@
 	// include '../Views/Users_Views/USUARIO_ADD.php';
 	// include '../Views/Users_Views/USUARIO_EDIT.php';
 	require_once('Models/usuarioModel.php');
-	echo "NO YAYYYYY";
-	echo "REQUEST: "; var_dump($_REQUEST);
-	echo "POST: "; var_dump($_POST);
+	echo "NO YAYYYYY"; echo "     ";
+	echo "REQUEST: "; var_dump($_REQUEST); echo "     ";
+	//echo "POST: "; var_dump($_POST); echo "     ";
 
 	class AdminUsuarioController {
 
@@ -15,14 +15,10 @@
 				switch($_REQUEST["action"]) {
 
 					case 'ADD': 
-					echo "CASI YAAAY.    ";
-						if (!$_POST){
-							echo "NOS PASAMOS DE YAAAY.    ";
-							require_once('Views/usuarioADDView.php');
-							(new UsuarioADDView())->render();
-						}else{
-							echo "YAYYYYY";
-							echo "REQUEST: "; var_dump($_REQUEST);
+					//echo "CASI YAAAY.    ";
+						if ($_POST){
+							//echo "YAYYYYY";
+							//echo "REQUEST: "; var_dump($_REQUEST); echo "     ";
 							require_once('Models/usuarioModel.php');
 							$usuario = new UsuarioModel($_POST["inputLogin"],$_POST["inputNombre"],$_POST["inputPassword"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_REQUEST["inputPermiso"]);
 							echo "USUARIO: "; var_dump($usuario);
@@ -39,6 +35,10 @@
 								echo $errores;
 							}
 							header('Location: index.php?controller=adminUsuarios');
+						}else{
+							//echo "NOS PASAMOS DE YAAAY.    ";
+							require_once('Views/usuarioADDView.php');
+							(new UsuarioADDView())->render();
 						}
 						break;
 						
@@ -69,7 +69,7 @@
 
 
 					default: 
-
+						echo "hey, estoy viniendo aquí";
 						header('Location: index.php?controller=adminUsuarios');
 						break;
 

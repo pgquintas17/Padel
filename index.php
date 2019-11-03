@@ -2,6 +2,8 @@
     require_once('Models/usuarioModel.php');
     require_once('Services/Utils.php');
     session_start();
+	echo "REQUEST EN INDEX: "; var_dump($_REQUEST); echo "     ";
+	//echo "POST EN INDEX: "; var_dump($_POST); echo "     ";
 
     if(isset($_REQUEST['controller'])) {
         if(Utils::conectado()) { 

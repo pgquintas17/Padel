@@ -8,8 +8,8 @@
     
         function __construct() {
             //Si se recibe un POST
-            if(isset($_POST['action'])) {
-                switch($_POST['action']) {
+            if(isset($_REQUEST['action'])) {
+                switch($_REQUEST['action']) {
                     //Si es un POST de login
                     case "login":
                         $usuario = new UsuarioModel();

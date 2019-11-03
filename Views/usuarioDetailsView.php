@@ -20,7 +20,7 @@
             ?>
             <!-- Jumbotron -->
             <div  id="espacio_info" class="jumbotron">
-            <h3>Usuario: <?php echo $this->datos['1']; ?></h3><br>
+            <br><h3>Usuario: <?php echo $this->datos['1']; ?></h3><br>
                 <div class="row justify-content-md-center">
                     <div class="col-md-auto"> 
 
@@ -28,31 +28,31 @@
                         <table class="table table-hover table-bordered" id="tablas" style="border-radius: 25px;">
                             <tr>
                             <th class="bg-dark text-white">Login</th>
-                                <td><?php echo $this->datos['0']; ?></td>
+                                <td class="table-light"><?php echo $this->datos['0']; ?></td>
                             </tr>
                             <tr>    
                                 <th class="bg-dark text-white">Nombre</th>
-                                <td><?php echo $this->datos['1']; ?></td>
+                                <td class="table-light"><?php echo $this->datos['1']; ?></td>
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Fecha de Nacimiento</th>
-                                <td><?php echo $this->datos['2']; ?></td>
+                                <td class="table-light"><?php echo $this->datos['2']; ?></td>
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Teléfono</th>
-                                <td><?php echo $this->datos['3']; ?></td>
+                                <td class="table-light"><?php echo $this->datos['3']; ?></td>
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Email</th>
-                                <td><?php echo $this->datos['4']; ?></td>
+                                <td class="table-light"><?php echo $this->datos['4']; ?></td>
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Genero</th>
-                                <td><?php echo $this->datos['5']; ?></td>
+                                <td class="table-light"><?php echo $this->datos['5']; ?></td>
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Permiso</th>
-                                <td>
+                                <td class="table-light">
                                     <?php 
                                         if($this->datos['6'] == 0)
                                             echo "Deportista";
@@ -64,9 +64,36 @@
                                 </td>
                             </tr>
                         </table>
+                        <br><button type="button" class="btn btn-light" data-toggle="modal" data-target="#confirmDelete"><i class="fas fa-trash-alt fa-2x"></i></button>
                     </div>
                 </div>
             </div>
+
+            <!--modal confirmación-->
+            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="borrarLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmación de borrado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de querer eliminar al usuario <strong><?php echo $this->datos['0']; ?></strong> y todos los datos relacionados con él? </p>
+                </div>
+                <div class="modal-footer">
+                    <?php
+                        $login = $this->datos['0'];          
+                        $url = "/index.php?controller=adminUsuarios&action=DELETE&username=". $login;
+                    ?>
+                    <a href="<?php echo $url ?>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Eliminar usuario</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+                </div>
+            </div>
+            </div>
+        <!--modal confirmación-->
 
         <?php
         }

@@ -20,14 +20,17 @@
             ?>
             <!-- Jumbotron -->
             <div  id="espacio_info" class="jumbotron">
-            <h3>Añadir usuario</h3><br>
+            <br><h3>Añadir usuario</h3><br>
                 <div class="row">
 
                     <div class="col-lg-3"></div>
-                    <div class="col-lg-6" id="perfilform">
+                    <div class="bg-dark text-white rounded p-3 col-lg-6" id="perfilform">
 
                         <!-- Formulario datos usuario -->
-                        <form method="post"  name="formAdd" action='/index.php?controller=adminUsuarios&action=ADD' autocomplete="off">
+                        <form action="/" method="POST" name="formADDUsers">
+
+                        <input type="hidden" name="controller" value="adminUsuarios">
+                        <input type="hidden" name="action" value="ADD">
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
