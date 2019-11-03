@@ -2,10 +2,6 @@
 
 	// include '../Views/Users_Views/USUARIO_ADD.php';
 	// include '../Views/Users_Views/USUARIO_EDIT.php';
-	require_once('Models/usuarioModel.php');
-	echo "NO YAYYYYY"; echo "     ";
-	echo "REQUEST: "; var_dump($_REQUEST); echo "     ";
-	//echo "POST: "; var_dump($_POST); echo "     ";
 
 	class AdminUsuarioController {
 
@@ -15,16 +11,19 @@
 				switch($_REQUEST["action"]) {
 
 					case 'ADD': 
-					//echo "CASI YAAAY.    ";
 						if ($_POST){
-							//echo "YAYYYYY";
-							//echo "REQUEST: "; var_dump($_REQUEST); echo "     ";
 							require_once('Models/usuarioModel.php');
-							$usuario = new UsuarioModel($_POST["inputLogin"],$_POST["inputNombre"],$_POST["inputPassword"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_REQUEST["inputPermiso"]);
-							echo "USUARIO: "; var_dump($usuario);
+							$usuario = new UsuarioModel();
+							$usuario->setLogin($_POST["inputLogin"]);
+							$usuario->setNombre($_POST["inputNombre"]);
+							$usuario->setPassword($_POST["inputPassword"]);
+							$usuario->setFechaNac($_POST["inputFechaNac"]);
+							$usuario->setTelefono($_POST["inputTelefono"]);
+							$usuario->setEmail($_POST["inputEmail"]);
+							$usuario->setGenero($_POST["inputGenero"]);
+							$usuario->setPermiso($_REQUEST["inputPermiso"]);
 							$errores =  $usuario->validarRegistro();
-							if(sizeof($errores) == 0){
-								echo "no hay errores";
+							if(sizeof($errores) == null){
 								require_once('Mappers/usuarioMapper.php');
 								$usuarioMapper = new UsuarioMapper();
 								$usuarioMapper->ADD($usuario); 
@@ -36,7 +35,6 @@
 							}
 							header('Location: index.php?controller=adminUsuarios');
 						}else{
-							//echo "NOS PASAMOS DE YAAAY.    ";
 							require_once('Views/usuarioADDView.php');
 							(new UsuarioADDView())->render();
 						}
@@ -77,10 +75,9 @@
 			} else { //mostrar todos los elementos
 				require_once('Mappers/usuarioMapper.php');
 				$usuarioMapper = new UsuarioMapper();
-				$listaUsuarios = $usuarioMapper->mostrarTodos();
-				$datos = array('login','nombre','passwd','fecha_nac','telefono','email','genero','permiso'); 
+				$listaUsuarios = $usuarioMapper->mostrarTodos(); 
 				require_once('Views/adminUsuarioView.php');
-				(new AdminUsuarioView('','','',$datos,$listaUsuarios))->render();
+				(new AdminUsuarioView('','','','',$listaUsuarios))->render();
 			}
 		}
 	}
