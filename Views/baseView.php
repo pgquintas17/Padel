@@ -43,7 +43,7 @@
                             if(Utils::nivelPermiso(2)){ //Si es admin
                         ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">PISTAS</a>
+                                <a class="nav-link" href="/index.php?controller=adminPista">PISTAS</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">CAMPEONATOS</a>
