@@ -4,122 +4,34 @@
 class PistaModel {
 
  	var $id_pista; 
-    var $estado;  
-	var $bd; 
+    var $estado;   
 	
 
- 	function __construct($id_pista,$estado){
+ 	function __construct($id_pista=null,$estado=null){
         $this->id_pista = $id_pista;
-        $this->estado = $estado;
-		include_once '../Models/BdAdmin.php'; 
-		$this->mysqli = ConectarBD();  
+        $this->estado = $estado; 
 	}
 
-	
-	function ADD() {
-				
-		$sql = "INSERT INTO PISTA (
-                    estado
-				)
-				VALUES (
-                    '$this->estado'
-				)";
-		if (!$this->mysqli->query($sql)) 
-			return 'Error en la inserción';
-		else 
-			return 'Inserción realizada con éxito';
 
+
+	//getters
+
+	public function getId(){
+		return $this->id_pista;
 	}
 
-	
-	function EDIT() {
-	
-    	$sql = "SELECT * FROM PISTA  WHERE (id_pista = '$this->id_pista') ";
-    	$result = $this->mysqli->query($sql);
-    
-    	if ($result->num_rows == 1) {	
-
-			$sql = "UPDATE PISTA  SET
-                        estado = '$this->estado'
-
-				WHERE ( id_pista = '$this->id_pista')";
-
-	        if (!($resultado = $this->mysqli->query($sql))){
-				return 'Error en la modificación';
-			}
-			else
-				return 'Modificado correctamente';
-    	}
-    	else 
-    		return 'No existe en la base de datos';
-	}	
-		
-		
-	function DELETE() {	
-
-		$sql = "SELECT * FROM PISTA  WHERE (id_pista = '$this->id_pista') ";
-		$result = $this->mysqli->query($sql);
-
-		if (!$result)
-    		return 'No se ha podido conectar con la base de datos';
-		    
-		if ($result->num_rows == 1) {
-		    	
-		    $sql = "DELETE FROM PISTA WHERE (id_pista = '$this->id_pista')";   
-		    $this->mysqli->query($sql);
-		        
-		    return "Borrado correctamente";
-		} 
-		else
-		    return "No existe";
+	public function getEstado(){
+		return $this->estado;
 	}
-	
-	
-	function mostrarTodos() {
-		
-		$sql = "select * from PISTA";
 
-    	if (!($resultado = $this->mysqli->query($sql)))
-			return 'Error en la consulta sobre la base de datos';
-    	else
-			return $resultado;
+	//setters
+
+	public function setId($id){
+		$this->id_pista = $id;
 	}
-	
 
-	function consultarDatos() {	
-
-		$sql = "SELECT * FROM PISTA WHERE (id_pista = '$this->id_pista')";
-		    
-		if (!($resultado = $this->mysqli->query($sql)))
-			return 'No existe en la base de datos'; 
-		else{ 
-			$result = $resultado->fetch_array();
-			return $result;
-		}
-    }
-
-
-	function crearFiltros($filtros) {
-		$toret = "( ";
-		int n = 
-		foreach($filtros as $filtro) {
-			switch($filtro) {
-				case "estado":
-					$toret .= "(estado LIKE '%$this->estado%')";
-					break;
-			}
-			$toret .= " && ";
-		}
-		$toret = chop($toret," && ");
-		$toret .= " )";
-
-		$sql = "select * from PISTA where " . $toret;
-
-    	if (!($resultado = $this->mysqli->query($sql))) {
-			return 'Error en la consulta sobre la base de datos';
-		}
-    	else 
-			return $resultado;
+	public function setEstado($estado){
+		$this->estado = $estado;
 	}
 
 
