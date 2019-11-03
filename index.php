@@ -2,7 +2,7 @@
     require_once('Models/usuarioModel.php');
     require_once('Services/Utils.php');
     session_start();
-	echo "REQUEST EN INDEX: "; var_dump($_REQUEST); echo "     ";
+	//echo "REQUEST EN INDEX: "; var_dump($_REQUEST); echo "     ";
 	//echo "POST EN INDEX: "; var_dump($_POST); echo "     ";
 
     if(isset($_REQUEST['controller'])) {
@@ -16,7 +16,7 @@
                         exit;
                         break;
                     case "adminPista":
-                        //require_once('Controllers/adminPistaController.php');
+                        require_once('Controllers/adminPistaController.php');
                         new AdminPistaController();
                         exit;
                         break;
