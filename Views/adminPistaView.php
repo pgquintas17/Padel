@@ -24,6 +24,7 @@
           <!-- Jumbotron -->
       <div  id="espacio_info" class="jumbotron">
         <h1>Pistas</h1><br>
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#addPista"><i class="fas fa-plus-circle fa-2x"></i></button><br><br>
         <div class="row justify-content-md-center">
             <!-- Tabla pistas -->
             <div class="col-md-4">
@@ -66,6 +67,38 @@
             </div>
         </div>
     </div>
+
+    <!--modal addPista-->
+    <div class="modal fade" id="addPista" tabindex="-1" role="dialog" aria-labelledby="borrarLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Añadir Pista</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <form action="/" method="POST" name="addPistas">
+                        <input type="hidden" name="controller" value="adminPista">
+                        <input type="hidden" name="action" value="ADD">
+
+                        <div class="form-group">
+                        <label>Número de pista</label>
+                        <input type="text" class="form-control" name="inputID">
+                        </div>
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-dark" value="Login">Añadir pista</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!--modal addPista-->
 
 <?php
         }

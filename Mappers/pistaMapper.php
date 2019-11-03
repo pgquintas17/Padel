@@ -11,39 +11,29 @@ require_once('Models/pistaModel.php');
 		    $this->mysqli = ConectarBD();
         }
 
+
         function ADD($pista){
 
-            $id_pista = $pista->getID();
+            $id_pista = $pista->getId();
+            $estado = $pista->getEstado();
+            echo "id_pista: ", $id_pista;
+            echo "    estado: ", $estado;
+    
+            $sql = "SELECT * FROM PISTA";
 
-            if (($id_pista <> '')){ 
-    
-                $sql = "SELECT * FROM PISTA WHERE (login = '$id_pista')";
-    
-                if (!$result = $this->mysqli->query($sql)) 
-                    return 'No se ha podido conectar con la base de datos'; 
-                else { 
-                    if ($result->num_rows == 0){ 
-                    
-                        $sql = "INSERT INTO PISTA (
-                                id_pista,
-                                estado
-                            )
-                            VALUES (
-                                '$id_pista',
-                                0
-                            )";
-    
-                        if (!$this->mysqli->query($sql)) 
-                            return 'Error en la inserción';
-                        else 
-                            return 'Inserción realizada con éxito'; 
-                    }
-                    else 
-                        return 'Ya existe en la base de datos'; 
-                }
+            if (!$result = $this->mysqli->query($sql)){ 
+                return false; 
             }
-            else 
-                return 'Introduzca un valor'; 
+            else { 
+                $sql2 = "INSERT INTO PISTA (id_pista, estado)
+                        VALUES ('$id_pista', '$estado')";
+
+                if (!$this->mysqli->query($sql2)){ 
+                    return false;
+                }else{ 
+                    return true;
+                } 
+            } 
         }
 
 

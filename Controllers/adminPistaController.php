@@ -8,20 +8,22 @@
 				switch($_REQUEST["action"]) {
 
 					case 'ADD': 
-					//echo "CASI YAAAY.    ";
 						if ($_POST){
-							//echo "YAYYYYY";
-							//echo "REQUEST: "; var_dump($_REQUEST); echo "     ";
 							require_once('Models/pistaModel.php');
-							$pista = new PistaModel($_POST["idpista"],0);
+							$pista = new PistaModel();
+							$pista->setId($_POST["inputID"]);
+							$pista->setEstado("0");
                             require_once('Mappers/pistaMapper.php');
                             $pistaMapper = new PistaMapper();
-                            $pistaMapper->ADD($pista); 
-                            echo "Pista añadida. Recuerda activarla para su uso.";
-							
+							$respuesta = $pistaMapper->ADD($pista);
+							if($respuesta){
+								echo "Pista añadida. Recuerda activarla para su uso.";
+							}
+							else{
+								echo "la has liado";
+							}
 							header('Location: index.php?controller=adminPista');
 						}else{
-							//echo "NOS PASAMOS DE YAAAY.    ";
 							require_once('Views/adminPistaView.php');
 							(new adminPistaView())->render();
 						}
