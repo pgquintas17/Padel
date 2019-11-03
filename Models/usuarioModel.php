@@ -99,16 +99,16 @@ class UsuarioModel {
 
 		$errores = array();
 
-		if (strlen($this->login) == 0 || strlen($this->login) < 15) {
+		if (strlen($this->login) == 0 || strlen($this->login) > 15) {
 			$errores["login"] = "El login no puede superar los 15 caracteres ni ser vacío";
 		}
-		if (strlen($this->password) < 6 || strlen($this->passwd) == 0) {
+		if (strlen($this->password) < 6 || strlen($this->password) == 0) {
 			$errores["passwordd"] = "La contraseña debe tener como mínimo 6 caracteres";
 		}
-		if (strlen($this->Nombre) == 0 || strlen($this->nombre) < 100) {
+		if (strlen($this->nombre) == 0 || strlen($this->nombre) > 100) {
 			$errores["nombre"] = "El nombre no puede estar vacio";
 		}
-		if ($this->genero == null) {
+		if (strlen($this->genero) == 0) {
 			$errores["genero"] = "Debe seleccionarse un género";
 		}
 		if ($this->fecha_nac == null) {
@@ -120,20 +120,10 @@ class UsuarioModel {
 		if ($this->permiso == null) {
 			$errores["permiso"] = "Debe seleccionarse una categoría para el usuario";
 		}
-		if (!$this->validarTelefono($this->telefono)) {
-			$errores["telefono"] = "Debe seleccionarse un género";
+		if ((!filter_var($this->telefono, FILTER_SANITIZE_NUMBER_INT)) || strlen($this->telefono) != 9) {
+			$errores["telefono"] = "Formato del teléfono erróneo";
 		}
 			return $errores;
-	}
-
-	function validarTelefono($telefono) {
-		$expresion = '/^[9|6|7][0-9]{8}$/'; 
-		if(preg_match($expresion, $telefono)){ 
-			echo true; 
-		}
-		else{ 
-			echo false; 
-		} 
 	}
 
 

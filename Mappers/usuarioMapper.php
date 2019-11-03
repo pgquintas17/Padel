@@ -23,7 +23,7 @@ require_once('Models/usuarioModel.php');
             $genero = $usuario->getGenero();
             $permiso = $usuario->getPermiso();
 
-            if (($usuario->getLogin() <> '')){ 
+            if (($login <> '')){ 
     
                 $sql = "SELECT * FROM USUARIO WHERE (login = '$login')";
     
@@ -43,7 +43,7 @@ require_once('Models/usuarioModel.php');
                                 permiso
                             )
                             VALUES (
-                                '$login()',
+                                '$login',
                                 '$nombre',
                                 '$password',
                                 '$fechaNac',
@@ -192,6 +192,56 @@ require_once('Models/usuarioModel.php');
                 return true;
             else 
                 return false;
+        }
+
+
+        function crearFiltros($usuario,$filtros) {
+            $toret = "( ";
+
+            $login = $usuario->getLogin();
+            $nombre = $usuario->getNombre();
+            $password = $usuario->getPassword();
+            $fechaNac = $usuario->getFechaNac();
+            $telefono = $usuario->getTelefono();
+            $email = $usuario->getEmail();
+            $genero = $usuario->getGenero();
+
+            foreach($filtros as $filtro) {
+                switch($filtro) {
+                    case "login":
+                        $toret .= "(login = '$login')";
+                        break;
+                    case "nombre":
+                        $toret .= "(nombre = '$nombre')";
+                        break;
+                    case "fecha_nac":
+                        $toret .= "(fecha_nac = '$fechaNac')";
+                        break;
+                    case "telefono":
+                        $toret .= "(telefono = '$telefono')";
+                        break;
+                    case "email":
+                        $toret .= "(email = '$email')";
+                        break;
+                    case "genero":
+                        $toret .= "(genero = '$genero')";
+                        break;
+                    case "permiso":
+                        $toret .= "(permiso = '$permiso')";
+                        break;
+                }
+                $toret .= " && ";
+            }
+            $toret = chop($toret," && ");
+            $toret .= " )";
+    
+            $sql = "select * from USUARIO where " . $toret;
+    
+            if (!($resultado = $this->mysqli->query($sql))) {
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else 
+                return $resultado;
         }
 
 

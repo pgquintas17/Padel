@@ -21,6 +21,9 @@
             <!-- Jumbotron -->
             <div  id="espacio_info" class="jumbotron">
             <br><h3>Usuario: <?php echo $this->datos['1']; ?></h3><br>
+            <div class="row justify-content-around">
+                <a class="bg-ligth text-dark" href="/index.php?controller=adminUsuarios"><i class="fas fa-arrow-circle-left fa-2x"></i></a><br>
+            </div>  
                 <div class="row justify-content-md-center">
                     <div class="col-md-auto"> 
 
@@ -36,29 +39,29 @@
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Fecha de Nacimiento</th>
-                                <td class="table-light"><?php echo $this->datos['2']; ?></td>
-                            </tr>
-                            <tr>
-                                <th class="bg-dark text-white">Teléfono</th>
                                 <td class="table-light"><?php echo $this->datos['3']; ?></td>
                             </tr>
                             <tr>
-                                <th class="bg-dark text-white">Email</th>
+                                <th class="bg-dark text-white">Teléfono</th>
                                 <td class="table-light"><?php echo $this->datos['4']; ?></td>
                             </tr>
                             <tr>
-                                <th class="bg-dark text-white">Genero</th>
+                                <th class="bg-dark text-white">Email</th>
                                 <td class="table-light"><?php echo $this->datos['5']; ?></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-dark text-white">Genero</th>
+                                <td class="table-light"><?php echo $this->datos['6']; ?></td>
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Permiso</th>
                                 <td class="table-light">
                                     <?php 
-                                        if($this->datos['6'] == 0)
+                                        if($this->datos['7'] == 0)
                                             echo "Deportista";
-                                        if($this->datos['6'] == 1)
+                                        if($this->datos['7'] == 1)
                                             echo "Entrenador";
-                                        if($this->datos['6'] == 2)
+                                        if($this->datos['7'] == 2)
                                             echo "Administrador"; 
                                     ?>
                                 </td>
@@ -93,7 +96,7 @@
                 </div>
             </div>
             </div>
-        <!--modal confirmación-->
+            <!--modal confirmación-->
 
         <?php
         }
