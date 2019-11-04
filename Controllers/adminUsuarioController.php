@@ -50,7 +50,6 @@
 						$respuesta = $usuarioMapper->DELETE($usuario); 
 						echo "Usuario Eliminado"; 
 						header('Location: index.php?controller=adminUsuarios');
-
 						break;
 						
 

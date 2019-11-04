@@ -1,16 +1,25 @@
 <?php
 require_once("Views/baseView.php");
+require_once('Views/mensajeView.php');
 
 class LoginView extends BaseView {
 
     private $usuario;
+    private $msg;
+    private $errs;
 
-	function __construct($usuario=null){		
+	function __construct($msg=null, $errs=null, $usuario=null){
+        $this->msg = $msg;
+        $this->errs = $errs;		
         parent::__construct($this->usuario);
     }
     
     function _render() {
         ?>
+
+        <!-- ESTA ES LA VISTA DEL MENSAJE Y DE LOS ERRORES -->
+        <?php (new MSGView($this->msg, $this->errs))->render(); ?>
+        <!-- ///////////////////////////////////////////// -->
         
         <div  id="espacio_info" class="jumbotron">
             <div class="row">

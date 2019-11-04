@@ -18,6 +18,11 @@
 
         function _render() { 
             ?>
+
+            <!-- ESTA ES LA VISTA DEL MENSAJE Y DE LOS ERRORES -->
+            <?php (new MSGView($this->msg, $this->errs))->render(); ?>
+            <!-- ///////////////////////////////////////////// -->
+            
             <!-- Jumbotron -->
             <div  id="espacio_info" class="jumbotron">
             <br><h3>Usuario: <?php echo $this->datos['1']; ?></h3><br>

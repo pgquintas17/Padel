@@ -1,22 +1,30 @@
 <?php
 
 require_once('Views/baseView.php');
+require_once('Views/mensajeView.php');
 
 class IndexView extends baseView {
 
     private $usuario;
     private $msg;
     private $errs;
+    private $partidosPromocionados;
 
-    function __construct($msg=null, $errs=null, $usuario=null) {
+    function __construct($msg=null, $errs=null, $usuario=null, $partidosPromocionados=null) {
         $this->msg = $msg;
         $this->errs = $errs;
         parent::__construct($this->usuario);
+        $this->partidosPromocionados = $partidosPromocionados;
     }
 
     function _render() { 
         ?>
-         <!-- Jumbotron -->
+        <!-- ESTA ES LA VISTA DEL MENSAJE Y DE LOS ERRORES -->
+        <?php (new MSGView($this->msg, $this->errs))->render(); ?>
+        <!-- ///////////////////////////////////////////// -->
+         
+         
+        <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
             <h1>Noticias</h1>
             <!-- Example row of columns -->

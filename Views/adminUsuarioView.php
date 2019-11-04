@@ -2,6 +2,7 @@
 
     require_once('Views/baseView.php');
     require_once('Models/usuarioModel.php');
+    require_once('Views/mensajeView.php');
 
     class AdminUsuarioView extends baseView {
 
@@ -21,12 +22,17 @@
 
         function _render() { 
 ?>
-          <!-- Jumbotron -->
-      <div  id="espacio_info" class="jumbotron">
-        <h1>Usuarios</h1><br>
-        <div class="row justify-content-md-center">
-            <a class="bg-ligth text-dark" href='/index.php?controller=adminUsuarios&action=ADD'><i class="fas fa-plus-circle fa-2x"></i></a>
-        </div><br>
+
+        <!-- ESTA ES LA VISTA DEL MENSAJE Y DE LOS ERRORES -->
+        <?php (new MSGView($this->msg, $this->errs))->render(); ?>
+        <!-- ///////////////////////////////////////////// -->
+
+        <!-- Jumbotron -->
+        <div  id="espacio_info" class="jumbotron">
+            <h1>Usuarios</h1><br>
+            <div class="row justify-content-md-center">
+                <a class="bg-ligth text-dark" href='/index.php?controller=adminUsuarios&action=ADD'><i class="fas fa-plus-circle fa-2x"></i></a>
+            </div><br>
 
         
 

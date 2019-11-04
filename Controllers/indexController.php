@@ -12,7 +12,7 @@ class IndexController {
 			$usuario = $_SESSION['Usuario'];
 		}
 		
-		(new IndexView($usuario))->render();
+		(new IndexView(null,null,$usuario,null))->render();
 	}
 }
 
