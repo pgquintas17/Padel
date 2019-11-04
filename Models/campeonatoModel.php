@@ -24,132 +24,57 @@ class CampeonatoModel {
 	}
 
 
-	function ADD(){
-			
-		$sql = "INSERT INTO CAMPEONATO (
-                	nombre,
-                	fecha_inicio,
-                	fecha_fin,
-                	fecha_inicio_inscripciones,
-                	fecha_fin_inscripciones
-				)
-				VALUES (
-                	'$this->nombre',
-                    '$this->fecha_inicio',
-                    '$this->fecha_fin',
-                    '$this->fecha_inicio_inscripciones',
-                    '$this->fecha_fin_inscripciones'
-				)";
 
-		if (!$this->mysqli->query($sql))
-			return 'Error en la inserción';
-		else
-			return 'Inserción realizada con éxito';
+	// getters
+
+	public function getId(){
+		return $this->id_campeonato;
 	}
 
-
-	function EDIT() {
-
-    	$sql = "SELECT * FROM CAMPEONATO  WHERE (id_campeonato = '$this->id_campeonato') ";
-    	$result = $this->mysqli->query($sql);
-
-    	if ($result->num_rows == 1) {
-
-			$sql = "UPDATE CAMPEONATO  SET
-                        nombre = '$this->nombre',
-                        fecha_inicio = '$this->fecha_inicio',
-                        fecha_fin = '$this->fecha_fin',
-                        fecha_inicio_inscripciones = '$this->fecha_inicio_inscripciones',
-                        fecha_fin_inscripciones = '$this->fecha_fin_inscripciones'
-
-				WHERE (id_campeonato = '$this->id_campeonato')";
-
-        	if (!($resultado = $this->mysqli->query($sql)))
-				return 'Error en la modificación';
-			else
-				return 'Modificado correctamente';
-    	}
-    	else
-			return 'No existe en la base de datos';
+	public function getNombre(){
+		return $this->nombre;
 	}
 
-
-	function mostrarTodos() {
-		
-		$sql = "select * from CAMPEONATO";
-
-    	if (!($resultado = $this->mysqli->query($sql)))
-			return 'Error en la consulta sobre la base de datos';
-    	else
-			return $resultado;
+	public function getFechaInicio(){
+		return $this->fecha_inicio;
 	}
 
-
-	function DELETE() {
-		
-		$sql = "SELECT * FROM CAMPEONATO  WHERE (id_campeonato = '$this->id_campeonato') ";
-		$result = $this->mysqli->query($sql);
-
-		if (!$result)
-    		return 'No se ha podido conectar con la base de datos';
-		
-		if ($result->num_rows == 1) {
-		    
-		    $sql = "DELETE FROM CAMPEONATO WHERE (id_campeonato = '$this->id_campeonato')";
-		    $this->mysqli->query($sql);
-		    
-		    return "Borrado correctamente";
-		}
-		else
-		    return "No existe";
+	public function getFechaFin(){
+		return $this->fecha_fin;
 	}
 
-	
-	function consultarDatos() {	
-		$sql = "SELECT * FROM CAMPEONATO WHERE (id_campeonato = '$this->id_campeonato')";
-		    
-		if (!($resultado = $this->mysqli->query($sql)))
-			return 'No existe en la base de datos'; 
-		else{ 
-			$result = $resultado->fetch_array();
-			return $result;
-		}
+	public function getFechaInicioInscripciones(){
+		return $this->fecha_inicio_inscripciones;
 	}
-	
 
-	function crearFiltros($filtros) {
-		$toret = "( ";
-		int n = 
-		foreach($filtros as $filtro) {
-			switch($filtro) {
-				case "nombre":
-					$toret .= "(nombre LIKE '%$this->nombre%')";
-					break;
-				case "fecha_inicio":
-					$toret .= "(fecha_inicio LIKE '%$this->fecha_inicio%')";
-					break;
-				case "fecha_fin":
-					$toret .= "(fecha_fin LIKE '%$this->fecha_fin%')";
-					break;
-					case "fecha_inicio_inscripciones":
-					$toret .= "(fecha_inscipciones LIKE '%$this->fecha_inicio_inscripciones%')";
-					break;
-				case "fecha_fin_inscripciones":
-					$toret .= "(fecha_fin_inscripciones LIKE '%$this->fecha_fin_inscripciones%')";
-					break;
-			}
-			$toret .= " && ";
-		}
-		$toret = chop($toret," && ");
-		$toret .= " )";
+	public function getFechaFinInscripciones(){
+		return $this->fecha_fin_inscripciones;
+	}
 
-		$sql = "select * from CAMPEONATO where " . $toret;
+	// setters
 
-    	if (!($resultado = $this->mysqli->query($sql))) {
-			return 'Error en la consulta sobre la base de datos';
-		}
-    	else 
-			return $resultado;
+	public function setId($id_campeonato){
+		$this->id_campeonato = $id_campeonato;
+	}
+
+	public function setNombre($nombre){
+		$this->nombre = $nombre;
+	}
+
+	public function setFechaInicio($fecha_inicio){
+		$this->fecha_inicio = $fecha_inicio;
+	}
+
+	public function setFechaFin($fecha_fin){
+		$this->fecha_fin = $fecha_fin;
+	}
+
+	public function setFechaInicioInscripciones($fecha_inicio_inscripciones){
+		$this->fecha_inicio_inscripciones = $fecha_inicio_inscripciones;
+	}
+
+	public function setFechaFinInscripciones($fecha_fin_inscripciones){
+		$this->fecha_fin_inscripciones = $fecha_fin_inscripciones;
 	}
 
 }
