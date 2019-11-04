@@ -97,7 +97,7 @@ class ParejaModel {
 	
 	function mostrarTodos() {
 		
-		$sql = "select * from PAREJA";
+		$sql = "SELECT * FROM PAREJA";
 
     	if (!($resultado = $this->mysqli->query($sql)))
 			return 'Error en la consulta sobre la base de datos';
@@ -145,7 +145,7 @@ class ParejaModel {
 		$toret = chop($toret," && ");
 		$toret .= " )";
 
-		$sql = "select * from PAREJA where " . $toret;
+		$sql = "SELECT * FROM PAREJA WHERE " . $toret;
 
     	if (!($resultado = $this->mysqli->query($sql))) {
 			return 'Error en la consulta sobre la base de datos';

@@ -74,7 +74,7 @@ class GrupoModel {
 
 	function mostrarTodos() {
 		
-		$sql = "select * from RESERVA";
+		$sql = "SELECT * FROM RESERVA";
 
     	if (!($resultado = $this->mysqli->query($sql)))
 			return 'Error en la consulta sobre la base de datos';
@@ -110,7 +110,7 @@ class GrupoModel {
 		$toret = chop($toret," && ");
 		$toret .= " )";
 
-		$sql = "select * from GRUPO where " . $toret;
+		$sql = "SELECT * FROM GRUPO WHERE " . $toret;
 
     	if (!($resultado = $this->mysqli->query($sql))) {
 			return 'Error en la consulta sobre la base de datos';

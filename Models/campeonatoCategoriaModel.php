@@ -67,7 +67,7 @@
 
 	function mostrarTodos() {
 		
-		$sql = "select * from CAMPEONATO_CATEGORIA";
+		$sql = "SELECT * FROM CAMPEONATO_CATEGORIA";
 
     	if (!($resultado = $this->mysqli->query($sql)))
 			return 'Error en la consulta sobre la base de datos';
@@ -107,7 +107,7 @@
 		}
 	}
 	
-	function getNParejas(){
+	function getNumParejas(){
 		
 		$sql = "SELECT * FROM CAMPEONATO_CATEGORIA WHERE ((id_catcamp = '$this->id_catcamp'))";
 		

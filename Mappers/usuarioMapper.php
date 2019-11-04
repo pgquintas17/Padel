@@ -127,7 +127,7 @@ require_once('Models/usuarioModel.php');
 
         function mostrarTodos() {
 		
-            $sql = "select 
+            $sql = "SELECT 
                         login,
                         nombre,
                         fecha_nac,
@@ -135,7 +135,7 @@ require_once('Models/usuarioModel.php');
                         email,
                         genero,
                         permiso 
-                    from USUARIO";
+                    FROM USUARIO";
     
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'Error en la consulta sobre la base de datos';
@@ -200,11 +200,11 @@ require_once('Models/usuarioModel.php');
 
             $login = $usuario->getLogin();
             $nombre = $usuario->getNombre();
-            $password = $usuario->getPassword();
             $fechaNac = $usuario->getFechaNac();
             $telefono = $usuario->getTelefono();
             $email = $usuario->getEmail();
             $genero = $usuario->getGenero();
+            $permiso = $usuario->getPermiso();
 
             foreach($filtros as $filtro) {
                 switch($filtro) {
@@ -235,7 +235,7 @@ require_once('Models/usuarioModel.php');
             $toret = chop($toret," && ");
             $toret .= " )";
     
-            $sql = "select * from USUARIO where " . $toret;
+            $sql = "SELECT * FROM USUARIO WHERE " . $toret;
     
             if (!($resultado = $this->mysqli->query($sql))) {
                 return 'Error en la consulta sobre la base de datos';

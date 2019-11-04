@@ -116,7 +116,7 @@ class EnfrentamientoModel {
 
 	function mostrarTodos() {
 		
-		$sql = "select * from ENFRENTAMIENTO";
+		$sql = "SELECT * FROM ENFRENTAMIENTO";
 
     	if (!($resultado = $this->mysqli->query($sql)))
 			return 'Error en la consulta sobre la base de datos';
@@ -163,7 +163,7 @@ class EnfrentamientoModel {
 		$toret = chop($toret," && ");
 		$toret .= " )";
 
-		$sql = "select * from ENFRENTAMIENTO where " . $toret;
+		$sql = "SELECT * FROM ENFRENTAMIENTO WHERE " . $toret;
 
     	if (!($resultado = $this->mysqli->query($sql))) {
 			return 'Error en la consulta sobre la base de datos';

@@ -18,7 +18,7 @@ class HorasModel {
 
 	function mostrarTodos() {
 		
-		$sql = "select * from HORAS";
+		$sql = "SELECT * FROM HORAS";
 
     	if (!($resultado = $this->mysqli->query($sql)))
 			return 'Error en la consulta sobre la base de datos';

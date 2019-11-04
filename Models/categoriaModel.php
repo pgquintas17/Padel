@@ -20,7 +20,7 @@ class CategoriaModel {
 	
 	function mostrarTodos() {
 		
-		$sql = "select * from CATEGORIA";
+		$sql = "SELECT * FROM CATEGORIA";
 
     	if (!($resultado = $this->mysqli->query($sql)))
 			return 'Error en la consulta sobre la base de datos';

@@ -39,7 +39,7 @@ require_once('Models/pistaModel.php');
 
         function mostrarTodos() {
 		
-            $sql = "select id_pista, estado from PISTA";
+            $sql = "SELECT id_pista, estado FROM PISTA";
     
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'Error en la consulta sobre la base de datos';
@@ -88,7 +88,6 @@ require_once('Models/pistaModel.php');
             }
             else 
                 return 'No existe en la base de datos';
-
         }
 
 
@@ -101,7 +100,6 @@ require_once('Models/pistaModel.php');
 		}
     	else 
 			return $resultado;
-
         }
 
 
@@ -121,7 +119,7 @@ require_once('Models/pistaModel.php');
             $toret = chop($toret," && ");
             $toret .= " )";
     
-            $sql = "select * from PISTA where " . $toret;
+            $sql = "SELECT * FROM PISTA WHERE " . $toret;
     
             if (!($resultado = $this->mysqli->query($sql))) {
                 return 'Error en la consulta sobre la base de datos';
