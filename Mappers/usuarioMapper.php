@@ -138,7 +138,7 @@ require_once('Models/usuarioModel.php');
                     FROM USUARIO";
     
             if (!($resultado = $this->mysqli->query($sql)))
-                return 'Error en la consulta sobre la base de datos';
+                return null;
             else
                 return $resultado;
         }

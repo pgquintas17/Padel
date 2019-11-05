@@ -123,7 +123,10 @@ class UsuarioModel {
 		if ((!filter_var($this->telefono, FILTER_SANITIZE_NUMBER_INT)) || strlen($this->telefono) != 9) {
 			$errores["telefono"] = "Formato del teléfono erróneo";
 		}
-			return $errores;
+		
+		if (sizeof($errores) > 0){
+			throw new ValidationException($errores, "El usuario no es válido");
+		}
 	}
 
 

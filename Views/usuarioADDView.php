@@ -2,6 +2,8 @@
 
     require_once('Views/baseView.php');
     require_once('Models/usuarioModel.php');
+    require_once('Views/mensajeView.php');
+    
     class UsuarioADDView extends baseView {
 
         private $usuario;

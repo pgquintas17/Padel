@@ -52,13 +52,13 @@
                                     if($this->fila['estado'] == 1){
                                 ?>
                                     <td class="table-light"><?php echo $this->fila['id_pista']; ?></td>
-                                    <td class="table-light"><a class="bg-ligth text-dark" href='/index.php?controller=adminPista&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-on fa-2x"></i></a></td>
+                                    <td class="table-light"><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-on fa-2x"></i></a></td>
                                 <?php
                                     }
                                     else{
                                 ?>
                                     <td class="table-danger"><?php echo $this->fila['id_pista']; ?></td>
-                                    <td class="table-danger"><a class="bg-ligth text-dark" href='/index.php?controller=adminPista&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-off fa-2x"></i></a></td>
+                                    <td class="table-danger"><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-off fa-2x"></i></a></td>
                                 <?php    
                                     }
                                 ?>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="modal-body">
                 <form action="/" method="POST" name="addPistas">
-                        <input type="hidden" name="controller" value="adminPista">
+                        <input type="hidden" name="controller" value="adminPistas">
                         <input type="hidden" name="action" value="ADD">
 
                         <div class="form-group">
