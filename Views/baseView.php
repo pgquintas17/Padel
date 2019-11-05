@@ -43,13 +43,13 @@
                             if(Utils::nivelPermiso(2)){ //Si es admin
                         ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="/index.php?controller=adminPista">PISTAS</a>
+                                <a class="nav-link" href="/index.php?controller=adminPistas">PISTAS</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">CAMPEONATOS</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">PARTIDOS</a>
+                                <a class="nav-link" href="/index.php?controller=adminPartidos">PARTIDOS</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/index.php?controller=adminUsuarios">USUARIOS</a>

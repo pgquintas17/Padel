@@ -12,10 +12,11 @@ class PartidoModel {
     var $login2;
     var $login3;
 	var $login4;
-	var $id_reserva 
+	var $id_reserva;
+	var $num_plazas; 
 	
 
- 	function __construct($id_partido=null,$resultado=null,$hora=null,$fecha=null,$promocion=null,$login1=null,$login2=null,$login3=null,$login4=null,$id_reserva=null){
+ 	function __construct($id_partido=null,$resultado=null,$hora=null,$fecha=null,$promocion=null,$login1=null,$login2=null,$login3=null,$login4=null,$id_reserva=null,$num_plazas=null){
 		$this->id_partido = $id_partido;
 		$this->resultado = $resultado;
         $this->hora = $hora; 
@@ -25,7 +26,8 @@ class PartidoModel {
         $this->login2 = $login2;
         $this->login3 = $login3;
 		$this->login4 = $login4;
-		$this->id_reserva = $id_reserva
+		$this->id_reserva = $id_reserva;
+		$this->num_plazas = $num_plazas;
 	}
 
 
@@ -71,6 +73,10 @@ class PartidoModel {
 		return $this->id_reserva;
 	}
 
+	public function getNumPlazas(){
+		return $this->numPlazas;
+	}
+
 
 	// setters
 
@@ -112,6 +118,37 @@ class PartidoModel {
 
 	public function setIdReserva($id_reserva){
 		$this->id_reserva = $id_reserva;
+	}
+
+	public function setNumPlazas($num_plazas){
+		$this->num_plazas = $num_plazas;
+	}
+
+
+
+	public function validarRegistro(){
+
+		$errores = array();
+		$fecha = date('Y-m-d');
+		$apertura = "09:00:00";
+		$cierre = "21:00:00";
+
+		if (($this->fecha) <= $fecha) {
+			$errores["Fecha"] = "Seleccione una fecha posterior a la actual.";
+		}
+
+		if (($this->hora) < $apertura) {
+			$errores["Hora"] = "La hora de apertura del club es a las 9:00.";
+		}
+
+		if (($this->hora) >= $cierre) {
+			$errores["Hora"] = "La hora de cierre del club es a las 21:00.";
+		}
+		
+		
+		if (sizeof($errores) > 0){
+			throw new ValidationException($errores, "El usuario no es válido");
+		}
 	}
 
 }

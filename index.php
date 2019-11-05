@@ -15,17 +15,17 @@
                         new AdminUsuarioController();
                         exit;
                         break;
-                    case "adminPista":
+                    case "adminPistas":
                         require_once('Controllers/adminPistaController.php');
                         new AdminPistaController();
                         exit;
                         break;
-                    case "adminPartido":
-                        //require_once('Controllers/adminPartidoController.php');
+                    case "adminPartidos":
+                        require_once('Controllers/adminPartidoController.php');
                         new AdminPartidoController();
                         exit;
                         break;
-                    case "adminCampeonato":
+                    case "adminCampeonatos":
                         //require_once('Controllers/adminCampeonatoController.php');
                         new AdminCampeonatoController();
                         exit;
@@ -42,11 +42,6 @@
                 case "reserva":
                     //require_once('Controllers/reservaPistaController.php');
                     new ReservaPistaController();
-                    exit;
-                    break;
-                case "promocion":
-                    //require_once('Controllers/partidoPromocionadoController.php');
-                    new PartidoPromocionadoController();
                     exit;
                     break;
                 case "campeonatos":
