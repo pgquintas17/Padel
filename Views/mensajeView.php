@@ -20,8 +20,8 @@ class MSGView {
 					<?php 
 						if(is_array($this->msg)) {
 							$toPrint = "";
-							foreach ($this->msg as $error) {
-								$toPrint = $toPrint . $error . "<br/>";
+							foreach ($this->msg as $mensaje) {
+								$toPrint = $toPrint . $mensaje . "<br/>";
 							}
 							echo $toPrint;
 						}
