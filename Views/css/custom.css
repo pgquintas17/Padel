@@ -95,6 +95,21 @@ header a:hover {
 
 }
 
+#tablas{
+	overflow: auto;
+	height: 500px;
+}
+
+.list-group-item{
+
+	margin: 5px;
+
+}
+
+#partidos{
+	overflow: auto;
+	height: 500px;
+}
 
 html {
 	height: 100%;
