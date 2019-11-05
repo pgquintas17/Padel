@@ -2,6 +2,8 @@
 
 	// include '../Views/Users_Views/USUARIO_ADD.php';
 	// include '../Views/Users_Views/USUARIO_EDIT.php';
+	require_once('Services/sessionMensajes.php');
+    require_once("Services/validarExcepciones.php");
 
 	class AdminUsuarioController {
 
@@ -12,31 +14,22 @@
 
 					case 'ADD': 
 						if ($_POST){
-							require_once('Models/usuarioModel.php');
-							$usuario = new UsuarioModel();
-							$usuario->setLogin($_POST["inputLogin"]);
-							$usuario->setNombre($_POST["inputNombre"]);
-							$usuario->setPassword($_POST["inputPassword"]);
-							$usuario->setFechaNac($_POST["inputFechaNac"]);
-							$usuario->setTelefono($_POST["inputTelefono"]);
-							$usuario->setEmail($_POST["inputEmail"]);
-							$usuario->setGenero($_POST["inputGenero"]);
-							$usuario->setPermiso($_REQUEST["inputPermiso"]);
-							$errores =  $usuario->validarRegistro();
-							if(sizeof($errores) == null){
-								require_once('Mappers/usuarioMapper.php');
-								$usuarioMapper = new UsuarioMapper();
-								$usuarioMapper->ADD($usuario); 
-								echo "Usuario añadido";
+							try {
+								require_once('Models/usuarioModel.php');
+								$usuario = new UsuarioModel($_POST["inputLogin"],$_POST["inputNombre"],$_POST["inputPassword"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_REQUEST["inputPermiso"]);
+								$errores =  $usuario->validarRegistro();
+
+								SessionMessage::setMessage("Registro completado con éxito");
+								header('Location: index.php?controller=adminUsuarios');
 							}
-							else{
-								echo "la has liado";
-								echo $errores;
+							catch (ValidationException $e){
+								SessionMessage::setErrores($e->getErrores());
+								SessionMessage::setMessage($e->getMessage());
+								header('Location: index.php?controller=adminUsuarios&action=ADD');
 							}
-							header('Location: index.php?controller=adminUsuarios');
 						}else{
 							require_once('Views/usuarioADDView.php');
-							(new UsuarioADDView())->render();
+							(new UsuarioADDView(SessionMessage::getMessage(),SessionMessage::getErrores()))->render();
 						}
 						break;
 						
@@ -76,7 +69,7 @@
 				$usuarioMapper = new UsuarioMapper();
 				$listaUsuarios = $usuarioMapper->mostrarTodos(); 
 				require_once('Views/adminUsuarioView.php');
-				(new AdminUsuarioView('','','','',$listaUsuarios))->render();
+				(new AdminUsuarioView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaUsuarios))->render();
 			}
 		}
 	}

@@ -1,5 +1,8 @@
 <?php
 
+	require_once('Services/sessionMensajes.php');
+	require_once("Services/validarExcepciones.php");
+	
 	class AdminPistaController {
 
 		function __construct() {
@@ -17,15 +20,15 @@
                             $pistaMapper = new PistaMapper();
 							$respuesta = $pistaMapper->ADD($pista);
 							if($respuesta){
-								echo "Pista añadida. Recuerda activarla para su uso.";
+								SessionMessage::setMessage("La pista ha sido añadida. Recuerda activarla para su uso.");
 							}
 							else{
-								echo "la has liado";
+								SessionMessage::setMessage("Se ha producido un error.");
 							}
-							header('Location: index.php?controller=adminPista');
+							header('Location: index.php?controller=adminPistas');
 						}else{
 							require_once('Views/adminPistaView.php');
-							(new adminPistaView())->render();
+							(new adminPistaView(SessionMessage::getMessage()))->render();
 						}
 						break;
 						
@@ -38,14 +41,14 @@
 						$pistaMapper = new PistaMapper();
 						$respuesta = $pistaMapper->cambiarEstado($pista);
 						if($respuesta){
-							header('Location: index.php?controller=adminPista');
+							header('Location: index.php?controller=adminPistas');
 						}
 						else{
 							echo "error";
 						} 
 						break;
 
-					case 'RESERVAS':
+					/*case 'RESERVAS':
 						require_once('Models/pistaModel.php');
 						$pista = new PistaModel();
                         $pista->setId($_REQUEST['idpista']);
@@ -53,16 +56,16 @@
 						$pistaMapper = new PistaMapper();
 						$respuesta = $pistaMapper->cambiarEstado($pista);
 						if($respuesta){
-							header('Location: index.php?controller=adminPista');
+							header('Location: index.php?controller=adminPistas');
 						}
 						else{
 							echo "error";
 						} 
-						break;
+						break;*/
 
 
 					default: 
-						header('Location: index.php?controller=adminPista');
+						header('Location: index.php?controller=adminPistas');
 						break;
 
 				}
@@ -71,7 +74,7 @@
 				$pistaMapper = new PistaMapper();
 				$listaPistas = $pistaMapper->mostrarTodos();
 				require_once('Views/adminPistaView.php');
-				(new AdminPistaView('','','','',$listaPistas))->render();
+				(new AdminPistaView(SessionMessage::getMessage(),SessionMessage::getErrores(),'','',$listaPistas))->render();
 			}
 		}
 	}
