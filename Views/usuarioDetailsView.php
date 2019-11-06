@@ -35,7 +35,7 @@
                     <div class="col-md-auto"> 
 
                         <!-- Tabla datos usuario -->
-                        <table class="table table-hover table-bordered" id="tablas" style="border-radius: 25px;">
+                        <table class="table table-hover table-bordered" style="border-radius: 25px;">
                             <tr>
                             <th class="bg-dark text-white">Login</th>
                                 <td class="table-light"><?php echo $this->datos['0']; ?></td>
@@ -46,7 +46,7 @@
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Fecha de Nacimiento</th>
-                                <td class="table-light"><?php echo $this->datos['3']; ?></td>
+                                <td class="table-light"><?php echo date('d-m-Y',strtotime($this->datos['3'])); ?></td>
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Teléfono</th>

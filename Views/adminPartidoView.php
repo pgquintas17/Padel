@@ -57,8 +57,8 @@
                     if($this->fila['fecha'] >= $fecha){
         ?>
                     <tr class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                        <td class="table-light"><?php echo $this->fila['fecha']; ?></td>
-                        <td class="table-light"><?php echo $this->fila['hora']; ?></td>
+                        <td class="table-light"><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></td>
+                        <td class="table-light"><?php echo date('H:i',strtotime($this->fila['hora']));?></td>
                         <td class="table-light"><?php echo $numPlazas; ?></td>
                         <?php
                         if($this->fila['promocion'] == 1){
@@ -75,8 +75,8 @@
                         else{
                         ?>
                         <tr class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                        <td class="table-secondary"><?php echo $this->fila['fecha']; ?></td>
-                        <td class="table-secondary"><?php echo $this->fila['hora']; ?></td>
+                        <td class="table-secondary"><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></td>
+                        <td class="table-secondary"><?php echo date('H:i',strtotime($this->fila['hora'])); ?></td>
                         <td class="table-secondary"></td>
                         <td class="table-secondary"></td>
                         <?php    

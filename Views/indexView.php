@@ -48,8 +48,8 @@ class IndexView extends baseView {
                                 if($numPlazas != 0){
                                 ?>
                                 <li class="list-group-item">
-                                    <strong><?php echo $this->fila['fecha']; ?></strong><br>
-                                    <p>Se jugará a las <?php echo $this->fila['hora']; ?><br>
+                                    <strong><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></strong><br>
+                                    <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     ¡Quedan <?php echo $numPlazas; ?> plazas libres!</p>
                                     <p><a class="btn btn-dark" href="#" role="button">Apuntarse</a></p>
                                 </li>
@@ -70,8 +70,8 @@ class IndexView extends baseView {
                                 $numPlazas = (new PartidoMapper())->getNumPlazasLibres($id);
                                 ?>
                                 <li class="list-group-item">
-                                    <strong><?php echo $this->fila['fecha']; ?></strong><br>
-                                    <p>Se jugará a las <?php echo $this->fila['hora']; ?><br>
+                                    <strong><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></strong><br>
+                                    <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     Quedan <?php echo $numPlazas; ?> plazas libres</p>
                                     <?php
                                     if($numPlazas == 0){
@@ -103,8 +103,8 @@ class IndexView extends baseView {
                                 if($numPlazas != 0){
                                 ?>
                                 <li class="list-group-item">
-                                    <strong><?php echo $this->fila['fecha']; ?></strong><br>
-                                    <p>Se jugará a las <?php echo $this->fila['hora']; ?><br>
+                                    <strong><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></strong><br>
+                                    <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     ¡Quedan <?php echo $numPlazas; ?> plazas libres!</p>
                                 </li>
                                 <?php
