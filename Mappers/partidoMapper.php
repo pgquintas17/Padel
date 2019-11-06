@@ -36,7 +36,7 @@ require_once('Models/partidoModel.php');
                         return 'Error en la inserción';
                     } 
                     else {
-                        return 'Inserción realizada con éxito';
+                        return 'Registro completado con éxito. Recuerda promocionar el partido para darle difusión.';
                     } 
                 }
 
