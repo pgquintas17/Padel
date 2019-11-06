@@ -18,8 +18,11 @@
 								require_once('Models/usuarioModel.php');
 								$usuario = new UsuarioModel($_POST["inputLogin"],$_POST["inputNombre"],$_POST["inputPassword"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_REQUEST["inputPermiso"]);
 								$errores =  $usuario->validarRegistro();
+								require_once('Mappers/usuarioMapper.php');
+                            	$usuarioMapper = new UsuarioMapper();
+								$respuesta = $usuarioMapper->ADD($usuario);
 
-								SessionMessage::setMessage("Registro completado con éxito");
+								SessionMessage::setMessage($respuesta);
 								header('Location: index.php?controller=adminUsuarios');
 							}
 							catch (ValidationException $e){

@@ -92,11 +92,11 @@
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="inputPermiso" value="1">
-                                    <label class="form-check-label" >Entrenador</label>
+                                    <label class="form-check-label" for="permiso-1">Entrenador</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="inputPermiso" value="2">
-                                    <label class="form-check-label">Administrador</label>
+                                    <label class="form-check-label" for="permiso-2">Administrador</label>
                                 </div>    
                             </div>
                             <button type="submit" class="btn btn-light" name="submit" id="submit">Registrar</button>
