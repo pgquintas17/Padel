@@ -18,8 +18,11 @@
 								require_once('Models/partidoModel.php');
 								$partido = new PartidoModel('','',$_POST["inputHora"],$_POST["inputFecha"],'','','','','','');
 								$errores =  $partido->validarRegistro();
+								require_once('Mappers/partidoMapper.php');
+                            	$partidoMapper = new PartidoMapper();
+								$respuesta = $partidoMapper->ADD($partido);
 
-								SessionMessage::setMessage("Registro completado con éxito");
+								SessionMessage::setMessage($respuesta);
 								header('Location: index.php?controller=adminPartidos');
 							}
 							catch (ValidationException $e){
@@ -29,7 +32,7 @@
 							}
 						}else{
 							require_once('Views/adminPartidoView.php');
-							(new AdminPartidoView(SessionMessage::getMessage(),SessionMessage::getErrores()))->render();
+							header('Location: index.php?controller=adminPartidos');
 						}
 						break;
 						

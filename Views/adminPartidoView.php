@@ -30,9 +30,7 @@
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
             <h1>Partidos</h1><br>
-            <!--<div class="row justify-content-md-center">
-                <a class="bg-ligth text-dark" href='/index.php?controller=adminUsuarios&action=ADD'><i class="fas fa-plus-circle fa-2x"></i></a>
-            </div><br>-->
+            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#addPartido"><i class="fas fa-plus-circle fa-2x"></i></button><br><br>
 
         
 
@@ -95,6 +93,42 @@
         </table>
             </div>
     </div>
+
+    <!--modal addPartido-->
+    <div class="modal fade" id="addPartido" tabindex="-1" role="dialog" aria-labelledby="borrarLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Añadir Pista</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <form action="/" method="POST" name="addPistas">
+                        <input type="hidden" name="controller" value="adminPartidos">
+                        <input type="hidden" name="action" value="ADD">
+
+                        <div class="form-group">
+                        <label>Día</label>
+                        <input type="date" class="form-control" name="inputFecha">
+                        </div>
+                        <div class="form-group">
+                        <label>Hora</label>
+                        <input type="time" class="form-control" name="inputHora">
+                        </div>
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-dark" value="Login">Añadir partido</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!--modal addPartidos-->
 
 <?php
         }
