@@ -69,7 +69,6 @@ require_once('Models/partidoModel.php');
 		
             $sql = "SELECT 
                         id_partido,
-                        resultado,
                         hora,
                         fecha,
                         promocion,
@@ -151,21 +150,35 @@ require_once('Models/partidoModel.php');
             }      
         }
 
+        function validarUsuario($partido,$usuario){
 
-        function añadirResultado($partido){
-
-            $resultado = $partido->getResultado();
+            $login = $usuario->getLogin();
             $id_partido = $partido->getId();
 
-            $sql = "UPDATE PARTIDO  SET resultado = '$resultado' 
-                    WHERE ( id_partido = '$id_partido' )";
+            $sql = "SELECT * FROM PARTIDO WHERE id_partido = '$id_partido'";
 
             if (!($resultado = $this->mysqli->query($sql))){
-                return 'Error en la modificación';
-            }      
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            if($tupla['4'] == $login){
+                return false;
+            } 
+            else if($tupla['5'] == $login){
+                return false;
+            } 
+            else if($tupla['6'] == $login){
+                return false;
+            }
+            else if($tupla['7'] == $login){
+                return false;
+            }
             else{
                 return true;
-            }      
+            }
         }
 
 
@@ -174,7 +187,7 @@ require_once('Models/partidoModel.php');
             $login = $usuario->getLogin();
             $id_partido = $partido->getId();
 
-            $sql = "SELECT * FROM PARTIDO WHERE id_partido = '$id_partido')";
+            $sql = "SELECT * FROM PARTIDO WHERE id_partido = '$id_partido'";
 
             if (!($resultado = $this->mysqli->query($sql))){
                 return 'Error en la consulta sobre la base de datos';
@@ -182,15 +195,15 @@ require_once('Models/partidoModel.php');
             else{
                 $tupla = $resultado->fetch_array(MYSQLI_NUM);
 
-                if($tupla['5'] == null & $tupla['5'] != $login){
+                if($tupla['4'] == null){
                     $sql2 = "UPDATE PARTIDO SET login1 = '$login' 
                     WHERE ( id_partido = '$id_partido' )";
                 } 
-                else if($tupla['6'] == null & $tupla['6'] != $login){
+                else if($tupla['5'] == null){
                     $sql2 = "UPDATE PARTIDO SET login2 = '$login' 
                     WHERE ( id_partido = '$id_partido' )";
                 } 
-                else if($tupla['7'] == null & $tupla['7'] != $login){
+                else if($tupla['6'] == null){
                     $sql2 = "UPDATE PARTIDO SET login3 = '$login' 
                     WHERE ( id_partido = '$id_partido' )";
                 }
@@ -202,7 +215,7 @@ require_once('Models/partidoModel.php');
                 if (!($resultado = $this->mysqli->query($sql2)))
                     return 'Error en la modificación';
                 else
-                    return true;
+                    return 'Te has apuntado correctamente al partido.';
             }
         }
 
@@ -216,7 +229,7 @@ require_once('Models/partidoModel.php');
                 
             $tupla = $result->fetch_array(MYSQLI_NUM);
             
-            if($tupla['4'] == 0){
+            if($tupla['3'] == 0){
                 $sql2 = "UPDATE PARTIDO  SET promocion = 1 WHERE ( id_partido = '$id_partido')";
             }
             else{
@@ -245,19 +258,19 @@ require_once('Models/partidoModel.php');
             else{
                 $tupla = $resultado->fetch_array(MYSQLI_NUM);
 
-                if($tupla['5'] == null){
+                if($tupla['4'] == null){
                     $numPlazas++;
+                } 
+                
+                if($tupla['5'] == null){
+                    $numPlazas++;;
                 } 
                 
                 if($tupla['6'] == null){
                     $numPlazas++;;
-                } 
-                
-                if($tupla['7'] == null){
-                    $numPlazas++;;
                 }
 
-                if($tupla['8'] == null){
+                if($tupla['7'] == null){
                     $numPlazas++;;
                 }
 
@@ -269,7 +282,6 @@ require_once('Models/partidoModel.php');
         function getPartidosPromocionadosFromFecha($fecha) {
 
             $sql = "SELECT id_partido,
-                            resultado,
                             hora,
                             fecha,
                             promocion,

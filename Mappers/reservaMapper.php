@@ -92,7 +92,7 @@ require_once('Models/reservaModel.php');
 
         function consultarDatos($reserva) {	
 
-            $id_pista = $reserva->getId();
+            $id_reserva = $reserva->getId();
 
             $sql = "SELECT * FROM RESERVA WHERE (id_reserva = '$id_reserva')";
                 
@@ -102,6 +102,22 @@ require_once('Models/reservaModel.php');
                 $result = $resultado->fetch_array(MYSQLI_NUM);
                 return $result;
             }
+        }
+
+
+        function getPistaById($reserva){
+
+            $id_reserva = $reserva->getId();
+
+            $sql = "SELECT id_pista FROM RESERVA WHERE (id_reserva = '$id_reserva')";
+                
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'No existe en la base de datos'; 
+            else{ 
+                $result = $resultado->fetch_array(MYSQLI_NUM);
+                return $result;
+            }
+
         }
 
 
