@@ -9,15 +9,19 @@
         private $usuario;
         private $msg;
         private $errs;
-        private $fila;
+        private $filaPartidos;
         private $listaPartidos;
+        private $filaHoras;
+        private $listaHoras;
 
-        function __construct($msg=null, $errs=null, $usuario=null, $fila=null, $listaPartidos=null) {
+        function __construct($msg=null, $errs=null, $usuario=null, $filaPartidos=null, $listaPartidos=null, $filaHoras=null, $listaHoras=null) {
             $this->msg = $msg;
             $this->errs = $errs;
             parent::__construct($this->usuario);
-            $this->fila = array('id_partido','resultado','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
+            $this->filaPartidos = array('id_partido','resultado','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
             $this->listaPartidos = $listaPartidos;
+            $this->filaHoras = array('id','hora');
+            $this->listaHoras = $listaHoras;
         }
 
         function _render() { 
@@ -48,35 +52,40 @@
             <tbody>
         <?php
 
-                while($this->fila = ($this->listaPartidos)->fetch_assoc()) {
+                while($this->filaPartidos = ($this->listaPartidos)->fetch_assoc()) {
                     $fecha = date('Y-m-d');
-                    $id_partido = $this->fila['id_partido'];          
+                    $id_partido = $this->filaPartidos['id_partido'];          
                     $url = "/index.php?controller=adminPartidos&action=DETAILS&idpartido=". $id_partido;
                     $numPlazas = (new PartidoMapper())->getNumPlazasLibres($id_partido);
                     
-                    if($this->fila['fecha'] >= $fecha){
+                    if($this->filaPartidos['fecha'] >= $fecha){
         ?>
-                    <tr class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                        <td class="table-light"><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></td>
-                        <td class="table-light"><?php echo date('H:i',strtotime($this->fila['hora']));?></td>
-                        <td class="table-light"><?php echo $numPlazas; ?></td>
+                    
                         <?php
-                        if($this->fila['promocion'] == 1){
+                        if($this->filaPartidos['promocion'] == 1){
                             ?>
-                            <td class="table-light"><a class="bg-ligth text-dark" href='/index.php?controller=adminPartidos&action=PROMOCION&idpartido=<?php echo $this->fila['id_partido']; ?>'><i class="fas fa-toggle-on fa-2x"></i></a></td>
+                            <tr class="table-light">
+                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo date('d-m-Y',strtotime($this->filaPartidos['fecha'])); ?></td>
+                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo date('H:i',strtotime($this->filaPartidos['hora']));?></td>
+                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo $numPlazas; ?></td>
+                            <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPartidos&action=PROMOCION&idpartido=<?php echo $this->filaPartidos['id_partido']; ?>'><i class="fas fa-toggle-on fa-2x"></i></a></td>
                             <?php
                             }
                             else{
                             ?>
-                            <td class="table-danger"><a class="bg-ligth text-dark" href='/index.php?controller=adminPartidos&action=PROMOCION&idpartido=<?php echo $this->fila['id_partido']; ?>'><i class="fas fa-toggle-off fa-2x"></i></a></td>
+                            <tr class="table-danger">
+                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo date('d-m-Y',strtotime($this->filaPartidos['fecha'])); ?></td>
+                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo date('H:i',strtotime($this->filaPartidos['hora']));?></td>
+                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo $numPlazas; ?></td>
+                            <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPartidos&action=PROMOCION&idpartido=<?php echo $this->filaPartidos['id_partido']; ?>'><i class="fas fa-toggle-off fa-2x"></i></a></td>
                             <?php
                             }
                         }
                         else{
                         ?>
                         <tr class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                        <td class="table-secondary"><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></td>
-                        <td class="table-secondary"><?php echo date('H:i',strtotime($this->fila['hora'])); ?></td>
+                        <td class="table-secondary"><?php echo date('d-m-Y',strtotime($this->filaPartidos['fecha'])); ?></td>
+                        <td class="table-secondary"><?php echo date('H:i',strtotime($this->filaPartidos['hora'])); ?></td>
                         <td class="table-secondary"></td>
                         <td class="table-secondary"></td>
                         <?php    
@@ -90,32 +99,50 @@
         
         ?>
             </tbody>
-        </table>
+        </table>           
+
             </div>
     </div>
 
     <!--modal addPartido-->
-    <div class="modal fade" id="addPartido" tabindex="-1" role="dialog" aria-labelledby="borrarLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+    <div class="modal fade bd-example-modal-lg" id="addPartido" tabindex="-1" role="dialog" aria-labelledby="borrarLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Añadir Pista</h5>
+                    <h5 class="modal-title">Añadir Partido</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="/" method="POST" name="addPistas">
+                <form action="/" method="POST" name="addPartido">
                         <input type="hidden" name="controller" value="adminPartidos">
                         <input type="hidden" name="action" value="ADD">
 
+                        <div class="row justify-content-md-center">
+                        <div class="col-md-auto">
                         <div class="form-group">
-                        <label>Día</label>
+                        <label><strong>Día</strong></label>
                         <input type="date" class="form-control" name="inputFecha">
                         </div>
+                        </div>
+                        </div>
                         <div class="form-group">
-                        <label>Hora</label>
-                        <input type="time" class="form-control" name="inputHora">
+                            <label><strong>Hora</strong></label>
+                            <table class="table table-hover table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <?php
+                                        while($this->filaHoras = ($this->listaHoras)->fetch_assoc()) {
+                                            $hora = $this->filaHoras['hora'];
+                                        ?>
+                                        <td class="table-light" style="text-align: -webkit-center";><input class="form-check-input" type="radio" name="inputHora" value="<?php echo $hora;?>"><?php echo date('H:i',strtotime($this->filaHoras['hora'])); ?></td>
+                                        <?php
+                                        }
+                                        ?>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="modal-footer">
                             <div class="form-group">
