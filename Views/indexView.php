@@ -69,23 +69,28 @@ class IndexView extends baseView {
                             while($this->fila = ($this->partidos)->fetch_assoc()) {
                                 $id = $this->fila['id_partido'];
                                 $numPlazas = (new PartidoMapper())->getNumPlazasLibres($id);
-                                ?>
-                                <li class="list-group-item">
+                                $reserva = (new PartidoMapper())->getReservaById($id);
+                                if($reserva == null){
+                                    ?>
+                                    <li class="list-group-item">
                                     <strong><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></strong><br>
                                     <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     Quedan <?php echo $numPlazas; ?> plazas libres</p>
                                     <?php
                                     if($numPlazas == 0){
+                                        $id = $this->fila['id_partido'];
+                                        $url = "index.php?controller=adminPartidos&action=CERRAR&idpartido=" . $id;
                                         ?>
-                                    <p><a class="btn btn-dark" href="#" role="button">Cerrar partido</a></p>
-                                </li>
+                                    <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Cerrar partido</a></p>
+                                    </li>
                                 <?php
                                 }
-                            }
+                            }    
+                        }
                             ?>
                             </p>
                             <?php
-                            }
+                        }
                     }
                     else{
                         ?>

@@ -64,13 +64,13 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">APUNTARSE A CAMPEONATOS</a>
                             </li>
-                        <?php
-                            }
-                        ?>
                             <li class="nav-item">
                             <!--perfil-->
                                 <a class="nav-link" href="/index.php?controller=perfil"><i class="fas fa-user"></i></a>
                             </li>
+                        <?php
+                            }
+                        ?>
                             <li class="nav-item">
                             <!--desconexión-->
                                 <a class="nav-link" href='/index.php?controller=logout'><i class="fas fa-power-off"></i></a>
