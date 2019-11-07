@@ -130,8 +130,8 @@ class PartidoModel {
 
 		$errores = array();
 		$fecha = date('Y-m-d');
-		$apertura = "09:00:00";
-		$cierre = "21:00:00";
+		$apertura = "09:00";
+		$cierre = "21:00";
 
 		if (($this->fecha) <= $fecha) {
 			$errores["Fecha"] = "Seleccione una fecha posterior a la actual.";

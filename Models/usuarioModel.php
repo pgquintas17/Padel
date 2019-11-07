@@ -102,8 +102,10 @@ class UsuarioModel {
 		if (strlen($this->login) == 0 || strlen($this->login) > 15) {
 			$errores["login"] = "El login no puede superar los 15 caracteres ni ser vacío";
 		}
-		if (strlen($this->password) < 6 || strlen($this->password) == 0) {
-			$errores["passwordd"] = "La contraseña debe tener como mínimo 6 caracteres";
+		if($this->password != $this->login){
+			if (strlen($this->password) < 6 || strlen($this->password) == 0) {
+				$errores["passwordd"] = "La contraseña debe tener como mínimo 6 caracteres";
+			}
 		}
 		if (strlen($this->nombre) == 0 || strlen($this->nombre) > 100) {
 			$errores["nombre"] = "El nombre no puede estar vacio";

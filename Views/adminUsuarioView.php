@@ -37,35 +37,36 @@
         
 
         <!-- Tabla usuario -->
-
-        <table class="table table-hover table-bordered" id="tablas" style="border-radius: 25px;">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Login</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Email</th>
-                </tr>
-            </thead>
-            <tbody>
-        <?php
-
-                while($this->fila = ($this->listaUsuarios)->fetch_assoc()) {
-                    $login = $this->fila['login'];          
-                    $url = "/index.php?controller=adminUsuarios&action=DETAILS&username=". $login;
-        ?>
-                    <tr class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                        <td class="table-light"><?php echo $this->fila['login']; ?></td>
-                        <td class="table-light"><?php echo $this->fila['nombre']; ?></td>
-                        <td class="table-light"><?php echo $this->fila['email']; ?></td>
+        <div id="tablas">
+            <table class="table table-hover table-bordered" style="border-radius: 25px;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Login</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Email</th>
                     </tr>
-                
-        <?php
-        
-                }
-        
-        ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+            <?php
+
+                    while($this->fila = ($this->listaUsuarios)->fetch_assoc()) {
+                        $login = $this->fila['login'];          
+                        $url = "/index.php?controller=adminUsuarios&action=DETAILS&username=". $login;
+            ?>
+                        <tr class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
+                            <td class="table-light"><?php echo $this->fila['login']; ?></td>
+                            <td class="table-light"><?php echo $this->fila['nombre']; ?></td>
+                            <td class="table-light"><?php echo $this->fila['email']; ?></td>
+                        </tr>
+                    
+            <?php
+            
+                    }
+            
+            ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 <?php
