@@ -52,7 +52,7 @@
 					case 'DETAILS': 
 						require_once('Models/partidoModel.php');
 						$partido = new PartidoModel();
-						$partido->setId($_REQUEST['id_partido']);
+						$partido->setId($_REQUEST['idpartido']);
 						require_once('Mappers/partidoMapper.php');
 						$partidoMapper = new PartidoMapper();
 						$datos = $partidoMapper->consultarDatos($partido);
@@ -90,9 +90,12 @@
 			} else { //mostrar todos los elementos
 				require_once('Mappers/partidoMapper.php');
 				$partidoMapper = new PartidoMapper();
-				$listaPartidos = $partidoMapper->mostrarTodos(); 
+				$listaPartidos = $partidoMapper->mostrarTodos();
+				require_once('Mappers/horaMapper.php');
+				$horaMapper = new HoraMapper();
+				$listaHoras = $horaMapper->mostrarTodos(); 
 				require_once('Views/adminPartidoView.php');
-				(new AdminPartidoView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaPartidos))->render();
+				(new AdminPartidoView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaPartidos,'',$listaHoras))->render();
 			}
 		}
 	}
