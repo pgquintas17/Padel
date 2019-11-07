@@ -21,16 +21,23 @@
 								$partido->setId($_REQUEST["idpartido"]);
 								require_once('Mappers/partidoMapper.php');
                             	$partidoMapper = new PartidoMapper();
-								$validacion = $partidoMapper->validarUsuario($partido,$usuario);
-								var_dump($validacion);
-								if($validacion){
+								$validacion1 = $partidoMapper->validarUsuario($partido,$usuario);
+								require_once('Models/reservaModel.php');
+								$reserva = new ReservaModel();
+								$reserva->setLogin($_SESSION['Usuario']->getLogin());
+								$reserva->setHora($partidoMapper->getHoraById($partido));
+								$reserva->setFecha($partidoMapper->getFechaById($partido));
+								require_once('Mappers/reservaMapper.php');
+								$reservaMapper = new ReservaMapper();
+								$validacion2 = $reservaMapper->comprobarDisponibilidadUsuario($reserva);
+								if($validacion1 && $validacion2){
 									$respuesta = $partidoMapper->añadirParticipante($partido,$usuario);
 									SessionMessage::setMessage($respuesta);
 									header('Location: index.php');
 									
 								}
 								else{
-									SessionMessage::setMessage("Ya estás anotado en este partido.");
+									SessionMessage::setMessage("Ya estás anotado en este partido o tienes otro partido/reserva en ese día y hora.");
 									header('Location: index.php');
 								}
 							

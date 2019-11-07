@@ -134,9 +134,9 @@ require_once('Models/partidoModel.php');
         }
 
 
-        function añadirReserva($partido,$reserva){
+        function añadirReserva($partido){
 
-            $id_reserva = $reserva->getId();
+            $id_reserva = $partido->getIdReserva();
             $id_partido = $partido->getId();
 
             $sql = "UPDATE PARTIDO  SET id_reserva = '$id_reserva' 
@@ -149,6 +149,7 @@ require_once('Models/partidoModel.php');
                 return true;
             }      
         }
+
 
         function validarUsuario($partido,$usuario){
 
@@ -177,8 +178,59 @@ require_once('Models/partidoModel.php');
                 return false;
             }
             else{
-                return true;
+
+                $hora = $tupla['1'];
+                $fecha = $tupla['2'];   
+
+                $sql2 = "SELECT * FROM PARTIDO 
+                        WHERE (hora = '$hora' AND fecha = '$fecha' AND
+                        (login1 = '$login' OR login2 = '$login' 
+                        OR login3 = '$login' OR login4 = '$login')";
+
+                if (!($resultado = $this->mysqli->query($sql2))){
+                    return false;
+                }
+                else{
+                    if ($resultado->num_rows == 0) {
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
             }
+        }
+
+        function getHoraById($partido){
+            
+            $id_partido = $partido->getId();
+
+            $sql = "SELECT * FROM PARTIDO WHERE id_partido = '$id_partido'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['1'];
+        }
+
+        function getFechaById($partido){
+
+            $id_partido = $partido->getId();
+
+            $sql = "SELECT * FROM PARTIDO WHERE id_partido = '$id_partido'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['2'];
         }
 
 
@@ -276,6 +328,18 @@ require_once('Models/partidoModel.php');
 
                 return $numPlazas;
             }
+        }
+
+
+        function getReservaById($id_partido){
+
+            $sql = "SELECT * FROM PARTIDO  WHERE (id_partido = '$id_partido') ";
+    	    $result = $this->mysqli->query($sql);
+                
+            $tupla = $result->fetch_array(MYSQLI_NUM);
+            
+            return $tupla['8'];
+
         }
 
 
