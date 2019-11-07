@@ -9,44 +9,71 @@
         if(Utils::conectado()) { 
 
             if($_SESSION['Usuario']->getPermiso() == 2){ //Si tiene permisos de administrador
+                
                 switch($_REQUEST["controller"]){
                     case "adminUsuarios":
-                        require_once('Controllers/adminUsuarioController.php');
+                        require_once('Controllers/admin/adminUsuarioController.php');
                         new AdminUsuarioController();
                         exit;
                         break;
                     case "adminPistas":
-                        require_once('Controllers/adminPistaController.php');
+                        require_once('Controllers/admin/adminPistaController.php');
                         new AdminPistaController();
                         exit;
                         break;
                     case "adminPartidos":
-                        require_once('Controllers/adminPartidoController.php');
+                        require_once('Controllers/admin/adminPartidoController.php');
                         new AdminPartidoController();
                         exit;
                         break;
                     case "adminCampeonatos":
-                        //require_once('Controllers/adminCampeonatoController.php');
+                        //require_once('Controllers/admin/adminCampeonatoController.php');
                         new AdminCampeonatoController();
                         exit;
                         break;
                 }
-            }
-            
-            switch($_REQUEST["controller"]) {
-                case "perfil":
-                    //require_once('Controllers/perfilController.php');
-                    new PerfilController();
-                    exit;
-                    break;
-                case "reserva":
-                    //require_once('Controllers/reservaPistaController.php');
+            }else if($_SESSION['Usuario']->getPermiso() == 0){ //SI ES DEPORTISTA
+
+                switch($_REQUEST["controller"]) {
+                    case "reserva":
+                    //require_once('Controllers/deportista/reservaPistaController.php');
                     new ReservaPistaController();
                     exit;
                     break;
                 case "campeonatos":
-                    //require_once('Controllers/deportistaCampeonatosController.php');
-                    new DeportistaCampeonatosController();
+                    //require_once('Controllers/deportista/campeonatosController.php');
+                    new CampeonatoController();
+                    exit;
+                    break;
+                case "partidos":
+                    require_once('Controllers/deportista/partidoController.php');
+                    new PartidoController();
+                    exit;
+                    break;
+                }
+
+            }else{ //SI ES ENTRENADOR
+
+                switch($_REQUEST["controller"]) {
+                    case "clases":
+                        //require_once('Controllers/perfilController.php');
+                        new PerfilController();
+                        exit;
+                        break;
+                    default:
+                        require_once('Controllers/indexController.php');
+                        new IndexController();
+                        exit;
+                        break;  
+                }  
+            }
+            
+            // GENERALES
+
+            switch($_REQUEST["controller"]) {
+                case "perfil":
+                    //require_once('Controllers/perfilController.php');
+                    new PerfilController();
                     exit;
                     break;
                 case "logout":
@@ -60,8 +87,7 @@
                     new IndexController();
                     exit;
                     break;  
-            }  
-            
+            }
         }else {
             switch($_REQUEST["controller"]) {
                 case "login":

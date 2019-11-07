@@ -30,13 +30,13 @@ class IndexView extends baseView {
          
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
-            <h1>Noticias</h1>
+            <h1>Noticias</h1><br>
             <!-- Example row of columns -->
             <div class="row">
                 <div id="partidos" class="col-lg-4">
                     <?php
-                        if(Utils::conectado()){
                          if($this->partidos != null) {
+                             if(Utils::conectado()){
                             if(($_SESSION['Usuario'])->getPermiso() == 0){
                             ?>
                             <h5>¡Apúntate a nuestros partidos!</h5>
@@ -45,13 +45,14 @@ class IndexView extends baseView {
                             while($this->fila = ($this->partidos)->fetch_assoc()) {
                                 $id = $this->fila['id_partido'];
                                 $numPlazas = (new PartidoMapper())->getNumPlazasLibres($id);
+                                $url = "index.php?controller=partidos&action=APUNTARSE&idpartido=" . $id;
                                 if($numPlazas != 0){
                                 ?>
                                 <li class="list-group-item">
                                     <strong><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></strong><br>
                                     <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     ¡Quedan <?php echo $numPlazas; ?> plazas libres!</p>
-                                    <p><a class="btn btn-dark" href="#" role="button">Apuntarse</a></p>
+                                    <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Apuntarse</a></p>
                                 </li>
                                 <?php
                                 }
@@ -85,12 +86,6 @@ class IndexView extends baseView {
                             </p>
                             <?php
                             }
-                        }
-                        else{
-                            ?>
-                            <h5>No hay partidos disponibles en este momento.</h5>
-                        <?php
-                        }
                     }
                     else{
                         ?>
@@ -114,6 +109,12 @@ class IndexView extends baseView {
                             </p>
                     <?php
                     }
+                }
+                else{
+                    ?>
+                    <h5>No hay partidos disponibles en este momento.</h5>
+                <?php
+                }
                     ?>
                 </div>
                 <div class="col-lg-4">
