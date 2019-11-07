@@ -16,7 +16,7 @@
 						if ($_POST){
 							try {
 								require_once('Models/usuarioModel.php');
-								$usuario = new UsuarioModel($_POST["inputLogin"],$_POST["inputNombre"],$_POST["inputPassword"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_REQUEST["inputPermiso"]);
+								$usuario = new UsuarioModel($_POST["inputLogin"],$_POST["inputNombre"],$_POST["inputLogin"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_REQUEST["inputPermiso"]);
 								$errores =  $usuario->validarRegistro();
 								require_once('Mappers/usuarioMapper.php');
                             	$usuarioMapper = new UsuarioMapper();
