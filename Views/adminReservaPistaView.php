@@ -56,7 +56,7 @@
                 while($this->fila = ($this->lista)->fetch_assoc()) {
                     $fecha = date('Y-m-d');
                     
-                    if($this->fila['fecha'] >= $fecha){
+                    if($this->fila['fecha'] > $fecha){
         ?>
                     <tr class="table-light">
                     <td><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></td>

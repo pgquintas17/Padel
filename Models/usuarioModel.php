@@ -127,7 +127,7 @@ class UsuarioModel {
 		}
 		
 		if (sizeof($errores) > 0){
-			throw new ValidationException($errores, "El usuario no es válido");
+			throw new ValidationException($errores, "Datos no válidos");
 		}
 	}
 

@@ -43,7 +43,7 @@
             <br><h3>Añadir reserva</h3><br>
                 <div class="row">
 
-                    <div class="col-lg-3"></div>
+                    <div class="col-lg-2"></div>
                     <div class="bg-dark text-white rounded p-3 col-md-8" id="perfilform">
 
                         <!-- Formulario datos usuario -->
@@ -98,6 +98,7 @@
                             <button type="submit" class="btn btn-light" name="action" value="ADD" id="submit">Reservar</button>
                         </form>
                     </div>
+                    <div class="col-lg-2"></div>
                 </div>
                 <div class="col-lg-3"></div>
             </div>

@@ -35,7 +35,12 @@
             }else if($_SESSION['Usuario']->getPermiso() == 0){ //SI ES DEPORTISTA
 
                 switch($_REQUEST["controller"]) {
-                    case "reservas":
+                case "perfil":
+                    require_once('Controllers/deportista/perfilController.php');
+                    new PerfilController();
+                    exit;
+                    break;
+                case "reservas":
                     require_once('Controllers/deportista/reservaPistaController.php');
                     new ReservaPistaController();
                     exit;
@@ -56,13 +61,8 @@
 
                 switch($_REQUEST["controller"]) {
                     case "clases":
-                        //require_once('Controllers/perfilController.php');
+                        //require_once('Controllers/clasesController.php');
                         new PerfilController();
-                        exit;
-                        break;
-                    default:
-                        require_once('Controllers/indexController.php');
-                        new IndexController();
                         exit;
                         break;  
                 }  
@@ -71,11 +71,6 @@
             // GENERALES
 
             switch($_REQUEST["controller"]) {
-                case "perfil":
-                    //require_once('Controllers/perfilController.php');
-                    new PerfilController();
-                    exit;
-                    break;
                 case "logout":
                     require_once('Controllers/indexController.php');
                     Utils::desconectar();

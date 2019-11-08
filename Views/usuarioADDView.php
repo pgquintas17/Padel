@@ -9,13 +9,11 @@
         private $usuario;
         private $msg;
         private $errs;
-        private $datos;
 
-        function __construct($msg=null, $errs=null, $usuario=null, $datos=null) {
+        function __construct($msg=null, $errs=null, $usuario=null) {
             $this->msg = $msg;
             $this->errs = $errs;
             parent::__construct($this->usuario);
-            $this->datos = $datos;
         }
 
         function _render() { 

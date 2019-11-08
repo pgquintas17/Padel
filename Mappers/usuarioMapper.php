@@ -96,7 +96,7 @@ require_once('Models/usuarioModel.php');
                 if (!($resultado = $this->mysqli->query($sql)))
                     return 'Error en la modificación';
                 else
-                    return 'Modificado correctamente';
+                    return 'Usuario modificado correctamente';
             }
             else 
                 return 'No existe en la base de datos';

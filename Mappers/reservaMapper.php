@@ -183,7 +183,22 @@ require_once('Models/reservaModel.php');
             $id_pista = $pista->getId();
 
             $sql = "SELECT id_reserva, id_pista, hora, fecha, login 
-                    FROM RESERVA WHERE id_pista = '$id_pista'";
+                    FROM RESERVA WHERE id_pista = '$id_pista' ORDER BY fecha DESC";
+    
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else
+                return $resultado;
+
+
+        }
+
+        function getReservasByLogin($usuario){
+
+            $login = $usuario->getLogin();
+
+            $sql = "SELECT id_reserva, id_pista, hora, fecha, login 
+                    FROM RESERVA WHERE login = '$login' ORDER BY fecha DESC";
     
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'Error en la consulta sobre la base de datos';
