@@ -201,6 +201,33 @@ require_once('Models/partidoModel.php');
             }
         }
 
+
+        function comprobarDisponibilidadUsuario($reserva){
+
+            $hora = $reserva->getHora();
+            $fecha = $reserva->getFecha();
+            $login = $reserva->getLogin();   
+
+            $sql2 = "SELECT * FROM PARTIDO 
+                        WHERE (hora = '$hora' AND fecha = '$fecha' AND
+                        (login1 = '$login' OR login2 = '$login' 
+                        OR login3 = '$login' OR login4 = '$login'))";
+
+            if (!($resultado = $this->mysqli->query($sql2))){
+                return false;
+            }
+            else{
+                if ($resultado->num_rows == 0) {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+
+        }
+
+
         function getHoraById($partido){
             
             $id_partido = $partido->getId();

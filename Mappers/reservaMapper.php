@@ -144,9 +144,7 @@ require_once('Models/reservaModel.php');
             $login = $reserva->getLogin();   
 
             $sql2 = "SELECT * FROM RESERVA 
-                    WHERE (hora = '$hora' AND fecha = '$fecha' AND
-                    (login1 = '$login' OR login2 = '$login' 
-                    OR login3 = '$login' OR login4 = '$login')";
+                    WHERE (hora = '$hora' AND fecha = '$fecha' AND login = '$login')";
 
             if (!($resultado = $this->mysqli->query($sql2))){
                 return false;

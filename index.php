@@ -35,8 +35,8 @@
             }else if($_SESSION['Usuario']->getPermiso() == 0){ //SI ES DEPORTISTA
 
                 switch($_REQUEST["controller"]) {
-                    case "reserva":
-                    //require_once('Controllers/deportista/reservaPistaController.php');
+                    case "reservas":
+                    require_once('Controllers/deportista/reservaPistaController.php');
                     new ReservaPistaController();
                     exit;
                     break;

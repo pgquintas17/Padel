@@ -59,7 +59,7 @@
                             }else { //Si no es admin
                         ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">RESERVAR PISTA</a>
+                                <a class="nav-link" href="/index.php?controller=reservas&action=reservar">RESERVAR PISTA</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">APUNTARSE A CAMPEONATOS</a>
