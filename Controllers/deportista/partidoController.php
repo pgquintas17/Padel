@@ -21,7 +21,6 @@
 								$partido->setId($_REQUEST["idpartido"]);
 								require_once('Mappers/partidoMapper.php');
                             	$partidoMapper = new PartidoMapper();
-								$validacion1 = $partidoMapper->validarUsuario($partido,$usuario);
 								require_once('Models/reservaModel.php');
 								$reserva = new ReservaModel();
 								$reserva->setLogin($_SESSION['Usuario']->getLogin());
@@ -29,6 +28,7 @@
 								$reserva->setFecha($partidoMapper->getFechaById($partido));
 								require_once('Mappers/reservaMapper.php');
 								$reservaMapper = new ReservaMapper();
+								$validacion1 = $partidoMapper->comprobarDisponibilidadUsuario($reserva);
 								$validacion2 = $reservaMapper->comprobarDisponibilidadUsuario($reserva);
 								if($validacion1 && $validacion2){
 									$respuesta = $partidoMapper->añadirParticipante($partido,$usuario);

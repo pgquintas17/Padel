@@ -151,57 +151,6 @@ require_once('Models/partidoModel.php');
         }
 
 
-        function validarUsuario($partido,$usuario){
-
-            $login = $usuario->getLogin();
-            $id_partido = $partido->getId();
-
-            $sql = "SELECT * FROM PARTIDO WHERE id_partido = '$id_partido'";
-
-            if (!($resultado = $this->mysqli->query($sql))){
-                return 'Error en la consulta sobre la base de datos';
-            }
-            else{
-                $tupla = $resultado->fetch_array(MYSQLI_NUM);
-            }
-
-            if($tupla['4'] == $login){
-                return false;
-            } 
-            else if($tupla['5'] == $login){
-                return false;
-            } 
-            else if($tupla['6'] == $login){
-                return false;
-            }
-            else if($tupla['7'] == $login){
-                return false;
-            }
-            else{
-
-                $hora = $tupla['1'];
-                $fecha = $tupla['2'];   
-
-                $sql2 = "SELECT * FROM PARTIDO 
-                        WHERE (hora = '$hora' AND fecha = '$fecha' AND
-                        (login1 = '$login' OR login2 = '$login' 
-                        OR login3 = '$login' OR login4 = '$login')";
-
-                if (!($resultado = $this->mysqli->query($sql2))){
-                    return false;
-                }
-                else{
-                    if ($resultado->num_rows == 0) {
-                        return true;
-                    }
-                    else{
-                        return false;
-                    }
-                }
-            }
-        }
-
-
         function comprobarDisponibilidadUsuario($reserva){
 
             $hora = $reserva->getHora();
@@ -393,20 +342,31 @@ require_once('Models/partidoModel.php');
         }
 
 
+        function getPartidosByLogin($usuario){
 
-        // AÑADIR FUNCIÓN:
-        // añadirReserva($partido,$reserva)
-            /* ¿Qué se hace si no hay reserva disponible? ¿Cómo se cancela el partido? 
-                1. Poner el resultado todo a 0 ??*/
-        // añadirResultado($partido,$resultado)
-            /* (buscar cómo son los resultados en pádel). */
+            $login = $usuario->getLogin();
+
+            $sql = "SELECT id_partido,
+                            hora,
+                            fecha,
+                            promocion,
+                            login1,
+                            login2,
+                            login3,
+                            login4,
+                            id_reserva 
+                    FROM PARTIDO 
+                    WHERE   (login1 = '$login' OR login2 = '$login' 
+                            OR login3 = '$login' OR login4 = '$login') 
+                    ORDER BY fecha DESC";
+    
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else
+                return $resultado;
 
 
-
-
-        /* En el inicio usar la función de crearFiltros para mostrar los partidos que sean posteriores a la fecha
-           y que aún tengas plazas disponibles. Se mostrará la fecha y hora, un mensaje genérico, número de plazas
-           disponibles y botón para apuntarse*/
+        }
     }
 
 ?>
