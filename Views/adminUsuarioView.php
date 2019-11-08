@@ -53,10 +53,10 @@
                         $login = $this->fila['login'];          
                         $url = "/index.php?controller=adminUsuarios&action=DETAILS&username=". $login;
             ?>
-                        <tr class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                            <td class="table-light"><?php echo $this->fila['login']; ?></td>
-                            <td class="table-light"><?php echo $this->fila['nombre']; ?></td>
-                            <td class="table-light"><?php echo $this->fila['email']; ?></td>
+                        <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
+                            <td><?php echo $this->fila['login']; ?></td>
+                            <td><?php echo $this->fila['nombre']; ?></td>
+                            <td><?php echo $this->fila['email']; ?></td>
                         </tr>
                     
             <?php

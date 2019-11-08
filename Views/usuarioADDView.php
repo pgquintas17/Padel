@@ -49,13 +49,7 @@
                                     <input type="text" class="form-control" name="inputLogin">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Password</label>
-                                    <input type="password" class="form-control" name="inputPassword">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Nombre</label>
+                                <label>Nombre</label>
                                     <input type="text" class="form-control" name="inputNombre">
                                 </div>
                             </div>    
@@ -71,13 +65,21 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputGenero">Género</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="inputGenero" value="femenino">
-                                    <label class="form-check-label">Femenino</label>
+                                <div class="form-check row">
+                                    <div class="col-md-2">
+                                        <input class="form-check-input" type="radio" name="inputGenero" value="femenino">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-check-label">Mujer</label>
+                                    </div>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="inputGenero" value="masculino">
-                                    <label class="form-check-label">Masculino</label>
+                                <div class="form-check row">
+                                    <div class="col-md-2">
+                                        <input class="form-check-input" type="radio" name="inputGenero" value="masculino">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-check-label">Hombre</label>
+                                    </div>
                                 </div>  
                             </div>
                             <div class="form-group">
@@ -86,17 +88,29 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label>Permiso</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="inputPermiso" value="0">
-                                    <label class="form-check-label" for="permiso-0">Deportista</label>
+                                <div class="form-check row">
+                                    <div class="col-md-2">
+                                        <input class="form-check-input" type="radio" name="inputPermiso" value="0">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-check-label" for="permiso-0">Deportista</label>
+                                    </div>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="inputPermiso" value="1">
-                                    <label class="form-check-label" for="permiso-1">Entrenador</label>
+                                <div class="form-check row">
+                                    <div class="col-md-2">
+                                        <input class="form-check-input" type="radio" name="inputPermiso" value="1">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-check-label" for="permiso-1">Entrenador</label>
+                                    </div>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="inputPermiso" value="2">
-                                    <label class="form-check-label" for="permiso-2">Administrador</label>
+                                <div class="form-check row">
+                                    <div class="col-md-2">
+                                        <input class="form-check-input" type="radio" name="inputPermiso" value="2">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-check-label" for="permiso-2">Administrador</label>
+                                    </div>
                                 </div>    
                             </div>
                             <button type="submit" class="btn btn-light" name="submit" id="submit">Registrar</button>
