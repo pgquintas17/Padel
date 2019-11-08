@@ -48,20 +48,16 @@
 						} 
 						break;
 
-					/*case 'RESERVAS':
+					case 'RESERVAS':
 						require_once('Models/pistaModel.php');
 						$pista = new PistaModel();
-                        $pista->setId($_REQUEST['idpista']);
-						require_once('Mappers/pistaMapper.php');
-						$pistaMapper = new PistaMapper();
-						$respuesta = $pistaMapper->cambiarEstado($pista);
-						if($respuesta){
-							header('Location: index.php?controller=adminPistas');
-						}
-						else{
-							echo "error";
-						} 
-						break;*/
+						$pista->setId($_REQUEST['idpista']);
+						require_once('Mappers/reservaMapper.php');
+						$reservaMapper = new ReservaMapper();
+						$lista = $reservaMapper->getReservasByPista($pista);
+						require_once('Views/adminReservaPistaView.php');
+						(new AdminReservaPistaView(SessionMessage::getMessage(),SessionMessage::getErrores(),'',$_REQUEST['idpista'],'',$lista))->render();
+						break;
 
 
 					default: 

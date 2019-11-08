@@ -178,6 +178,22 @@ require_once('Models/reservaModel.php');
         }
 
 
+        function getReservasByPista($pista){
+
+            $id_pista = $pista->getId();
+
+            $sql = "SELECT id_reserva, id_pista, hora, fecha, login 
+                    FROM RESERVA WHERE id_pista = '$id_pista'";
+    
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else
+                return $resultado;
+
+
+        }
+
+
         function crearFiltros($reserva,$filtros) {
             $toret = "( ";
 

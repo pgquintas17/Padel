@@ -18,7 +18,7 @@
             $this->msg = $msg;
             $this->errs = $errs;
             parent::__construct($this->usuario);
-            $this->filaPartidos = array('id_partido','resultado','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
+            $this->filaPartidos = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
             $this->listaPartidos = $listaPartidos;
             $this->filaHoras = array('id','hora');
             $this->listaHoras = $listaHoras;
@@ -64,19 +64,19 @@
                         <?php
                         if($this->filaPartidos['promocion'] == 1){
                             ?>
-                            <tr class="table-light">
-                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo date('d-m-Y',strtotime($this->filaPartidos['fecha'])); ?></td>
-                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo date('H:i',strtotime($this->filaPartidos['hora']));?></td>
-                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo $numPlazas; ?></td>
+                            <tr class="table-light clickeable-row" onclick="window.location.assign('<?php echo $url ?>');">
+                            <td><?php echo date('d-m-Y',strtotime($this->filaPartidos['fecha'])); ?></td>
+                            <td><?php echo date('H:i',strtotime($this->filaPartidos['hora']));?></td>
+                            <td><?php echo $numPlazas; ?></td>
                             <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPartidos&action=PROMOCION&idpartido=<?php echo $this->filaPartidos['id_partido']; ?>'><i class="fas fa-toggle-on fa-2x"></i></a></td>
                             <?php
                             }
                             else{
                             ?>
-                            <tr class="table-danger">
-                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo date('d-m-Y',strtotime($this->filaPartidos['fecha'])); ?></td>
-                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo date('H:i',strtotime($this->filaPartidos['hora']));?></td>
-                            <td  class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');"><?php echo $numPlazas; ?></td>
+                            <tr class="table-danger clickeable-row" onclick="window.location.assign('<?php echo $url ?>');">
+                            <td><?php echo date('d-m-Y',strtotime($this->filaPartidos['fecha'])); ?></td>
+                            <td><?php echo date('H:i',strtotime($this->filaPartidos['hora']));?></td>
+                            <td><?php echo $numPlazas; ?></td>
                             <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPartidos&action=PROMOCION&idpartido=<?php echo $this->filaPartidos['id_partido']; ?>'><i class="fas fa-toggle-off fa-2x"></i></a></td>
                             <?php
                             }

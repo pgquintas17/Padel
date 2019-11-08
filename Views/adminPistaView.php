@@ -46,19 +46,22 @@
                     <?php
 
                             while($this->fila = ($this->listaPistas)->fetch_assoc()) {
+                                $id_pista = $this->fila['id_pista'];          
+                                $url = "/index.php?controller=adminPistas&action=RESERVAS&idpista=". $id_pista;
                     ?>
-                                <tr>
                                 <?php
                                     if($this->fila['estado'] == 1){
                                 ?>
-                                    <td class="table-light"><?php echo $this->fila['id_pista']; ?></td>
-                                    <td class="table-light"><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-on fa-2x"></i></a></td>
+                                <tr class="table-light clickeable-row" onclick="window.location.assign('<?php echo $url ?>');">
+                                    <td><?php echo $this->fila['id_pista']; ?></td>
+                                    <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-on fa-2x"></i></a></td>
                                 <?php
                                     }
                                     else{
                                 ?>
-                                    <td class="table-danger"><?php echo $this->fila['id_pista']; ?></td>
-                                    <td class="table-danger"><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-off fa-2x"></i></a></td>
+                                <tr class="table-danger clickeable-row" onclick="window.location.assign('<?php echo $url ?>');">
+                                    <td><?php echo $this->fila['id_pista']; ?></td>
+                                    <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-off fa-2x"></i></a></td>
                                 <?php    
                                     }
                                 ?>
