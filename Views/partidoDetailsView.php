@@ -89,9 +89,36 @@
                                 echo $idpista['0']; ?></td>
                             </tr>
                         </table>
+                        <br><button type="button" class="btn btn-light" data-toggle="modal" data-target="#confirmDelete"><i class="fas fa-trash-alt fa-2x"></i></button>
                     </div>
                 </div>
             </div>
+
+            <!--modal confirmación-->
+            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="borrarLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmación de borrado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de querer eliminar este partido? </p>
+                </div>
+                <div class="modal-footer">
+                    <?php
+                        $id_partido = $this->datos['0'];          
+                        $url = "/index.php?controller=adminPartidos&action=DELETE&idpartido=". $id_partido;
+                    ?>
+                    <a href="<?php echo $url ?>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Eliminar partido</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!--modal confirmación-->
 
         <?php
         }

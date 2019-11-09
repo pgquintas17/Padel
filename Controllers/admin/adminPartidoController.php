@@ -55,11 +55,11 @@
 					case 'DELETE': 
 						require_once('Models/partidoModel.php');
 						$partido = new PartidoModel();
-						$partido->setId($_REQUEST['id_partido']);
+						$partido->setId($_REQUEST['idpartido']);
 						require_once('Mappers/partidoMapper.php');
 						$partidoMapper = new PartidoMapper();
 						$respuesta = $partidoMapper->DELETE($partido); 
-						SessionMessage::setMessage("Partido eliminado."); 
+						SessionMessage::setMessage($respuesta); 
 						header('Location: index.php?controller=adminPartidos');
 						break;
 						
