@@ -58,7 +58,7 @@
                     $url = "/index.php?controller=adminPartidos&action=DETAILS&idpartido=". $id_partido;
                     $numPlazas = (new PartidoMapper())->getNumPlazasLibres($id_partido);
                     
-                    if($this->filaPartidos['fecha'] >= $fecha){
+                    if($this->filaPartidos['fecha'] > $fecha){
         ?>
                     
                         <?php
