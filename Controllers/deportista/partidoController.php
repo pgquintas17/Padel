@@ -48,32 +48,32 @@
 						break;
 						
 
-					/* case 'BORRARSE': 
+					case 'borrar': 
 						require_once('Models/partidoModel.php');
 						$partido = new PartidoModel();
-						$partido->setId($_REQUEST['id_partido']);
+						$partido->setId($_REQUEST['idpartido']);
 						require_once('Mappers/partidoMapper.php');
 						$partidoMapper = new PartidoMapper();
-						$respuesta = $partidoMapper->DELETE($partido); 
-						SessionMessage::setMessage("Partido eliminado."); 
-						header('Location: index.php?controller=partidos');
-						break; */
-						
+						$fecha = $partidoMapper->getFechaById($partido);
 
-					/* case 'DETAILS': 
-						require_once('Models/partidoModel.php');
-						$partido = new PartidoModel();
-						$partido->setId($_REQUEST['id_partido']);
-						require_once('Mappers/partidoMapper.php');
-						$partidoMapper = new PartidoMapper();
-						$datos = $partidoMapper->consultarDatos($partido);
-						require_once('Views/partidoDetailsView.php');
-						(new PartidoDetailsView('','','',$datos))->render();
-                        break; */
+						$hoy = date('Y-m-d');
+						$limit = date_create($fecha);
+						date_sub($limit, date_interval_create_from_date_string('1 day'));
+						$limite = date_format($limit, 'Y-m-d');
 
-
+						if($hoy >= $limite){
+							SessionMessage::setMessage("No se puede cancelar la inscripción con tan poca antelación."); 
+							header('Location: index.php?controller=perfil');	
+						}
+						else{
+						$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']); 
+						SessionMessage::setMessage($respuesta); 
+						header('Location: index.php?controller=perfil');
+						}
+						break;
+					
 					default: 
-					echo "default";
+						echo "default";
 						header('Location: index.php');
 						break;
 

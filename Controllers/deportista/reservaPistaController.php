@@ -76,32 +76,34 @@
 							break;
 						
 
-					/* case 'BORRARSE': 
-						require_once('Models/partidoModel.php');
-						$partido = new PartidoModel();
-						$partido->setId($_REQUEST['id_partido']);
-						require_once('Mappers/partidoMapper.php');
-						$partidoMapper = new PartidoMapper();
-						$respuesta = $partidoMapper->DELETE($partido); 
-						SessionMessage::setMessage("Partido eliminado."); 
-						header('Location: index.php?controller=partidos');
-						break; */
+					case 'borrar':
+						require_once('Models/reservaModel.php');
+						$reserva = new ReservaModel();
+						$reserva->setId($_REQUEST['idreserva']);
+						require_once('Mappers/reservaMapper.php');
+						$reservaMapper = new ReservaMapper();
+						$fecha = $reservaMapper->getFechaById($reserva);
+						$reserva->setLogin($_SESSION['Usuario']->getLogin());
 						
+						$hoy = date('Y-m-d');
+						$limit = date_create($fecha);
+						date_sub($limit, date_interval_create_from_date_string('1 day'));
+						$limite = date_format($limit, 'Y-m-d');
 
-					/* case 'DETAILS': 
-						require_once('Models/partidoModel.php');
-						$partido = new PartidoModel();
-						$partido->setId($_REQUEST['id_partido']);
-						require_once('Mappers/partidoMapper.php');
-						$partidoMapper = new PartidoMapper();
-						$datos = $partidoMapper->consultarDatos($partido);
-						require_once('Views/partidoDetailsView.php');
-						(new PartidoDetailsView('','','',$datos))->render();
-                        break; */
+						if($hoy >= $limite){
+							SessionMessage::setMessage("No se puede cancelar la reserva con tan poca antelación."); 
+							header('Location: index.php?controller=perfil');	
+						}
+						else{
+							$respuesta = $reservaMapper->cancelarReserva($reserva); 
+							SessionMessage::setMessage($respuesta); 
+							header('Location: index.php?controller=perfil');
 
+						}
+						break;
 
 					default: 
-					echo "default";
+						echo "default";
 						header('Location: index.php');
 						break;
 

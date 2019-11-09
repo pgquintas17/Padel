@@ -47,7 +47,7 @@ require_once('Models/partidoModel.php');
 
             $id_partido = $partido->getId();
 		
-            $sql = "SELECT * FROM USUARIO  WHERE (id_partido = '$id_partido') ";    
+            $sql = "SELECT * FROM PARTIDO  WHERE (id_partido = '$id_partido') ";    
             $result = $this->mysqli->query($sql);
     
             if (!$result)
@@ -55,10 +55,10 @@ require_once('Models/partidoModel.php');
                 
             if ($result->num_rows == 1) {
                     
-                $sql = "DELETE FROM  USUARIO WHERE (id_partido = '$id_partido')";   
+                $sql = "DELETE FROM  PARTIDO WHERE (id_partido = '$id_partido')";   
                 $this->mysqli->query($sql);
                 
-                return "Borrado correctamente";
+                return "Partido eliminado";
             } 
             else
                 return "No existe";
@@ -100,37 +100,6 @@ require_once('Models/partidoModel.php');
                 $result = $resultado->fetch_array(MYSQLI_NUM);
                 return $result;
             }
-        }
-
-
-        function crearFiltros($partido,$filtros) {
-            $toret = "( ";
-
-            $hora = $partido->getHora();
-            $fecha = $partido->getFecha();
-
-            foreach($filtros as $filtro) {
-                switch($filtro) {
-                    case "hora":
-                        $toret .= "(hora = '$hora')";
-                        break;
-                    case "fecha":
-                        $toret .= "(fecha = '$fecha')";
-                        break;
-                }
-                $toret .= " && ";
-            }
-            $toret = chop($toret," && ");
-            $toret .= " )";
-    
-            $sql = "SELECT * FROM PARTIDO WHERE " . $toret;
-    
-            if (!($resultado = $this->mysqli->query($sql))) {
-                return 'Error en la consulta sobre la base de datos';
-            }
-            else {
-                return $resultado;
-            }   
         }
 
 
@@ -177,6 +146,48 @@ require_once('Models/partidoModel.php');
         }
 
 
+        function cancelarInscripcion($partido,$usuario){
+
+            $id_partido = $partido->getId();
+            $login = $usuario->getLogin();   
+
+            $sql = "SELECT * FROM PARTIDO 
+                        WHERE (id_partido = '$id_partido' AND
+                        (login1 = '$login' OR login2 = '$login' 
+                        OR login3 = '$login' OR login4 = '$login'))";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+
+                if($tupla['4'] == $login){
+                    $sql2 = "UPDATE PARTIDO SET login1 = NULL 
+                    WHERE ( id_partido = '$id_partido' )";
+                } 
+                else if($tupla['5'] == $login){
+                    $sql2 = "UPDATE PARTIDO SET login2 = NULL 
+                    WHERE ( id_partido = '$id_partido' )";
+                } 
+                else if($tupla['6'] == $login){
+                    $sql2 = "UPDATE PARTIDO SET login3 = NULL 
+                    WHERE ( id_partido = '$id_partido' )";
+                }
+                else{
+                    $sql2 = "UPDATE PARTIDO SET login4 = NULL 
+                    WHERE ( id_partido = '$id_partido' )";
+                }
+
+                if (!($resultado = $this->mysqli->query($sql2)))
+                    return 'Error en la modificación';
+                else
+                    return 'Tu inscripción en el partido ha sido cancelada.';
+            }
+
+        }
+
+
         function getHoraById($partido){
             
             $id_partido = $partido->getId();
@@ -192,6 +203,7 @@ require_once('Models/partidoModel.php');
 
             return $tupla['1'];
         }
+
 
         function getFechaById($partido){
 

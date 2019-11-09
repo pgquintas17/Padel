@@ -46,7 +46,7 @@
                     <?php
                     while($this->filaPartidos = ($this->listaPartidos)->fetch_assoc()) {
                         $id = $this->filaPartidos['id_partido'];
-                        $url = "index.php?controller=partidos&action=BORRARSE&idpartido=" . $id;
+                        $urlP = "index.php?controller=partidos&action=borrar&idpartido=" . $id;
                         $hoy = date('Y-m-d');
 
                         if($this->filaPartidos['fecha'] > $hoy){
@@ -72,7 +72,7 @@
                         <?php
                         }
                         ?>
-                            <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Desapuntarse</a></p>
+                            <p><a class="btn btn-dark" href="<?php echo $urlP; ?>" role="button">Desapuntarse</a></p>
                         </li>
                         <?php
                         }
@@ -110,7 +110,7 @@
                     <?php
                     while($this->filaReservas = ($this->listaReservas)->fetch_assoc()) {
                         $id = $this->filaReservas['id_reserva'];
-                        $url = "index.php?controller=reservas&action=BORRAR&idreserva=" . $id;
+                        $urlR = "index.php?controller=reservas&action=borrar&idreserva=" . $id;
                         $hoy = date('Y-m-d');
 
                         if($this->filaReservas['fecha'] > $hoy){
@@ -118,7 +118,7 @@
                         <li class="list-group-item">
                             <strong><?php echo date('d-m-Y',strtotime($this->filaReservas['fecha'])); ?></strong><br>
                             <p>Tienes reservada la pista <?php echo $this->filaReservas['id_pista']; ?> a las  <?php echo date('H:i',strtotime($this->filaReservas['hora'])); ?>.<br>
-                            <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Cancelar</a></p>
+                            <p><a class="btn btn-dark" href="<?php echo $urlR; ?>" role="button">Cancelar</a></p>
                         </li>
                         <?php
                         }
