@@ -3,7 +3,6 @@
 require_once('Models/horaModel.php');
 
     class CampeonatoCategoriaMapper{
-
         var $bd;
 
         function __construct(){
