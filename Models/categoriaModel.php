@@ -3,43 +3,36 @@
     
 class CategoriaModel {
 
- 	var $id_categoria; 
-    var $sexo;
-    var $nivel;  
-	var $bd; 
+ 	private $id_categoria; 
+    private $sexo;
 	
 
- 	function __construct($id_categoria,$sexo,$nivel){
+ 	function __construct($id_categoria=null,$sexonivel=null){
         $this->id_categoria = $id_categoria;
-        $this->sexo = $sexo; 
-		$this->nivel = $nivel;
-		include_once '../Models/BdAdmin.php'; 
-		$this->mysqli = ConectarBD();  
+        $this->sexonivel = $sexonivel;  
 	}
 
-	
-	function mostrarTodos() {
-		
-		$sql = "SELECT * FROM CATEGORIA";
 
-    	if (!($resultado = $this->mysqli->query($sql)))
-			return 'Error en la consulta sobre la base de datos';
-    	else
-			return $resultado;
+	//getters
+
+	public function getId(){
+		return $this->id_categoria;
 	}
-	
-	
-	function consultarDatos() {	
 
-		$sql = "SELECT * FROM CATEGORIA WHERE (id_categoria = '$this->id_categoria')";
-		    
-		if (!($resultado = $this->mysqli->query($sql)))
-			return 'No existe en la base de datos'; 
-		else{ 
-			$result = $resultado->fetch_array();
-			return $result;
-		}
-    }
+	public function getSexoNivel(){
+		return $this->sexonivel;
+	}
+
+
+	//setters
+
+	public function setId($id_categoria){
+		$this->id_categoria = $id_categoria;
+	}
+
+	public function setSexoNivel($sexonivel){
+		$this->sexonivel = $sexonivel;
+	}
 
 }
 
