@@ -83,7 +83,8 @@ require_once('Models/campeonatoModel.php');
                             fecha_fin,
                             fecha_inicio_inscripciones,
                             fecha_fin_inscripciones 
-                    FROM CAMPEONATO";
+                    FROM CAMPEONATO
+                    ORDER BY fecha_fin DESC";
     
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'Error en la consulta sobre la base de datos';
@@ -147,6 +148,28 @@ require_once('Models/campeonatoModel.php');
             else
                 return $resultado;
 
+        }
+
+
+        function getCampeonatosEnInscripcion(){
+
+            $hoy = date('Y-m-d H:i:s');
+
+            $sql = "SELECT id_campeonato,
+                            nombre,
+                            fecha_inicio,
+                            fecha_fin,
+                            fecha_inicio_inscripciones,
+                            fecha_fin_inscripciones 
+                    FROM CAMPEONATO 
+                    WHERE fecha_inicio_inscripciones <= '$hoy' AND fecha_fin_inscripciones >= '$hoy'
+                    ORDER BY fecha_fin_inscripciones";
+    
+            if (!($resultado = $this->mysqli->query($sql))){
+                return null;
+            }else{
+                return $resultado;
+            }
         }
 
 
