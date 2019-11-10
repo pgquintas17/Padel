@@ -128,7 +128,7 @@ class IndexView extends baseView {
                 </div>
 
                 <!--CAMPEONATOS-->
-                <div id="campeonatos" class="col-lg-4">
+                <div id="partidos" class="col-lg-4">
                     <?php
                          if($this->campeonatos != null) {
                             if(Utils::conectado()){
@@ -143,7 +143,7 @@ class IndexView extends baseView {
                                 ?>
                                 <li class="list-group-item">
                                     <strong><?php echo $this->filaC['nombre']; ?></strong><br>
-                                    <p>Se jugará del <?php echo date('d-m-y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-y',strtotime($this->filaC['fecha_fin'])); ?><br>
+                                    <p>Se jugará del<br> <?php echo date('d-m-y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-y',strtotime($this->filaC['fecha_fin'])); ?><br>
                                     Plazo de inscripción abierto hasta el <?php echo date('d-m',strtotime($this->filaC['fecha_fin_inscripciones'])); ?> a las <?php echo date('H:i',strtotime($this->filaC['fecha_fin_inscripciones'])); ?></p>
                                     <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Inscribirse</a></p>
                                 </li>
@@ -158,11 +158,11 @@ class IndexView extends baseView {
                             <h5>Campeonatos en inscripción</h5>
                             <p id="justificar">
                             <?php
-                            while($this->fila = ($this->campeonatos)->fetch_assoc()) {
+                            while($this->filaC = ($this->campeonatos)->fetch_assoc()) {
                                 ?>
                                 <li class="list-group-item">
                                 <strong><?php echo $this->filaC['nombre']; ?></strong><br>
-                                <p>Se jugará del <?php echo date('d-m-Y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin'])); ?><br>
+                                <p>Se jugará del<br> <?php echo date('d-m-Y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin'])); ?><br>
                                 Plazo de inscripción abierto hasta el <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin_inscripciones'])); ?> a las <?php echo date('H:i',strtotime($this->filaC['fecha_fin_inscripciones'])); ?></p>
                             </li>
                             <?php
@@ -181,7 +181,7 @@ class IndexView extends baseView {
                                 ?>
                                 <li class="list-group-item">
                                     <strong><?php echo $this->filaC['nombre']; ?></strong><br>
-                                    <p>Se jugará del <?php echo date('d-m-Y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin'])); ?><br>
+                                    <p>Se jugará del<br> <?php echo date('d-m-Y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin'])); ?><br>
                                     Plazo de inscripción abierto hasta el <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin_inscripciones'])); ?> a las <?php echo date('H:i',strtotime($this->filaC['fecha_fin_inscripciones'])); ?></p>
                                     <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Apuntarse</a></p>
                                 </li>
