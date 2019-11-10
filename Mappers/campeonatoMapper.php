@@ -127,48 +127,26 @@ require_once('Models/campeonatoModel.php');
                 return $result;
             }
         }
-        
-    
-        function crearFiltros($campeonato$filtros) {
 
-            $nombre = $campeonato->getNombre();
-            $fecha_inicio = $campeonato->getFechaInicio();
-            $fecha_fin = $campeonato->getFechaFin();
-            $fecha_inicio_inscripciones = $campeonato->getFechaInicioIncripciones();
-            $fecha_fin_inscripciones = $campeonato->getFechaFinInscripciones();
 
-            $toret = "( ";
-            int n = 
-            foreach($filtros as $filtro) {
-                switch($filtro) {
-                    case "nombre":
-                        $toret .= "(nombre = '$nombre')";
-                        break;
-                    case "fecha_inicio":
-                        $toret .= "(fecha_inicio = '$fecha_inicio')";
-                        break;
-                    case "fecha_fin":
-                        $toret .= "(fecha_fin = '$fecha_fin')";
-                        break;
-                        case "fecha_inicio_inscripciones":
-                        $toret .= "(fecha_inscipciones = '$fecha_inicio_inscripciones')";
-                        break;
-                    case "fecha_fin_inscripciones":
-                        $toret .= "(fecha_fin_inscripciones = '$fecha_fin_inscripciones')";
-                        break;
-                }
-                $toret .= " && ";
-            }
-            $toret = chop($toret," && ");
-            $toret .= " )";
+        function getCategoriasCampeonato($campeonato){
+
+            $id_campeonato = $campeonato->getId();
+
+            $sql = "SELECT campeonato.NOMBRE, categoria.SEXONIVEL 
+                    FROM campeonato 
+                    INNER JOIN (campeonato_categoria 
+                                JOIN categoria 
+                                ON campeonato_categoria.ID_CATEGORIA = categoria.ID_CATEGORIA) 
+                    ON campeonato.ID_CAMPEONATO = campeonato_categoria.ID_CAMPEONATO 
+                    WHERE campeonato.ID_CAMPEONATO = '$id_campeonato' 
+                    ORDER BY categoria.SEXONIVEL";
     
-            $sql = "SELECT * FROM CAMPEONATO WHERE " . $toret;
-    
-            if (!($resultado = $this->mysqli->query($sql))) {
+            if (!($resultado = $this->mysqli->query($sql)))
                 return 'Error en la consulta sobre la base de datos';
-            }
-            else 
+            else
                 return $resultado;
+
         }
 
 

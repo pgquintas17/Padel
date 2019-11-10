@@ -8,19 +8,16 @@ class CampeonatoModel {
  	var $fecha_inicio; 
     var $fecha_fin;
     var $fecha_inicio_inscripciones;
- 	var $fecha_fin_inscripciones;  
-	var $bd; 
+ 	var $fecha_fin_inscripciones;
 	
 
- 	function __construct($id_campeonato,$nombre,$fecha_inicio,$fecha_fin,$fecha_inicio_inscripciones,$fecha_fin_inscripciones){
+ 	function __construct($id_campeonato=null,$nombre=null,$fecha_inicio=null,$fecha_fin=null,$fecha_inicio_inscripciones=null,$fecha_fin_inscripciones=null){
         $this->id_campeonato = $id_campeonato;
         $this->nombre = $nombre; 
 		$this->fecha_inicio = $fecha_inicio; 
  		$this->fecha_fin = $fecha_fin; 
 		$this->fecha_inicio_inscripciones = $fecha_inicio_inscripciones; 
-        $this->fecha_fin_inscripciones = $fecha_fin_inscripciones;
-		include_once '../Models/BdAdmin.php'; 
-		$this->mysqli = ConectarBD();  
+        $this->fecha_fin_inscripciones = $fecha_fin_inscripciones; 
 	}
 
 
