@@ -9,12 +9,15 @@
         private $usuario;
         private $msg;
         private $errs;
+        private $filaReservas;
+        private $listaReservas;
         private $filaPartidos;
         private $listaPartidos;
-        private $filaHoras;
-        private $listaHoras;
+        private $filaCampeonatos;
+        private $listaCampeonatos;
+        
 
-        function __construct($msg=null, $errs=null, $usuario=null, $filaReservas=null, $listaReservas=null, $filaPartidos=null, $listaPartidos=null) {
+        function __construct($msg=null, $errs=null, $usuario=null, $filaReservas=null, $listaReservas=null, $filaPartidos=null, $listaPartidos=null, $filaCampeonatos=null, $listaCampeonatos=null) {
             $this->msg = $msg;
             $this->errs = $errs;
             parent::__construct($this->usuario);
@@ -22,6 +25,8 @@
             $this->listaReservas = $listaReservas;
             $this->filaPartidos = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
             $this->listaPartidos = $listaPartidos;
+            $this->filaCampeonatos = array('id_campeonato', 'nombre', 'fecha_fin_inscripciones','sexonivel', 'numero', 'nombre_pareja', 'capitan', 'miembro');
+            $this->listaCampeonatos = $listaCampeonatos;
         }
 
         function _render() { 
@@ -41,6 +46,7 @@
                     <?php
                     if($this->listaPartidos != null) {
                     ?>
+                    <!---SECCIÓN PARTIDOS--->
                     <h5>Tus partidos</h5>
                     <p id="justificar">
                     <?php
@@ -101,6 +107,8 @@
                     }
                     ?>
                 </div>
+
+                <!---SECCIÓN RESERVAS--->
                 <div id="partidos" class="col-lg-4">
                     <?php
                     if($this->listaReservas != null) {
@@ -141,9 +149,80 @@
                     }
                     ?>
                 </div>
-                <div class="col-lg-4">
-                    <h5>Tus campeonatos</h5>
-                    <p id="justificar">Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+
+                <!---SECCIÓN CAMPEONATOS--->
+                <div id="partidos" class="col-lg-4">
+                    <?php
+                    if($this->listaCampeonatos != null) {
+                    ?>
+                        <h5>Tus reservas</h5>
+                        <p id="justificar">
+                        <?php
+                        while($this->filaCampeonatos = ($this->listaCampeonatos)->fetch_assoc()) {
+                            $hoy = date('Y-m-d H:i:s');
+                            $id = $this->filaCampeonatos['id_campeonato'];
+                            $urlC = "index.php?controller=campeonatos&action=details&idcampeonato=" . $id;
+                            ?>
+                            <li class="list-group-item">
+                                <strong><?php echo $this->filaCampeonatos['nombre']; ?></strong><br>
+                                <p style="text-align:left";>Estás apuntado en la categoría <strong><?php 
+                                                                if($this->filaCampeonatos['sexonivel'] == 'M1'){
+                                                                    echo "1ª masculina";
+                                                                }
+                                                                    
+                                                                if($this->filaCampeonatos['sexonivel'] == 'M2'){
+                                                                    echo "2ª masculina";
+                                                                }
+                                                                
+                                                                if($this->filaCampeonatos['sexonivel'] == 'M3'){
+                                                                    echo "3ª masculina";
+                                                                }
+                                                                
+                                                                if($this->filaCampeonatos['sexonivel'] == 'F1'){
+                                                                    echo "1ª femenina";
+                                                                }
+                                                                    
+                                                                if($this->filaCampeonatos['sexonivel'] == 'F2'){
+                                                                    echo "2ª femenina";
+                                                                }
+                                                                
+                                                                if($this->filaCampeonatos['sexonivel'] == 'F3'){
+                                                                    echo "3ª femenina";
+                                                                }
+
+                                                                if($this->filaCampeonatos['sexonivel'] == 'MX1'){
+                                                                    echo "1ª mixta";
+                                                                }
+                                                                    
+                                                                if($this->filaCampeonatos['sexonivel'] == 'MX2'){
+                                                                    echo "2ª mixta";
+                                                                }
+                                                                
+                                                                if($this->filaCampeonatos['sexonivel'] == 'MX3'){
+                                                                    echo "3ª mixta";
+                                                                }
+                                
+                                                                ?></strong>.</p>
+                            <p style="text-align:left";>Pareja <strong><?php echo $this->filaCampeonatos['nombre_pareja']; ?></strong>:<br>-Capitán: <?php echo $this->filaCampeonatos['capitan']; ?><br>-Miembro: <?php echo $this->filaCampeonatos['miembro']; ?></p>
+                            <?php
+                            if($this->filaCampeonatos['fecha_fin_inscripciones'] <= $hoy){
+                                ?>
+                                <p><a class="btn btn-dark" href="<?php echo $urlC; ?>" role="button">Cancelar inscripción.</a></p>
+                                <?php
+                            }
+                            ?>
+                            </li>
+                            <?php   
+                            
+                        }
+                    }
+                    else{
+                        ?>
+                        <h5>No estás apuntado a ningún campeonato.</h5>
+                        <
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>

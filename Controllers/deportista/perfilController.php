@@ -52,9 +52,12 @@
                 $listaReservas = $reservaMapper->getReservasByLogin($_SESSION['Usuario']);
                 require_once('Mappers/partidoMapper.php');
                 $partidoMapper = new PartidoMapper();
-				$listaPartidos = $partidoMapper->getPartidosByLogin($_SESSION['Usuario']); 
+				$listaPartidos = $partidoMapper->getPartidosByLogin($_SESSION['Usuario']);
+				require_once('Mappers/campeonatoMapper.php');
+                $campeonatoMapper = new CampeonatoMapper();
+				$listaCampeonatos = $campeonatoMapper->getCampeonatosByLogin($_SESSION['Usuario']);  
 				require_once('Views/perfilView.php');
-				(new PerfilView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaReservas,'',$listaPartidos))->render();
+				(new PerfilView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaReservas,'',$listaPartidos,'',$listaCampeonatos))->render();
 			}
 		}
 	}

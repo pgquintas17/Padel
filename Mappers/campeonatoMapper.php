@@ -173,6 +173,31 @@ require_once('Models/campeonatoModel.php');
         }
 
 
+        function getCampeonatosByLogin($usuario){
+
+            $login = $usuario->getLogin();
+
+            $sql = "SELECT campeonato.id_campeonato, campeonato.nombre, campeonato.fecha_fin_inscripciones, 
+                           categoria.sexonivel, 
+                           pareja.nombre_pareja, pareja.capitan, pareja.miembro 
+                    FROM campeonato INNER JOIN 
+                                    (categoria INNER JOIN 
+                                                (campeonato_categoria INNER JOIN pareja 
+                                                ON campeonato_categoria.ID_CATCAMP=pareja.ID_CATCAMP) 
+                                    ON campeonato_categoria.ID_CATEGORIA = categoria.ID_CATEGORIA) 
+                    ON campeonato.ID_CAMPEONATO = campeonato_categoria.ID_CAMPEONATO 
+                    WHERE pareja.MIEMBRO = '$login' OR pareja.CAPITAN = '$login' 
+                    ORDER BY campeonato.fecha_fin DESC";
+
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else
+                return $resultado;
+
+
+        }
+
+
     }
 
 ?>
