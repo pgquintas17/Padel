@@ -2,125 +2,55 @@
 
  class CampeonatoCategoriaModel {
 	 	
-	var $id_catcamp;
- 	var $id_campeonato; 
-	var $id_categoria;
-	var $n_plazas; 
- 	var $bd; 
+	private $id_catcamp;
+ 	private $id_campeonato; 
+	private $id_categoria;
+	private $n_plazas;  
 
- 	function __construct($id_catcamp, $id_campeonato, $id_categoria ){
+ 	function __construct($id_catcamp=null, $id_campeonato=null, $id_categoria=null){
 
 		$this->id_catcamp = $id_catcamp;
  		$this->id_campeonato = $id_campeonato; 
 		$this->id_categoria = $id_categoria;
-		$this->n_plazas = $n_plazas; 
-
-		include_once '../Models/BdAdmin.php'; 
-		$this->mysqli = ConectarBD();  
-	}
-
-  
-	function ADD(){
-
-		$sql = "INSERT INTO CAMPEONATO_CATEGORIA (
-					id_campeonato,
-					id_categoria,
-					n_plazas
-				)
-				VALUES (
-					'$this->id_campeonato',
-					'$this->id_categoria',
-					'$this->n_plazas'
-				)";
-
-		if (!$this->mysqli->query($sql))  
-			return 'Error en la inserción';
-		else
-			return 'Inserción realizada con éxito';  
-
+		$this->n_plazas = $n_plazas;  
 	}
 
 
-	function EDIT() {
-	
-    	$sql = "SELECT * FROM  CAMPEONATO_CATEGORIA  WHERE (id_catcamp = '$this->id_catcamp')";
-    	$result = $this->mysqli->query($sql);
-    
-    	if ($result->num_rows == 1) {	
+	//getters
 
-		$sql = "UPDATE CAMPEONATO_CATEGORIA  SET
-					id_campeonato = '$this->id_campeonato',
-					id_categoria = '$this->id_categoria',
-					n_plazas = '$this->n_plazas'
-
-				WHERE (id_catcamp = '$this->id_catcamp')";
-		
-        	if (!($resultado = $this->mysqli->query($sql)))
-				return 'Error en la modificación';
-			else
-				return 'Modificado correctamente';
-		}
-		else
-    		return 'No existe en la base de datos';
-	}
-	
-
-	function mostrarTodos() {
-		
-		$sql = "SELECT * FROM CAMPEONATO_CATEGORIA";
-
-    	if (!($resultado = $this->mysqli->query($sql)))
-			return 'Error en la consulta sobre la base de datos';
-    	else
-			return $resultado;
+	public function getId(){
+		return $this->id_catcamp;
 	}
 
-	
-	function DELETE() {	
-		
-		$sql = "SELECT * FROM  CAMPEONATO_CATEGORIA  WHERE  (id_catcamp = '$this->id_catcamp') ";
-		
-    	if (!$result = $this->mysqli->query($sql))
-    		return 'No se ha podido conectar con la base de datos'; 
-    
-		if ($result->num_rows == 1){
-		    
-		    $sql = "DELETE FROM  CAMPEONATO_CATEGORIA  WHERE (id_camtcamp = '$this->id_catcamp')";
-		    $this->mysqli->query($sql);
-		    
-		    return "Borrado correctamente";
-		} 
-		else
-		    return "No existe";
-	} 
-	
-	
-	function consultarDatos() {	
-
-		$sql = "SELECT * FROM CAMPEONATO_CATEGORIA WHERE (id_catcamp = '$this->id_catcamp')";
-		    
-		if (!($resultado = $this->mysqli->query($sql)))
-			return 'No existe en la base de datos'; 
-		else{ 
-			$result = $resultado->fetch_array();
-			return $result;
-		}
-	}
-	
-	function getNumParejas(){
-		
-		$sql = "SELECT * FROM CAMPEONATO_CATEGORIA WHERE ((id_catcamp = '$this->id_catcamp'))";
-		
-		$resultado = $this->mysqli->query($sql);
-		
-		if ($resultado->num_rows == 0)
-			return 'La categoría no existe';
-		else{
-			$tupla = $resultado->fetch_array();
-			return $tupla['n_plazas'];
-		}
+	public function getIdCampeonato(){
+		return $this->id_campeonato;
 	}
 
+	public function getIdCategoria(){
+		return $this->id_categoria;
+	}
+
+	public function getNumPlazas(){
+		return $this->n_plazas;
+	}
+
+	//setters
+
+	public function setId($id_catcamp){
+		$this->id_catcamp = $id_catcamp;
+	}
+
+	public function setIdCampeonato($id_campeonato){
+		$this->id_campeonato = $id_campeonato;
+	}
+
+	public function setIdCategoria($id_categoria){
+		$this->id_categoria = $id_categoria;
+	}
+
+	public function setNumPlazas($n_plazas){
+		$this->n_plazas = $n_plazas;
+	}
 
 }
 
