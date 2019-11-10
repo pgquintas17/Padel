@@ -46,7 +46,7 @@
                                 <a class="nav-link" href="/index.php?controller=adminPistas">PISTAS</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">CAMPEONATOS</a>
+                                <a class="nav-link" href="/index.php?controller=adminCampeonatos">CAMPEONATOS</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/index.php?controller=adminPartidos">PARTIDOS</a>
@@ -62,7 +62,13 @@
                                 <a class="nav-link" href="/index.php?controller=reservas&action=reservar">RESERVAR PISTA</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">APUNTARSE A CAMPEONATOS</a>
+                                <div class="dropdown show">
+                                    <a class="nav-link dropdown-toggle" href="/index.php?controller=campeonatos" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CAMPEONATOS</a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="/index.php?controller=campeonatos&action=apuntarse">Apuntarse a campeonatos</a>
+                                            <a class="dropdown-item" href="/index.php?controller=campeonatos">Ver campeonatos</a>
+                                        </div>
+                                </div>
                             </li>
                             <li class="nav-item">
                             <!--perfil-->
