@@ -2,13 +2,13 @@
     
 class ParejaModel {
 
- 	var $id_pareja; 
- 	var $nombre_pareja;
- 	var $capitan; 
-    var $miembro;
-	var $id_grupo;
-	var $id_catcamp;  
-	var $bd; 
+ 	private $id_pareja; 
+ 	private $nombre_pareja;
+ 	private $capitan; 
+    private $miembro;
+	private $id_grupo;
+	private $id_catcamp;
+	private $puntos;   
 	
 
  	function __construct($id_pareja,$nombre_pareja,$capitan,$miembro,$id_grupo,$id_catcamp){
@@ -18,140 +18,67 @@ class ParejaModel {
  		$this->miembro = $miembro;  
 		$this->id_grupo = $id_grupo;
 		$this->id_catcamp = $id_catcamp;
-		include_once '../Models/BdAdmin.php'; 
-		$this->mysqli = ConectarBD();  
+		$this->puntos = $puntos;
 	}
 
-	
-	function ADD(){
-				
-		$sql = "INSERT INTO PAREJA (
-                    nombre_pareja,
-                    capitan,
-                    miembro,
-                    id_grupo,
-					id_catcamp
-				)
-				VALUES (
-                    '$this->nombre_pareja',
-                    '$this->capitan',
-                    '$this->miembro',
-                    '$this->id_grupo',
-					'$this->id_catcamp'
-				)";
+	//getters
 
-		if (!$this->mysqli->query($sql))
-			return 'Error en la inserción';
-		else
-			return 'Inserción realizada con éxito'; 
-
+	public function getId(){
+		return $this->id_pareja;
 	}
 
-	
-	function EDIT() {
-	
-    	$sql = "SELECT * FROM PAREJA  WHERE (id_pareja = '$this->id_pareja') ";
-    	$result = $this->mysqli->query($sql);
-    
-    	if ($result->num_rows == 1) {	
-
-			$sql = "UPDATE PAREJA  SET
-                		nombre_pareja = '$this->nombre_pareja',
-                    	capitan = '$this->capitan',
-                    	miembro = '$this->miembro',
-                    	id_grupo = '$this->id_grupo'
-						id_catcamp = '$this->id_catcamp',
-
-					WHERE (id_pareja = '$this->id_pareja')";
-
-
-        	if (!($resultado = $this->mysqli->query($sql)))
-				return 'Error en la modificación';
-			else 
-				return 'Modificado correctamente';
-    	}
-		else 
-    		return 'No existe en la base de datos';
-	}
-		
-		
-	function DELETE() {	
-		
-		$sql = "SELECT * FROM PAREJA  WHERE (id_pareja = '$this->id_pareja') ";
-		$result = $this->mysqli->query($sql);
-
-		if (!$result)
-    		return 'No se ha podido conectar con la base de datos';
-		    
-		if ($result->num_rows == 1) {
-		    	
-		    $sql = "DELETE FROM PAREJA WHERE (id_pareja = '$this->id_pareja')";
-		    $this->mysqli->query($sql);
-		        
-		    return "Borrado correctamente";
-		} 
-		else
-		    return "No existe";
-	} 
-	
-	
-	function mostrarTodos() {
-		
-		$sql = "SELECT * FROM PAREJA";
-
-    	if (!($resultado = $this->mysqli->query($sql)))
-			return 'Error en la consulta sobre la base de datos';
-    	else
-			return $resultado;
+	public function getNombre(){
+		return $this->nombre_pareja;
 	}
 
-
-	function consultarDatos() {
-			
-		$sql = "SELECT * FROM PAREJA WHERE (id_pareja = '$this->id_pareja')";
-		    
-		if (!($resultado = $this->mysqli->query($sql)))
-			return 'No existe en la base de datos'; 
-		else{ 
-			$result = $resultado->fetch_array();
-			return $result;
-		}
+	public function getCapitan(){
+		return $this->capitan;
 	}
 
+	public function getMiembro(){
+		return $this->id_miembro;
+	}
 
-	function crearFiltros($filtros) {
-		$toret = "( ";
-		int n = 
-		foreach($filtros as $filtro) {
-			switch($filtro) {
-				case "nombre_pareja":
-					$toret .= "(nombre_pareja = $this->nombre_pareja)";
-					break;
-				case "capitan":
-					$toret .= "(capitan LIKE '%$this->capitan%')";
-					break;
-				case "miembro":
-					$toret .= "(miembro LIKE '%$this->miembro%')";
-					break;
-				case "id_grupo":
-					$toret .= "(id_grupo = $this->id_grupo)";
-					break;
-				case "id_catcamp":
-					$toret .= "(id_catcamp = $this->id_catcamp)";
-					break;
-			}
-			$toret .= " && ";
-		}
-		$toret = chop($toret," && ");
-		$toret .= " )";
+	public function getIdGrupo(){
+		return $this->id_grupo;
+	}
 
-		$sql = "SELECT * FROM PAREJA WHERE " . $toret;
+	public function getCatCamp(){
+		return $this->id_catcamp;
+	}
 
-    	if (!($resultado = $this->mysqli->query($sql))) {
-			return 'Error en la consulta sobre la base de datos';
-		}
-    	else 
-			return $resultado;
+	public function getPuntos(){
+		return $this->puntos;
+	}
+
+	//setters
+
+	public function setId($id_pareja){
+		$this->id_pareja = $id_pareja;
+	}
+
+	public function setNombre($nombre_pareja){
+		$this->nombre_pareja = $nombre_pareja;
+	}
+
+	public function setCapitan($capitan){
+		$this->capitan = $capitan;
+	}
+
+	public function setMiembro($miembro){
+		$this->id_miembro = $miembro;
+	}
+
+	public function setIdGrupo($id_grupo){
+		$this->id_grupo = $id_grupo;
+	}
+
+	public function setCatCamp($id_catcamp){
+		$this->id_catcamp = $id_catcamp;
+	}
+
+	public function setPuntos($puntos){
+		$this->puntos = $puntos;
 	}
 
 
