@@ -27,7 +27,7 @@
                         exit;
                         break;
                     case "adminCampeonatos":
-                        //require_once('Controllers/admin/adminCampeonatoController.php');
+                        require_once('Controllers/admin/adminCampeonatoController.php');
                         new AdminCampeonatoController();
                         exit;
                         break;
@@ -46,7 +46,7 @@
                     exit;
                     break;
                 case "campeonatos":
-                    //require_once('Controllers/deportista/campeonatosController.php');
+                    require_once('Controllers/deportista/campeonatoController.php');
                     new CampeonatoController();
                     exit;
                     break;
