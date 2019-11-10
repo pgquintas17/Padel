@@ -12,13 +12,16 @@ class IndexView extends baseView {
     private $msg;
     private $errs;
     private $partidos;
+    private $campeonatos;
 
-    function __construct($msg=null, $errs=null, $usuario=null, $fila=null, $partidos=null) {
+    function __construct($msg=null, $errs=null, $usuario=null, $fila=null, $partidos=null, $filaC=null, $campeonatos=null) {
         $this->msg = $msg;
         $this->errs = $errs;
         parent::__construct($this->usuario);
         $this->fila = array('id_partido','resultado','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
         $this->partidos = $partidos;
+        $this->filaC = array('id_campeonato','nombre','fecha_inicio','fecha_fin','fecha_inicio_inscripciones','fecha_fin_inscripciones');
+        $this->campeonatos = $campeonatos;
     }
 
     function _render() { 
@@ -33,6 +36,7 @@ class IndexView extends baseView {
             <h1>Noticias</h1><br>
             <!-- Example row of columns -->
             <div class="row">
+                <!--PARTIDOS-->
                 <div id="partidos" class="col-lg-4">
                     <?php
                          if($this->partidos != null) {
@@ -122,11 +126,81 @@ class IndexView extends baseView {
                 }
                     ?>
                 </div>
-                <div class="col-lg-4">
-                    <h2>Nuevos campeonatos</h2>
-                    <p id="justificar">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+
+                <!--CAMPEONATOS-->
+                <div id="campeonatos" class="col-lg-4">
+                    <?php
+                         if($this->campeonatos != null) {
+                            if(Utils::conectado()){
+                            if(($_SESSION['Usuario'])->getPermiso() == 0){
+                            ?>
+                            <h5>¡Apúntate a nuestros campeonatos!</h5>
+                            <p id="justificar">
+                            <?php
+                            while($this->filaC = ($this->campeonatos)->fetch_assoc()) {
+                                $id = $this->filaC['id_campeonato'];
+                                $url = "index.php?controller=campeonatos&action=inscripcion&idpartido=" . $id;
+                                ?>
+                                <li class="list-group-item">
+                                    <strong><?php echo $this->filaC['nombre']; ?></strong><br>
+                                    <p>Se jugará del <?php echo date('d-m-y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-y',strtotime($this->filaC['fecha_fin'])); ?><br>
+                                    Plazo de inscripción abierto hasta el <?php echo date('d-m',strtotime($this->filaC['fecha_fin_inscripciones'])); ?> a las <?php echo date('H:i',strtotime($this->filaC['fecha_fin_inscripciones'])); ?></p>
+                                    <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Inscribirse</a></p>
+                                </li>
+                                <?php
+                            }
+                            ?>
+                            </p>
+                            <?php
+                            }
+                            else{
+                                ?>
+                            <h5>Campeonatos en inscripción</h5>
+                            <p id="justificar">
+                            <?php
+                            while($this->fila = ($this->campeonatos)->fetch_assoc()) {
+                                ?>
+                                <li class="list-group-item">
+                                <strong><?php echo $this->filaC['nombre']; ?></strong><br>
+                                <p>Se jugará del <?php echo date('d-m-Y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin'])); ?><br>
+                                Plazo de inscripción abierto hasta el <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin_inscripciones'])); ?> a las <?php echo date('H:i',strtotime($this->filaC['fecha_fin_inscripciones'])); ?></p>
+                            </li>
+                            <?php
+                            }    
+                        }
+                            ?>
+                            </p>
+                            <?php
+                    }
+                    else{
+                        ?>
+                        <h5>¡Únete al club para poder apuntarte a los campeonatos!</h5>
+                            <p id="justificar">
+                            <?php
+                            while($this->filaC = ($this->campeonatos)->fetch_assoc()) {
+                                ?>
+                                <li class="list-group-item">
+                                    <strong><?php echo $this->filaC['nombre']; ?></strong><br>
+                                    <p>Se jugará del <?php echo date('d-m-Y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin'])); ?><br>
+                                    Plazo de inscripción abierto hasta el <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin_inscripciones'])); ?> a las <?php echo date('H:i',strtotime($this->filaC['fecha_fin_inscripciones'])); ?></p>
+                                    <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Apuntarse</a></p>
+                                </li>
+                                <?php
+                            }
+                            ?>
+                            </p>
+                    <?php
+                    }
+                }
+                else{
+                    ?>
+                    <h5>No hay campeonatos disponibles en este momento.</h5>
+                <?php
+                }
+                    ?>
                 </div>
+
+                <!--GENERIC-->
                 <div class="col-lg-4">
                     <h2>Nuevas reglas</h2>
                     <p id="justificar">Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
