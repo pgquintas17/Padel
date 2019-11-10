@@ -168,7 +168,12 @@ require_once('Models/campeonatoModel.php');
             if (!($resultado = $this->mysqli->query($sql))){
                 return null;
             }else{
-                return $resultado;
+                if($resultado->num_rows == 0){
+                    return null;
+                }
+                else{
+                    return $resultado;
+                }
             }
         }
 
@@ -191,10 +196,14 @@ require_once('Models/campeonatoModel.php');
 
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'Error en la consulta sobre la base de datos';
-            else
-                return $resultado;
-
-
+            else{
+                if($resultado->num_rows == 0){
+                    return null;
+                }
+                else{
+                    return $resultado;
+                }
+            }
         }
 
 

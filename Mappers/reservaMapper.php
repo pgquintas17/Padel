@@ -205,10 +205,14 @@ require_once('Models/reservaModel.php');
     
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'Error en la consulta sobre la base de datos';
-            else
-                return $resultado;
-
-
+            else{
+                if($resultado->num_rows == 0){
+                    return null;
+                }
+                else{
+                    return $resultado;
+                }
+            }
         }
 
 

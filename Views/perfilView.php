@@ -102,7 +102,6 @@
                     else{
                         ?>
                         <h5>No estás apuntado en ningún partido.</h5>
-                        <
                     <?php
                     }
                     ?>
@@ -144,7 +143,6 @@
                     else{
                         ?>
                         <h5>No tienes reservas de pistas.</h5>
-                        <
                     <?php
                     }
                     ?>
@@ -229,7 +227,6 @@
                     else{
                         ?>
                         <h5>No estás apuntado a ningún campeonato.</h5>
-                        <
                     <?php
                     }
                     ?>
