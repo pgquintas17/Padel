@@ -20,7 +20,7 @@ require_once('Models/horaModel.php');
                     VALUES ('$id_campeonato', '$id_categoria', 0 )";
     
             if (!$this->mysqli->query($sql))  
-                return 'Error en la inserción';
+                return 'Error en la inserción de' .$id_categoria .' y ' .$id_campeonato;
             else
                 return 'Inserción realizada con éxito';  
     

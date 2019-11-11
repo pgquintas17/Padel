@@ -17,28 +17,37 @@ require_once('Models/campeonatoModel.php');
             $nombre = $campeonato->getNombre();
             $fecha_inicio = $campeonato->getFechaInicio();
             $fecha_fin = $campeonato->getFechaFin();
-            $fecha_inicio_inscripciones = $campeonato->getFechaInicioIncripciones();
+            $fecha_inicio_inscripciones = $campeonato->getFechaInicioInscripciones();
             $fecha_fin_inscripciones = $campeonato->getFechaFinInscripciones();
-			
-            $sql = "INSERT INTO CAMPEONATO (
-                        nombre,
-                        fecha_inicio,
-                        fecha_fin,
-                        fecha_inicio_inscripciones,
-                        fecha_fin_inscripciones
-                    )
-                    VALUES (
-                        '$nombre',
-                        '$fecha_inicio',
-                        '$fecha_fin',
-                        '$fecha_inicio_inscripciones',
-                        '$fecha_fin_inscripciones'
-                    )";
+
+            $sql = "SELECT * FROM CAMPEONATO  WHERE (nombre = '$nombre') ";
+            $result = $this->mysqli->query($sql);
     
-            if (!$this->mysqli->query($sql))
-                return 'Error en la inserción';
-            else
-                return 'Inserción realizada con éxito';
+            if ($result->num_rows == 1) {
+                return 'Ya existe un campeonato con ese nombre';
+            }else{
+                $sql = "INSERT INTO CAMPEONATO (
+                    nombre,
+                    fecha_inicio,
+                    fecha_fin,
+                    fecha_inicio_inscripciones,
+                    fecha_fin_inscripciones
+                )
+                VALUES (
+                    '$nombre',
+                    '$fecha_inicio',
+                    '$fecha_fin',
+                    '$fecha_inicio_inscripciones',
+                    '$fecha_fin_inscripciones'
+                )";
+
+        if (!$this->mysqli->query($sql))
+            return 'Error en la inserción';
+        else
+            return 'Campeonato creado';
+
+            }
+
         }
     
     
@@ -48,7 +57,7 @@ require_once('Models/campeonatoModel.php');
             $nombre = $campeonato->getNombre();
             $fecha_inicio = $campeonato->getFechaInicio();
             $fecha_fin = $campeonato->getFechaFin();
-            $fecha_inicio_inscripciones = $campeonato->getFechaInicioIncripciones();
+            $fecha_inicio_inscripciones = $campeonato->getFechaInicioInscripciones();
             $fecha_fin_inscripciones = $campeonato->getFechaFinInscripciones();
     
             $sql = "SELECT * FROM CAMPEONATO  WHERE (id_campeonato = '$id_campeonato') ";
@@ -204,6 +213,24 @@ require_once('Models/campeonatoModel.php');
                     return $resultado;
                 }
             }
+        }
+
+
+
+        function getIdByNombre($campeonato){
+
+            $nombre = $campeonato->getNombre();
+
+            $sql = "SELECT * FROM CAMPEONATO WHERE nombre = '$nombre'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['0'];
         }
 
 

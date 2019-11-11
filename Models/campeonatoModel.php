@@ -74,6 +74,52 @@ class CampeonatoModel {
 		$this->fecha_fin_inscripciones = $fecha_fin_inscripciones;
 	}
 
+
+
+
+	public function validarRegistro(){
+
+		$errores = array();
+		$hoy = date('Y-m-d H:i:s');
+
+		if (strlen($this->nombre) == 0 || strlen($this->nombre) > 30) {
+			$errores["nombre"] = "El nombre no puede superar los 30 caracteres ni ser vacío";
+		}
+
+		if ($this->fecha_inicio_inscripciones == null) {
+			$errores["fecha_ii"] = "Debe seleccionarse una fecha de inicio para el periodo de inscripción.";
+		}
+		if ($this->fecha_inicio_inscripciones < $hoy) {
+			$errores["fecha_ii_2"] = "El periodo de inscripción no puede ser anterior a la fecha actual.";
+		}
+
+		if ($this->fecha_fin_inscripciones == null) {
+			$errores["fecha_fi"] = "Debe seleccionarse una fecha de fin para el periodo de inscripción.";
+		}
+		if ($this->fecha_fin_inscripciones < $this->fecha_inicio_inscripciones) {
+			$errores["fecha_fi_2"] = "El periodo de inscripción no puede finalizar antes de empezar.";
+		}
+
+		if ($this->fecha_inicio == null) {
+			$errores["fecha_i"] = "Debe seleccionarse una fecha de inicio para el campeonato.";
+		}
+		if ($this->fecha_inicio < $this->fecha_fin_inscripciones) {
+			$errores["fecha_i_2"] = "El campeonato no puede ser empezar antes de terminar el periodo de inscripción.";
+		}
+		
+		if ($this->fecha_fin == null) {
+			$errores["fecha_f"] = "Debe seleccionarse una fecha de fin para el campeonato.";
+		}
+		if ($this->fecha_fin < $this->fecha_inicio) {
+			$errores["fecha_f_2"] = "El campeonato no puede ser finalizar antes de empezar.";
+		}
+		
+		
+		if (sizeof($errores) > 0){
+			throw new ValidationException($errores, "Datos no válidos");
+		}
+	}
+
 }
 
 ?>

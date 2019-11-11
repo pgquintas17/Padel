@@ -12,27 +12,55 @@
 
                     case 'ADD': 
                         echo "add";
-						/* if ($_POST){
-							try {
-								require_once('Models/usuarioModel.php');
-								$usuario = new UsuarioModel($_POST["inputLogin"],$_POST["inputNombre"],$_POST["inputLogin"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_REQUEST["inputPermiso"]);
-								$errores =  $usuario->validarRegistro();
-								require_once('Mappers/usuarioMapper.php');
-                            	$usuarioMapper = new UsuarioMapper();
-								$respuesta = $usuarioMapper->ADD($usuario);
-
-								SessionMessage::setMessage($respuesta);
-								header('Location: index.php?controller=adminUsuarios');
+						if ($_POST){
+							$cat = $_REQUEST['categoria'];
+							if(empty($cat)){
+								SessionMessage::setMessage("Debes seleccionar al menos una categoría");
+								header('Location: index.php?controller=adminCampeonatos&action=ADD');
 							}
-							catch (ValidationException $e){
-								SessionMessage::setErrores($e->getErrores());
-								SessionMessage::setMessage($e->getMessage());
-								header('Location: index.php?controller=adminUsuarios&action=ADD');
+							else{
+								try {
+									require_once('Models/campeonatoModel.php');
+									$campeonato = new CampeonatoModel();
+									$campeonato->setNombre($_REQUEST['nombre']);
+									$campeonato->setFechaInicio($_REQUEST['fechainicio']);
+									$campeonato->setFechaFin($_REQUEST['fechafin']);
+									$campeonato->setFechaInicioInscripciones($_REQUEST['fechainicioins']);
+									$campeonato->setFechaFinInscripciones($_REQUEST['fechafinins']);
+									$errores =  $campeonato->validarRegistro();
+									require_once('Mappers/campeonatoMapper.php');
+									$campeonatoMapper = new CampeonatoMapper();
+									$respuesta = $campeonatoMapper->ADD($campeonato);
+
+									$N = count($cat);
+									$idCampeonato = $campeonatoMapper->getIdByNombre($campeonato);
+									require_once('Models/campeonatoCategoriaModel.php');
+									require_once('Mappers/campeonatoCategoriaMapper.php');
+									for($i = 0; $i < $N; $i++){
+										$catcamp = new CampeonatoCategoriaModel();
+										$catcamp->setIdCampeonato($idCampeonato);
+										$catcamp->setIdCategoria($cat[$i]);
+										
+										$catcampMapper = new CampeonatoCategoriaMapper();
+										$catcampMapper->ADD($catcamp);
+									}
+
+									SessionMessage::setMessage($respuesta);
+									header('Location: index.php?controller=adminCampeonatos');
+								}
+								catch (ValidationException $e){
+									SessionMessage::setErrores($e->getErrores());
+									SessionMessage::setMessage($e->getMessage());
+									header('Location: index.php?controller=adminCampeonatos&action=ADD');
+								}
 							}
 						}else{
-							require_once('Views/usuarioADDView.php');
-							(new UsuarioADDView(SessionMessage::getMessage(),SessionMessage::getErrores()))->render();
-						} */
+							require_once('Mappers/categoriaMapper.php');
+							$categoriaMapper = new CategoriaMapper();
+							$categorias = $categoriaMapper->mostrarTodos();
+							require_once('Views/campeonatoADDView.php');
+							(new CampeonatoADDView(SessionMessage::getMessage(),SessionMessage::getErrores(),'','',$categorias))->render();
+						} 
 						break;
 						
 
