@@ -65,7 +65,7 @@
                         $url = "/index.php?controller=campeonato&action=DETAILS&idCampeonato=". $idcampeonato;
 
                         $hoy = date('Y-m-d H:i:s');
-                        if($this->fila['fecha_inicio_inscripciones'] <= $hoy && $this->fila['fecha_fin_inscripciones'] >= $hoy){ // EN PERIODO DE INSCRIPCION
+                        if(($this->fila['fecha_inicio_inscripciones'] <= $hoy && $this->fila['fecha_fin_inscripciones'] >= $hoy) || $this->fila['fecha_inicio_inscripciones'] > $hoy){ // EN PERIODO DE INSCRIPCION O A ESPERA DE ABRIR
                         ?>
                         <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                             <td><?php echo $this->fila['nombre']; ?></td>
@@ -78,13 +78,13 @@
                         <?php
                         }
 
-                        if($this->fila['fecha_inicio'] <= $hoy && $this->fila['fecha_fin'] > $hoy){ // EN CURSO
+                        if(($this->fila['fecha_inicio'] <= $hoy && $this->fila['fecha_fin'] > $hoy) || $this->fila['fecha_fin_inscripciones'] <= $hoy){ // EN CURSO O A ESPERA DE EMPEZAR
                         ?>
                         <tr class='table-warning clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                             <td><?php echo $this->fila['nombre']; ?></td>
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
-                            <td></td>
+                            <td>Cerrado</td>
                             <td></td>
                         </tr>
 
@@ -97,7 +97,7 @@
                                 <td><?php echo $this->fila['nombre']; ?></td>
                                 <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
-                            <td></td>
+                            <td>Cerrado</td>
                             <td>Ver clasificación</td>
                             </tr>
     
