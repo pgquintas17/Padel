@@ -251,9 +251,8 @@ require_once('Models/reservaModel.php');
             }
             else{
                 $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                return $tupla['3'];
             }
-
-            return $tupla['3'];
         }
 
 
