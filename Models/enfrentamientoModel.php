@@ -12,7 +12,7 @@ class EnfrentamientoModel {
     var $set3;
     var $pareja1;
 	var $pareja2;  
-	var $id_pista;
+	var $id_reserva;
 	var $bd; 
 	
 

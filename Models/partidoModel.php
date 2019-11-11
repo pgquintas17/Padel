@@ -3,8 +3,7 @@
     
 class PartidoModel {
 	
-	var $id_partido;
-	var $resultado; 
+	var $id_partido; 
  	var $hora;
 	var $fecha; 
 	var $promocion;
@@ -12,13 +11,11 @@ class PartidoModel {
     var $login2;
     var $login3;
 	var $login4;
-	var $id_reserva;
-	var $num_plazas; 
+	var $id_reserva; 
 	
 
- 	function __construct($id_partido=null,$resultado=null,$hora=null,$fecha=null,$promocion=null,$login1=null,$login2=null,$login3=null,$login4=null,$id_reserva=null,$num_plazas=null){
+ 	function __construct($id_partido=null,$hora=null,$fecha=null,$promocion=null,$login1=null,$login2=null,$login3=null,$login4=null,$id_reserva=null){
 		$this->id_partido = $id_partido;
-		$this->resultado = $resultado;
         $this->hora = $hora; 
 		$this->fecha = $fecha;
 		$this->promocion = $promocion; 
@@ -27,7 +24,6 @@ class PartidoModel {
         $this->login3 = $login3;
 		$this->login4 = $login4;
 		$this->id_reserva = $id_reserva;
-		$this->num_plazas = $num_plazas;
 	}
 
 
@@ -35,10 +31,6 @@ class PartidoModel {
 
 	public function getId(){
 		return $this->id_partido;
-	}
-
-	public function getResultado(){
-		return $this->resultado;
 	}
 
 	public function getHora(){
@@ -73,19 +65,11 @@ class PartidoModel {
 		return $this->id_reserva;
 	}
 
-	public function getNumPlazas(){
-		return $this->numPlazas;
-	}
-
 
 	// setters
 
 	public function setId($id_partido){
 		$this->id_partido = $id_partido;
-	}
-
-	public function setResultado($resultado){
-		$this->resultado = $resultado;
 	}
 
 	public function setHora($hora){
@@ -118,10 +102,6 @@ class PartidoModel {
 
 	public function setIdReserva($id_reserva){
 		$this->id_reserva = $id_reserva;
-	}
-
-	public function setNumPlazas($num_plazas){
-		$this->num_plazas = $num_plazas;
 	}
 
 
