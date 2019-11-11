@@ -17,7 +17,7 @@ require_once('Models/horaModel.php');
             $capitan = $pareja->getCapitan();
             $miembro = $pareja->getMiembro();
             $fecha_inscrip = $pareja->getFechaInscrip();
-            $id_catcamp = $pareja->getIdCatCamp();
+            $id_catcamp = $pareja->getCatCamp();
 				
             $sql = "INSERT INTO PAREJA (nombre_pareja,capitan,miembro,fecha_inscrip,id_catcamp,puntos)
                     VALUES ('$nombre_pareja','$capitan','$miembro','$fecha_inscrip','$id_catcamp',0)";
@@ -133,13 +133,28 @@ require_once('Models/horaModel.php');
         }
 
 
+        function getUsuarioRepetidoEnCategoria($pareja){
+
+            $capitan = $pareja->getCapitan();
+            $miembro = $pareja->getMiembro();
+            $id_catcamp = $pareja->getCatCamp();
+
+            $sql = "SELECT * FROM PAREJA 
+                    WHERE id_catcamp = '$id_catcamp' AND 
+                    (capitan = '$capitan' OR miembro = '$capitan' OR capitan = '$miembro' OR miembro = '$miembro')";
+            
+            $resultado = $this->mysqli->query($sql);
+            
+            if ($resultado->num_rows != 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+
+        }
+
+
     }
 
 ?>
-
-
-
-
-
-
-}

@@ -234,6 +234,68 @@ require_once('Models/campeonatoModel.php');
         }
 
 
+
+        function getNombreById($campeonato){
+
+            $id = $campeonato->getId();
+
+            $sql = "SELECT * FROM CAMPEONATO WHERE id_campeonato = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['1'];
+        }
+
+
+        function getFechaFinInsById($campeonato){
+
+            $id = $campeonato->getId();
+
+            $sql = "SELECT * FROM CAMPEONATO WHERE id_campeonato = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['5'];
+
+        }
+
+
+        function getCategoriasByCampeonato($campeonato){
+
+            $id = $campeonato->getId();
+
+            $sql = "SELECT categoria.sexonivel, campeonato_categoria.id_catcamp 
+                    FROM categoria INNER JOIN 
+                                    (campeonato_categoria INNER JOIN campeonato 
+                                    ON campeonato_categoria.id_campeonato=campeonato.id_campeonato) 
+                    ON campeonato_categoria.ID_CATEGORIA = categoria.ID_CATEGORIA
+                    WHERE campeonato.id_campeonato = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else{
+                if($resultado->num_rows == 0){
+                    return null;
+                }
+                else{
+                    return $resultado;
+                }
+            }
+
+
+        }
+
+
     }
 
 ?>

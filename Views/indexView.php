@@ -139,7 +139,7 @@ class IndexView extends baseView {
                             <?php
                             while($this->filaC = ($this->campeonatos)->fetch_assoc()) {
                                 $id = $this->filaC['id_campeonato'];
-                                $url = "index.php?controller=campeonatos&action=inscripcion&idpartido=" . $id;
+                                $url = "index.php?controller=campeonatos&action=inscripcion&idcampeonato=" . $id;
                                 ?>
                                 <li class="list-group-item">
                                     <strong><?php echo $this->filaC['nombre']; ?></strong><br>
@@ -183,7 +183,6 @@ class IndexView extends baseView {
                                     <strong><?php echo $this->filaC['nombre']; ?></strong><br>
                                     <p>Se jugará del<br> <?php echo date('d-m-Y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin'])); ?><br>
                                     Plazo de inscripción abierto hasta el <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin_inscripciones'])); ?> a las <?php echo date('H:i',strtotime($this->filaC['fecha_fin_inscripciones'])); ?></p>
-                                    <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Apuntarse</a></p>
                                 </li>
                                 <?php
                             }

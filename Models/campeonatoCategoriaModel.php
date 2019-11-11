@@ -7,7 +7,7 @@
 	private $id_categoria;
 	private $n_plazas;  
 
- 	function __construct($id_catcamp=null, $id_campeonato=null, $id_categoria=null){
+ 	function __construct($id_catcamp=null, $id_campeonato=null, $id_categoria=null,$n_plazas=null){
 
 		$this->id_catcamp = $id_catcamp;
  		$this->id_campeonato = $id_campeonato; 

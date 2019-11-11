@@ -38,7 +38,7 @@ class ParejaModel {
 	}
 
 	public function getMiembro(){
-		return $this->id_miembro;
+		return $this->miembro;
 	}
 
 	public function getFechaInscrip(){
@@ -72,7 +72,7 @@ class ParejaModel {
 	}
 
 	public function setMiembro($miembro){
-		$this->id_miembro = $miembro;
+		$this->miembro = $miembro;
 	}
 
 	public function setFechaInscrip($fecha_inscrip){
@@ -89,6 +89,70 @@ class ParejaModel {
 
 	public function setPuntos($puntos){
 		$this->puntos = $puntos;
+	}
+
+
+
+
+	public function validarRegistro(){
+
+		$errores = array();
+		require_once('Mappers/parejaMapper.php');
+		require_once('Models/campeonatoCategoriaModel.php');
+		require_once('Mappers/campeonatoCategoriaMapper.php');
+		require_once('Models/usuarioModel.php');
+		require_once('Mappers/usuarioMapper.php');
+
+		$catcampMapper = new CampeonatoCategoriaMapper();
+		$usuarioMapper = new UsuarioMapper();
+		$parejaMapper = new ParejaMapper();
+		$capitan = new UsuarioModel();
+		$capitan->setLogin($this->capitan);
+		$miembro = new UsuarioModel();
+		$miembro->setLogin($this->miembro);
+
+		if (strlen($this->nombre_pareja) == 0 || strlen($this->nombre_pareja) > 20) {
+			$errores["nombre"] = "El nombre no puede estar vacio ni superar los 20 caracteres.";
+		}
+
+		if($usuarioMapper->validarExisteDeportista($miembro)){
+			$errores['miembro'] = "El usuario elegido como miembro no existe o no es deportista.";	
+		}
+
+		if ($this->capitan == $this->miembro) {
+			$errores["miembros"] = "Los miembros de la pareja deben ser distintos.";
+		}
+
+		if($parejaMapper->getUsuarioRepetidoEnCategoria($this)){
+			$errores["usuario_repetido"] = "Uno de los usuarios ya está apuntado en esta categoría.";
+		}
+
+		$catcamp = new CampeonatoCategoriaModel();
+		$catcamp->setId($this->id_catcamp);
+		$sexo = $catcampMapper->getSexonivelById($catcamp);
+
+		$sexoC = $usuarioMapper->getSexoByLogin($capitan);
+		$sexoM = $usuarioMapper->getSexoByLogin($miembro);
+
+		if(($sexo == "M1" || $sexo == "M2" || $sexo == "M3") && ($sexoM == "femenino" || $sexoC == "femenino")){
+
+			$errores["genero"] = "En las categorías masculinas sólo pueden jugar hombres.";
+
+		}else if(($sexo == "F1" || $sexo == "F2" || $sexo == "F3") && ($sexoM == "masculino" || $sexoC == "masculino")){
+
+			$errores["genero"] = "En las categorías femeninas sólo pueden jugar mujeres.";
+
+		}else{
+
+			if($sexoM == $sexoC){
+				$errores["genero"] = "En las categorías mixtas sólo pueden jugar parejas mixtas.";
+			}
+		}
+		
+
+		if (sizeof($errores) > 0){
+			throw new ValidationException($errores, "Datos no válidos");
+		}
 	}
 
 

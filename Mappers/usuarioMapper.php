@@ -195,53 +195,38 @@ require_once('Models/usuarioModel.php');
         }
 
 
-        function crearFiltros($usuario,$filtros) {
-            $toret = "( ";
+        function validarExisteDeportista($usuario){
 
             $login = $usuario->getLogin();
-            $nombre = $usuario->getNombre();
-            $fechaNac = $usuario->getFechaNac();
-            $telefono = $usuario->getTelefono();
-            $email = $usuario->getEmail();
-            $genero = $usuario->getGenero();
-            $permiso = $usuario->getPermiso();
 
-            foreach($filtros as $filtro) {
-                switch($filtro) {
-                    case "login":
-                        $toret .= "(login = '$login')";
-                        break;
-                    case "nombre":
-                        $toret .= "(nombre = '$nombre')";
-                        break;
-                    case "fecha_nac":
-                        $toret .= "(fecha_nac = '$fechaNac')";
-                        break;
-                    case "telefono":
-                        $toret .= "(telefono = '$telefono')";
-                        break;
-                    case "email":
-                        $toret .= "(email = '$email')";
-                        break;
-                    case "genero":
-                        $toret .= "(genero = '$genero')";
-                        break;
-                    case "permiso":
-                        $toret .= "(permiso = '$permiso')";
-                        break;
-                }
-                $toret .= " && ";
+            $sql = "SELECT * FROM USUARIO 
+                    WHERE login = '$login' AND permiso = '0'";
+            
+            $resultado = $this->mysqli->query($sql);
+            
+            if ($resultado->num_rows == 0){
+                return true;
             }
-            $toret = chop($toret," && ");
-            $toret .= " )";
-    
-            $sql = "SELECT * FROM USUARIO WHERE " . $toret;
-    
-            if (!($resultado = $this->mysqli->query($sql))) {
+            else{
+                return false;
+            }
+        }
+
+
+        function getSexoByLogin($usuario){
+
+            $login = $usuario->getLogin();
+
+            $sql = "SELECT * FROM USUARIO
+                    WHERE login = '$login'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
                 return 'Error en la consulta sobre la base de datos';
             }
-            else 
-                return $resultado;
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                return $tupla['6'];
+            }
         }
 
 

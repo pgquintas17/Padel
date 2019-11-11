@@ -11,28 +11,59 @@
 				switch($_REQUEST["action"]) {
 
                     case 'inscripcion': 
-                        echo "add pareja";
-						/* if ($_POST){
-							try {
-								require_once('Models/usuarioModel.php');
-								$usuario = new UsuarioModel($_POST["inputLogin"],$_POST["inputNombre"],$_POST["inputLogin"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_REQUEST["inputPermiso"]);
-								$errores =  $usuario->validarRegistro();
-								require_once('Mappers/usuarioMapper.php');
-                            	$usuarioMapper = new UsuarioMapper();
-								$respuesta = $usuarioMapper->ADD($usuario);
+						if(isset($_REQUEST['idcampeonato'])){
+							if ($_POST){
+								$hoy = date('Y-m-d H:i:s');
+								require_once('Models/campeonatoModel.php');
+								$campeonato = new CampeonatoModel();
+								$campeonato->setId($_REQUEST['idcampeonato']);
+								require_once('Mappers/campeonatoMapper.php');
+								$campeonatoMapper = new CampeonatoMapper();
+								$fechaFinInsc = $campeonatoMapper->getFechaFinInsById($campeonato);
 
-								SessionMessage::setMessage($respuesta);
-								header('Location: index.php?controller=adminUsuarios');
-							}
-							catch (ValidationException $e){
-								SessionMessage::setErrores($e->getErrores());
-								SessionMessage::setMessage($e->getMessage());
-								header('Location: index.php?controller=adminUsuarios&action=ADD');
+								if($fechaFinInsc < $hoy){
+									SessionMessage::setMessage("El plazo de inscripción para este campeonato ha finalizado.");
+									header('Location: index.php?');
+								}
+								else{
+									try {
+										require_once('Models/parejaModel.php');
+										$pareja = new ParejaModel();
+										$pareja->setNombre($_REQUEST['nombre']);
+										$pareja->setCapitan($_SESSION['Usuario']->getLogin());
+										$pareja->setMiembro($_REQUEST['miembro']);
+										$pareja->setCatCamp($_REQUEST['categoria']);
+										$pareja->setFechaInscrip($hoy);
+										$errores =  $pareja->validarRegistro();
+										require_once('Mappers/parejaMapper.php');
+										$parejaMapper = new ParejaMapper();
+										$respuesta = $parejaMapper->ADD($pareja);
+	
+										SessionMessage::setMessage($respuesta);
+										header('Location: index.php?');
+									}
+									catch (ValidationException $e){
+										SessionMessage::setErrores($e->getErrores());
+										SessionMessage::setMessage($e->getMessage());
+										$goto = 'Location: index.php?controller=campeonatos&action=inscripcion&idcampeonato='.$_REQUEST['idcampeonato'];
+										header($goto);
+									}
+								}
+							}else{
+								require_once('Models/campeonatoModel.php');
+								$campeonato = new CampeonatoModel();
+								$campeonato->setId($_REQUEST['idcampeonato']);
+								require_once('Mappers/campeonatoMapper.php');
+								$campeonatoMapper = new CampeonatoMapper();
+								$categorias = $campeonatoMapper->getCategoriasByCampeonato($campeonato);
+								$camp = array($campeonatoMapper->getNombreById($campeonato),$_REQUEST['idcampeonato']);;
+								require_once('Views/inscripcionCampeonatoView.php');
+								(new InscripcionCampeonatoView(SessionMessage::getMessage(),SessionMessage::getErrores(),'','',$categorias,$camp))->render();
 							}
 						}else{
-							require_once('Views/usuarioADDView.php');
-							(new UsuarioADDView(SessionMessage::getMessage(),SessionMessage::getErrores()))->render();
-						} */
+							header('Location: index.php');
+							break;
+						}
 						break;
 						
 

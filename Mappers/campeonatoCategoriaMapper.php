@@ -112,6 +112,29 @@ require_once('Models/horaModel.php');
         }
 
 
+        function getSexonivelById($catcamp){
+
+            $id = $catcamp->getId();
+
+            $sql = "SELECT * FROM CAMPEONATO_CATEGORIA WHERE id_catcamp = '$id'";
+            
+            $resultado = $this->mysqli->query($sql);
+            
+            if ($resultado->num_rows == 0)
+                return 'La categoría no existe';
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                $id_cat = $tupla['2'];
+
+                $sql2 = "SELECT * FROM CATEGORIA WHERE id_categoria = '$id_cat'";
+            
+                $resultado = $this->mysqli->query($sql2);
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                
+                return $tupla['1'];
+            }
+        }
+
     }
 
 ?>
