@@ -37,15 +37,23 @@
 						
 
                     case 'borrar': 
-                        echo "delete pareja";
-						/* require_once('Models/usuarioModel.php');
-						$usuario = new UsuarioModel();
-						$usuario->setLogin($_REQUEST['username']);
-						require_once('Mappers/usuarioMapper.php');
-						$usuarioMapper = new UsuarioMapper();
-						$respuesta = $usuarioMapper->DELETE($usuario); 
-						echo "Usuario Eliminado"; 
-						header('Location: index.php?controller=adminUsuarios'); */
+						
+						$hoy = date('Y-m-d H:i:s');
+
+						if($_REQUEST['fechafininscripciones'] < $hoy){
+							SessionMessage::setMessage("El plazo de inscripción ha cerrado. No puedes borrar tu inscripción al campeonato.");
+							header('Location: index.php?controller=perfil');
+						}
+						else{
+							require_once('Models/parejaModel.php');
+							$pareja = new ParejaModel();
+							$pareja->setId($_REQUEST['idpareja']);
+							require_once('Mappers/parejaMapper.php');
+							$parejaMapper = new ParejaMapper();
+							$respuesta = $parejaMapper->DELETE($pareja); 
+							SessionMessage::setMessage($respuesta);
+							header('Location: index.php?controller=perfil');
+						}
 						break;
 						
 

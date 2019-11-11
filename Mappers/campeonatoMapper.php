@@ -184,7 +184,7 @@ require_once('Models/campeonatoModel.php');
 
             $sql = "SELECT campeonato.fecha_fin, campeonato.id_campeonato, campeonato.nombre, campeonato.fecha_fin_inscripciones, 
                            categoria.sexonivel, 
-                           pareja.nombre_pareja, pareja.capitan, pareja.miembro 
+                           pareja.nombre_pareja, pareja.capitan, pareja.miembro, pareja.id_pareja 
                     FROM campeonato INNER JOIN 
                                     (categoria INNER JOIN 
                                                 (campeonato_categoria INNER JOIN pareja 

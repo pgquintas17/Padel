@@ -5,17 +5,19 @@ class ParejaModel {
  	private $id_pareja; 
  	private $nombre_pareja;
  	private $capitan; 
-    private $miembro;
+	private $miembro;
+	private $fecha_inscrip;
 	private $id_grupo;
 	private $id_catcamp;
 	private $puntos;   
 	
 
- 	function __construct($id_pareja,$nombre_pareja,$capitan,$miembro,$id_grupo,$id_catcamp){
+ 	function __construct($id_pareja=null,$nombre_pareja=null,$capitan=null,$miembro=null,$fecha_inscrip=null,$id_grupo=null,$id_catcamp=null,$puntos=null){
         $this->id_pareja = $id_pareja;
         $this->nombre_pareja = $nombre_pareja; 
 		$this->capitan = $capitan; 
- 		$this->miembro = $miembro;  
+		$this->miembro = $miembro;  
+		$this->fecha_inscrip = $fecha_inscrip;
 		$this->id_grupo = $id_grupo;
 		$this->id_catcamp = $id_catcamp;
 		$this->puntos = $puntos;
@@ -37,6 +39,10 @@ class ParejaModel {
 
 	public function getMiembro(){
 		return $this->id_miembro;
+	}
+
+	public function getFechaInscrip(){
+		return $this->fecha_inscrip;
 	}
 
 	public function getIdGrupo(){
@@ -67,6 +73,10 @@ class ParejaModel {
 
 	public function setMiembro($miembro){
 		$this->id_miembro = $miembro;
+	}
+
+	public function setFechaInscrip($fecha_inscrip){
+		$this->fecha_inscrip = $fecha_inscrip;
 	}
 
 	public function setIdGrupo($id_grupo){

@@ -2,7 +2,7 @@
 
 require_once('Models/horaModel.php');
 
-    class CampeonatoCategoriaMapper{
+    class ParejaMapper{
         var $bd;
 
         function __construct(){
@@ -14,12 +14,13 @@ require_once('Models/horaModel.php');
         function ADD($pareja){
 
             $nombre_pareja = $pareja->getNombre();
-            $nombre_pareja = $pareja->getCapitan();
-            $nombre_pareja = $pareja->getMiembro();
-            $nombre_pareja = $pareja->getIdCatCamp();
+            $capitan = $pareja->getCapitan();
+            $miembro = $pareja->getMiembro();
+            $fecha_inscrip = $pareja->getFechaInscrip();
+            $id_catcamp = $pareja->getIdCatCamp();
 				
-            $sql = "INSERT INTO PAREJA (nombre_pareja,capitan,miembro,id_catcamp,puntos)
-                    VALUES ('$nombre_pareja','$capitan','$miembro','$id_catcamp',0)";
+            $sql = "INSERT INTO PAREJA (nombre_pareja,capitan,miembro,fecha_inscrip,id_catcamp,puntos)
+                    VALUES ('$nombre_pareja','$capitan','$miembro','$fecha_inscrip','$id_catcamp',0)";
     
             if (!$this->mysqli->query($sql))
                 return 'Error en la inserción';
@@ -44,7 +45,7 @@ require_once('Models/horaModel.php');
                 $sql = "DELETE FROM PAREJA WHERE (id_pareja = '$id_pareja')";
                 $this->mysqli->query($sql);
                     
-                return "Borrado correctamente";
+                return "Inscripción cancelada.";
             } 
             else
                 return "No existe";
@@ -53,7 +54,7 @@ require_once('Models/horaModel.php');
         
         function mostrarTodos() {
             
-            $sql = "SELECT id_pareja, nombre_pareja, capitan, miembro, id_grupo, id_catcamp, puntos 
+            $sql = "SELECT id_pareja, nombre_pareja, capitan, miembro, fecha_inscrip, id_grupo, id_catcamp, puntos 
                     FROM PAREJA";
     
             if (!($resultado = $this->mysqli->query($sql)))

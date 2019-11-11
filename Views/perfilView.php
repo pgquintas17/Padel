@@ -25,7 +25,7 @@
             $this->listaReservas = $listaReservas;
             $this->filaPartidos = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
             $this->listaPartidos = $listaPartidos;
-            $this->filaCampeonatos = array('fecha_fin','id_campeonato', 'nombre', 'fecha_fin_inscripciones','sexonivel', 'numero', 'nombre_pareja', 'capitan', 'miembro');
+            $this->filaCampeonatos = array('fecha_fin','id_campeonato', 'nombre', 'fecha_fin_inscripciones','sexonivel', 'numero', 'nombre_pareja', 'capitan', 'miembro', 'id_pareja');
             $this->listaCampeonatos = $listaCampeonatos;
         }
 
@@ -159,6 +159,9 @@
                         while($this->filaCampeonatos = ($this->listaCampeonatos)->fetch_assoc()) {
                             $hoy = date('Y-m-d H:i:s');
                             $id = $this->filaCampeonatos['id_campeonato'];
+                            $pareja = $this->filaCampeonatos['id_pareja'];
+                            $fechafinins = $this->filaCampeonatos['fecha_fin_inscripciones'];
+                            $urlBorrar = "index.php?controller=campeonatos&action=borrar&idpareja=" . $pareja . "&fechafininscripciones=" . $fechafinins;
                             $urlC = "index.php?controller=campeonatos&action=details&idcampeonato=" . $id;
 
                             if($this->filaCampeonatos['fecha_fin'] > $hoy){
@@ -172,7 +175,7 @@
                                 <?php
                             }
                             ?>
-                                <strong><?php echo $this->filaCampeonatos['nombre']; ?></strong><br>
+                                <strong><a href=<?php echo $urlC; ?>><?php echo $this->filaCampeonatos['nombre']; ?></a></strong><br>
                                 <p style="text-align:left";>Estás apuntado en la categoría <strong><?php 
                                                                 if($this->filaCampeonatos['sexonivel'] == 'M1'){
                                                                     echo "1ª masculina";
@@ -215,7 +218,7 @@
                             <?php
                             if($this->filaCampeonatos['fecha_fin_inscripciones'] > $hoy){
                                 ?>
-                                <p><a class="btn btn-dark" href="<?php echo $urlC; ?>" role="button">Cancelar inscripción.</a></p>
+                                <p><a class="btn btn-dark" href="<?php echo $urlBorrar; ?>" role="button">Cancelar inscripción.</a></p>
                                 <?php
                             }
                             ?>
