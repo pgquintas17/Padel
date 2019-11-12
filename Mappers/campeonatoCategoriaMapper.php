@@ -22,7 +22,7 @@ require_once('Models/horaModel.php');
             if (!$this->mysqli->query($sql))  
                 return 'Error en la inserción de' .$id_categoria .' y ' .$id_campeonato;
             else
-                return 'Inserción realizada con éxito';  
+                return 'Categoría añadida correctamente';  
     
         }
         
@@ -43,17 +43,17 @@ require_once('Models/horaModel.php');
 
             $id_catcamp = $campeonatoCategoria->getId();
             
-            $sql = "SELECT * FROM  CAMPEONATO_CATEGORIA  WHERE  (id_catcamp = '$id_catcamp') ";
+            $sql = "SELECT * FROM  CAMPEONATO_CATEGORIA  WHERE (id_catcamp = '$id_catcamp') ";
             
             if (!$result = $this->mysqli->query($sql))
                 return 'No se ha podido conectar con la base de datos'; 
         
             if ($result->num_rows == 1){
                 
-                $sql = "DELETE FROM  CAMPEONATO_CATEGORIA  WHERE (id_camtcamp = '$id_catcamp')";
+                $sql = "DELETE FROM  CAMPEONATO_CATEGORIA  WHERE (id_catcamp = '$id_catcamp')";
                 $this->mysqli->query($sql);
                 
-                return "Borrado correctamente";
+                return "Categoría borrada correctamente";
             } 
             else
                 return "No existe";

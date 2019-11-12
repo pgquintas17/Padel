@@ -39,30 +39,30 @@
             <h1>Campeonato: <?php echo $this->datos['1'];?></h1><br>
             
             <div class="row justify-content-md-center">
-            <div class="col-2">
-            <?php
-            if(Utils::nivelPermiso(2)){
-            ?>
-                <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
-            </div>
-            <div class="col-2">
-                <a role="button" class="btn btn-link text-dark" data-toggle="modal" data-target="#confirmDelete"><i class="fas fa-trash-alt fa-2x"></i></a><br>
-            </div>
-            <div class="col-2">    
-                <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos&action=EDIT&idcampeonato=<?php echo $this->datos['0'];?>'><i class="fas fa-edit fa-2x"></i></a>
-            </div>
-            <?php
-            }
-            else{
-            ?>
-                <a class="bg-ligth text-dark" href='/index.php?controller=campeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
-            </div>
+                <div class="col-2" style="align-self: center;">
+                    <?php
+                    if(Utils::nivelPermiso(2)){
+                    ?>
+                        <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                </div>
+                <div class="col-2" style="align-self: center;">
+                    <a role="button" class="btn btn-link text-dark" data-toggle="modal" data-target="#confirmDelete"><i class="fas fa-trash-alt fa-2x"></i></a><br>
+                </div>
+                <div class="col-2" style="align-self: center;">    
+                    <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos&action=EDIT&idcampeonato=<?php echo $this->datos['0'];?>'><i class="fas fa-edit fa-2x"></i></a>
+                </div>
+                <?php
+                }
+                else{
+                ?>
+                    <a class="bg-ligth text-dark" href='/index.php?controller=campeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                </div>
             <?php
             }
             ?>
             <div class="col-6">
-            <p style="text-align: right";><strong>Periodo inscripción:</strong> <?php echo date('d-m-Y',strtotime($this->datos['4'])); ?> hasta el <?php echo date('d-m-Y',strtotime($this->datos['5'])); ?><br>
-            <strong>Periodo de juego:</strong> <?php echo date('d-m-Y',strtotime($this->datos['2'])); ?> hasta el <?php echo date('d-m-Y',strtotime($this->datos['3'])); ?></p>
+                <p style="text-align: right";><strong>Periodo inscripción:</strong> <?php echo date('d-m-Y',strtotime($this->datos['4'])); ?> hasta el <?php echo date('d-m-Y',strtotime($this->datos['5'])); ?><br>
+                <strong>Periodo de juego:</strong> <?php echo date('d-m-Y',strtotime($this->datos['2'])); ?> hasta el <?php echo date('d-m-Y',strtotime($this->datos['3'])); ?></p>
             </div>
             </div>
             
@@ -74,9 +74,9 @@
             while($this->filaC = ($this->categorias)->fetch_assoc()) {
             ?>
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" style="text-align: -webkit-left;">
                         <h5 class="mb-0">
-                        <button class="btn btn-link text-dark" data-toggle="collapse" data-target="#<?php echo $this->filaC['id_catcamp']; ?>">Categoría <?php 
+                        <button class="btn btn-link text-dark font-weight-bold" data-toggle="collapse" data-target="#<?php echo $this->filaC['id_catcamp']; ?>">Categoría <?php 
                                                                 if($this->filaC['sexonivel'] == 'M1'){
                                                                     echo "1ª masculina";
                                                                 }
@@ -112,7 +112,6 @@
                                                                 if($this->filaC['sexonivel'] == 'MX3'){
                                                                     echo "3ª mixta";
                                                                 }
-                                
                                                                 ?></button>
                                                                 </h5>
                     </div>
@@ -120,10 +119,17 @@
                         <div class="card-body">
                             <ul class="list-group">
                         <?php
-                        while($this->filaG = ($this->grupos)->fetch_assoc()) {
-                        ?>
-                                <li class="list-group-item"><a class="text-dark" href="#enfrentamientos">Grupo número <?php echo $this->filaG['numero']; ?></a></li>
-                        <?php
+                        if($this->grupos != null){
+                            while($this->filaG = ($this->grupos)->fetch_assoc()) {
+                            ?>
+                                    <li class="list-group-item"><a class="text-dark" href="#enfrentamientos">Grupo número <?php echo $this->filaG['numero']; ?></a></li>
+                            <?php
+                            }
+                        }
+                        else{
+                            ?>
+                                    <li class="list-group-item text-dark">No existen grupos para la categoría seleccionada.</li>
+                            <?php
                         }
                         ?>
                             </ul>
@@ -135,12 +141,13 @@
                 }
                 ?>
             </div>
+            <!----->
     </div>
 
 
 
-    <!--modal confirmación-->
-    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="borrarLabel" aria-hidden="true">
+    <!--modal borrado campeonato-->
+        <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="borrarLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -162,7 +169,7 @@
                 </div>
                 </div>
             </div>
-            </div>
+        </div>
             <!--modal confirmación-->
 
 <?php

@@ -73,6 +73,93 @@
 						SessionMessage::setMessage($respuesta); 
 						header('Location: index.php?controller=adminCampeonatos');
 						break;
+
+					
+					case 'EDIT':
+						if($_REQUEST['idcampeonato']){
+							require_once('Models/campeonatoModel.php');
+							$campeonato = new CampeonatoModel();
+							$campeonato->setId($_REQUEST['idcampeonato']);
+							require_once('Mappers/campeonatoMapper.php');
+							$campeonatoMapper = new CampeonatoMapper();
+							$categoriasFaltan = $campeonatoMapper->getCategoriasNotInCampeonato($campeonato);
+							$categoriasActuales = $campeonatoMapper->getCategoriasByCampeonato($campeonato);
+							$datos = $campeonatoMapper->consultarDatos($campeonato);
+
+							require_once('Views/campeonatoEDITView.php');
+							(new CampeonatoEDITView(SessionMessage::getMessage(),SessionMessage::getErrores(),'','',$categoriasActuales,'',$categoriasFaltan,$datos))->render();
+
+						}
+						else{
+							header('Location: index.php?controller=adminCampeonatos');
+						}
+						
+						break;
+
+
+					case 'borrarCategorias': 
+						if ($_POST){
+							
+							$cat = $_REQUEST['categoria'];
+							$N = count($cat);
+							
+							require_once('Models/campeonatoCategoriaModel.php');
+							require_once('Mappers/campeonatoCategoriaMapper.php');
+
+							for($i = 0; $i < $N; $i++){
+								$catcamp = new CampeonatoCategoriaModel();
+								$catcamp->setId($cat[$i]);
+								$catcampMapper = new CampeonatoCategoriaMapper();
+								$respuesta = $catcampMapper->DELETE($catcamp);
+							}
+
+							require_once('Models/campeonatoModel.php');
+							$campeonato = new CampeonatoModel();
+							$campeonato->setId($_REQUEST['idcampeonato']);
+							require_once('Mappers/campeonatoMapper.php');
+							$campeonatoMapper = new CampeonatoMapper();
+							$numCategorias = $campeonatoMapper->getNumCategoriasByCampeonato($campeonato);
+
+							if($numCategorias == 0){
+								$campeonatoMapper->DELETE($campeonato);
+								SessionMessage::setMessage("El campeonato y sus categorías han sido eliminados.");
+								header('Location: index.php?controller=adminCampeonatos');
+							}
+							else{
+								SessionMessage::setMessage($respuesta);
+								$goto = 'Location: index.php?controller=adminCampeonatos&action=DETAILS&idcampeonato='.$_REQUEST['idcampeonato'];
+								header($goto);
+							}
+						}else{
+							header('Location: index.php?controller=adminCampeonatos');
+						}
+						break;
+
+
+					case 'addCategorias': 
+						if ($_POST){
+							$cat = $_REQUEST['categoria'];
+							$N = count($cat);
+							
+							require_once('Models/campeonatoCategoriaModel.php');
+							require_once('Mappers/campeonatoCategoriaMapper.php');
+
+							for($i = 0; $i < $N; $i++){
+								$catcamp = new CampeonatoCategoriaModel();
+								$catcamp->setIdCampeonato($_REQUEST['idcampeonato']);
+								$catcamp->setIdCategoria($cat[$i]);
+								
+								$catcampMapper = new CampeonatoCategoriaMapper();
+								$respuesta=$catcampMapper->ADD($catcamp);
+							}
+
+							SessionMessage::setMessage($respuesta);
+							$goto = 'Location: index.php?controller=adminCampeonatos&action=DETAILS&idcampeonato='.$_REQUEST['idcampeonato'];
+							header($goto);
+						}else{
+							header('Location: index.php?controller=adminCampeonatos');
+						}
+						break;
 						
 
                     case 'DETAILS': 
@@ -85,7 +172,7 @@
 						require_once('Views/campeonatoDetailsView.php');
 						$categorias = $campeonatoMapper->getCategoriasByCampeonato($campeonato);
 						$grupos = $campeonatoMapper->getGruposByCampeonato($campeonato);
-						(new CampeonatoDetailsView('','','',$datos,'',$categorias,'',$grupos))->render();
+						(new CampeonatoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'',$datos,'',$categorias,'',$grupos))->render();
 						break;
 
 

@@ -41,48 +41,15 @@ require_once('Models/campeonatoModel.php');
                     '$fecha_fin_inscripciones'
                 )";
 
-        if (!$this->mysqli->query($sql))
-            return 'Error en la inserción';
-        else
-            return 'Campeonato creado';
-
-            }
-
-        }
-    
-    
-        function EDIT($campeonato) {
-
-            $id_campeonato = $campeonato->getId();
-            $nombre = $campeonato->getNombre();
-            $fecha_inicio = $campeonato->getFechaInicio();
-            $fecha_fin = $campeonato->getFechaFin();
-            $fecha_inicio_inscripciones = $campeonato->getFechaInicioInscripciones();
-            $fecha_fin_inscripciones = $campeonato->getFechaFinInscripciones();
-    
-            $sql = "SELECT * FROM CAMPEONATO  WHERE (id_campeonato = '$id_campeonato') ";
-            $result = $this->mysqli->query($sql);
-    
-            if ($result->num_rows == 1) {
-    
-                $sql = "UPDATE CAMPEONATO  SET
-                            nombre = '$nombre',
-                            fecha_inicio = '$fecha_inicio',
-                            fecha_fin = '$fecha_fin',
-                            fecha_inicio_inscripciones = '$fecha_inicio_inscripciones',
-                            fecha_fin_inscripciones = '$fecha_fin_inscripciones'
-    
-                    WHERE (id_campeonato = '$id_campeonato')";
-    
-                if (!($resultado = $this->mysqli->query($sql)))
-                    return 'Error en la modificación';
+                if (!$this->mysqli->query($sql))
+                    return 'Error en la inserción';
                 else
-                    return 'Modificado correctamente';
+                    return 'Campeonato creado';
+
             }
-            else
-                return 'No existe en la base de datos';
+
         }
-    
+
     
         function mostrarTodos() {
             
@@ -155,7 +122,8 @@ require_once('Models/campeonatoModel.php');
     
             if (!($resultado = $this->mysqli->query($sql))){
                 return null;
-            }else{
+            }
+            else{
                 if($resultado->num_rows == 0){
                     return null;
                 }
@@ -182,8 +150,9 @@ require_once('Models/campeonatoModel.php');
                     WHERE pareja.MIEMBRO = '$login' OR pareja.CAPITAN = '$login' 
                     ORDER BY campeonato.fecha_fin DESC";
 
-            if (!($resultado = $this->mysqli->query($sql)))
+            if (!($resultado = $this->mysqli->query($sql))){
                 return 'Error en la consulta sobre la base de datos';
+            }
             else{
                 if($resultado->num_rows == 0){
                     return null;
@@ -258,6 +227,52 @@ require_once('Models/campeonatoModel.php');
                                     (campeonato_categoria INNER JOIN campeonato 
                                     ON campeonato_categoria.id_campeonato=campeonato.id_campeonato) 
                     ON campeonato_categoria.ID_CATEGORIA = categoria.ID_CATEGORIA
+                    WHERE campeonato.id_campeonato = '$id'
+                    ORDER BY categoria.sexonivel";
+
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else{
+                if($resultado->num_rows == 0){
+                    return null;
+                }
+                else{
+                    return $resultado;
+                }
+            }
+        }
+
+
+        function getNumCategoriasByCampeonato($campeonato){
+
+            $id = $campeonato->getId();
+
+            $sql = "SELECT COUNT(*) 
+                    FROM categoria INNER JOIN 
+                                    (campeonato_categoria INNER JOIN campeonato 
+                                    ON campeonato_categoria.id_campeonato=campeonato.id_campeonato) 
+                    ON campeonato_categoria.ID_CATEGORIA = categoria.ID_CATEGORIA
+                    WHERE campeonato.id_campeonato = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))) {
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $result = $resultado->fetch_array(MYSQLI_NUM);
+                return $result['0'];
+            }
+        }
+
+
+        function getGruposByCampeonato($campeonato){
+
+            $id = $campeonato->getId();
+
+            $sql = "SELECT campeonato_categoria.id_catcamp, grupo.numero 
+                    FROM grupo INNER JOIN (campeonato_categoria 
+                                            INNER JOIN campeonato 
+                                            ON campeonato_categoria.id_campeonato=campeonato.id_campeonato) 
+                    ON campeonato_categoria.id_catcamp=grupo.id_catcamp 
                     WHERE campeonato.id_campeonato = '$id'";
 
             if (!($resultado = $this->mysqli->query($sql)))
@@ -273,16 +288,17 @@ require_once('Models/campeonatoModel.php');
         }
 
 
-        function getGruposByCampeonato($campeonato){
+        function getCategoriasNotInCampeonato($campeonato){
 
             $id = $campeonato->getId();
 
-            $sql = "SELECT campeonato_categoria.id_catcamp, grupo.numero 
-                    FROM grupo INNER JOIN (campeonato_categoria 
-                                            INNER JOIN campeonato 
-                                            ON campeonato_categoria.id_campeonato=campeonato.id_campeonato) 
-                    ON campeonato_categoria.id_catcamp=grupo.id_catcamp 
-                    WHERE campeonato.id_campeonato = '$id'";
+            $sql = "SELECT id_categoria, sexonivel 
+                    FROM categoria 
+                    WHERE NOT EXISTS(SELECT 1 
+                                     FROM campeonato_categoria 
+                                     WHERE campeonato_categoria.id_categoria=categoria.id_categoria 
+                                     AND id_campeonato = '$id')
+                    ORDER BY sexonivel";
 
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'Error en la consulta sobre la base de datos';
