@@ -16,13 +16,16 @@ require_once('Models/horaModel.php');
 
             $id_catcamp = $grupo->getIdCatCamp();
             $n_parejas = $grupo->getNumParejas();
+            $numero = $grupo->getNumero();
 
             $sql = "INSERT INTO GRUPO (
                         id_catcamp,
+                        numero,
                         n_parejas
                     )
                     VALUES (
                         '$id_catcamp',
+                        '$numero',
                         '$n_parejas'
                     )";
             if (!$this->mysqli->query($sql))
@@ -36,7 +39,7 @@ require_once('Models/horaModel.php');
             
             $id_grupo = $grupo->getId();
             
-            $sql = "SELECT * FROM GRUPO  WHERE (id_grupo = '$id_grupo') ";
+            $sql = "SELECT * FROM GRUPO  WHERE id_grupo = '$id_grupo' ";
             $result = $this->mysqli->query($sql);
     
             if (!$result)
@@ -56,7 +59,7 @@ require_once('Models/horaModel.php');
     
         function mostrarTodos() {
             
-            $sql = "SELECT id_grupo, id_catcamp, n_parejas FROM GRUPO";
+            $sql = "SELECT id_grupo, id_catcamp, numero, n_parejas FROM GRUPO";
     
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'Error en la consulta sobre la base de datos';
@@ -69,7 +72,7 @@ require_once('Models/horaModel.php');
 
             $id_grupo = $grupo->getId();
     
-            $sql = "SELECT * FROM GRUPO WHERE (id_grupo = '$id_grupo')";
+            $sql = "SELECT * FROM GRUPO WHERE id_grupo = '$id_grupo'";
                 
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'No existe en la base de datos'; 

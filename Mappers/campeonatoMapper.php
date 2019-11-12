@@ -139,27 +139,6 @@ require_once('Models/campeonatoModel.php');
         }
 
 
-        function getCategoriasCampeonato($campeonato){
-
-            $id_campeonato = $campeonato->getId();
-
-            $sql = "SELECT campeonato.NOMBRE, categoria.SEXONIVEL 
-                    FROM campeonato 
-                    INNER JOIN (campeonato_categoria 
-                                JOIN categoria 
-                                ON campeonato_categoria.ID_CATEGORIA = categoria.ID_CATEGORIA) 
-                    ON campeonato.ID_CAMPEONATO = campeonato_categoria.ID_CAMPEONATO 
-                    WHERE campeonato.ID_CAMPEONATO = '$id_campeonato' 
-                    ORDER BY categoria.SEXONIVEL";
-    
-            if (!($resultado = $this->mysqli->query($sql)))
-                return 'Error en la consulta sobre la base de datos';
-            else
-                return $resultado;
-
-        }
-
-
         function getCampeonatosEnInscripcion(){
 
             $hoy = date('Y-m-d H:i:s');
@@ -291,8 +270,30 @@ require_once('Models/campeonatoModel.php');
                     return $resultado;
                 }
             }
+        }
 
 
+        function getGruposByCampeonato($campeonato){
+
+            $id = $campeonato->getId();
+
+            $sql = "SELECT campeonato_categoria.id_catcamp, grupo.numero 
+                    FROM grupo INNER JOIN (campeonato_categoria 
+                                            INNER JOIN campeonato 
+                                            ON campeonato_categoria.id_campeonato=campeonato.id_campeonato) 
+                    ON campeonato_categoria.id_catcamp=grupo.id_catcamp 
+                    WHERE campeonato.id_campeonato = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else{
+                if($resultado->num_rows == 0){
+                    return null;
+                }
+                else{
+                    return $resultado;
+                }
+            }
         }
 
 

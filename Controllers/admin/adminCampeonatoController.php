@@ -78,15 +78,16 @@
 						
 
                     case 'DETAILS': 
-                        echo "details";
-						/* require_once('Models/usuarioModel.php');
-						$usuario = new UsuarioModel();
-						$usuario->setLogin($_REQUEST['username']);
-						require_once('Mappers/usuarioMapper.php');
-						$usuarioMapper = new UsuarioMapper();
-						$datos = $usuarioMapper->consultarDatos($usuario);
-						require_once('Views/usuarioDetailsView.php');
-						(new UsuarioDetailsView('','','',$datos))->render(); */
+						require_once('Models/campeonatoModel.php');
+						$campeonato = new CampeonatoModel();
+						$campeonato->setId($_REQUEST['idcampeonato']);
+						require_once('Mappers/campeonatoMapper.php');
+						$campeonatoMapper = new CampeonatoMapper();
+						$datos = $campeonatoMapper->consultarDatos($campeonato);
+						require_once('Views/campeonatoDetailsView.php');
+						$categorias = $campeonatoMapper->getCategoriasByCampeonato($campeonato);
+						$grupos = $campeonatoMapper->getGruposByCampeonato($campeonato);
+						(new CampeonatoDetailsView('','','',$datos,'',$categorias,'',$grupos))->render();
 						break;
 
 

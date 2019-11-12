@@ -61,9 +61,14 @@
             <?php
 
                     while($this->fila = ($this->listaCampeonatos)->fetch_assoc()) {
-                        $idcampeonato = $this->fila['id_campeonato'];          
-                        $url = "/index.php?controller=campeonato&action=DETAILS&idCampeonato=". $idcampeonato;
-
+                        $idcampeonato = $this->fila['id_campeonato'];
+                        if(Utils::nivelpermiso(2)){
+                            $url = "/index.php?controller=adminCampeonatos&action=DETAILS&idcampeonato=". $idcampeonato;
+                        }
+                        else{
+                            $url = "/index.php?controller=campeonatos&action=DETAILS&idcampeonato=". $idcampeonato;
+                        }          
+                        
                         $hoy = date('Y-m-d H:i:s');
                         if(($this->fila['fecha_inicio_inscripciones'] <= $hoy && $this->fila['fecha_fin_inscripciones'] >= $hoy) || $this->fila['fecha_inicio_inscripciones'] > $hoy){ // EN PERIODO DE INSCRIPCION O A ESPERA DE ABRIR
                         ?>
