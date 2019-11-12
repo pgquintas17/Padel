@@ -25,7 +25,7 @@
             $this->listaReservas = $listaReservas;
             $this->filaPartidos = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
             $this->listaPartidos = $listaPartidos;
-            $this->filaCampeonatos = array('fecha_fin','id_campeonato', 'nombre', 'fecha_fin_inscripciones','sexonivel', 'numero', 'nombre_pareja', 'capitan', 'miembro', 'id_pareja');
+            $this->filaCampeonatos = array('fecha_fin','id_campeonato', 'nombre', 'fecha_fin_inscripciones','sexonivel', 'nombre_pareja', 'capitan', 'miembro', 'id_pareja');
             $this->listaCampeonatos = $listaCampeonatos;
         }
 
