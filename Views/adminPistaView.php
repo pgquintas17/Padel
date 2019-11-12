@@ -34,8 +34,8 @@
             <button type="button" class="btn btn-light" data-toggle="modal" data-target="#addPista"><i class="fas fa-plus-circle fa-2x"></i></button><br><br>
             <div class="row justify-content-md-center">
                 <!-- Tabla pistas -->
-                <div class="col-md-4">
-                    <table class="table table-hover table-bordered" id="tablas" style="border-radius: 25px; text-align: center;">
+                <div class="col-md-4" id="tablas">
+                    <table class="table table-hover table-bordered"  style="border-radius: 25px; text-align: center;">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Número de pista</th>
