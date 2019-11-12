@@ -11,7 +11,6 @@
 				switch($_REQUEST["action"]) {
 
                     case 'ADD': 
-                        echo "add";
 						if ($_POST){
 							$cat = $_REQUEST['categoria'];
 							if(empty($cat)){
@@ -65,15 +64,14 @@
 						
 
                     case 'DELETE': 
-                        echo "delete";
-						/* require_once('Models/usuarioModel.php');
-						$usuario = new UsuarioModel();
-						$usuario->setLogin($_REQUEST['username']);
-						require_once('Mappers/usuarioMapper.php');
-						$usuarioMapper = new UsuarioMapper();
-						$respuesta = $usuarioMapper->DELETE($usuario); 
-						echo "Usuario Eliminado"; 
-						header('Location: index.php?controller=adminUsuarios'); */
+						require_once('Models/campeonatoModel.php');
+						$campeonato = new CampeonatoModel();
+						$campeonato->setId($_REQUEST['idcampeonato']);
+						require_once('Mappers/campeonatoMapper.php');
+						$campeonatoMapper = new CampeonatoMapper();
+						$respuesta = $campeonatoMapper->DELETE($campeonato); 
+						SessionMessage::setMessage($respuesta); 
+						header('Location: index.php?controller=adminCampeonatos');
 						break;
 						
 

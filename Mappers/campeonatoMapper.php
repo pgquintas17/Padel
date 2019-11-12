@@ -117,7 +117,7 @@ require_once('Models/campeonatoModel.php');
                 $sql = "DELETE FROM CAMPEONATO WHERE (id_campeonato = '$id_campeonato')";
                 $this->mysqli->query($sql);
                 
-                return "Borrado correctamente";
+                return "Campeonato borrado correctamente.";
             }
             else
                 return "No existe";

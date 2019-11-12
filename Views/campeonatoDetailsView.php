@@ -37,24 +37,35 @@
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
             <h1>Campeonato: <?php echo $this->datos['1'];?></h1><br>
-
-            <p style="text-align: right";><strong>Periodo inscripción:</strong> <?php echo date('d-m-Y',strtotime($this->datos['4'])); ?> hasta el <?php echo date('d-m-Y',strtotime($this->datos['5'])); ?><br>
-            <strong>Periodo de juego:</strong> <?php echo date('d-m-Y',strtotime($this->datos['2'])); ?> hasta el <?php echo date('d-m-Y',strtotime($this->datos['3'])); ?></p>
             
+            <div class="row justify-content-md-center">
             <div class="col-2">
             <?php
             if(Utils::nivelPermiso(2)){
             ?>
                 <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+            </div>
+            <div class="col-2">
+                <a role="button" class="btn btn-link text-dark" data-toggle="modal" data-target="#confirmDelete"><i class="fas fa-trash-alt fa-2x"></i></a><br>
+            </div>
+            <div class="col-2">    
+                <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos&action=EDIT&idcampeonato=<?php echo $this->datos['0'];?>'><i class="fas fa-edit fa-2x"></i></a>
+            </div>
             <?php
             }
             else{
             ?>
-                <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                <a class="bg-ligth text-dark" href='/index.php?controller=campeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+            </div>
             <?php
             }
             ?>
-            </div><br>
+            <div class="col-6">
+            <p style="text-align: right";><strong>Periodo inscripción:</strong> <?php echo date('d-m-Y',strtotime($this->datos['4'])); ?> hasta el <?php echo date('d-m-Y',strtotime($this->datos['5'])); ?><br>
+            <strong>Periodo de juego:</strong> <?php echo date('d-m-Y',strtotime($this->datos['2'])); ?> hasta el <?php echo date('d-m-Y',strtotime($this->datos['3'])); ?></p>
+            </div>
+            </div>
+            
 
         <!-- Panel categorías y grupos -->
             <div class="accordion">
@@ -125,6 +136,34 @@
                 ?>
             </div>
     </div>
+
+
+
+    <!--modal confirmación-->
+    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="borrarLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmación de borrado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de querer eliminar este campeonato? Se eleminirán todas las categorías, grupos, parejas y enfrentamientos del mismo.</p>
+                </div>
+                <div class="modal-footer">
+                    <?php
+                        $id_campeonato = $this->datos['0'];          
+                        $url = "/index.php?controller=adminCampeonatos&action=DELETE&idcampeonato=". $id_campeonato;
+                    ?>
+                    <a href="<?php echo $url ?>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Eliminar campeonato</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!--modal confirmación-->
 
 <?php
         }
