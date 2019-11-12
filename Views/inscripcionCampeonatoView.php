@@ -67,11 +67,11 @@
                                 while($this->fila = ($this->categorias)->fetch_assoc()) {
                                     ?>
                                     <div class="form-check row">
-                                        <div class="col-md-2">
+                                    <label><div class="col-md-2">
                                         <input class="form-check-input" type="radio" name="categoria" value="<?php echo $this->fila['id_catcamp']; ?>">
                                         </div>
                                         <div class="col-md-12">
-                                            <label><?php 
+                                            <?php 
                                                                 if($this->fila['sexonivel'] == 'M1'){
                                                                     echo "1ª masculina";
                                                                 }
@@ -108,8 +108,8 @@
                                                                     echo "3ª mixta";
                                                                 }
                                 
-                                                                ?></label>
-                                        </div>
+                                                                ?>
+                                        </div></label>
                                     </div>
                                     <?php
                                 
