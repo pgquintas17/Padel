@@ -19,42 +19,52 @@
                                 header('Location: index.php?controller=reservas&action=reservar');
                             }
                             else{
-								require_once('Models/usuarioModel.php');
-								$usuario = $_SESSION["Usuario"];
-								require_once('Models/reservaModel.php');
-                                $reserva = new ReservaModel();
-                                $reserva->setLogin($_SESSION['Usuario']->getLogin());
-                                $reserva->setFecha($_POST["fecha"]);
-                                $reserva->setHora($_POST["inputHora"]);
+
+								$maxReservas = 5;
+
 								require_once('Mappers/reservaMapper.php');
 								$reservaMapper = new ReservaMapper();
-                                $validacion1 = $reservaMapper->comprobarDisponibilidadUsuario($reserva);
-                                require_once('Mappers/partidoMapper.php');
-                            	$partidoMapper = new PartidoMapper();
-								$validacion2 = $partidoMapper->comprobarDisponibilidadUsuario($reserva);
-								if($validacion1 && $validacion2){
-									$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
-                                    require_once('Mappers/pistaMapper.php');
-                                    $pistaMapper = new PistaMapper();
-                                    $pistasActivas = $pistaMapper->getNumPistasActivas();
-                                    if($reservasEnFecha == $pistasActivas){
-                                        SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
-                                        header('Location: index.php?controller=reservas&action=reservar');
-                                    }
-                                    else{
-                                        $idPista = $pistaMapper->findPistaLibre($reserva);
-                                        $reserva->setIdPista($idPista);
-                                        $reservaMapper->ADD($reserva);
-                                        $reservaHecha = "La reserva para el partido ha sido registrada en la pista: " . $idPista;
-                                        SessionMessage::setMessage($reservaHecha);
-                                        header('Location: index.php?controller=reservas&action=reservar');
-                                    }
-									
+								$numReservas = $reservaMapper->getNumReservasActivasByLogin($_SESSION['Usuario']);
+
+								if($numReservas == $maxReservas){
+									SessionMessage::setMessage("Has llegado al máximo permitido de reservas activas.");
+									header('Location: index.php');
 								}
 								else{
-									SessionMessage::setMessage("Tienes otra reserva/partido en ese día y hora.");
-									header('Location: index.php?controller=reservas&action=reservar');
-                                }
+									require_once('Models/reservaModel.php');
+									$reserva = new ReservaModel();
+									require_once('Models/usuarioModel.php');
+									$reserva->setLogin($_SESSION['Usuario']->getLogin());
+									$reserva->setFecha($_POST["fecha"]);
+									$reserva->setHora($_POST["inputHora"]);
+									$validacion1 = $reservaMapper->comprobarDisponibilidadUsuario($reserva);
+									require_once('Mappers/partidoMapper.php');
+									$partidoMapper = new PartidoMapper();
+									$validacion2 = $partidoMapper->comprobarDisponibilidadUsuario($reserva);
+									if($validacion1 && $validacion2){
+										$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
+										require_once('Mappers/pistaMapper.php');
+										$pistaMapper = new PistaMapper();
+										$pistasActivas = $pistaMapper->getNumPistasActivas();
+										if($reservasEnFecha == $pistasActivas){
+											SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
+											header('Location: index.php?controller=reservas&action=reservar');
+										}
+										else{
+											$idPista = $pistaMapper->findPistaLibre($reserva);
+											$reserva->setIdPista($idPista);
+											$reservaMapper->ADD($reserva);
+											$reservaHecha = "La reserva para el partido ha sido registrada en la pista: " . $idPista;
+											SessionMessage::setMessage($reservaHecha);
+											header('Location: index.php?controller=reservas&action=reservar');
+										}
+										
+									}
+									else{
+										SessionMessage::setMessage("Tienes otra reserva/partido en ese día y hora.");
+										header('Location: index.php?controller=reservas&action=reservar');
+									}
+								}
 							}
 						break;
 						

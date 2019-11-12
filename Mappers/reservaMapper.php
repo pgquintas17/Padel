@@ -216,6 +216,23 @@ require_once('Models/reservaModel.php');
         }
 
 
+        function getNumReservasActivasByLogin($usuario){
+
+            $login = $usuario->getLogin();
+            $hoy = date('Y-m-d');
+
+            $sql = "SELECT COUNT(*) 
+                    FROM RESERVA WHERE login = '$login' AND fecha > $hoy";
+    
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else{
+                $result = $resultado->fetch_array(MYSQLI_NUM);
+                return $result['0'];
+            }
+        }
+
+
         function cancelarReserva($reserva){
 
             $id_reserva = $reserva->getId();
