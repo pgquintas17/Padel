@@ -118,7 +118,7 @@ require_once('Models/usuarioModel.php');
                 $sql = "DELETE FROM  USUARIO WHERE (login = '$login')";   
                 $this->mysqli->query($sql);
                 
-                return "Borrado correctamente";
+                return "Usuario borrado correctamente.";
             } 
             else
                 return "No existe";
