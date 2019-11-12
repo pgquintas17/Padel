@@ -201,9 +201,9 @@ class IndexView extends baseView {
 
                 <!--GENERIC-->
                 <div class="col-lg-4">
-                    <h2>Nuevas reglas</h2>
-                    <p id="justificar">Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-                    <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+                    <h5>Clases particulares y escuelas deportivas</h5>
+                    <p><img src="Views/imgs/padel.jpg" class="img-fluid" alt="Responsive image"></p>
+                    <p style="text-align:justify;">¡Dentro de muy poco podrás disfrutar aprendiendo y mejorando tu técnica de la mano de nuestros expertos profesores! Se impartirán clases particulares y también grupos adaptados por nivel. ¡No te lo pierdas!</p>
                 </div>
             </div>
         </div>
