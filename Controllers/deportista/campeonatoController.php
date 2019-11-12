@@ -26,27 +26,40 @@
 									header('Location: index.php?');
 								}
 								else{
-									try {
-										require_once('Models/parejaModel.php');
-										$pareja = new ParejaModel();
-										$pareja->setNombre($_REQUEST['nombre']);
-										$pareja->setCapitan($_SESSION['Usuario']->getLogin());
-										$pareja->setMiembro($_REQUEST['miembro']);
-										$pareja->setCatCamp($_REQUEST['categoria']);
-										$pareja->setFechaInscrip($hoy);
-										$errores =  $pareja->validarRegistro();
-										require_once('Mappers/parejaMapper.php');
-										$parejaMapper = new ParejaMapper();
-										$respuesta = $parejaMapper->ADD($pareja);
-	
-										SessionMessage::setMessage($respuesta);
+
+									require_once('Models/campeonatoCategoriaModel.php');
+									$catcamp = new CampeonatoCategoriaModel();
+									$catcamp->setId($_REQUEST['categoria']);
+									require_once('Mappers/campeonatoCategoriaMapper.php');
+									$catcampMapper = new CampeonatoCategoriaMapper();
+									$numParejas = $catcampMapper->getNumParejas($catcamp);
+									if($numParejas == 96){
+										SessionMessage::setMessage("No quedan plazas disponibles en esta categoría.");
 										header('Location: index.php?');
-									}
-									catch (ValidationException $e){
-										SessionMessage::setErrores($e->getErrores());
-										SessionMessage::setMessage($e->getMessage());
-										$goto = 'Location: index.php?controller=campeonatos&action=inscripcion&idcampeonato='.$_REQUEST['idcampeonato'];
-										header($goto);
+									}else{
+										try {
+											require_once('Models/parejaModel.php');
+											$pareja = new ParejaModel();
+											$pareja->setNombre($_REQUEST['nombre']);
+											$pareja->setCapitan($_SESSION['Usuario']->getLogin());
+											$pareja->setMiembro($_REQUEST['miembro']);
+											$pareja->setCatCamp($_REQUEST['categoria']);
+											$pareja->setFechaInscrip($hoy);
+											$errores =  $pareja->validarRegistro();
+											require_once('Mappers/parejaMapper.php');
+											$parejaMapper = new ParejaMapper();
+											$catcampMapper->addParejas($catcamp);
+											$respuesta = $parejaMapper->ADD($pareja);
+											
+											SessionMessage::setMessage($respuesta);
+											header('Location: index.php?');
+										}
+										catch (ValidationException $e){
+											SessionMessage::setErrores($e->getErrores());
+											SessionMessage::setMessage($e->getMessage());
+											$goto = 'Location: index.php?controller=campeonatos&action=inscripcion&idcampeonato='.$_REQUEST['idcampeonato'];
+											header($goto);
+										}
 									}
 								}
 							}else{
@@ -89,15 +102,16 @@
 						
 
                     case 'DETAILS': 
-                        echo "details";
-						/* require_once('Models/usuarioModel.php');
-						$usuario = new UsuarioModel();
-						$usuario->setLogin($_REQUEST['username']);
-						require_once('Mappers/usuarioMapper.php');
-						$usuarioMapper = new UsuarioMapper();
-						$datos = $usuarioMapper->consultarDatos($usuario);
-						require_once('Views/usuarioDetailsView.php');
-						(new UsuarioDetailsView('','','',$datos))->render(); */
+                        require_once('Models/campeonatoModel.php');
+						$campeonato = new CampeonatoModel();
+						$campeonato->setId($_REQUEST['idcampeonato']);
+						require_once('Mappers/campeonatoMapper.php');
+						$campeonatoMapper = new CampeonatoMapper();
+						$datos = $campeonatoMapper->consultarDatos($campeonato);
+						require_once('Views/campeonatoDetailsView.php');
+						$categorias = $campeonatoMapper->getCategoriasByCampeonato($campeonato);
+						$grupos = $campeonatoMapper->getGruposByCampeonato($campeonato);
+						(new CampeonatoDetailsView('','','',$datos,'',$categorias,'',$grupos))->render();
 						break;
 
 
