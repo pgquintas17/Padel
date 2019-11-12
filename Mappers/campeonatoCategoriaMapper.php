@@ -107,7 +107,11 @@ require_once('Models/horaModel.php');
                         SET n_plazas = n_plazas + 1  
                         WHERE (id_catcamp = '$id_catcamp')";
 
+                if (!($resultado = $this->mysqli->query($sql)))
+                    return 'No existe en la base de datos'; 
+                else{
                 return 'Pareja añadida';
+                }
             }
         }
 
