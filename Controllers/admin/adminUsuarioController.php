@@ -44,7 +44,7 @@
 						require_once('Mappers/usuarioMapper.php');
 						$usuarioMapper = new UsuarioMapper();
 						$respuesta = $usuarioMapper->DELETE($usuario); 
-						echo "Usuario Eliminado"; 
+						SessionMessage::setMessage($respuesta);
 						header('Location: index.php?controller=adminUsuarios');
 						break;
 						
@@ -62,7 +62,6 @@
 
 
 					default: 
-						echo "hey, estoy viniendo aquí";
 						header('Location: index.php?controller=adminUsuarios');
 						break;
 

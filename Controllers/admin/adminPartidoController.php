@@ -119,12 +119,6 @@
 							header('Location: index.php');
 						}
                         break;
-                    
-
-                    case 'RESULTADO':
-                        echo "nada";
-                        break;
-
 
 					default: 
 						header('Location: index.php?controller=adminPartidos');

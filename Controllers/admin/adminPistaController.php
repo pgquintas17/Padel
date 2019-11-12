@@ -40,12 +40,7 @@
 						require_once('Mappers/pistaMapper.php');
 						$pistaMapper = new PistaMapper();
 						$respuesta = $pistaMapper->cambiarEstado($pista);
-						if($respuesta){
-							header('Location: index.php?controller=adminPistas');
-						}
-						else{
-							echo "error";
-						} 
+						header('Location: index.php?controller=adminPistas');
 						break;
 
 					case 'RESERVAS':
