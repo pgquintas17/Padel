@@ -61,54 +61,54 @@
                                     <input type="text" class="form-control" name="inputTelefono">
                                 </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label for="inputGenero">Género</label>
                                 <div class="form-check row">
-                                    <div class="col-md-2">
+                                <label><div class="col-md-1">
                                         <input class="form-check-input" type="radio" name="inputGenero" value="femenino">
                                     </div>
-                                    <div class="col-md-2">
-                                        <label class="form-check-label">Mujer</label>
-                                    </div>
+                                    <div class="col-md-1">
+                                        Mujer
+                                    </div></label>
                                 </div>
                                 <div class="form-check row">
-                                    <div class="col-md-2">
+                                <label><div class="col-md-1">
                                         <input class="form-check-input" type="radio" name="inputGenero" value="masculino">
                                     </div>
-                                    <div class="col-md-2">
-                                        <label class="form-check-label">Hombre</label>
-                                    </div>
+                                    <div class="col-md-1">
+                                        Hombre
+                                    </div></label>
                                 </div>  
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" class="form-control" name="inputEmail">
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label>Permiso</label>
                                 <div class="form-check row">
-                                    <div class="col-md-2">
+                                <label><div class="col-md-2">
                                         <input class="form-check-input" type="radio" name="inputPermiso" value="0">
                                     </div>
                                     <div class="col-md-2">
-                                        <label class="form-check-label" for="permiso-0">Deportista</label>
-                                    </div>
+                                        Deportista
+                                    </div></label>
                                 </div>
                                 <div class="form-check row">
-                                    <div class="col-md-2">
+                                <label><div class="col-md-2">
                                         <input class="form-check-input" type="radio" name="inputPermiso" value="1">
                                     </div>
                                     <div class="col-md-2">
-                                        <label class="form-check-label" for="permiso-1">Entrenador</label>
-                                    </div>
+                                        Entrenador
+                                    </div></label>
                                 </div>
                                 <div class="form-check row">
-                                    <div class="col-md-2">
+                                <label><div class="col-md-2">
                                         <input class="form-check-input" type="radio" name="inputPermiso" value="2">
                                     </div>
                                     <div class="col-md-2">
-                                        <label class="form-check-label" for="permiso-2">Administrador</label>
-                                    </div>
+                                        Administrador
+                                    </div></label>
                                 </div>    
                             </div>
                             <button type="submit" class="btn btn-light" name="submit" id="submit">Registrar</button>

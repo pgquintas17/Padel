@@ -63,23 +63,15 @@
                                         <input type="text" class="form-control" name="inputTelefono" value=<?php echo $this->datos['4'];?>>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label for="inputGenero">Género</label>
                                     <div class="form-check row">
-                                        <div class="col-md-2">
-                                            <input class="form-check-input" type="radio" name="inputGenero" value="femenino" <?php if($this->datos['6'] == "femenino"){ ?> checked <?php } ?>>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label class="form-check-label">Mujer</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-check row">
-                                        <div class="col-md-2">
-                                            <input class="form-check-input" type="radio" name="inputGenero" value="masculino" <?php if($this->datos['6'] == "masculino"){ ?> checked<?php } ?>>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label class="form-check-label">Hombre</label>
-                                        </div>
+                                    <label><div class="col-md-1">
+                                            <input class="form-check-input" type="radio" name="inputGenero" value="femenino" <?php if($this->datos['6'] == "femenino"){ ?> checked <?php } ?>>Mujer
+                                        </div></label>
+                                    <label><div class="col-md-1">
+                                            <input class="form-check-input" type="radio" name="inputGenero" value="masculino" <?php if($this->datos['6'] == "masculino"){ ?> checked<?php } ?>>Hombre
+                                        </div></label>
                                     </div>  
                                 </div>
                                 <div class="form-group">
