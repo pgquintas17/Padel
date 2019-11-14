@@ -31,6 +31,11 @@
                         new AdminCampeonatoController();
                         exit;
                         break;
+                    case "adminGrupos":
+                        require_once('Controllers/admin/adminGrupoController.php');
+                        new AdminGrupoController();
+                        exit;
+                        break;
                 }
             }else if($_SESSION['Usuario']->getPermiso() == 0){ //SI ES DEPORTISTA
 
