@@ -46,7 +46,7 @@
 								header('Location: index.php?controller=adminPartidos&action=ADD');
 							}
 						}else{
-							require_once('Views/adminPartidoView.php');
+							require_once('Views/partido/adminPartidoView.php');
 							header('Location: index.php?controller=adminPartidos');
 						}
 						break;
@@ -71,7 +71,7 @@
 						require_once('Mappers/partidoMapper.php');
 						$partidoMapper = new PartidoMapper();
 						$datos = $partidoMapper->consultarDatos($partido);
-						require_once('Views/partidoDetailsView.php');
+						require_once('Views/partido/partidoDetailsView.php');
 						(new PartidoDetailsView('','','',$datos))->render();
                         break;
 
@@ -99,7 +99,7 @@
 				require_once('Mappers/horaMapper.php');
 				$horaMapper = new HoraMapper();
 				$listaHoras = $horaMapper->mostrarTodos(); 
-				require_once('Views/adminPartidoView.php');
+				require_once('Views/partido/adminPartidoView.php');
 				(new AdminPartidoView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaPartidos,'',$listaHoras))->render();
 			}
 		}

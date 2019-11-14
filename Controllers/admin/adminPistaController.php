@@ -27,7 +27,7 @@
 							}
 							header('Location: index.php?controller=adminPistas');
 						}else{
-							require_once('Views/adminPistaView.php');
+							require_once('Views/pista/adminPistaView.php');
 							(new adminPistaView(SessionMessage::getMessage()))->render();
 						}
 						break;
@@ -50,7 +50,7 @@
 						require_once('Mappers/reservaMapper.php');
 						$reservaMapper = new ReservaMapper();
 						$lista = $reservaMapper->getReservasByPista($pista);
-						require_once('Views/adminReservaPistaView.php');
+						require_once('Views/reserva/adminReservaPistaView.php');
 						(new AdminReservaPistaView(SessionMessage::getMessage(),SessionMessage::getErrores(),'',$_REQUEST['idpista'],'',$lista))->render();
 						break;
 
@@ -64,7 +64,7 @@
 				require_once('Mappers/pistaMapper.php');
 				$pistaMapper = new PistaMapper();
 				$listaPistas = $pistaMapper->mostrarTodos();
-				require_once('Views/adminPistaView.php');
+				require_once('Views/pista/adminPistaView.php');
 				(new AdminPistaView(SessionMessage::getMessage(),SessionMessage::getErrores(),'','',$listaPistas))->render();
 			}
 		}

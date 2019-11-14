@@ -73,14 +73,14 @@
                                 require_once('Mappers/horaMapper.php');
                                 $horaMapper = new HoraMapper();
                                 $listaHoras = $horaMapper->mostrarTodos();
-                                require_once('Views/pistaReservarView.php');
+                                require_once('Views/reserva/pistaReservarView.php');
                                 (new PistaReservarView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,$_REQUEST["fecha"]))->render();
                             }
                             else{
                                 require_once('Mappers/horaMapper.php');
                                 $horaMapper = new HoraMapper();
                                 $listaHoras = $horaMapper->mostrarTodos();
-                                require_once('Views/pistaReservarView.php');
+                                require_once('Views/reserva/pistaReservarView.php');
                                 (new PistaReservarView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,''))->render();
                             }
 							break;

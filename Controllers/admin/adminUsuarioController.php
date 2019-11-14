@@ -31,7 +31,7 @@
 								header('Location: index.php?controller=adminUsuarios&action=ADD');
 							}
 						}else{
-							require_once('Views/usuarioADDView.php');
+							require_once('Views/usuario/usuarioADDView.php');
 							(new UsuarioADDView(SessionMessage::getMessage(),SessionMessage::getErrores()))->render();
 						}
 						break;
@@ -56,7 +56,7 @@
 						require_once('Mappers/usuarioMapper.php');
 						$usuarioMapper = new UsuarioMapper();
 						$datos = $usuarioMapper->consultarDatos($usuario);
-						require_once('Views/usuarioDetailsView.php');
+						require_once('Views/usuario/usuarioDetailsView.php');
 						(new UsuarioDetailsView('','','',$datos))->render();
 						break;
 
@@ -70,7 +70,7 @@
 				require_once('Mappers/usuarioMapper.php');
 				$usuarioMapper = new UsuarioMapper();
 				$listaUsuarios = $usuarioMapper->mostrarTodos(); 
-				require_once('Views/adminUsuarioView.php');
+				require_once('Views/usuario/adminUsuarioView.php');
 				(new AdminUsuarioView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaUsuarios))->render();
 			}
 		}

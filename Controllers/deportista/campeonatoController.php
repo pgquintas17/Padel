@@ -70,7 +70,7 @@
 								$campeonatoMapper = new CampeonatoMapper();
 								$categorias = $campeonatoMapper->getCategoriasByCampeonato($campeonato);
 								$camp = array($campeonatoMapper->getNombreById($campeonato),$_REQUEST['idcampeonato']);;
-								require_once('Views/inscripcionCampeonatoView.php');
+								require_once('Views/campeonato/inscripcionCampeonatoView.php');
 								(new InscripcionCampeonatoView(SessionMessage::getMessage(),SessionMessage::getErrores(),'','',$categorias,$camp))->render();
 							}
 						}else{
@@ -108,7 +108,7 @@
 						require_once('Mappers/campeonatoMapper.php');
 						$campeonatoMapper = new CampeonatoMapper();
 						$datos = $campeonatoMapper->consultarDatos($campeonato);
-						require_once('Views/campeonatoDetailsView.php');
+						require_once('Views/campeonato/campeonatoDetailsView.php');
 						$categorias = $campeonatoMapper->getCategoriasByCampeonato($campeonato);
 						(new CampeonatoDetailsView('','','',$datos,'',$categorias,''))->render();
 						break;
@@ -122,7 +122,7 @@
 						$grupoMapper = new GrupoMapper();
 						$parejas = $grupoMapper->getParejasByGrupo($grupo); 
 						$enfrentamientos = $grupoMapper->getEnfrentamientosByGrupo($grupo);
-						require_once('Views/grupoDetailsView.php');
+						require_once('Views/campeonato/grupoDetailsView.php');
 						(new GrupoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$enfrentamientos,'',$parejas))->render();
 						break;
 
@@ -134,7 +134,7 @@
 						require_once('Mappers/CampeonatoCategoriaMapper.php');
 						$catcampMapper = new CampeonatoCategoriaMapper();
 						$parejas = $catcampMapper->getParejasByCategoria($catcamp); 
-						require_once('Views/clasificacionCategoriaView.php');
+						require_once('Views/campeonato/clasificacionCategoriaView.php');
 						(new ClasificacionCategoriaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas))->render();
 						break;
 					
@@ -146,7 +146,7 @@
 						require_once('Mappers/CampeonatoMapper.php');
 						$campeonatoMapper = new CampeonatoMapper();
 						$parejas = $campeonatoMapper->getParejasByCampeonato($campeonato); 
-						require_once('Views/clasificacionCampeonatoView.php');
+						require_once('Views/campeonato/clasificacionCampeonatoView.php');
 						(new ClasificacionCampeonatoView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas))->render();
 						break;
 					
@@ -160,7 +160,7 @@
 				require_once('Mappers/campeonatoMapper.php');
 				$campeonatoMapper = new CampeonatoMapper();
 				$listaCampeonatos = $campeonatoMapper->mostrarTodos(); 
-				require_once('Views/campeonatoView.php');
+				require_once('Views/campeonato/campeonatoView.php');
 				(new CampeonatoView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaCampeonatos))->render();
 			}
 		}

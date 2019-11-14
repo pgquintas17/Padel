@@ -35,7 +35,7 @@
                             require_once('Mappers/usuarioMapper.php');
                             $usuarioMapper = new UsuarioMapper();
                             $datos = $usuarioMapper->consultarDatos($_SESSION['Usuario']);
-							require_once('Views/usuarioEDITView.php');
+							require_once('Views/usuario/usuarioEDITView.php');
 							(new UsuarioEDITView(SessionMessage::getMessage(),SessionMessage::getErrores(),'',$datos))->render();
 						}
 						break;
@@ -56,7 +56,7 @@
 				require_once('Mappers/campeonatoMapper.php');
                 $campeonatoMapper = new CampeonatoMapper();
 				$listaCampeonatos = $campeonatoMapper->getCampeonatosByLogin($_SESSION['Usuario']);  
-				require_once('Views/perfilView.php');
+				require_once('Views/usuario/perfilView.php');
 				(new PerfilView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaReservas,'',$listaPartidos,'',$listaCampeonatos))->render();
 			}
 		}
