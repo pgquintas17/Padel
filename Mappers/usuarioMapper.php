@@ -230,6 +230,22 @@ require_once('Models/usuarioModel.php');
         }
 
 
+        function getAdmin(){
+
+            $sql = "SELECT * FROM USUARIO
+                    WHERE  (permiso = '2') LIMIT 1";
+                
+                $resultado = $this->mysqli->query($sql);
+                
+                if ($resultado->num_rows == 0)
+                    return null;
+                else{
+                    $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                    return new UsuarioModel($tupla[0], $tupla[1], $tupla[2], $tupla[3], $tupla[4], $tupla[5], $tupla[6], $tupla[7]);        
+                }
+        }
+
+
     }
 
 ?>

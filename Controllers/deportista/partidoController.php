@@ -4,6 +4,7 @@
 	// include '../Views/Users_Views/USUARIO_EDIT.php';
 	require_once('Services/sessionMensajes.php');
 	require_once("Services/validarExcepciones.php");
+	require_once("Services/Utils.php");
 
 	class PartidoController {
 
@@ -32,9 +33,34 @@
 								$validacion2 = $reservaMapper->comprobarDisponibilidadUsuario($reserva);
 								if($validacion1 && $validacion2){
 									$respuesta = $partidoMapper->añadirParticipante($partido,$usuario);
-									SessionMessage::setMessage($respuesta);
-									header('Location: index.php');
-									
+									$numPlazas = $partidoMapper->getNumPlazasLibres($_REQUEST["idpartido"]);
+									if($numPlazas == 0){
+										require_once('Models/UsuarioModel.php');
+										require_once('Mappers/UsuarioMapper.php');
+										$admin = (new UsuarioMapper())->getAdmin();
+										$reserva->setLogin($admin->getLogin());
+										$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
+										require_once('Mappers/pistaMapper.php');
+										$pistaMapper = new PistaMapper();
+										$pistasActivas = $pistaMapper->getNumPistasActivas();
+										if($reservasEnFecha == $pistasActivas){
+											SessionMessage::setMessage("No hay pistas disponibles para ese día y hora. El partido se ha eliminado.");
+											header('Location: index.php');
+										}
+										else{
+											$idPista = $pistaMapper->findPistaLibre($reserva);
+											$reserva->setIdPista($idPista);
+											$reservaMapper->ADD($reserva);
+											$partido->setIdReserva($reservaMapper->getIdReserva($reserva));
+											$partidoMapper->añadirReserva($partido);
+											SessionMessage::setMessage($respuesta);
+											header('Location: index.php');
+										}
+									}
+									else{
+										SessionMessage::setMessage($respuesta);
+										header('Location: index.php');
+									}
 								}
 								else{
 									SessionMessage::setMessage("Ya estás anotado en este partido o tienes otro partido/reserva en ese día y hora.");

@@ -85,40 +85,7 @@
 						$partidoMapper->cambiarPromocion($partido);
 						header('Location: index.php?controller=adminPartidos'); 
 						break;
-                        
                     
-                    case 'CERRAR':
-						require_once('Models/partidoModel.php');
-						$partido = new PartidoModel();
-						$partido->setId($_REQUEST['idpartido']);
-						require_once('Mappers/partidoMapper.php');
-						$partidoMapper = new PartidoMapper();
-						require_once('Models/reservaModel.php');
-						$reserva = new ReservaModel();
-						$reserva->setHora($partidoMapper->getHoraById($partido));
-						$reserva->setFecha($partidoMapper->getFechaById($partido));
-						$reserva->setLogin($_SESSION["Usuario"]->getLogin());
-						require_once('Mappers/reservaMapper.php');
-						$reservaMapper = new ReservaMapper();
-						$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
-						require_once('Mappers/pistaMapper.php');
-						$pistaMapper = new PistaMapper();
-						$pistasActivas = $pistaMapper->getNumPistasActivas();
-						if($reservasEnFecha == $pistasActivas){
-							SessionMessage::setMessage("No hay pistas disponibles para ese día y hora. El partido se ha eliminado.");
-							header('Location: index.php');
-						}
-						else{
-							$idPista = $pistaMapper->findPistaLibre($reserva);
-							$reserva->setIdPista($idPista);
-							$reservaMapper->ADD($reserva);
-							$partido->setIdReserva($reservaMapper->getIdReserva($reserva));
-							$partidoMapper->añadirReserva($partido);
-							$reservaHecha = "La reserva para el partido ha sido registrada en la pista: " . $idPista;
-							SessionMessage::setMessage($reservaHecha);
-							header('Location: index.php');
-						}
-                        break;
 
 					default: 
 						header('Location: index.php?controller=adminPartidos');
