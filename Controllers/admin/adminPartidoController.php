@@ -16,7 +16,7 @@
 						if ($_POST){
 							try {
 								require_once('Models/partidoModel.php');
-								$partido = new PartidoModel('','',$_POST["inputHora"],$_POST["inputFecha"],'','','','','','');
+								$partido = new PartidoModel('',$_POST["inputHora"],$_POST["inputFecha"],'','','','','','');
 								$errores =  $partido->validarRegistro();
 								require_once('Mappers/partidoMapper.php');
 								$partidoMapper = new PartidoMapper();
