@@ -138,15 +138,15 @@ class ParejaModel {
 
 			$errores["genero"] = "En las categorías masculinas sólo pueden jugar hombres.";
 
-		}else if(($sexo == "F1" || $sexo == "F2" || $sexo == "F3") && ($sexoM == "masculino" || $sexoC == "masculino")){
+		}
+		
+		if(($sexo == "F1" || $sexo == "F2" || $sexo == "F3") && ($sexoM == "masculino" || $sexoC == "masculino")){
 
 			$errores["genero"] = "En las categorías femeninas sólo pueden jugar mujeres.";
-
-		}else{
-
-			if($sexoM == $sexoC){
+		}
+		
+		if(($sexo == "MX1" || $sexo == "MX2" || $sexo == "MX3") && ($sexoM == $sexoC)){
 				$errores["genero"] = "En las categorías mixtas sólo pueden jugar parejas mixtas.";
-			}
 		}
 		
 
