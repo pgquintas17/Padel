@@ -172,6 +172,31 @@ require_once('Models/horaModel.php');
         }
 
 
+        function validarNombrePorCampeonato($pareja,$campeonato){
+            
+            $nombre = $pareja->getNombre();
+            $id = $campeonato->getId();
+
+            $sql = "SELECT nombre_pareja 
+            FROM PAREJA INNER JOIN (campeonato_categoria 
+                                    INNER JOIN campeonato 
+                                    ON campeonato_categoria.id_campeonato = campeonato.id_campeonato
+                                    INNER JOIN categoria 
+                                    ON campeonato_categoria.id_categoria = categoria.id_categoria) 
+            ON pareja.id_catcamp = campeonato_categoria.id_catcamp
+            WHERE campeonato.id_campeonato = '$id' AND nombre_pareja = '$nombre'";
+
+            $resultado = $this->mysqli->query($sql);
+
+            if ($resultado->num_rows != 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+
     }
 
 ?>

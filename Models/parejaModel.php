@@ -102,6 +102,8 @@ class ParejaModel {
 		require_once('Mappers/campeonatoCategoriaMapper.php');
 		require_once('Models/usuarioModel.php');
 		require_once('Mappers/usuarioMapper.php');
+		require_once('Models/campeonatoModel.php');
+		
 
 		$catcampMapper = new CampeonatoCategoriaMapper();
 		$usuarioMapper = new UsuarioMapper();
@@ -110,9 +112,17 @@ class ParejaModel {
 		$capitan->setLogin($this->capitan);
 		$miembro = new UsuarioModel();
 		$miembro->setLogin($this->miembro);
+		$catcamp = new CampeonatoCategoriaModel();
+		$catcamp->setId($this->id_catcamp);
+		$campeonato = new CampeonatoModel(($catcampMapper->getCampeonatoByCategoria($catcamp)));
+
 
 		if (strlen($this->nombre_pareja) == 0 || strlen($this->nombre_pareja) > 20) {
 			$errores["nombre"] = "El nombre no puede estar vacio ni superar los 20 caracteres.";
+		}
+
+		if($parejaMapper->validarNombrePorCampeonato($this,$campeonato)){
+			$errores["nombre2"] = "Ya existe una pareja inscrita en el campeonato con ese nombre.";
 		}
 
 		if($usuarioMapper->validarExisteDeportista($miembro)){
@@ -127,8 +137,6 @@ class ParejaModel {
 			$errores["usuario_repetido"] = "Uno de los usuarios ya está apuntado en esta categoría.";
 		}
 
-		$catcamp = new CampeonatoCategoriaModel();
-		$catcamp->setId($this->id_catcamp);
 		$sexo = $catcampMapper->getSexonivelById($catcamp);
 
 		$sexoC = $usuarioMapper->getSexoByLogin($capitan);

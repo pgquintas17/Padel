@@ -177,6 +177,24 @@ require_once('Models/horaModel.php');
 
         }
 
+        function getCampeonatoByCategoria($catcamp){
+
+            $id = $catcamp->getId();
+
+            $sql = "SELECT id_campeonato FROM CAMPEONATO_CATEGORIA WHERE id_catcamp = '$id'";
+            
+            $resultado = $this->mysqli->query($sql);
+            
+            if ($resultado->num_rows == 0)
+                return 'La categoría no existe';
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                
+                return $tupla['0'];
+            }
+
+        }
+
     }
 
 ?>
