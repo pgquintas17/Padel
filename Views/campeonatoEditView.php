@@ -39,7 +39,7 @@
 
             <div class="row justify-content-md-center">
                 <div class="col-2" style="align-self: center;">
-                    <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos&action=DETAILS&<?php echo $this->datos[0]; ?>'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                    <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos&action=DETAILS&idcampeonato=<?php echo $this->datos['0']; ?>'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
                 </div>
             <div class="col">
                 <p class="text-danger" style="text-align: right";>Recuerda que si eliminas todas las categorías del campeonato también se borrará el campeoanto</p>

@@ -18,7 +18,7 @@ class IndexView extends baseView {
         $this->msg = $msg;
         $this->errs = $errs;
         parent::__construct($this->usuario);
-        $this->fila = array('id_partido','resultado','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
+        $this->fila = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
         $this->partidos = $partidos;
         $this->filaC = array('id_campeonato','nombre','fecha_inicio','fecha_fin','fecha_inicio_inscripciones','fecha_fin_inscripciones');
         $this->campeonatos = $campeonatos;
@@ -37,7 +37,7 @@ class IndexView extends baseView {
             <!-- Example row of columns -->
             <div class="row">
                 <!--PARTIDOS-->
-                <div id="partidos" class="col-lg-4">
+                <div id="seccion" class="col-lg-4">
                     <?php
                          if($this->partidos != null) {
                              if(Utils::conectado()){
@@ -128,7 +128,7 @@ class IndexView extends baseView {
                 </div>
 
                 <!--CAMPEONATOS-->
-                <div id="partidos" class="col-lg-4">
+                <div id="seccion" class="col-lg-4">
                     <?php
                          if($this->campeonatos != null) {
                             if(Utils::conectado()){

@@ -77,6 +77,7 @@
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio_inscripciones'])); ?> hasta <?php echo date('d-m-Y H:i:s',strtotime($this->fila['fecha_fin_inscripciones'])); ?></td>
+                            <!-- MOSTRAR COLUMNA SI PLAZO DE INSCRIPCIÓN CERRÓ Y SI SE ES ADMIN si no poner "plazo inscripción abierto"-->
                             <td>Crear Grupos</td>
                         </tr>
 
@@ -90,7 +91,7 @@
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
                             <td>Cerrado</td>
-                            <td></td>
+                            <td>En curso</td>
                         </tr>
 
                         <?php

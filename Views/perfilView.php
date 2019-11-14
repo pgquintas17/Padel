@@ -42,7 +42,7 @@
             <p>Haz click <a href='index.php?controller=perfil&action=EDIT'>aquí</a> para editar tus datos.
 
             <div class="row">
-                <div id="partidos" class="col-lg-4">
+                <div id="seccion" class="col-lg-4">
                     <?php
                     if($this->listaPartidos != null) {
                     ?>
@@ -108,7 +108,7 @@
                 </div>
 
                 <!---SECCIÓN RESERVAS--->
-                <div id="partidos" class="col-lg-4">
+                <div id="seccion" class="col-lg-4">
                     <?php
                     if($this->listaReservas != null) {
                     ?>
@@ -149,7 +149,7 @@
                 </div>
 
                 <!---SECCIÓN CAMPEONATOS--->
-                <div id="partidos" class="col-lg-4">
+                <div id="seccion" class="col-lg-4">
                     <?php
                     if($this->listaCampeonatos != null) {
                     ?>

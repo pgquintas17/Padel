@@ -14,17 +14,15 @@
         private $filaC;
         private $categorias;
         private $filaG;
-        private $grupos;
 
-        function __construct($msg=null, $errs=null, $usuario=null, $datos=null,$filaC=null, $categorias=null, $filaG=null, $grupos=null) {
+        function __construct($msg=null, $errs=null, $usuario=null, $datos=null,$filaC=null, $categorias=null, $filaG=null) {
             $this->msg = $msg;
             $this->errs = $errs;
             parent::__construct($this->usuario);
             $this->datos = $datos;
             $this->filaC = array('sexonivel','id_catcamp');
             $this->categorias = $categorias;
-            $this->filaG = array('id_catcamp','numero');
-            $this->grupos = $grupos;
+            $this->filaG = array('id_grupo','id_catcamp','numero');
         }
 
         function _render() { 
@@ -68,7 +66,7 @@
             
 
         <!-- Panel categorías y grupos -->
-            <div class="accordion">
+            <div id="tablas" class="accordion">
 
             <?php
             while($this->filaC = ($this->categorias)->fetch_assoc()) {
@@ -119,16 +117,32 @@
                         <div class="card-body">
                             <ul class="list-group">
                         <?php
-                        if($this->grupos != null){
-                            while($this->filaG = ($this->grupos)->fetch_assoc()) {
+
+                        require_once('Models/CampeonatoCategoriaModel.php');
+                        $catcamp = new CampeonatoCategoriaModel();
+                        $catcamp->setId($this->filaC['id_catcamp']);
+                        require_once('Mappers/CampeonatoCategoriaMapper.php');
+                        $catcampMapper = new CampeonatoCategoriaMapper();
+                        $grupos = $catcampMapper->getGruposByCatCamp($catcamp);
+                        if($grupos != null){
+
+                            while($this->filaG = $grupos->fetch_assoc()) {
+                                $idgrupo = $this->filaG['id_grupo'];
+                                if(Utils::nivelPermiso(2)){
+                                    $url = "/index.php?controller=adminGrupos&idgrupo=".$idgrupo;
+                                }else{
+                                    $url = "/index.php?controller=campeonatos&action=grupo&idgrupo=".$idgrupo;
+                                }
+                                
                             ?>
-                                    <li class="list-group-item"><a class="text-dark" href="#enfrentamientos">Grupo número <?php echo $this->filaG['numero']; ?></a></li>
+                                <li class="list-group-item"><a class="text-dark" href="<?php echo $url; ?>">Grupo número <?php echo $this->filaG['numero']; ?></a></li>
                             <?php
                             }
+                                
                         }
                         else{
                             ?>
-                                    <li class="list-group-item text-dark">No existen grupos para la categoría seleccionada.</li>
+                                <li class="list-group-item text-dark">No existen grupos para la categoría seleccionada.</li>
                             <?php
                         }
                         ?>
