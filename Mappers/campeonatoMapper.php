@@ -264,30 +264,6 @@ require_once('Models/campeonatoModel.php');
         }
 
 
-        function getGruposByCampeonato($campeonato){
-
-            $id = $campeonato->getId();
-
-            $sql = "SELECT campeonato_categoria.id_catcamp, grupo.numero 
-                    FROM grupo INNER JOIN (campeonato_categoria 
-                                            INNER JOIN campeonato 
-                                            ON campeonato_categoria.id_campeonato=campeonato.id_campeonato) 
-                    ON campeonato_categoria.id_catcamp=grupo.id_catcamp 
-                    WHERE campeonato.id_campeonato = '$id'";
-
-            if (!($resultado = $this->mysqli->query($sql)))
-                return 'Error en la consulta sobre la base de datos';
-            else{
-                if($resultado->num_rows == 0){
-                    return null;
-                }
-                else{
-                    return $resultado;
-                }
-            }
-        }
-
-
         function getCategoriasNotInCampeonato($campeonato){
 
             $id = $campeonato->getId();

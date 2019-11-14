@@ -124,32 +124,6 @@ require_once('Models/pistaModel.php');
         }
 
 
-        function crearFiltros($pista,$filtros) {
-            
-            $estado = $pista->getEstado();
-            $toret = "( ";
-             
-            foreach($filtros as $filtro) {
-                switch($filtro) {
-                    case "estado":
-                        $toret .= "(estado = '$estado')";
-                        break;
-                }
-                $toret .= " && ";
-            }
-            $toret = chop($toret," && ");
-            $toret .= " )";
-    
-            $sql = "SELECT * FROM PISTA WHERE " . $toret;
-    
-            if (!($resultado = $this->mysqli->query($sql))) {
-                return 'Error en la consulta sobre la base de datos';
-            }
-            else 
-                return $resultado;
-        }
-
-
     }
 
 ?>
