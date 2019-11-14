@@ -3,20 +3,19 @@
     
 class EnfrentamientoModel {
 
- 	var $id_enfrentamiento; 
- 	var $resultado;
- 	var $fecha; 
-    var $hora;
-    var $set1;
-    var $set2;
-    var $set3;
-    var $pareja1;
-	var $pareja2;  
-	var $id_reserva;
-	var $bd; 
+ 	private $id_enfrentamiento; 
+ 	private $resultado;
+ 	private $fecha; 
+    private $hora;
+    private $set1;
+    private $set2;
+    private $set3;
+    private $pareja1;
+	private $pareja2;  
+	private $id_reserva;
 	
 
- 	function __construct($id_enfrentamiento,$resultado,$fecha,$hora,$set1,$set2,$set3,$pareja1,$pareja2,$id_pista){
+ 	function __construct($id_enfrentamiento=null,$resultado=null,$fecha=null,$hora=null,$set1=null,$set2=null,$set3=null,$pareja1=null,$pareja2=null,$id_reserva=null){
         $this->id_enfrentamiento = $id_enfrentamiento;
         $this->resultado = $resultado; 
 		$this->fecha = $fecha; 
@@ -26,152 +25,104 @@ class EnfrentamientoModel {
         $this->set3 = $set3; 
         $this->pareja1 = $pareja1;
 		$this->pareja2 = $pareja2;
-		$this->id_pista = $id_pista;
-		include_once '../Models/BdAdmin.php'; 
-		$this->mysqli = ConectarBD();  
+		$this->id_reserva = $id_reserva; 
 	}
 
 
-	function ADD(){
 
-		$sql = "INSERT INTO ENFRENTAMIENTO (
-                    resultado,
-                    fecha,
-                    hora,
-                    set1,
-                    set2,
-                    set3,
-                    pareja1,
-                    pareja2,
-					id_pista
-				)
-				VALUES (
-                    '$this->resultado',
-                    '$this->fecha',
-                    '$this->hora',
-                    '$this->set1',
-                    '$this->set2',
-                    '$this->set3',
-                    '$this->pareja1',
-                    '$this->pareja2',
-					'$this->id_pista'
-				)";
 
-		if (!$this->mysqli->query($sql)) 
-			return 'Error en la inserción';
-		else 
-			return 'Inserción realizada con éxito';   
+	// getters
+
+	public function getId(){
+		return $this->id_enfrentamiento;
 	}
 
-	
-	function EDIT() {
-	
-    	$sql = "SELECT * FROM ENFRENTAMIENTO  WHERE (id_enfrentamiento = '$this->id_enfrentamiento') ";
-    	$result = $this->mysqli->query($sql);
-
-    	if ($result->num_rows == 1) {	
-
-			$sql = "UPDATE ENFRENTAMIENTO  SET
-                        resultado = '$this->resultado',
-                        fecha = '$this->fecha',
-                        hora = '$this->hora',
-                        set1 = '$this->set1',
-                        set2 = '$this->set2',
-                        set3 = '$this->set3',
-                        pareja1 = '$this->pareja1',
-                        pareja2 = '$this->pareja2',
-						id_pista = '$this->id_pista'
-
-				WHERE ( id_enfrentamiento = '$this->id_enfrentamiento')";
-
-        	if (!($resultado = $this->mysqli->query($sql)))
-				return 'Error en la modificación';
-			else 
-				return 'Modificado correctamente';
-    	}
-		else 
-			return 'No existe en la base de datos';
+	public function getResultado(){
+		return $this->resultado;
 	}
 
-	
-	function DELETE() {	
-		
-		$sql = "SELECT * FROM ENFRENTAMIENTO  WHERE (id_enfrentamiento = '$this->id_enfrentamiento') ";    
-		$result = $this->mysqli->query($sql);
-
-		if (!$result)
-    		return 'No se ha podido conectar con la base de datos';
-		    
-		if ($result->num_rows == 1) {
-		    	
-		    $sql = "DELETE FROM ENFRENTAMIENTO WHERE (id_enfrentamiento = '$this->id_enfrentamiento')";    
-		    $this->mysqli->query($sql);
-		        
-		    return "Borrado correctamente";
-		} 
-		else
-		    return "No existe";
-	} 
-
-
-	function mostrarTodos() {
-		
-		$sql = "SELECT * FROM ENFRENTAMIENTO";
-
-    	if (!($resultado = $this->mysqli->query($sql)))
-			return 'Error en la consulta sobre la base de datos';
-    	else
-			return $resultado;
+	public function getFecha(){
+		return $this->fecha;
 	}
 
+	public function getHora(){
+		return $this->hora;
+	}
 
-	function consultarDatos() {	
+	public function getSet1(){
+		return $this->set1;
+	}
 
-		$sql = "SELECT * FROM ENFRENTAMIENTO WHERE (id_enfrentamiento = '$this->id_enfrentamiento')";
-		    
-		if (!($resultado = $this->mysqli->query($sql)))
-			return 'No existe en la base de datos'; 
-		else{ 
-			$result = $resultado->fetch_array();
-			return $result;
-		}
+	public function getSet2(){
+		return $this->set2;
+	}
+
+	public function getSet3(){
+		return $this->set3;
 	}
 	
-
-	function crearFiltros($filtros) {
-		$toret = "( ";
-		int n = 
-		foreach($filtros as $filtro) {
-			switch($filtro) {
-				case "fecha":
-					$toret .= "(fecha LIKE '%$this->fecha%')";
-					break;
-				case "pareja1":
-					$toret .= "((pareja1 LIKE '%$this->pareja1%')";
-					$toret .= " | (pareja2 LIKE '%$this->pareja1%'))";
-					break;
-				case "pareja2":
-					$toret .= "((pareja1 LIKE '%$this->pareja2%')";
-					$toret .= " | (pareja2 LIKE '%$this->pareja2%'))";
-					break;
-				case "id_pista":
-					$toret .= "(id_pista LIKE '%$this->id_pista%')";
-					break;
-			}
-			$toret .= " && ";
-		}
-		$toret = chop($toret," && ");
-		$toret .= " )";
-
-		$sql = "SELECT * FROM ENFRENTAMIENTO WHERE " . $toret;
-
-    	if (!($resultado = $this->mysqli->query($sql))) {
-			return 'Error en la consulta sobre la base de datos';
-		}
-    	else 
-			return $resultado;
+	public function getPareja1(){
+		return $this->pareja1;
 	}
 
+	public function getPareja2(){
+		return $this->pareja2;
+	}
+
+	public function getIdReserva(){
+		return $this->id_reserva;
+	}	
+
+	public function getIdGrupo(){
+		return $this->id_grupo;
+	}
+
+
+	// setter
+
+	public function setId($id_enfrentamiento){
+		$this->id_enfrentamiento = $id_enfrentamiento;
+	}
+
+	public function setResultado($resultado){
+		$this->resultado = $resultado;
+	}
+
+	public function setFecha($fecha){
+		$this->fecha = $fecha;
+	}
+
+	public function setHora($hora){
+		$this->hora = $hora;
+	}
+
+	public function setSet1($set1){
+		$this->set1 = $set1;
+	}
+
+	public function setSet2($set2){
+		$this->set2 = $set2;
+	}
+	
+	public function setSet3($set3){
+		$this->set3 = $set3;
+	}
+	
+	public function setPareja1($pareja1){
+		$this->pareja1 = $pareja1;
+	}
+
+	public function setPareja2($pareja2){
+		$this->pareja2 = $pareja2;
+	}
+
+	public function setIdReserva($id_reserva){
+		$this->id_reserva = $id_reserva;
+	}
+
+	public function setIdGrupo($id_grupo){
+		$this->id_grupo = $id_grupo;
+	}
 
 
 }
