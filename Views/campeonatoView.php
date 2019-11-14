@@ -70,45 +70,41 @@
                         }          
                         
                         $hoy = date('Y-m-d H:i:s');
-                        if(($this->fila['fecha_inicio_inscripciones'] <= $hoy && $this->fila['fecha_fin_inscripciones'] >= $hoy) || $this->fila['fecha_inicio_inscripciones'] > $hoy){ // EN PERIODO DE INSCRIPCION O A ESPERA DE ABRIR
-                        ?>
-                        <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                            <td><?php echo $this->fila['nombre']; ?></td>
-                            <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
-                            <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
-                            <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio_inscripciones'])); ?> hasta <?php echo date('d-m-Y H:i:s',strtotime($this->fila['fecha_fin_inscripciones'])); ?></td>
-                            <!-- MOSTRAR COLUMNA SI PLAZO DE INSCRIPCIÓN CERRÓ Y SI SE ES ADMIN si no poner "plazo inscripción abierto"-->
-                            <td>Crear Grupos</td>
-                        </tr>
 
-                        <?php
-                        }
-
-                        if(($this->fila['fecha_inicio'] <= $hoy && $this->fila['fecha_fin'] > $hoy) || $this->fila['fecha_fin_inscripciones'] <= $hoy){ // EN CURSO O A ESPERA DE EMPEZAR
+                        if($this->fila['fecha_inicio'] <= $hoy && $this->fila['fecha_fin'] > $hoy){ // EN CURSO
                         ?>
                         <tr class='table-warning clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                             <td><?php echo $this->fila['nombre']; ?></td>
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
                             <td>Cerrado</td>
-                            <td>En curso</td>
+                            <td><a class="text-dark" href="/index.php?controller=adminCampeonatos&action=clasificacion&idcatcamp=<?php echo $this->filaC['id_campeonato']; ?>"><i class="fas fa-list-alt"></i></a></td>
                         </tr>
 
                         <?php
-                        }
-
-                        if($this->fila['fecha_fin'] < $hoy){ // FINALIZADOS
+                        } else if($this->fila['fecha_fin'] < $hoy){ // FINALIZADOS
                             ?>
                             <tr class='table-secondary clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                                 <td><?php echo $this->fila['nombre']; ?></td>
                                 <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
                             <td>Cerrado</td>
-                            <td>Ver clasificación</td>
+                            <td><a class="text-dark" href="/index.php?controller=adminCampeonatos&action=clasificacion&idcatcamp=<?php echo $this->filaC['id_campeonato']; ?>"><i class="fas fa-list-alt"></i></a></td>
                             </tr>
     
                             <?php
-                            }           
+                        }
+                        else{
+                        ?>
+                            <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
+                                <td><?php echo $this->fila['nombre']; ?></td>
+                                <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
+                                <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
+                                <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio_inscripciones'])); ?> hasta <?php echo date('d-m-Y H:i:s',strtotime($this->fila['fecha_fin_inscripciones'])); ?></td>
+                                <td></td>
+                            </tr>
+                        <?php
+                        }           
                     }
             
             ?>

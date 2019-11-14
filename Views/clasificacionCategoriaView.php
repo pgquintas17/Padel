@@ -31,6 +31,25 @@ class ClasificacionCategoriaView extends baseView {
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
             <h1>Parejas: </h1><br>
+
+            <div class="row">
+                <div class="col-2" style="align-self: center;">
+                    <?php
+                    if(Utils::nivelPermiso(2)){
+                    ?>
+                        <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                </div>
+                    <?php
+                    }
+                    else{
+                    ?>
+                        <a class="bg-ligth text-dark" href='/index.php?controller=campeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                </div>
+                    <?php
+                    }
+                    ?>
+            </div>
+            
             <!-- Example row of columns -->
             <div class="row justify-content-md-center">
 

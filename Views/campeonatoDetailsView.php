@@ -111,7 +111,16 @@
                                                                     echo "3ª mixta";
                                                                 }
                                                                 ?></button>
-                                                                <a class="text-dark" href="/index.php?controller=adminCampeonatos&action=clasificacion&idcatcamp=<?php echo $this->filaC['id_catcamp']; ?>"><i class="fas fa-list-alt"></i></a></h5>
+                                                                <?php
+                                                                    if(Utils::nivelPermiso(2)){
+                                                                        $url = "/index.php?controller=adminCampeonatos&action=clasificacion&idcatcamp=".$this->filaC['id_catcamp'];
+                                                                    }
+                                                                    else{
+                                                                        $url = "/index.php?controller=campeonatos&action=clasificacion&idcatcamp=".$this->filaC['id_catcamp'];
+
+                                                                    }
+                                                                ?>
+                                                                <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a></h5>
                     </div>
                     <div id="<?php echo $this->filaC['id_catcamp']; ?>" class="collapse" data-parent="#accordion">
                         <div class="card-body">

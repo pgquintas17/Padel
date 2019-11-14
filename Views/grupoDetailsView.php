@@ -34,6 +34,24 @@ class GrupoDetailsView extends baseView {
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
             <h1>Grupo: </h1><br>
+
+            <div class="row">
+                <div class="col-2" style="align-self: center;"><p>
+                    <?php
+                    if(Utils::nivelPermiso(2)){
+                    ?>
+                        <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                </p></div>
+                    <?php
+                    }
+                    else{
+                    ?>
+                        <a class="bg-ligth text-dark" href='/index.php?controller=campeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                </p></div>
+                    <?php
+                    }
+                    ?>
+            </div>
             <!-- Example row of columns -->
             <div class="row">
 
@@ -70,6 +88,7 @@ class GrupoDetailsView extends baseView {
 
                 <!--ENFRENTAMIENTOS-->
                 <div id="tablas" class="col">
+                <h5>Enfrentamientos</h5>
                     <table class="table table-hover table-bordered" style="border-radius: 25px;">
                         <thead class="thead-dark">
                         <tr>

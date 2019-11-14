@@ -122,10 +122,21 @@
 						$grupoMapper = new GrupoMapper();
 						$parejas = $grupoMapper->getParejasByGrupo($grupo); 
 						$enfrentamientos = $grupoMapper->getEnfrentamientosByGrupo($grupo);
-				require_once('Views/grupoDetailsView.php');
-				(new GrupoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$enfrentamientos,'',$parejas))->render();
+						require_once('Views/grupoDetailsView.php');
+						(new GrupoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$enfrentamientos,'',$parejas))->render();
 
 
+					case 'clasificacion':
+						require_once('Models/CampeonatoCategoriaModel.php');
+						$catcamp = new CampeonatoCategoriaModel();
+						$catcamp->setId($_REQUEST['idcatcamp']);
+						require_once('Mappers/CampeonatoCategoriaMapper.php');
+						$catcampMapper = new CampeonatoCategoriaMapper();
+						$parejas = $catcampMapper->getParejasByCategoria($catcamp); 
+						require_once('Views/clasificacionCategoriaView.php');
+						(new ClasificacionCategoriaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas))->render();
+					
+					
 					default: 
 						echo "hey, estoy viniendo aquí";
 						header('Location: index.php?controller=adminUsuarios');
