@@ -171,9 +171,18 @@
 						$datos = $campeonatoMapper->consultarDatos($campeonato);
 						require_once('Views/campeonatoDetailsView.php');
 						$categorias = $campeonatoMapper->getCategoriasByCampeonato($campeonato);
-						$grupos = $campeonatoMapper->getGruposByCampeonato($campeonato);
-						(new CampeonatoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'',$datos,'',$categorias,'',$grupos))->render();
+						(new CampeonatoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'',$datos,'',$categorias,''))->render();
 						break;
+					
+					case 'clasificacion':
+						require_once('Models/CampeonatoCategoriaModel.php');
+						$catcamp = new CampeonatoCategoriaModel();
+						$catcamp->setId($_REQUEST['idcatcamp']);
+						require_once('Mappers/CampeonatoCategoriaMapper.php');
+						$catcampMapper = new CampeonatoCategoriaMapper();
+						$parejas = $catcampMapper->getParejasByCategoria($catcamp); 
+						require_once('Views/clasificacionCategoriaView.php');
+						(new ClasificacionCategoriaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas))->render();
 
 
 					default: 

@@ -139,6 +139,44 @@ require_once('Models/horaModel.php');
             }
         }
 
+
+        function getGruposByCatCamp($catcamp){
+
+            $id = $catcamp->getId();
+
+            $sql = "SELECT id_grupo, id_catcamp, numero, n_parejas 
+                    FROM GRUPO 
+                    WHERE id_catcamp = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else{
+                if($resultado->num_rows == 0){
+                    return null;
+                }
+                else{
+                    return $resultado;
+                }
+            }
+        }
+
+        
+        function getParejasByCategoria($catcamp){
+
+            $id = $catcamp->getId();
+
+            $sql = "SELECT id_pareja, nombre_pareja, capitan, miembro, fecha_inscrip, id_grupo, id_catcamp, puntos 
+                    FROM PAREJA
+                    WHERE id_catcamp = '$id'
+                    ORDER BY puntos DESC";
+    
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else
+                return $resultado;
+
+        }
+
     }
 
 ?>

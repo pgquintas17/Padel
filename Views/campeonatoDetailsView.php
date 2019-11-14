@@ -111,7 +111,7 @@
                                                                     echo "3ª mixta";
                                                                 }
                                                                 ?></button>
-                                                                </h5>
+                                                                <a class="text-dark" href="/index.php?controller=adminCampeonatos&action=clasificacion&idcatcamp=<?php echo $this->filaC['id_catcamp']; ?>"><i class="fas fa-list-alt"></i></a></h5>
                     </div>
                     <div id="<?php echo $this->filaC['id_catcamp']; ?>" class="collapse" data-parent="#accordion">
                         <div class="card-body">
