@@ -109,11 +109,11 @@ class PartidoModel {
 	public function validarRegistro(){
 
 		$errores = array();
-		$fecha = date('Y-m-d');
+		$hoy = date('Y-m-d');
 		$apertura = "09:00";
 		$cierre = "21:00";
 
-		if (($this->fecha) <= $fecha) {
+		if (($this->fecha) <= $hoy) {
 			$errores["Fecha"] = "Seleccione una fecha posterior a la actual.";
 		}
 
@@ -127,7 +127,7 @@ class PartidoModel {
 		
 		
 		if (sizeof($errores) > 0){
-			throw new ValidationException($errores, "El usuario no es válido");
+			throw new ValidationException($errores, "Partido no válido");
 		}
 	}
 
