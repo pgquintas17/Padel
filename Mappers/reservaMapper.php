@@ -222,7 +222,7 @@ require_once('Models/reservaModel.php');
             $hoy = date('Y-m-d');
 
             $sql = "SELECT COUNT(*) 
-                    FROM RESERVA WHERE login = '$login' AND fecha > $hoy";
+                    FROM RESERVA WHERE login = '$login' AND fecha > '$hoy'";
     
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'Error en la consulta sobre la base de datos';
