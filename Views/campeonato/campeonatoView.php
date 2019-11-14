@@ -116,7 +116,7 @@
     
                             <?php
                         }
-                        else{
+                        else{ // PERIODO INSCRIPCIÓN O ESPERANDO A EMPEZAR
                         ?>
                             <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                                 <td><?php echo $this->fila['nombre']; ?></td>
@@ -127,13 +127,26 @@
                                     <?php
                                         if(Utils::nivelPermiso(2)){
                                             $url = "/index.php?controller=adminCampeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
+                                        ?>
+                                            <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a>
+                                        <?php
                                         }
                                         else{
-                                            $url = "/index.php?controller=campeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
+                                            if($this->fila['fecha_fin_inscripciones'] >= $hoy){
+                                                $url = "index.php?controller=campeonatos&action=inscripcion&idcampeonato=" .$this->fila['id_campeonato'];
+                                            ?>
+                                                <a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Inscribirse</a>
+                                            <?php
 
+                                            } else{
+                                                $url = "index.php?controller=campeonatos&action=clasificacionCampeonato&idcampeonato=" .$this->fila['id_campeonato'];
+                                            ?>
+                                                <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a>
+                                            <?php
+                                            }
+                                            
                                         }
                                     ?>
-                                    <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a>
                                 </td>
                             </tr>
                         <?php
