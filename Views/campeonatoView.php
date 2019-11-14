@@ -78,7 +78,18 @@
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
                             <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
                             <td>Cerrado</td>
-                            <td><a class="text-dark" href="/index.php?controller=adminCampeonatos&action=clasificacion&idcatcamp=<?php echo $this->filaC['id_campeonato']; ?>"><i class="fas fa-list-alt"></i></a></td>
+                            <td>
+                                <?php
+                                    if(Utils::nivelPermiso(2)){
+                                        $url = "/index.php?controller=adminCampeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
+                                    }
+                                    else{
+                                        $url = "/index.php?controller=campeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
+
+                                    }
+                                ?>
+                                <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a>
+                            </td>
                         </tr>
 
                         <?php
@@ -87,9 +98,20 @@
                             <tr class='table-secondary clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                                 <td><?php echo $this->fila['nombre']; ?></td>
                                 <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
-                            <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
-                            <td>Cerrado</td>
-                            <td><a class="text-dark" href="/index.php?controller=adminCampeonatos&action=clasificacion&idcatcamp=<?php echo $this->filaC['id_campeonato']; ?>"><i class="fas fa-list-alt"></i></a></td>
+                                <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
+                                <td>Cerrado</td>
+                                <td>
+                                    <?php
+                                        if(Utils::nivelPermiso(2)){
+                                            $url = "/index.php?controller=adminCampeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
+                                        }
+                                        else{
+                                            $url = "/index.php?controller=campeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
+
+                                        }
+                                    ?>
+                                    <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a>
+                                </td>
                             </tr>
     
                             <?php
@@ -101,7 +123,18 @@
                                 <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
                                 <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_fin'])); ?></td>
                                 <td><?php echo date('d-m-Y H:i',strtotime($this->fila['fecha_inicio_inscripciones'])); ?> hasta <?php echo date('d-m-Y H:i:s',strtotime($this->fila['fecha_fin_inscripciones'])); ?></td>
-                                <td></td>
+                                <td>
+                                    <?php
+                                        if(Utils::nivelPermiso(2)){
+                                            $url = "/index.php?controller=adminCampeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
+                                        }
+                                        else{
+                                            $url = "/index.php?controller=campeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
+
+                                        }
+                                    ?>
+                                    <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a>
+                                </td>
                             </tr>
                         <?php
                         }           

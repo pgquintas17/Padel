@@ -289,6 +289,28 @@ require_once('Models/campeonatoModel.php');
         }
 
 
+        function getParejasByCampeonato($campeonato){
+
+            $id = $campeonato->getId();
+
+            $sql = "SELECT id_pareja, nombre_pareja, capitan, miembro, fecha_inscrip, id_grupo, pareja.id_catcamp, puntos, sexonivel 
+                    FROM PAREJA INNER JOIN (campeonato_categoria 
+                                            INNER JOIN campeonato 
+                                            ON campeonato_categoria.id_campeonato = campeonato.id_campeonato
+                                            INNER JOIN categoria 
+                                            ON campeonato_categoria.id_categoria = categoria.id_categoria) 
+                    ON pareja.id_catcamp = campeonato_categoria.id_catcamp
+                    WHERE campeonato.id_campeonato = '$id'
+                    ORDER BY puntos DESC";
+    
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else
+                return $resultado;
+
+        }
+
+
     }
 
 ?>

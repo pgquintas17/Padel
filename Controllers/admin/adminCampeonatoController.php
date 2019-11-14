@@ -174,7 +174,20 @@
 						(new CampeonatoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'',$datos,'',$categorias,''))->render();
 						break;
 					
-					case 'clasificacion':
+
+					case 'clasificacionCampeonato':
+						require_once('Models/CampeonatoModel.php');
+						$campeonato = new CampeonatoModel();
+						$campeonato->setId($_REQUEST['idcampeonato']);
+						require_once('Mappers/CampeonatoMapper.php');
+						$campeonatoMapper = new CampeonatoMapper();
+						$parejas = $campeonatoMapper->getParejasByCampeonato($campeonato); 
+						require_once('Views/clasificacionCampeonatoView.php');
+						(new ClasificacionCampeonatoView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas))->render();
+						break;
+
+
+					case 'clasificacionCategoria':
 						require_once('Models/CampeonatoCategoriaModel.php');
 						$catcamp = new CampeonatoCategoriaModel();
 						$catcamp->setId($_REQUEST['idcatcamp']);
@@ -183,7 +196,7 @@
 						$parejas = $catcampMapper->getParejasByCategoria($catcamp); 
 						require_once('Views/clasificacionCategoriaView.php');
 						(new ClasificacionCategoriaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas))->render();
-
+						break;
 
 					default: 
 						echo "hey, estoy viniendo aquí";

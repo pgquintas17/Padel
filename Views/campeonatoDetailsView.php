@@ -113,10 +113,10 @@
                                                                 ?></button>
                                                                 <?php
                                                                     if(Utils::nivelPermiso(2)){
-                                                                        $url = "/index.php?controller=adminCampeonatos&action=clasificacion&idcatcamp=".$this->filaC['id_catcamp'];
+                                                                        $url = "/index.php?controller=adminCampeonatos&action=clasificacionCategoria&idcatcamp=".$this->filaC['id_catcamp'];
                                                                     }
                                                                     else{
-                                                                        $url = "/index.php?controller=campeonatos&action=clasificacion&idcatcamp=".$this->filaC['id_catcamp'];
+                                                                        $url = "/index.php?controller=campeonatos&action=clasificacionCategoria&idcatcamp=".$this->filaC['id_catcamp'];
 
                                                                     }
                                                                 ?>
