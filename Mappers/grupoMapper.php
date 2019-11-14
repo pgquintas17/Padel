@@ -96,6 +96,23 @@
                 return $resultado;
 
         }
+
+
+        function getEnfrentamientosByGrupo($grupo){
+
+            $id = $grupo->getId();
+
+            $sql = "SELECT id_enfrentamiento, resultado, fecha, hora, set1, set2, set3, pareja1, pareja2, id_reserva, id_grupo 
+                    FROM ENFRENTAMIENTO
+                    WHERE id_grupo = '$id'
+                    ORDER BY fecha DESC";
+    
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else
+                return $resultado;
+
+        }
         
 
     }

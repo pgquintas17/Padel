@@ -110,9 +110,20 @@
 						$datos = $campeonatoMapper->consultarDatos($campeonato);
 						require_once('Views/campeonatoDetailsView.php');
 						$categorias = $campeonatoMapper->getCategoriasByCampeonato($campeonato);
-						$grupos = $campeonatoMapper->getGruposByCampeonato($campeonato);
-						(new CampeonatoDetailsView('','','',$datos,'',$categorias,'',$grupos))->render();
+						(new CampeonatoDetailsView('','','',$datos,'',$categorias,''))->render();
 						break;
+
+
+					case 'grupo':
+						require_once('Models/grupoModel.php');
+						$grupo = new GrupoModel();
+						$grupo->setId($_REQUEST['idgrupo']);
+						require_once('Mappers/grupoMapper.php');
+						$grupoMapper = new GrupoMapper();
+						$parejas = $grupoMapper->getParejasByGrupo($grupo); 
+						$enfrentamientos = $grupoMapper->getEnfrentamientosByGrupo($grupo);
+				require_once('Views/grupoDetailsView.php');
+				(new GrupoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$enfrentamientos,'',$parejas))->render();
 
 
 					default: 

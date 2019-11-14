@@ -2,7 +2,8 @@
 
 require_once('Views/baseView.php');
 require_once('Views/mensajeView.php');
-require_once('Models/usuarioModel.php');
+require_once('Models/parejaModel.php');
+require_once('Mappers/parejaMapper.php');
 require_once('Services/Utils.php');
 
 class GrupoDetailsView extends baseView {
@@ -76,7 +77,13 @@ class GrupoDetailsView extends baseView {
                             <th scope="col">Pareja 2</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Resultado</th>
-                            <!-- AÑADIR COLUMNA SI SE ES ADMIN PARA AÑADIR RESULTADOS -->
+                            <?php
+                                if(Utils::nivelPermiso(2)){
+                            ?>
+                                <th scope="col"></th>
+                            <?php
+                                }
+                            ?>
                         </tr>
                         </thead>
                         <tbody>
@@ -86,10 +93,17 @@ class GrupoDetailsView extends baseView {
                             $url = '#url para entrar en detalles y ver sets, hora, pista, etc.'          
                         ?>
                             <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                                <td><?php echo $this->fila['pareja1']; ?></td>
-                                <td><?php echo $this->fila['pareja2']; ?></td>
-                                <td><?php echo $this->fila['fecha']; ?></td>
-                                <td><?php echo $this->fila['resultado']; ?></td>
+                                <td><?php $pareja = new ParejaModel(); $pareja->setId($this->filaE['pareja1']); $parejaMapper = new ParejaMapper(); echo $parejaMapper->getNombreById($pareja); ?></td>
+                                <td><?php $pareja = new ParejaModel(); $pareja->setId($this->filaE['pareja2']); $parejaMapper = new ParejaMapper(); echo $parejaMapper->getNombreById($pareja); ?></td>
+                                <td><?php if($this->filaE['fecha'] != null){echo $this->filaE['fecha'];} else{ echo "Pendiente de acordar";} ?></td>
+                                <td><?php if($this->filaE['resultado'] != null){echo $this->filaE['resultado'];} else{ echo "Pendiente de jugar";} ?></td>
+                        <?php
+                            if(Utils::nivelPermiso(2)){
+                        ?>
+                                <td>Gestionar resultado</td>
+                        <?php
+                            }
+                        ?>
                             </tr>
                         
                         <?php

@@ -155,6 +155,23 @@ require_once('Models/horaModel.php');
         }
 
 
+        function getNombreById($pareja){
+
+            $id = $pareja->getId();
+
+            $sql = "SELECT * FROM PAREJA WHERE id_pareja = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['1'];
+        }
+
+
     }
 
 ?>

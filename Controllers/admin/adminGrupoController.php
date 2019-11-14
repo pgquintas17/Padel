@@ -32,8 +32,9 @@
 				require_once('Mappers/grupoMapper.php');
 				$grupoMapper = new GrupoMapper();
 				$parejas = $grupoMapper->getParejasByGrupo($grupo); 
+				$enfrentamientos = $grupoMapper->getEnfrentamientosByGrupo($grupo);
 				require_once('Views/grupoDetailsView.php');
-				(new GrupoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','','','',$parejas))->render();
+				(new GrupoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$enfrentamientos,'',$parejas))->render();
 			}
 		}
 	}
