@@ -1,7 +1,5 @@
 <?php
 
-require_once('Models/horaModel.php');
-
     class GrupoMapper{
 
         var $bd;
@@ -80,6 +78,23 @@ require_once('Models/horaModel.php');
                 $result = $resultado->fetch_array(MYSQLI_NUM);
                 return $result;
             }
+        }
+
+
+        function getParejasByGrupo($grupo){
+
+            $id = $grupo->getId();
+
+            $sql = "SELECT id_pareja, nombre_pareja, capitan, miembro, fecha_inscrip, id_grupo, id_catcamp, puntos 
+                    FROM PAREJA
+                    WHERE id_grupo = '$id'
+                    ORDER BY puntos DESC";
+    
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'Error en la consulta sobre la base de datos';
+            else
+                return $resultado;
+
         }
         
 
