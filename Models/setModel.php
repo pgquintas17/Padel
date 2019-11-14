@@ -2,18 +2,62 @@
 <?php
     
 class SetModel {
-	
- 	var $n_set; 
-    var $punt_pareja1;  
-	var $punt_pareja2; 
+
+    var $pareja1;  
+	var $pareja2; 
 	
 
- 	function __construct($id_pista,$estado){
-        $this->id_pista = $id_pista;
-        $this->estado = $estado;
-		include_once '../Models/BdAdmin.php'; 
-		$this->mysqli = ConectarBD();  
+ 	function __construct($pareja1=null,$pareja2=null){
+        $this->pareja1 = $pareja1;
+        $this->pareja2 = $pareja2;  
 	}
+
+
+	// getters
+
+	public function getPareja1(){
+		return $this->pareja1;
+	}
+
+	public function getPareja2(){
+		return $this->pareja2;
+	}
+
+	// setters
+
+	public function setPareja1($pareja1){
+		$this->pareja1 = $pareja1;
+	}
+
+	public function setPareja2($pareja2){
+		$this->pareja2 = $pareja2;
+	}
+
+
+
+	function validarSet(){
+
+		$errores = array();
+
+		if(($this->pareja1 == null && $this->pareja2 != null) || ($this->pareja1 != null && $this->pareja2 == null)){
+			$errores['puntuación'] = "Puntuación de set no válida.";
+		}
+
+		if($this->pareja1 == 7 && ($this->pareja2 != 5 && $this->pareja2 != 6){
+			$errores['puntuación'] = "Puntuación de set no válida.";
+		}
+
+		if($this->pareja1 == 6 & $this->pareja2 > 4){
+			$errores['puntuación'] = "Puntuación de set no válida.";
+		}
+
+		if (sizeof($errores) > 0){
+			throw new ValidationException($errores, "Datos no válidos");
+		}
+	}
+
+
+
 
 
 }
