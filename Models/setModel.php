@@ -40,15 +40,15 @@ class SetModel {
 		$errores = array();
 
 		if(($this->pareja1 == null && $this->pareja2 != null) || ($this->pareja1 != null && $this->pareja2 == null)){
-			$errores['puntuación'] = "Puntuación de set no válida.";
+			$errores['puntuacion'] = "Puntuación de set no válida.";
 		}
 
-		if($this->pareja1 == 7 && ($this->pareja2 != 5 && $this->pareja2 != 6){
-			$errores['puntuación'] = "Puntuación de set no válida.";
+		if($this->pareja1 == 7 && ($this->pareja2 != 5 && $this->pareja2 != 6)){
+			$errores['puntuacion'] = "Puntuación de set no válida.";
 		}
 
 		if($this->pareja1 == 6 & $this->pareja2 > 4){
-			$errores['puntuación'] = "Puntuación de set no válida.";
+			$errores['puntuacion'] = "Puntuación de set no válida.";
 		}
 
 		if (sizeof($errores) > 0){

@@ -119,7 +119,7 @@ class GrupoDetailsView extends baseView {
                         <?php
                             if(Utils::nivelPermiso(2)){
                         ?>
-                                <td>Gestionar resultado</td>
+                                <td><a class="bg-ligth text-dark" href='/index.php?controller=adminGrupos&action=addResultado&idenfrentamiento=<?php echo $this->filaE['id_enfrentamiento']; ?>'><i class="fas fa-trophy"></i></a></td>
                         <?php
                             }
                         ?>

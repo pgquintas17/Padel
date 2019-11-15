@@ -54,6 +54,41 @@
                 return $result;
             }
         }
+
+
+        function addResultado($enfrentamiento){
+
+            $id = $enfrentamiento->getId();
+            $set1 = $enfrentamiento->getSet1();                   
+            $set2 = $enfrentamiento->getSet2();                   
+            $set3 = $enfrentamiento->getSet3();
+            $resultado = $enfrentamiento->getResultado(); 
+            
+            
+            $sql = "SELECT * FROM ENFRENTAMIENTO  WHERE (id_enfrentamiento = '$id')";
+            $result = $this->mysqli->query($sql);
+        
+            if ($result->num_rows == 1) {	
+    
+                $sql = "UPDATE ENFRENTAMIENTO  SET
+                            resultado = '$resultado',
+                            set1 = '$set1',
+                            set2 = '$set2',
+                            set3 = '$set3'
+    
+                        WHERE ( id_enfrentamiento = '$id')";
+    
+                if (!($resultado = $this->mysqli->query($sql)))
+                    return 'Error en la modificación';
+                else
+                    return 'Resultado añadido correctamente.';
+            }
+            else 
+                return 'No existe en la base de datos';
+
+
+
+        }
         
 
     }

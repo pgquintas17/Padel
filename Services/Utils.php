@@ -51,33 +51,27 @@ class Utils {
 			$puntosPareja2++;
 		}
 
-		if(($puntosPareja1 == 2 || $puntosPareja2 == 2) && $set3 !=null){
-			return false;
-		}
-		else{
+		if(($puntosPareja1 == 2 || $puntosPareja2 == 2) && $set3->getPareja1() == null){
+
 			if($puntosPareja1 > $puntosPareja2){
 				
-				$resultado = array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>1);
-				return $resultado;
+				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>1);
 			}
 			else{
 				
-				$resultado = array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
-				return $resultado;
+				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
 			}
 		}
 
 		if($set3->getPareja1() > $set3->getPareja2()){
 			$puntosPareja1++;
 
-			$resultado = array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>1);
-			return $resultado;
+			return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>1);
 		}
 		else{
 			$puntosPareja2++;
 
-			$resultado = array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
-			return $resultado;
+			return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
 		}
 
 	}
