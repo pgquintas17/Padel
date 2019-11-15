@@ -162,7 +162,7 @@
                             $pareja = $this->filaCampeonatos['id_pareja'];
                             $fechafinins = $this->filaCampeonatos['fecha_fin_inscripciones'];
                             $urlBorrar = "index.php?controller=campeonatos&action=borrar&idpareja=" . $pareja . "&fechafininscripciones=" . $fechafinins;
-                            $urlC = "index.php?controller=campeonatos&action=details&idcampeonato=" . $id;
+                            $urlC = "index.php?controller=campeonatos&action=DETAILS&idcampeonato=" . $id;
 
                             if($this->filaCampeonatos['fecha_fin'] > $hoy){
                                 ?>
