@@ -59,8 +59,8 @@
             }
             ?>
             <div class="col-6">
-                <p style="text-align: right";><strong>Periodo inscripción:</strong> <?php echo date('d/M',strtotime($this->datos['4'])); ?> - <?php echo date('d/M',strtotime($this->datos['5'])); ?><br>
-                <strong>Periodo de juego:</strong> <?php echo date('d/M',strtotime($this->datos['2'])); ?> - <?php echo date('d/M',strtotime($this->datos['3'])); ?></p>
+                <p style="text-align: right";><strong>Periodo inscripción:</strong> <?php echo date('d/m',strtotime($this->datos['4'])); ?> - <?php echo date('d/m',strtotime($this->datos['5'])); ?><br>
+                <strong>Periodo de juego:</strong> <?php echo date('d/m',strtotime($this->datos['2'])); ?> - <?php echo date('d/m',strtotime($this->datos['3'])); ?></p>
             </div>
             </div>
             

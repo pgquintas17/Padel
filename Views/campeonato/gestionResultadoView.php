@@ -59,7 +59,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>Fecha</label>
-                                        <input type="text" class="form-control" name="fecha" readonly value="<?php echo date('d/M/y',strtotime($this->datos['2'])); ?>">
+                                        <input type="text" class="form-control" name="fecha" readonly value="<?php echo date('d/m/y',strtotime($this->datos['2'])); ?>">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Hora</label>

@@ -65,7 +65,7 @@
                         if($this->filaPartidos['promocion'] == 1){
                             ?>
                             <tr class="table-light clickeable-row" onclick="window.location.assign('<?php echo $url ?>');">
-                            <td><?php echo date('d/M',strtotime($this->filaPartidos['fecha'])); ?></td>
+                            <td><?php echo date('d/m',strtotime($this->filaPartidos['fecha'])); ?></td>
                             <td><?php echo date('H:i',strtotime($this->filaPartidos['hora']));?></td>
                             <td><?php echo $numPlazas; ?></td>
                             <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPartidos&action=PROMOCION&idpartido=<?php echo $this->filaPartidos['id_partido']; ?>'><i class="fas fa-toggle-on fa-2x"></i></a></td>
@@ -74,7 +74,7 @@
                             else{
                             ?>
                             <tr class="table-danger clickeable-row" onclick="window.location.assign('<?php echo $url ?>');">
-                            <td><?php echo date('d/M',strtotime($this->filaPartidos['fecha'])); ?></td>
+                            <td><?php echo date('d/m',strtotime($this->filaPartidos['fecha'])); ?></td>
                             <td><?php echo date('H:i',strtotime($this->filaPartidos['hora']));?></td>
                             <td><?php echo $numPlazas; ?></td>
                             <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPartidos&action=PROMOCION&idpartido=<?php echo $this->filaPartidos['id_partido']; ?>'><i class="fas fa-toggle-off fa-2x"></i></a></td>
@@ -84,7 +84,7 @@
                         else{
                         ?>
                         <tr class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                        <td class="table-secondary"><?php echo date('d/M',strtotime($this->filaPartidos['fecha'])); ?></td>
+                        <td class="table-secondary"><?php echo date('d/m',strtotime($this->filaPartidos['fecha'])); ?></td>
                         <td class="table-secondary"><?php echo date('H:i',strtotime($this->filaPartidos['hora'])); ?></td>
                         <td class="table-secondary"></td>
                         <td class="table-secondary"></td>

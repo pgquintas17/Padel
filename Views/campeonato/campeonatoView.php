@@ -75,8 +75,8 @@
                         ?>
                         <tr class='table-warning clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                             <td><?php echo $this->fila['nombre']; ?></td>
-                            <td><?php echo date('d/M H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
-                            <td><?php echo date('d/M H:i',strtotime($this->fila['fecha_fin'])); ?></td>
+                            <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
+                            <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_fin'])); ?></td>
                             <td>Cerrado</td>
                             <td>
                                 <?php
@@ -97,8 +97,8 @@
                             ?>
                             <tr class='table-secondary clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                                 <td><?php echo $this->fila['nombre']; ?></td>
-                                <td><?php echo date('d/M H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
-                                <td><?php echo date('d/M H:i',strtotime($this->fila['fecha_fin'])); ?></td>
+                                <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
+                                <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_fin'])); ?></td>
                                 <td>Cerrado</td>
                                 <td>
                                     <?php
@@ -120,9 +120,9 @@
                         ?>
                             <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                                 <td><?php echo $this->fila['nombre']; ?></td>
-                                <td><?php echo date('d/M H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
-                                <td><?php echo date('d/M H:i',strtotime($this->fila['fecha_fin'])); ?></td>
-                                <td><?php echo date('d/M H:i',strtotime($this->fila['fecha_inicio_inscripciones'])); ?> hasta <?php echo date('d/M H:i:s',strtotime($this->fila['fecha_fin_inscripciones'])); ?></td>
+                                <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
+                                <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_fin'])); ?></td>
+                                <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio_inscripciones'])); ?> hasta <?php echo date('d/m H:i:s',strtotime($this->fila['fecha_fin_inscripciones'])); ?></td>
                                 <td>
                                     <?php
                                         if(Utils::nivelPermiso(2)){
