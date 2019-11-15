@@ -40,7 +40,7 @@
                         <table class="table table-hover table-bordered" style="border-radius: 25px;">
                             <tr>
                             <th class="bg-dark text-white">Fecha</th>
-                                <td class="table-light"><?php echo date('d-m-Y',strtotime($this->datos['2'])); ?></td>
+                                <td class="table-light"><?php echo date('d/M',strtotime($this->datos['2'])); ?></td>
                             </tr>
                             <tr>    
                                 <th class="bg-dark text-white">Hora</th>

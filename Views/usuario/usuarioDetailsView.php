@@ -46,7 +46,7 @@
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Fecha de Nacimiento</th>
-                                <td class="table-light"><?php echo date('d-m-Y',strtotime($this->datos['3'])); ?></td>
+                                <td class="table-light"><?php echo date('d/m/Y',strtotime($this->datos['3'])); ?></td>
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Teléfono</th>

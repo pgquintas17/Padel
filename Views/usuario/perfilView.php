@@ -58,7 +58,7 @@
                         if($this->filaPartidos['fecha'] > $hoy){
                             ?>
                         <li class="list-group-item">
-                            <strong><?php echo date('d-m-Y',strtotime($this->filaPartidos['fecha'])); ?></strong><br>
+                            <strong><?php echo date('d/m',strtotime($this->filaPartidos['fecha'])); ?></strong><br>
                             <p>Se jugará a las <?php echo date('H:i',strtotime($this->filaPartidos['hora'])); ?>. <br>
                         <?php
                         if($this->filaPartidos['id_reserva'] != NULL){
@@ -91,7 +91,7 @@
                             $idPista = $reservaMapper->getPistaById($reserva);
                         ?>
                         <li class="list-group-item bg-secondary">
-                        <strong><?php echo date('d-m-Y',strtotime($this->filaPartidos['fecha'])); ?></strong><br>
+                        <strong><?php echo date('d/m',strtotime($this->filaPartidos['fecha'])); ?></strong><br>
                         <p>El partido se jugó a las <?php echo date('H:i',strtotime($this->filaPartidos['hora'])); ?> en la pista número <?php echo $idPista['0']; ?>.</p>
                         <?php
 
@@ -123,7 +123,7 @@
                         if($this->filaReservas['fecha'] > $hoy){
                             ?>
                         <li class="list-group-item">
-                            <strong><?php echo date('d-m-Y',strtotime($this->filaReservas['fecha'])); ?></strong><br>
+                            <strong><?php echo date('d/m',strtotime($this->filaReservas['fecha'])); ?></strong><br>
                             <p>Tienes reservada la pista <?php echo $this->filaReservas['id_pista']; ?> a las  <?php echo date('H:i',strtotime($this->filaReservas['hora'])); ?>.<br>
                             <p><a class="btn btn-dark" href="<?php echo $urlR; ?>" role="button">Cancelar</a></p>
                         </li>
@@ -132,7 +132,7 @@
                         else{
                         ?>
                         <li class="list-group-item bg-secondary">
-                        <strong><?php echo date('d-m-Y',strtotime($this->filaReservas['fecha'])); ?></strong><br>
+                        <strong><?php echo date('d/m',strtotime($this->filaReservas['fecha'])); ?></strong><br>
                         <p>Reservaste la pista número <?php echo $this->filaReservas['id_pista']; ?> a las  <?php echo date('H:i',strtotime($this->filaReservas['hora'])); ?>.<br>
                         <?php
 

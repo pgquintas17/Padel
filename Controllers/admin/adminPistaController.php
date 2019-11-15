@@ -28,7 +28,7 @@
 							header('Location: index.php?controller=adminPistas');
 						}else{
 							require_once('Views/pista/adminPistaView.php');
-							(new adminPistaView(SessionMessage::getMessage()))->render();
+							(new AdminPistaView(SessionMessage::getMessage()))->render();
 						}
 						break;
 						

@@ -53,7 +53,7 @@ class IndexView extends baseView {
                                 if($numPlazas != 0){
                                 ?>
                                 <li class="list-group-item">
-                                    <strong><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></strong><br>
+                                    <strong><?php echo date('d/m/Y',strtotime($this->fila['fecha'])); ?></strong><br>
                                     <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     ¡Quedan <?php echo $numPlazas; ?> plazas libres!</p>
                                     <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Apuntarse</a></p>
@@ -77,7 +77,7 @@ class IndexView extends baseView {
                                 if($reserva == null){
                                     ?>
                                     <li class="list-group-item">
-                                    <strong><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></strong><br>
+                                    <strong><?php echo date('d/m/Y',strtotime($this->fila['fecha'])); ?></strong><br>
                                     <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     Quedan <?php echo $numPlazas; ?> plazas libres</p>
                                     <?php
@@ -107,7 +107,7 @@ class IndexView extends baseView {
                                 if($numPlazas != 0){
                                 ?>
                                 <li class="list-group-item">
-                                    <strong><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></strong><br>
+                                    <strong><?php echo date('d/m/Y',strtotime($this->fila['fecha'])); ?></strong><br>
                                     <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     ¡Quedan <?php echo $numPlazas; ?> plazas libres!</p>
                                 </li>
@@ -143,8 +143,8 @@ class IndexView extends baseView {
                                 ?>
                                 <li class="list-group-item">
                                     <strong><?php echo $this->filaC['nombre']; ?></strong><br>
-                                    <p>Se jugará del<br> <?php echo date('d-m-y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-y',strtotime($this->filaC['fecha_fin'])); ?><br>
-                                    Plazo de inscripción abierto hasta el <?php echo date('d-m',strtotime($this->filaC['fecha_fin_inscripciones'])); ?>.</p>
+                                    <p>Se jugará del<br> <?php echo date('d/M',strtotime($this->filaC['fecha_inicio'])); ?> - <?php echo date('d/M',strtotime($this->filaC['fecha_fin'])); ?><br>
+                                    Plazo de inscripción abierto hasta el <?php echo date('d/M',strtotime($this->filaC['fecha_fin_inscripciones'])); ?>.</p>
                                     <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Inscribirse</a></p>
                                 </li>
                                 <?php
@@ -162,8 +162,8 @@ class IndexView extends baseView {
                                 ?>
                                 <li class="list-group-item">
                                 <strong><?php echo $this->filaC['nombre']; ?></strong><br>
-                                <p>Se jugará del<br> <?php echo date('d-m-Y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin'])); ?><br>
-                                Plazo de inscripción abierto hasta el <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin_inscripciones'])); ?>.</p>
+                                <p>Se jugará del<br> <?php echo date('d/M',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d/M',strtotime($this->filaC['fecha_fin'])); ?><br>
+                                Plazo de inscripción abierto hasta el <?php echo date('d/M',strtotime($this->filaC['fecha_fin_inscripciones'])); ?>.</p>
                             </li>
                             <?php
                             }    
@@ -181,8 +181,8 @@ class IndexView extends baseView {
                                 ?>
                                 <li class="list-group-item">
                                     <strong><?php echo $this->filaC['nombre']; ?></strong><br>
-                                    <p>Se jugará del<br> <?php echo date('d-m-Y',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin'])); ?><br>
-                                    Plazo de inscripción abierto hasta el <?php echo date('d-m-Y',strtotime($this->filaC['fecha_fin_inscripciones'])); ?>.</p>
+                                    <p>Se jugará del<br> <?php echo date('d/M',strtotime($this->filaC['fecha_inicio'])); ?> al <?php echo date('d/M',strtotime($this->filaC['fecha_fin'])); ?><br>
+                                    Plazo de inscripción abierto hasta el <?php echo date('d/M',strtotime($this->filaC['fecha_fin_inscripciones'])); ?>.</p>
                                 </li>
                                 <?php
                             }

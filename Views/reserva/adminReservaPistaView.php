@@ -59,7 +59,7 @@
                     if($this->fila['fecha'] > $fecha){
         ?>
                     <tr class="table-light">
-                    <td><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></td>
+                    <td><?php echo date('d/M',strtotime($this->fila['fecha'])); ?></td>
                     <td><?php echo date('H:i',strtotime($this->fila['hora']));?></td>
                     <td><?php echo $this->fila['login']; ?></td>
                     <?php
@@ -68,7 +68,7 @@
                     else{
                     ?>
                     <tr class='table-secondary'>
-                    <td><?php echo date('d-m-Y',strtotime($this->fila['fecha'])); ?></td>
+                    <td><?php echo date('d/M',strtotime($this->fila['fecha'])); ?></td>
                     <td><?php echo date('H:i',strtotime($this->fila['hora'])); ?></td>
                     <td><?php echo $this->fila['login']; ?></td>
                     <?php    
