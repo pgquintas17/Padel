@@ -64,7 +64,7 @@ class GrupoDetailsView extends baseView {
 
                         if($_SESSION['Usuario']->getLogin() == $this->filaP['capitan'] || $_SESSION['Usuario']->getLogin() == $this->filaP['miembro']){
                         ?>
-                            <li class="list-group-item bg-info">
+                            <li class="list-group-item" style="background-color: #99ebff";>
                                 <strong><?php echo $this->filaP['nombre_pareja']; ?></strong><br>
                                 <p style="text-align:left";>-Capitán: <?php echo $this->filaP['capitan']; ?><br>
                                 -Miembro: <?php echo $this->filaP['miembro']; ?></p>
@@ -109,7 +109,13 @@ class GrupoDetailsView extends baseView {
                         <?php
                         while($this->filaE = ($this->enfrentamientos)->fetch_assoc()) {
                             $id = $this->filaE['id_enfrentamiento'];
-                            $url = '#url para entrar en detalles y ver sets, hora, pista, etc.'          
+                            if(Utils::nivelPermiso(2)){
+                                $url = '/index.php?controller=adminGrupos&action=DETAILS&idenfrentamiento=' .$id;
+                            }
+                            else{
+                                $url = '/index.php?controller=campeonatos&action=enfDETAILS&idenfrentamiento=' .$id;
+                            }
+                                      
                         ?>
                             <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                                 <td><?php $pareja = new ParejaModel(); $pareja->setId($this->filaE['pareja1']); $parejaMapper = new ParejaMapper(); echo $parejaMapper->getNombreById($pareja); ?></td>

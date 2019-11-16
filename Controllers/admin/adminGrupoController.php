@@ -121,9 +121,17 @@
 						break;
 
 					
-					case 'editResultado':
-						echo "editar un resultado";
+					case 'DETAILS': 
+						require_once('Models/enfrentamientoModel.php');
+						$enfrentamiento = new EnfrentamientoModel();
+						$enfrentamiento->setId($_REQUEST['idenfrentamiento']);
+						require_once('Mappers/enfrentamientoMapper.php');
+						$enfrentamientoMapper = new EnfrentamientoMapper();
+						$datos = $enfrentamientoMapper->consultarDatos($enfrentamiento);
+						require_once('Views/campeonato/enfrentamientoDetailsView.php');
+						(new EnfrentamientoDetailsView('','','',$datos))->render();
 						break;
+
 
 					default: 
 						echo "hey, estoy viniendo aquí";

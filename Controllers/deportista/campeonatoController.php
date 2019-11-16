@@ -149,7 +149,20 @@
 						require_once('Views/campeonato/clasificacionCampeonatoView.php');
 						(new ClasificacionCampeonatoView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas))->render();
 						break;
+
+
+					case 'enfDETAILS': 
+						require_once('Models/enfrentamientoModel.php');
+						$enfrentamiento = new EnfrentamientoModel();
+						$enfrentamiento->setId($_REQUEST['idenfrentamiento']);
+						require_once('Mappers/enfrentamientoMapper.php');
+						$enfrentamientoMapper = new EnfrentamientoMapper();
+						$datos = $enfrentamientoMapper->consultarDatos($enfrentamiento);
+						require_once('Views/campeonato/enfrentamientoDetailsView.php');
+						(new EnfrentamientoDetailsView('','','',$datos))->render();
+						break;
 					
+
 					default: 
 						echo "hey, estoy viniendo aquí";
 						header('Location: index.php?controller=adminUsuarios');
