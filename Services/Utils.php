@@ -61,18 +61,27 @@ class Utils {
 				
 				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
 			}
-		}
-
-		if($set3->getPareja1() > $set3->getPareja2()){
-			$puntosPareja1++;
-
-			return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>1);
+		} 
+		else if (($puntosPareja1 == 2 || $puntosPareja2 == 2) && $set3->getPareja1() != null){
+			$errores = array();
+			$errores['puntuación'] = "Puntuación de set no válida.";
+			throw new ValidationException($errores, "Datos no válidos");
 		}
 		else{
-			$puntosPareja2++;
 
-			return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
+			if($set3->getPareja1() > $set3->getPareja2()){
+				$puntosPareja1++;
+	
+				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>1);
+			}
+			else{
+				$puntosPareja2++;
+	
+				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
+			}
+
 		}
+
 
 	}
     

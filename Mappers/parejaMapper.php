@@ -102,11 +102,13 @@ require_once('Models/horaModel.php');
             $resultado = $this->mysqli->query($sql);
             
             if ($resultado->num_rows == 0)
-                return 'La categoría no existe';
+                return 'La pareja no existe';
             else{
                 $sql = "UPDATE PAREJA 
                         SET puntos = puntos + 3  
                         WHERE (id_pareja = '$id_pareja')";
+
+                $resultado = $this->mysqli->query($sql);
 
                 return 'Puntos sumados';
             }
@@ -122,11 +124,57 @@ require_once('Models/horaModel.php');
             $resultado = $this->mysqli->query($sql);
             
             if ($resultado->num_rows == 0)
-                return 'La categoría no existe';
+                return 'La pareja no existe';
             else{
                 $sql = "UPDATE PAREJA 
                         SET puntos = puntos + 1  
                         WHERE (id_pareja = '$id_pareja')";
+
+                $resultado = $this->mysqli->query($sql);
+
+                return 'Puntos sumados';
+            }
+        }
+
+
+        function deletePuntosGanador($pareja){
+
+            $id_pareja = $pareja->getId();
+            
+            $sql = "SELECT * FROM PAREJA WHERE (id_pareja = '$id_pareja')";
+            
+            $resultado = $this->mysqli->query($sql);
+            
+            if ($resultado->num_rows == 0)
+                return 'La pareja no existe';
+            else{
+                $sql = "UPDATE PAREJA 
+                        SET puntos = puntos - 3  
+                        WHERE (id_pareja = '$id_pareja')";
+
+                $resultado = $this->mysqli->query($sql);
+
+                return 'Puntos sumados';
+            }
+        }
+
+
+        function deletePuntosPerdedor($pareja){
+
+            $id_pareja = $pareja->getId();
+            
+            $sql = "SELECT * FROM PAREJA WHERE (id_pareja = '$id_pareja')";
+            
+            $resultado = $this->mysqli->query($sql);
+            
+            if ($resultado->num_rows == 0)
+                return 'La pareja no existe';
+            else{
+                $sql = "UPDATE PAREJA 
+                        SET puntos = puntos - 1  
+                        WHERE (id_pareja = '$id_pareja')";
+                        
+                $resultado = $this->mysqli->query($sql);
 
                 return 'Puntos sumados';
             }

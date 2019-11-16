@@ -45,15 +45,18 @@
                                 <input type="hidden" name="controller" value="adminGrupos">
                                 <input type="hidden" name="action" value="addResultado">
                                 <input type="hidden" name="idenfrentamiento" value="<?php echo $this->datos['0']; ?>">
+                                <input type="hidden" name="pareja1" value="<?php echo $this->datos['7']; ?>">
+                                <input type="hidden" name="pareja2" value="<?php echo $this->datos['8']; ?>">
+                                <input type="hidden" name="idgrupo" value="<?php echo $this->datos['10']; ?>">
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>Pareja1</label>
-                                        <input type="text" class="form-control" name="pareja1" readonly value="<?php $pareja = new ParejaModel(); $pareja->setId($this->datos['7']); $parejaMapper = new ParejaMapper(); echo $parejaMapper->getNombreById($pareja); ?>">
+                                        <input type="text" class="form-control" readonly value="<?php $pareja = new ParejaModel(); $pareja->setId($this->datos['7']); $parejaMapper = new ParejaMapper(); echo $parejaMapper->getNombreById($pareja); ?>">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Pareja2</label>
-                                        <input type="text" class="form-control" name="pareja2" readonly value="<?php $pareja = new ParejaModel(); $pareja->setId($this->datos['8']); $parejaMapper = new ParejaMapper(); echo $parejaMapper->getNombreById($pareja); ?>">
+                                        <input type="text" class="form-control" readonly value="<?php $pareja = new ParejaModel(); $pareja->setId($this->datos['8']); $parejaMapper = new ParejaMapper(); echo $parejaMapper->getNombreById($pareja); ?>">
                                     </div>
                                 </div>    
                                 <div class="form-row">
