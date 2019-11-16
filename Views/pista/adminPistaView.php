@@ -31,7 +31,7 @@
           <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
             <h1>Pistas</h1><br>
-            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#addPista"><i class="fas fa-plus-circle fa-2x"></i></button><br><br>
+            <button type="button" class="btn btn-link text-dark" data-toggle="modal" data-target="#addPista"><i class="fas fa-plus-circle fa-2x"></i></button><br><br>
             <div class="row justify-content-md-center">
                 <!-- Tabla pistas -->
                 <div class="col-md-4" id="tablas">

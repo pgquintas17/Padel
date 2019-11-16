@@ -89,7 +89,7 @@
                                 echo $idpista['0']; ?></td>
                             </tr>
                         </table>
-                        <br><button type="button" class="btn btn-light" data-toggle="modal" data-target="#confirmDelete"><i class="fas fa-trash-alt fa-2x"></i></button>
+                        <br><button type="button" class="btn btn-link text-dark" data-toggle="modal" data-target="#confirmDelete"><i class="fas fa-trash-alt fa-2x"></i></button>
                     </div>
                 </div>
             </div>
