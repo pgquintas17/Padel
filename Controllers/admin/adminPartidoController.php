@@ -13,41 +13,53 @@
 				switch($_REQUEST["action"]) {
 
 					case 'ADD': 
-						if ($_POST){
-							try {
-								require_once('Models/partidoModel.php');
-								$partido = new PartidoModel('',$_POST["inputHora"],$_POST["inputFecha"],'','','','','','');
-								$errores =  $partido->validarRegistro();
-								require_once('Mappers/partidoMapper.php');
-								$partidoMapper = new PartidoMapper();
-								require_once('Models/reservaModel.php');
-								$reserva = new ReservaModel();
-								$reserva->setHora($_POST["inputHora"]);
-								$reserva->setFecha($_POST["inputFecha"]);
-								require_once('Mappers/reservaMapper.php');
-								$reservaMapper = new ReservaMapper();
-								$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
-								require_once('Mappers/pistaMapper.php');
-								$pistaMapper = new PistaMapper();
-								$pistasActivas = $pistaMapper->getNumPistasActivas(); 
-								if($reservasEnFecha == $pistasActivas){
-									SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
-									header('Location: index.php?controller=adminPartidos');
-								}
-								else{
-									$respuesta = $partidoMapper->ADD($partido);
-									SessionMessage::setMessage($respuesta);
-									header('Location: index.php?controller=adminPartidos');
-								}
+						try {
+							require_once('Models/partidoModel.php');
+							$partido = new PartidoModel('',$_POST["inputHora"],$_POST["inputFecha"],'','','','','','');
+							$errores =  $partido->validarRegistro();
+							require_once('Mappers/partidoMapper.php');
+							$partidoMapper = new PartidoMapper();
+							require_once('Models/reservaModel.php');
+							$reserva = new ReservaModel();
+							$reserva->setHora($_POST["inputHora"]);
+							$reserva->setFecha($_POST["inputFecha"]);
+							require_once('Mappers/reservaMapper.php');
+							$reservaMapper = new ReservaMapper();
+							$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
+							require_once('Mappers/pistaMapper.php');
+							$pistaMapper = new PistaMapper();
+							$pistasActivas = $pistaMapper->getNumPistasActivas(); 
+							if($reservasEnFecha == $pistasActivas){
+								SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
+								header('Location: index.php?controller=adminPartidos');
 							}
-							catch (ValidationException $e){
-								SessionMessage::setErrores($e->getErrores());
-								SessionMessage::setMessage($e->getMessage());
-								header('Location: index.php?controller=adminPartidos&action=ADD');
+							else{
+								$respuesta = $partidoMapper->ADD($partido);
+								SessionMessage::setMessage($respuesta);
+								header('Location: index.php?controller=adminPartidos');
 							}
-						}else{
-							require_once('Views/partido/adminPartidoView.php');
-							header('Location: index.php?controller=adminPartidos');
+						}
+						catch (ValidationException $e){
+							SessionMessage::setErrores($e->getErrores());
+							SessionMessage::setMessage($e->getMessage());
+							header('Location: index.php?controller=adminPartidos&action=ADD');
+						}
+						break;
+
+					case 'fecha':	
+						if(isset($_REQUEST["fecha"])){
+							require_once('Mappers/horaMapper.php');
+							$horaMapper = new HoraMapper();
+							$listaHoras = $horaMapper->mostrarTodos();
+							require_once('Views/partido/partidoADDView.php');
+							(new PartidoADDView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,$_REQUEST["fecha"]))->render();
+						}
+						else{
+							require_once('Mappers/horaMapper.php');
+							$horaMapper = new HoraMapper();
+							$listaHoras = $horaMapper->mostrarTodos();
+							require_once('Views/partido/partidoADDView.php');
+							(new PartidoADDView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,''))->render();
 						}
 						break;
 						

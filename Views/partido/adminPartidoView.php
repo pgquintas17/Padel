@@ -34,7 +34,9 @@
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
             <h1>Partidos</h1><br>
-            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#addPartido"><i class="fas fa-plus-circle fa-2x"></i></button><br><br>
+            <div class="row justify-content-md-center">
+                <a class="bg-ligth text-dark" href='/index.php?controller=adminPartidos&action=fecha'><i class="fas fa-plus-circle fa-2x"></i></a>
+            </div><br>
 
         
 
@@ -103,59 +105,6 @@
 
             </div>
     </div>
-
-    <!--modal addPartido-->
-    <div class="modal fade bd-example-modal-lg" id="addPartido" tabindex="-1" role="dialog" aria-labelledby="borrarLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Añadir Partido</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                <form action="/" method="POST" name="addPartido">
-                        <input type="hidden" name="controller" value="adminPartidos">
-                        <input type="hidden" name="action" value="ADD">
-
-                        <div class="row justify-content-md-center">
-                        <div class="col-md-auto">
-                        <div class="form-group">
-                        <label><strong>Día</strong></label>
-                        <input type="date" class="form-control" name="inputFecha">
-                        </div>
-                        </div>
-                        </div>
-                        <div class="form-group">
-                            <label><strong>Hora</strong></label>
-                            <table class="table table-hover table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <?php
-                                        while($this->filaHoras = ($this->listaHoras)->fetch_assoc()) {
-                                            $hora = $this->filaHoras['hora'];
-                                        ?>
-                                        <td class="table-light" style="text-align: -webkit-center";><input class="form-check-input" type="radio" name="inputHora" value="<?php echo $hora;?>"><?php echo date('H:i',strtotime($this->filaHoras['hora'])); ?></td>
-                                        <?php
-                                        }
-                                        ?>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-dark" value="Login">Añadir partido</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                </div>
-            </div>
-            </div>
-            <!--modal addPartidos-->
 
 <?php
         }
