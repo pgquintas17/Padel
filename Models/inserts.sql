@@ -1,6 +1,8 @@
 /*********************************************************/
-/* 5.- Insertamos datos de ejemplo para todas las tablas */
+/* Insertamos datos de ejemplo para todas las tablas     */
 /*********************************************************/
+
+USE `abp35_padelweb`;
 
 -- tabla USUARIO
 
