@@ -144,7 +144,7 @@
                                 }
                                 
                             ?>
-                                <li class="list-group-item"><a class="text-dark" href="<?php echo $url; ?>">Grupo número <?php echo $this->filaG['numero']; ?></a></li>
+                                <a class="text-dark" href="<?php echo $url; ?>"><li class="list-group-item">Grupo número <?php echo $this->filaG['numero']; ?></li></a>
                             <?php
                             }
                                 

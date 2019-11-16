@@ -13,8 +13,9 @@ class GrupoDetailsView extends baseView {
     private $errs;
     private $enfrentamientos;
     private $parejas;
+    private $datos;
 
-    function __construct($msg=null, $errs=null, $usuario=null, $filaE=null, $enfrentamientos=null, $filaP=null, $parejas=null) {
+    function __construct($msg=null, $errs=null, $usuario=null, $filaE=null, $enfrentamientos=null, $filaP=null, $parejas=null, $datos=null) {
         $this->msg = $msg;
         $this->errs = $errs;
         parent::__construct($this->usuario);
@@ -22,6 +23,7 @@ class GrupoDetailsView extends baseView {
         $this->enfrentamientos = $enfrentamientos;
         $this->filaP = array('id_pareja','nombre_pareja','capitan','miembro','fecha_inscrip','id_grupo','id_catcamp','puntos');
         $this->parejas = $parejas;
+        $this->datos = $datos;
     }
 
     function _render() { 
@@ -33,20 +35,56 @@ class GrupoDetailsView extends baseView {
          
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
-            <h1>Grupo: </h1><br>
+            <h1>Grupo <?php echo $this->datos['0']; ?>, <?php 
+                                if($this->datos['2'] == 'M1'){
+                                    echo "1ª masculina";
+                                }
+                                    
+                                if($this->datos['2'] == 'M2'){
+                                    echo "2ª masculina";
+                                }
+                                
+                                if($this->datos['2'] == 'M3'){
+                                    echo "3ª masculina";
+                                }
+                                
+                                if($this->datos['2'] == 'F1'){
+                                    echo "1ª femenina";
+                                }
+                                    
+                                if($this->datos['2'] == 'F2'){
+                                    echo "2ª femenina";
+                                }
+                                
+                                if($this->datos['2'] == 'F3'){
+                                    echo "3ª femenina";
+                                }
+
+                                if($this->datos['2'] == 'MX1'){
+                                    echo "1ª mixta";
+                                }
+                                    
+                                if($this->datos['2'] == 'MX2'){
+                                    echo "2ª mixta";
+                                }
+                                
+                                if($this->datos['2'] == 'MX3'){
+                                    echo "3ª mixta";
+                                }
+                                ?>:</h1><br>
 
             <div class="row">
                 <div class="col-2" style="align-self: center;"><p>
                     <?php
                     if(Utils::nivelPermiso(2)){
                     ?>
-                        <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                        <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos&action=DETAILS&idcampeonato=<?php echo $this->datos['1']; ?>'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
                 </p></div>
                     <?php
                     }
                     else{
                     ?>
-                        <a class="bg-ligth text-dark" href='/index.php?controller=campeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                        <a class="bg-ligth text-dark" href='/index.php?controller=campeonatos&action=DETAILS&idcampeonato=<?php echo $this->datos['1']; ?>'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
                 </p></div>
                     <?php
                     }

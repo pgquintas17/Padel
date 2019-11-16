@@ -195,6 +195,26 @@ require_once('Models/horaModel.php');
 
         }
 
+        function getDatosCampeonatoYCategoria($catcamp){
+
+            $id = $catcamp->getId();
+
+            $sql = "SELECT id_campeonato, sexonivel 
+                    FROM CAMPEONATO_CATEGORIA 
+                    INNER JOIN categoria 
+                                ON categoria.id_categoria=campeonato_categoria.id_categoria 
+                    WHERE id_catcamp = '$id'";
+            
+            $resultado = $this->mysqli->query($sql);
+            
+            if ($resultado->num_rows == 0)
+                return 'La categoría no existe';
+            else{
+                return $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+        }
+
     }
 
 ?>

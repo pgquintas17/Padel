@@ -147,8 +147,9 @@
 				$grupoMapper = new GrupoMapper();
 				$parejas = $grupoMapper->getParejasByGrupo($grupo); 
 				$enfrentamientos = $grupoMapper->getEnfrentamientosByGrupo($grupo);
+				$datos = $grupoMapper->getDatosGrupo($grupo);
 				require_once('Views/campeonato/grupoDetailsView.php');
-				(new GrupoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$enfrentamientos,'',$parejas))->render();
+				(new GrupoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$enfrentamientos,'',$parejas, $datos))->render();
 			}
 		}
 	}

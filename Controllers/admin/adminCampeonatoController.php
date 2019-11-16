@@ -181,9 +181,10 @@
 						$campeonato->setId($_REQUEST['idcampeonato']);
 						require_once('Mappers/CampeonatoMapper.php');
 						$campeonatoMapper = new CampeonatoMapper();
-						$parejas = $campeonatoMapper->getParejasByCampeonato($campeonato); 
+						$parejas = $campeonatoMapper->getParejasByCampeonato($campeonato);
+						$datos = $campeonatoMapper->consultarDatos($campeonato); 
 						require_once('Views/campeonato/clasificacionCampeonatoView.php');
-						(new ClasificacionCampeonatoView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas))->render();
+						(new ClasificacionCampeonatoView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas,$datos))->render();
 						break;
 
 
@@ -194,8 +195,9 @@
 						require_once('Mappers/CampeonatoCategoriaMapper.php');
 						$catcampMapper = new CampeonatoCategoriaMapper();
 						$parejas = $catcampMapper->getParejasByCategoria($catcamp); 
+						$datos = $catcampMapper->getDatosCampeonatoYCategoria($catcamp);
 						require_once('Views/campeonato/clasificacionCategoriaView.php');
-						(new ClasificacionCategoriaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas))->render();
+						(new ClasificacionCategoriaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas,$datos))->render();
 						break;
 
 					default: 

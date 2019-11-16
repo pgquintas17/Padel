@@ -122,8 +122,9 @@
 						$grupoMapper = new GrupoMapper();
 						$parejas = $grupoMapper->getParejasByGrupo($grupo); 
 						$enfrentamientos = $grupoMapper->getEnfrentamientosByGrupo($grupo);
+						$datos = $grupoMapper->getDatosGrupo($grupo);
 						require_once('Views/campeonato/grupoDetailsView.php');
-						(new GrupoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$enfrentamientos,'',$parejas))->render();
+						(new GrupoDetailsView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$enfrentamientos,'',$parejas,$datos))->render();
 						break;
 
 
@@ -133,9 +134,10 @@
 						$catcamp->setId($_REQUEST['idcatcamp']);
 						require_once('Mappers/CampeonatoCategoriaMapper.php');
 						$catcampMapper = new CampeonatoCategoriaMapper();
-						$parejas = $catcampMapper->getParejasByCategoria($catcamp); 
+						$parejas = $catcampMapper->getParejasByCategoria($catcamp);
+						$datos = $catcampMapper->getDatosCampeonatoYCategoria($catcamp);  
 						require_once('Views/campeonato/clasificacionCategoriaView.php');
-						(new ClasificacionCategoriaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas))->render();
+						(new ClasificacionCategoriaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas,$datos))->render();
 						break;
 					
 
@@ -145,9 +147,10 @@
 						$campeonato->setId($_REQUEST['idcampeonato']);
 						require_once('Mappers/CampeonatoMapper.php');
 						$campeonatoMapper = new CampeonatoMapper();
-						$parejas = $campeonatoMapper->getParejasByCampeonato($campeonato); 
+						$parejas = $campeonatoMapper->getParejasByCampeonato($campeonato);
+						$datos = $campeonatoMapper->consultarDatos($campeonato);  
 						require_once('Views/campeonato/clasificacionCampeonatoView.php');
-						(new ClasificacionCampeonatoView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas))->render();
+						(new ClasificacionCampeonatoView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$parejas,$datos))->render();
 						break;
 
 

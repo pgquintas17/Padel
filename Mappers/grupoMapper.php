@@ -113,6 +113,27 @@
                 return $resultado;
 
         }
+
+
+        function getDatosGrupo($grupo){
+
+            $id_grupo = $grupo->getId();
+    
+            $sql = "SELECT numero, id_campeonato, sexonivel 
+                    FROM GRUPO INNER JOIN (campeonato_categoria 
+                                        INNER JOIN categoria 
+                                                ON categoria.id_categoria = campeonato_categoria.id_categoria)
+                                ON grupo.id_catcamp = campeonato_categoria.id_catcamp
+                    WHERE id_grupo = '$id_grupo'";
+                
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'No existe en la base de datos'; 
+            else{ 
+                $result = $resultado->fetch_array(MYSQLI_NUM);
+                return $result;
+            }
+
+        }
         
 
     }

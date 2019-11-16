@@ -12,13 +12,15 @@ class ClasificacionCampeonatoView extends baseView {
     private $msg;
     private $errs;
     private $parejas;
+    private $datos;
 
-    function __construct($msg=null, $errs=null, $usuario=null, $filaP=null, $parejas=null) {
+    function __construct($msg=null, $errs=null, $usuario=null, $filaP=null, $parejas=null, $datos=null) {
         $this->msg = $msg;
         $this->errs = $errs;
         parent::__construct($this->usuario);
         $this->filaP = array('id_pareja', 'nombre_pareja', 'capitan', 'miembro', 'fecha_inscrip', 'id_grupo', 'pareja.id_catcamp', 'puntos', 'sexonivel');
         $this->parejas = $parejas;
+        $this->datos = $datos;
     }
 
     function _render() { 
@@ -30,7 +32,7 @@ class ClasificacionCampeonatoView extends baseView {
          
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
-            <h1>Parejas: </h1><br>
+            <h1>Parejas en <?php echo $this->datos['1']; ?>: </h1><br>
 
             <div class="row">
                 <div class="col-2" style="align-self: center;">
@@ -57,6 +59,7 @@ class ClasificacionCampeonatoView extends baseView {
                 <div id="seccion" class="col-lg-4">
                     <p id="justificar">
                     <?php
+                    if(($this->parejas)->num_rows != 0){
                     while($this->filaP = ($this->parejas)->fetch_assoc()) {
 
                         if($_SESSION['Usuario']->getLogin() == $this->filaP['capitan'] || $_SESSION['Usuario']->getLogin() == $this->filaP['miembro']){
@@ -148,6 +151,12 @@ class ClasificacionCampeonatoView extends baseView {
                         <?php
                         }       
                     }
+                }
+                else{
+                    ?>
+                        <h5>No hay parejas apuntadas en este campeonato.</h5>
+                    <?php
+                }
                     ?>
                 </div>
             </div>
