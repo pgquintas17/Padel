@@ -61,7 +61,7 @@ class ClasificacionCategoriaView extends baseView {
 
                         if($_SESSION['Usuario']->getLogin() == $this->filaP['capitan'] || $_SESSION['Usuario']->getLogin() == $this->filaP['miembro']){
                         ?>
-                            <li class="list-group-item bg-info">
+                            <li class="list-group-item" style="background-color: #99ebff";>
                                 <strong><?php echo $this->filaP['nombre_pareja']; ?></strong><br>
                                 <p style="text-align:left";>-Capitán: <?php echo $this->filaP['capitan']; ?><br>
                                 -Miembro: <?php echo $this->filaP['miembro']; ?></p>

@@ -36,7 +36,7 @@
                 <div class="row justify-content-md-center">
                     <div class="col-md-auto"> 
 
-                        <!-- Tabla datos usuario -->
+                        <!-- Tabla datos partido -->
                         <table class="table table-hover table-bordered" style="border-radius: 25px;">
                             <tr>
                             <th class="bg-dark text-white">Fecha</th>
