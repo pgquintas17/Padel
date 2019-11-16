@@ -120,6 +120,34 @@ require_once('Models/partidoModel.php');
         }
 
 
+        function borrarReserva($partido){
+
+            $id_partido = $partido->getId();
+
+            $sql = "SELECT * FROM PARTIDO  WHERE (id_partido = '$id_partido') ";
+    	    $result = $this->mysqli->query($sql);
+                
+            $tupla = $result->fetch_array(MYSQLI_NUM);
+
+            $id_reserva = $tupla['8'];
+
+            $sql = "UPDATE PARTIDO  SET id_reserva = NULL 
+                    WHERE ( id_partido = '$id_partido' )";
+
+            $this->mysqli->query($sql);
+
+            $sql2 = "DELETE FROM RESERVA WHERE (id_reserva = '$id_reserva')";
+
+            if (!($resultado = $this->mysqli->query($sql2))){
+                return 'Error en la modificación';
+            }      
+            else{
+
+                return "Reserva eliminada";
+            }      
+        }
+
+
         function comprobarDisponibilidadUsuario($reserva){
 
             $hora = $reserva->getHora();

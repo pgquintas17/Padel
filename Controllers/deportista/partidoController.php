@@ -44,6 +44,7 @@
 										$pistaMapper = new PistaMapper();
 										$pistasActivas = $pistaMapper->getNumPistasActivas();
 										if($reservasEnFecha == $pistasActivas){
+											$partidoMapper->DELETE($partido);
 											SessionMessage::setMessage("No hay pistas disponibles para ese día y hora. El partido se ha eliminado.");
 											header('Location: index.php');
 										}
@@ -92,9 +93,14 @@
 							header('Location: index.php?controller=perfil');	
 						}
 						else{
-						$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']); 
-						SessionMessage::setMessage($respuesta); 
-						header('Location: index.php?controller=perfil');
+
+							$numPlazas = $partidoMapper->getNumPlazasLibres($_REQUEST["idpartido"]);
+							if($numPlazas == 0){
+								$partidoMapper->borrarReserva($partido);
+							}
+							$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']); 
+							SessionMessage::setMessage($respuesta); 
+							header('Location: index.php?controller=perfil');
 						}
 						break;
 					
