@@ -3,7 +3,6 @@
 /*********************************************************/
 
 -- tabla USUARIO
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('admin','admin','admin','1995-01-29','666666666','admin@email.es','masculino',2);
 
 INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('gacelasoto','Andres','contraseña','1995-01-29','666666666','andres@email.es','masculino',0);
 INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('asconcepcion','Andrew','contraseña','1995-01-29','666666666','andrew@email.es','masculino',0);
@@ -96,31 +95,6 @@ INSERT INTO pista(ID_PISTA,ESTADO) VALUES (4,1);
 INSERT INTO pista(ID_PISTA,ESTADO) VALUES (5,1);
 INSERT INTO pista(ID_PISTA,ESTADO) VALUES (6,1);
 INSERT INTO pista(ID_PISTA,ESTADO) VALUES (7,0);
-
-
-
-
--- tabla HORAS
-INSERT INTO horas(HORA) VALUES ('09:00:00');
-INSERT INTO horas(HORA) VALUES ('10:30:00');
-INSERT INTO horas(HORA) VALUES ('12:00:00');
-INSERT INTO horas(HORA) VALUES ('13:30:00');
-INSERT INTO horas(HORA) VALUES ('15:00:00');
-INSERT INTO horas(HORA) VALUES ('16:30:00');
-INSERT INTO horas(HORA) VALUES ('18:00:00');
-INSERT INTO horas(HORA) VALUES ('19:30:00');
-
-
--- tabla CATEGORIA
-INSERT INTO categoria (SEXONIVEL) VALUES ('M1'); 	-- 10
-INSERT INTO categoria (SEXONIVEL) VALUES ('F1');	-- 11
-INSERT INTO categoria (SEXONIVEL) VALUES ('MX1');	-- 12
-INSERT INTO categoria (SEXONIVEL) VALUES ('M2');	-- 13
-INSERT INTO categoria (SEXONIVEL) VALUES ('F2');	-- 14
-INSERT INTO categoria (SEXONIVEL) VALUES ('MX2');	-- 15
-INSERT INTO categoria (SEXONIVEL) VALUES ('M3');	-- 16
-INSERT INTO categoria (SEXONIVEL) VALUES ('F3');	-- 17
-INSERT INTO categoria (SEXONIVEL) VALUES ('MX3');	-- 18
 
 
 
