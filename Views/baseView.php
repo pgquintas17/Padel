@@ -69,7 +69,7 @@
                             </li>
                             <li class="nav-item">
                             <!--perfil-->
-                                <a class="nav-link" href="/index.php?controller=perfil"><i class="fas fa-user"></i></a>
+                                <a class="nav-link" href="/index.php?controller=perfil"><i class="fas fa-user"></i> <?php echo strtoupper($_SESSION['Usuario']->getLogin()); ?></a>
                             </li>
                         <?php
                             }
