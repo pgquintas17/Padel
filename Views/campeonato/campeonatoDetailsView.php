@@ -46,10 +46,15 @@
                 <div class="col-2" style="align-self: center;">
                     <a role="button" class="btn btn-link text-dark" data-toggle="modal" data-target="#confirmDelete"><i class="fas fa-trash-alt fa-2x"></i></a><br>
                 </div>
-                <div class="col-2" style="align-self: center;">    
+                <?php
+                    $hoy = date('Y-m-d');
+                    if($this->datos['5'] > $hoy){
+                ?>
+                <div class="col-2" style="align-self: center;">  
                     <a class="bg-ligth text-dark" href='/index.php?controller=adminCampeonatos&action=EDIT&idcampeonato=<?php echo $this->datos['0'];?>'><i class="fas fa-edit fa-2x"></i></a>
                 </div>
                 <?php
+                    }
                 }
                 else{
                 ?>

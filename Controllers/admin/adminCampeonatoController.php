@@ -97,31 +97,38 @@
 
 					case 'borrarCategorias': 
 						if ($_POST){
-							
-							$cat = $_REQUEST['categoria'];
-							$N = count($cat);
-
-							for($i = 0; $i < $N; $i++){
-								$catcamp = new CampeonatoCategoriaModel();
-								$catcamp->setId($cat[$i]);
-								$catcampMapper = new CampeonatoCategoriaMapper();
-								$respuesta = $catcampMapper->DELETE($catcamp);
-							}
-
-							$campeonato = new CampeonatoModel();
-							$campeonato->setId($_REQUEST['idcampeonato']);
-							$campeonatoMapper = new CampeonatoMapper();
-							$numCategorias = $campeonatoMapper->getNumCategoriasByCampeonato($campeonato);
-
-							if($numCategorias == 0){
-								$campeonatoMapper->DELETE($campeonato);
-								SessionMessage::setMessage("El campeonato y sus categorías han sido eliminados.");
-								header('Location: index.php?controller=adminCampeonatos');
-							}
-							else{
-								SessionMessage::setMessage($respuesta);
+							$hoy = date('Y-m-d H:i:s');
+							if(((new CampeonatoMapper())->getFechaFinInsById(new CampeonatoModel($_REQUEST['idcampeonato']))) < $hoy){
+								SessionMessage::setMessage("No se pueden editar las categorías de un campeonato fuera del plazo de inscripción.");
 								$goto = 'Location: index.php?controller=adminCampeonatos&action=DETAILS&idcampeonato='.$_REQUEST['idcampeonato'];
 								header($goto);
+							}else{
+							
+								$cat = $_REQUEST['categoria'];
+								$N = count($cat);
+
+								for($i = 0; $i < $N; $i++){
+									$catcamp = new CampeonatoCategoriaModel();
+									$catcamp->setId($cat[$i]);
+									$catcampMapper = new CampeonatoCategoriaMapper();
+									$respuesta = $catcampMapper->DELETE($catcamp);
+								}
+
+								$campeonato = new CampeonatoModel();
+								$campeonato->setId($_REQUEST['idcampeonato']);
+								$campeonatoMapper = new CampeonatoMapper();
+								$numCategorias = $campeonatoMapper->getNumCategoriasByCampeonato($campeonato);
+
+								if($numCategorias == 0){
+									$campeonatoMapper->DELETE($campeonato);
+									SessionMessage::setMessage("El campeonato y sus categorías han sido eliminados.");
+									header('Location: index.php?controller=adminCampeonatos');
+								}
+								else{
+									SessionMessage::setMessage($respuesta);
+									$goto = 'Location: index.php?controller=adminCampeonatos&action=DETAILS&idcampeonato='.$_REQUEST['idcampeonato'];
+									header($goto);
+								}
 							}
 						}else{
 							header('Location: index.php?controller=adminCampeonatos');
@@ -131,21 +138,28 @@
 
 					case 'addCategorias': 
 						if ($_POST){
-							$cat = $_REQUEST['categoria'];
-							$N = count($cat);
+							$hoy = date('Y-m-d H:i:s');
+							if(((new CampeonatoMapper())->getFechaFinInsById(new CampeonatoModel($_REQUEST['idcampeonato']))) < $hoy){
+								SessionMessage::setMessage("No se pueden editar las categorías de un campeonato fuera del plazo de inscripción.");
+								$goto = 'Location: index.php?controller=adminCampeonatos&action=DETAILS&idcampeonato='.$_REQUEST['idcampeonato'];
+								header($goto);
+							}else{
+								$cat = $_REQUEST['categoria'];
+								$N = count($cat);
 
-							for($i = 0; $i < $N; $i++){
-								$catcamp = new CampeonatoCategoriaModel();
-								$catcamp->setIdCampeonato($_REQUEST['idcampeonato']);
-								$catcamp->setIdCategoria($cat[$i]);
-								
-								$catcampMapper = new CampeonatoCategoriaMapper();
-								$respuesta=$catcampMapper->ADD($catcamp);
+								for($i = 0; $i < $N; $i++){
+									$catcamp = new CampeonatoCategoriaModel();
+									$catcamp->setIdCampeonato($_REQUEST['idcampeonato']);
+									$catcamp->setIdCategoria($cat[$i]);
+									
+									$catcampMapper = new CampeonatoCategoriaMapper();
+									$respuesta=$catcampMapper->ADD($catcamp);
+								}
+
+								SessionMessage::setMessage($respuesta);
+								$goto = 'Location: index.php?controller=adminCampeonatos&action=DETAILS&idcampeonato='.$_REQUEST['idcampeonato'];
+								header($goto);
 							}
-
-							SessionMessage::setMessage($respuesta);
-							$goto = 'Location: index.php?controller=adminCampeonatos&action=DETAILS&idcampeonato='.$_REQUEST['idcampeonato'];
-							header($goto);
 						}else{
 							header('Location: index.php?controller=adminCampeonatos');
 						}
