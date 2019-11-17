@@ -85,7 +85,7 @@
                             <td style="vertical-align: middle";><?php echo $this->fila['nombre']; ?></td>
                             <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
                             <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_fin'])); ?></td>
-                            <td style="vertical-align: middle";>Cerrado</td>
+                            <td style="vertical-align: middle";>Campeonato en curso</td>
                             <td style="vertical-align: middle";>
                                 <?php
                                     if(Utils::nivelPermiso(2)){
@@ -144,7 +144,7 @@
                                 <td style="vertical-align: middle";><?php echo $this->fila['nombre']; ?></td>
                                 <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
                                 <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_fin'])); ?></td>
-                                <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio_inscripciones'])); ?> - <?php echo date('d/m H:i',strtotime($this->fila['fecha_fin_inscripciones'])); ?></td>
+                                <td style="vertical-align: middle";><?php if($this->fila['fecha_fin_inscripciones'] > $hoy){echo date('d/m H:i',strtotime($this->fila['fecha_inicio_inscripciones'])); ?> - <?php echo date('d/m H:i',strtotime($this->fila['fecha_fin_inscripciones']));} else{ echo "Cerrado";} ?></td>
                                 <td style="vertical-align: middle";>
                                     <?php
                                         if(Utils::nivelPermiso(2)){
@@ -181,16 +181,18 @@
                                     ?>
                                 </td>
                                 <?php
-                                if(Utils::nivelPermiso(2) && $this->fila['fecha_fin_inscripciones'] <= $hoy && !(new GrupoMapper())->comprobarGrupos($this->fila['id_campeonato'])){
+                                if(Utils::nivelPermiso(2)){
+                                    if($this->fila['fecha_fin_inscripciones'] <= $hoy && !(new GrupoMapper())->comprobarGrupos($this->fila['id_campeonato'])){
                                     $url = 'index.php?controller=adminCampeonatos&action=crearGrupos&idcampeonato=' . $this->fila['id_campeonato'];
                                     ?>
                                         <td style="vertical-align: middle";><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Crear grupos</a></td>
                                     <?php
-                                }
-                                else{
-                                    ?>
-                                    <td></td>
-                                    <?php
+                                    }
+                                    else{
+                                        ?>
+                                        <td></td>
+                                        <?php
+                                    }
                                 }
                                 ?>
                             </tr>
