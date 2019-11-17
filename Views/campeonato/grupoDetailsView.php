@@ -161,10 +161,17 @@ class GrupoDetailsView extends baseView {
                                 <td><?php if($this->filaE['fecha'] != null){echo $this->filaE['fecha'];} else{ echo "Pendiente de acordar";} ?></td>
                                 <td><?php if($this->filaE['resultado'] != null){echo $this->filaE['resultado'];} else{ echo "Pendiente de jugar";} ?></td>
                         <?php
+                            $hoy = date('Y-m-d');
                             if(Utils::nivelPermiso(2)){
+                                if($this->filaE['id_reserva'] != null && $this->filaE['fecha'] < $hoy){
                         ?>
-                                <td><a class="bg-ligth text-dark" href='/index.php?controller=adminGrupos&action=addResultado&idenfrentamiento=<?php echo $this->filaE['id_enfrentamiento']; ?>'><i class="fas fa-trophy"></i></a></td>
+                                    <td><a class="bg-ligth text-dark" href='/index.php?controller=adminGrupos&action=addResultado&idenfrentamiento=<?php echo $this->filaE['id_enfrentamiento']; ?>'><i class="fas fa-trophy"></i></a></td>
                         <?php
+                                } else{
+                                    ?>
+                                    <td></td>
+                                    <?php
+                                }
                             }
                         ?>
                             </tr>
