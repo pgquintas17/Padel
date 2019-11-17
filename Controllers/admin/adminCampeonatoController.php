@@ -7,6 +7,7 @@
 	require_once('Models/campeonatoCategoriaModel.php');
 	require_once('Mappers/campeonatoCategoriaMapper.php');
 	require_once('Mappers/categoriaMapper.php');
+	require_once('Mappers/grupoMapper.php');
 
 	class AdminCampeonatoController {
 
@@ -185,12 +186,18 @@
 
 
 					case 'crearGrupos':
-						echo "crear grupos";
+						$campeonato = new CampeonatoModel($_REQUEST['idcampeonato']);
+						$categorias = (new CampeonatoCategoriaMapper())->getCategorias($campeonato);
+						
+						foreach($categorias as $categoria){
+							(new GrupoMapper())->generarGrupos($categoria);
+						}
 
+						header('Location: index.php?controller=adminCampeonatos');
 						break;
 
+
 					default: 
-						header('Location: index.php?controller=adminUsuarios');
 						break;
 
 				}

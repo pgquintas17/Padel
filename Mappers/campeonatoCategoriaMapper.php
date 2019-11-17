@@ -1,6 +1,7 @@
 <?php
 
 require_once('Models/horaModel.php');
+require_once('Models/campeonatoCategoriaModel.php');
 
     class CampeonatoCategoriaMapper{
         var $bd;
@@ -212,7 +213,30 @@ require_once('Models/horaModel.php');
             else{
                 return $resultado->fetch_array(MYSQLI_NUM);
             }
+        }
 
+
+        function getCategorias($campeonato){
+
+            $id = $campeonato->getId();
+
+            $sql = "SELECT id_catcamp, id_campeonato, id_categoria, n_plazas FROM campeonato_categoria WHERE ID_CAMPEONATO = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            } else{
+                $categorias = array();
+                $fila = array('id_catcamp', 'id_campeonato', 'id_categoria', 'n_plazas');
+
+                while($fila = ($resultado)->fetch_assoc()){
+
+                        $categoria = new CampeonatoCategoriaModel($fila['id_catcamp'], $fila['id_campeonato'], $fila['id_categoria'], $fila['n_plazas']);
+                        $categorias[] = $categoria;
+                }
+
+                    return $categorias;
+
+            }
         }
 
     }

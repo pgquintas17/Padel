@@ -1,5 +1,8 @@
 <?php
 
+    require_once('Mappers/CampeonatoCategoriaMapper.php');
+    require_once('Models/GrupoModel.php');
+
     class GrupoMapper{
 
         var $bd;
@@ -153,6 +156,92 @@
             else{
                 return true;
             }
+        }
+
+
+        function getGrupos($categoria){
+
+            $id = $categoria->getId();
+
+            $sql = "SELECT id_grupo, id_catcamp, numero, n_parejas FROM grupo WHERE id_catcamp = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            } else{
+                $grupos = array();
+                $fila = array('id_grupo', 'id_catcamp', 'numero', 'n_parejas');
+
+                while($fila = ($resultado)->fetch_assoc()){
+
+                        $grupo = new GrupoModel($fila['id_grupo'], $fila['id_catcamp'], $fila['numero'], $fila['n_parejas']);
+                        $grupos[] = $grupo;
+                }
+
+                    return $grupos;
+
+            }
+        }
+
+
+
+        function generarGrupos($categoria){
+
+            $id_categoria = $categoria->getId();
+            $n_participantes = $categoria->getNumPlazas();
+
+            if($n_participantes < 8){
+                (new CampeonatoCategoriaMapper())->DELETE($categoria);
+                echo "borrado";
+
+            }else{
+
+                $resto = 11;
+
+                for ($i = 12; $i >= 8; $i--) {
+                    $resto_aux = $n_participantes % $i;
+                    
+                    if($resto_aux == 0){
+                        $n_grupos = $n_participantes / $i;
+                        $nParejasGrupo = $i;
+                    }else{
+                        if ($resto_aux < $resto){
+                            $resto = $resto_aux;
+                            $n_grupos = round($n_participantes / $i, 0, PHP_ROUND_HALF_DOWN);
+                            $nParejasGrupo = $i;
+                        }
+                    }  
+                }
+
+                for($i = 0; $i < $n_grupos; $i++){
+
+                    $grupo = new GrupoModel();
+                    $grupo->setIdCatCamp($id_categoria);
+                    $grupo->setNumero($i+1);
+                    $grupo->setNumParejas($nParejasGrupo);
+
+                    (new GrupoMapper())->ADD($grupo);
+                }
+
+                $grupos = (new GrupoMapper())->getGrupos($categoria);
+
+                foreach($grupos as $grupo){
+
+                    $limit = $grupo->getNumParejas();
+                    $id_grupo = $grupo->getId();
+
+                    $sql = "UPDATE PAREJA 
+                            SET id_grupo = '$id_grupo' 
+                            WHERE id_catcamp = '$id_categoria' 
+                            LIMIT $limit";
+
+                    $resultado = $this->mysqli->query($sql);
+                }
+
+
+            }
+
+            echo "done";
+
         }
         
 
