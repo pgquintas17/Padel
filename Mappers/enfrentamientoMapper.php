@@ -12,18 +12,15 @@
 
         function ADD($enfrentamiento){
 
-            $fecha = $enfrentamiento->getFecha();
-            $hora = $enfrentamiento->getHora();
             $pareja1 = $enfrentamiento->getPareja1();
             $pareja2 = $enfrentamiento->getPareja2();
-            $id_reserva = $enfrentamiento->getIdReserva();
             $id_grupo = $enfrentamiento->getIdGrupo();
 
-            $sql = "INSERT INTO ENFRENTAMIENTO (fecha, hora, pareja1, pareja2, id_reserva, id_grupo)
-                    VALUES ('$fecha', '$hora', '$pareja1', '$pareja2', '$id_reserva', $id_grupo)";
+            $sql = "INSERT INTO ENFRENTAMIENTO (pareja1, pareja2, id_grupo)
+                    VALUES ('$pareja1', '$pareja2', '$id_grupo')";
     
             if (!$this->mysqli->query($sql)) 
-                return 'Error en la inserción';
+                return 'Error con la base de datos';
             else 
                 return 'Inserción realizada con éxito';   
         } 

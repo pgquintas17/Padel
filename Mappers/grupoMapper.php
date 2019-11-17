@@ -2,6 +2,10 @@
 
     require_once('Mappers/CampeonatoCategoriaMapper.php');
     require_once('Models/GrupoModel.php');
+    require_once('Models/ParejaModel.php');
+    require_once('Mappers/ParejaMapper.php');
+    require_once('Models/EnfrentamientoModel.php');
+    require_once('Mappers/EnfrentamientoMapper.php');
 
     class GrupoMapper{
 
@@ -231,17 +235,37 @@
 
                     $sql = "UPDATE PAREJA 
                             SET id_grupo = '$id_grupo' 
-                            WHERE id_catcamp = '$id_categoria' 
+                            WHERE id_catcamp = '$id_categoria'
+                            ORDER BY fecha_inscrip 
                             LIMIT $limit";
 
-                    $resultado = $this->mysqli->query($sql);
+                    $this->mysqli->query($sql);
+
+                    $sql = "DELETE 
+                        FROM PAREJA 
+                        WHERE id_catcamp = '$id_categoria' 
+                            AND id_grupo IS NULL";
+
+                    $this->mysqli->query($sql);
+
+                    $parejas = (new ParejaMapper())->getParejas($grupo);
+
+                    $numParejas = $grupo->getNumParejas();
+
+                    for($i = 0; $i < $numParejas-1; $i++){
+                        for($j = $i + 1; $j < $numParejas; $j++){
+                            if($i != $j){
+                                $enfrentamiento = new EnfrentamientoModel();
+                                $enfrentamiento->setPareja1($parejas[$i]->getId());
+                                $enfrentamiento->setPareja2($parejas[$j]->getId());
+                                $enfrentamiento->setIdGrupo($grupo->getId());
+
+                                (new EnfrentamientoMapper())->ADD($enfrentamiento);
+                            }
+                        }
+                    }
                 }
-
-
             }
-
-            echo "done";
-
         }
         
 

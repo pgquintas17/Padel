@@ -245,6 +245,32 @@ require_once('Models/horaModel.php');
         }
 
 
+
+        function getParejas($grupo){
+
+            $id = $grupo->getId();
+
+            $sql = "SELECT id_pareja, nombre_pareja, capitan, miembro, fecha_inscrip, id_grupo, id_catcamp, puntos 
+                    FROM pareja WHERE id_grupo = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            } else{
+                $parejas = array();
+                $fila = array('id_pareja', 'nombre_pareja', 'capitan', 'miembro', 'fecha_inscrip', 'id_grupo', 'id_catcamp', 'puntos');
+
+                while($fila = ($resultado)->fetch_assoc()){
+
+                        $pareja = new GrupoModel($fila['id_pareja'], $fila['nombre_pareja'], $fila['capitan'], $fila['miembro'], $fila['fecha_inscrip'], $fila['id_grupo'], $fila['id_catcamp'], $fila['puntos']);
+                        $parejas[] = $pareja;
+                }
+
+                    return $parejas;
+
+            }
+        }
+
+
     }
 
 ?>
