@@ -139,13 +139,12 @@ require_once('Models/campeonatoModel.php');
             $login = $usuario->getLogin();
 
             $sql = "SELECT campeonato.fecha_fin, campeonato.id_campeonato, campeonato.nombre, campeonato.fecha_fin_inscripciones, 
-                           categoria.sexonivel, grupo.id_grupo, grupo.numero,
+                           categoria.sexonivel, 
                            pareja.nombre_pareja, pareja.capitan, pareja.miembro, pareja.id_pareja 
                     FROM campeonato INNER JOIN 
                                     (categoria INNER JOIN 
                                                 (campeonato_categoria INNER JOIN pareja 
-                                                ON campeonato_categoria.ID_CATCAMP=pareja.ID_CATCAMP
-                                                INNER JOIN grupo ON campeonato_categoria.id_catcamp = grupo.id_catcamp) 
+                                                ON campeonato_categoria.ID_CATCAMP=pareja.ID_CATCAMP) 
                                     ON campeonato_categoria.ID_CATEGORIA = categoria.ID_CATEGORIA) 
                     ON campeonato.ID_CAMPEONATO = campeonato_categoria.ID_CAMPEONATO 
                     WHERE pareja.MIEMBRO = '$login' OR pareja.CAPITAN = '$login' 

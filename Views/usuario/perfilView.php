@@ -25,7 +25,7 @@
             $this->listaReservas = $listaReservas;
             $this->filaPartidos = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
             $this->listaPartidos = $listaPartidos;
-            $this->filaCampeonatos = array('fecha_fin','id_campeonato', 'nombre', 'fecha_fin_inscripciones','sexonivel', 'nombre_pareja', 'capitan', 'miembro', 'id_pareja', 'id_grupo', 'numero');
+            $this->filaCampeonatos = array('fecha_fin','id_campeonato', 'nombre', 'fecha_fin_inscripciones','sexonivel', 'nombre_pareja', 'capitan', 'miembro', 'id_pareja');
             $this->listaCampeonatos = $listaCampeonatos;
         }
 
@@ -220,12 +220,6 @@
                                 ?>
                                 <p><a class="btn btn-dark" href="<?php echo $urlBorrar; ?>" role="button">Cancelar inscripción.</a></p>
                                 <?php
-                            } else{
-                                if($this->filaCampeonatos['id_grupo'] != null){
-                                ?>
-                                    <p>Estás en el <a href='index.php?controller=campeonatos&action=grupo&idgrupo=<?php echo $this->filaCampeonatos['id_grupo']; ?>' >grupo <?php echo $this->filaCampeonatos['numero']; ?></a></p>
-                                <?php
-                                }
                             }
                             ?>
                             </li>
