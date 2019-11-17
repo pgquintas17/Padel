@@ -2,6 +2,9 @@
 
 	require_once('Services/sessionMensajes.php');
 	require_once("Services/validarExcepciones.php");
+	require_once('Models/pistaModel.php');
+	require_once('Mappers/pistaMapper.php');
+	require_once('Mappers/reservaMapper.php');
 	
 	class AdminPistaController {
 
@@ -12,11 +15,9 @@
 
 					case 'ADD': 
 						if ($_POST){
-							require_once('Models/pistaModel.php');
 							$pista = new PistaModel();
 							$pista->setId($_POST["inputID"]);
 							$pista->setEstado("0");
-                            require_once('Mappers/pistaMapper.php');
                             $pistaMapper = new PistaMapper();
 							$respuesta = $pistaMapper->ADD($pista);
 							if($respuesta){
@@ -34,20 +35,16 @@
 						
 
 					case 'ESTADO':
-						require_once('Models/pistaModel.php');
 						$pista = new PistaModel();
                         $pista->setId($_REQUEST['idpista']);
-						require_once('Mappers/pistaMapper.php');
 						$pistaMapper = new PistaMapper();
 						$respuesta = $pistaMapper->cambiarEstado($pista);
 						header('Location: index.php?controller=adminPistas');
 						break;
 
 					case 'RESERVAS':
-						require_once('Models/pistaModel.php');
 						$pista = new PistaModel();
 						$pista->setId($_REQUEST['idpista']);
-						require_once('Mappers/reservaMapper.php');
 						$reservaMapper = new ReservaMapper();
 						$lista = $reservaMapper->getReservasByPista($pista);
 						require_once('Views/reserva/adminReservaPistaView.php');
@@ -61,7 +58,6 @@
 
 				}
             } else { //mostrar todos los elementos
-				require_once('Mappers/pistaMapper.php');
 				$pistaMapper = new PistaMapper();
 				$listaPistas = $pistaMapper->mostrarTodos();
 				require_once('Views/pista/adminPistaView.php');

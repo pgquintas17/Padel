@@ -1,9 +1,10 @@
 <?php	
 
-	// include '../Views/Users_Views/USUARIO_ADD.php';
-	// include '../Views/Users_Views/USUARIO_EDIT.php';
 	require_once('Services/sessionMensajes.php');
-    require_once("Services/validarExcepciones.php");
+	require_once("Services/validarExcepciones.php");
+	require_once('Models/usuarioModel.php');
+	require_once('Mappers/usuarioMapper.php');
+	
 
 	class AdminUsuarioController {
 
@@ -15,10 +16,8 @@
 					case 'ADD': 
 						if ($_POST){
 							try {
-								require_once('Models/usuarioModel.php');
 								$usuario = new UsuarioModel($_POST["inputLogin"],$_POST["inputNombre"],$_POST["inputLogin"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_REQUEST["inputPermiso"]);
 								$errores =  $usuario->validarRegistro();
-								require_once('Mappers/usuarioMapper.php');
                             	$usuarioMapper = new UsuarioMapper();
 								$respuesta = $usuarioMapper->ADD($usuario);
 
@@ -38,10 +37,8 @@
 						
 
 					case 'DELETE': 
-						require_once('Models/usuarioModel.php');
 						$usuario = new UsuarioModel();
 						$usuario->setLogin($_REQUEST['username']);
-						require_once('Mappers/usuarioMapper.php');
 						$usuarioMapper = new UsuarioMapper();
 						$respuesta = $usuarioMapper->DELETE($usuario); 
 						SessionMessage::setMessage($respuesta);
@@ -50,10 +47,8 @@
 						
 
 					case 'DETAILS': 
-						require_once('Models/usuarioModel.php');
 						$usuario = new UsuarioModel();
 						$usuario->setLogin($_REQUEST['username']);
-						require_once('Mappers/usuarioMapper.php');
 						$usuarioMapper = new UsuarioMapper();
 						$datos = $usuarioMapper->consultarDatos($usuario);
 						require_once('Views/usuario/usuarioDetailsView.php');
@@ -67,7 +62,6 @@
 
 				}
 			} else { //mostrar todos los elementos
-				require_once('Mappers/usuarioMapper.php');
 				$usuarioMapper = new UsuarioMapper();
 				$listaUsuarios = $usuarioMapper->mostrarTodos(); 
 				require_once('Views/usuario/adminUsuarioView.php');

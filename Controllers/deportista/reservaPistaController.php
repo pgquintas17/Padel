@@ -1,9 +1,13 @@
 <?php	
 
-	// include '../Views/Users_Views/USUARIO_ADD.php';
-	// include '../Views/Users_Views/USUARIO_EDIT.php';
 	require_once('Services/sessionMensajes.php');
 	require_once("Services/validarExcepciones.php");
+	require_once('Mappers/reservaMapper.php');
+	require_once('Models/reservaModel.php');
+	require_once('Models/usuarioModel.php');
+	require_once('Mappers/partidoMapper.php');
+	require_once('Mappers/pistaMapper.php');
+	require_once('Mappers/horaMapper.php');
 
 	class ReservaPistaController {
 
@@ -22,7 +26,6 @@
 
 								$maxReservas = 5;
 
-								require_once('Mappers/reservaMapper.php');
 								$reservaMapper = new ReservaMapper();
 								$numReservas = $reservaMapper->getNumReservasActivasByLogin($_SESSION['Usuario']);
 
@@ -31,19 +34,15 @@
 									header('Location: index.php');
 								}
 								else{
-									require_once('Models/reservaModel.php');
 									$reserva = new ReservaModel();
-									require_once('Models/usuarioModel.php');
 									$reserva->setLogin($_SESSION['Usuario']->getLogin());
 									$reserva->setFecha($_POST["fecha"]);
 									$reserva->setHora($_POST["inputHora"]);
 									$validacion1 = $reservaMapper->comprobarDisponibilidadUsuario($reserva);
-									require_once('Mappers/partidoMapper.php');
 									$partidoMapper = new PartidoMapper();
 									$validacion2 = $partidoMapper->comprobarDisponibilidadUsuario($reserva);
 									if($validacion1 && $validacion2){
 										$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
-										require_once('Mappers/pistaMapper.php');
 										$pistaMapper = new PistaMapper();
 										$pistasActivas = $pistaMapper->getNumPistasActivas();
 										if($reservasEnFecha == $pistasActivas){
@@ -70,14 +69,12 @@
 						
 						case 'reservar':	
                             if(isset($_REQUEST["fecha"])){
-                                require_once('Mappers/horaMapper.php');
                                 $horaMapper = new HoraMapper();
                                 $listaHoras = $horaMapper->mostrarTodos();
                                 require_once('Views/reserva/pistaReservarView.php');
                                 (new PistaReservarView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,$_REQUEST["fecha"]))->render();
                             }
                             else{
-                                require_once('Mappers/horaMapper.php');
                                 $horaMapper = new HoraMapper();
                                 $listaHoras = $horaMapper->mostrarTodos();
                                 require_once('Views/reserva/pistaReservarView.php');
@@ -87,10 +84,8 @@
 						
 
 					case 'borrar':
-						require_once('Models/reservaModel.php');
 						$reserva = new ReservaModel();
 						$reserva->setId($_REQUEST['idreserva']);
-						require_once('Mappers/reservaMapper.php');
 						$reservaMapper = new ReservaMapper();
 						$fecha = $reservaMapper->getFechaById($reserva);
 						$reserva->setLogin($_SESSION['Usuario']->getLogin());

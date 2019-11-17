@@ -1,9 +1,13 @@
 <?php	
 
-	// include '../Views/Users_Views/USUARIO_ADD.php';
-	// include '../Views/Users_Views/USUARIO_EDIT.php';
 	require_once('Services/sessionMensajes.php');
-    require_once("Services/validarExcepciones.php");
+	require_once("Services/validarExcepciones.php");
+	require_once('Models/usuarioModel.php');
+	require_once('Mappers/usuarioMapper.php');
+	require_once('Mappers/reservaMapper.php');
+	require_once('Mappers/partidoMapper.php');
+	require_once('Mappers/campeonatoMapper.php');
+	
 
 	class PerfilController {
 
@@ -15,10 +19,8 @@
 					case 'EDIT': 
 						if ($_POST){
 							try {
-								require_once('Models/usuarioModel.php');
 								$usuario = new UsuarioModel($_SESSION["Usuario"]->getLogin(),$_POST["inputNombre"],$_POST["inputPassword"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_SESSION["Usuario"]->getPermiso());
 								$errores =  $usuario->validarRegistro();
-								require_once('Mappers/usuarioMapper.php');
                             	$usuarioMapper = new UsuarioMapper();
 								$respuesta = $usuarioMapper->EDIT($usuario);
 
@@ -31,8 +33,6 @@
 								header('Location: index.php?controller=perfil&action=EDIT');
 							}
 						}else{
-                            require_once('Models/usuarioModel.php');
-                            require_once('Mappers/usuarioMapper.php');
                             $usuarioMapper = new UsuarioMapper();
                             $datos = $usuarioMapper->consultarDatos($_SESSION['Usuario']);
 							require_once('Views/usuario/usuarioEDITView.php');
@@ -41,19 +41,15 @@
 						break;
 
 					default: 
-						echo "hey, estoy viniendo aquí";
 						header('Location: index.php?controller=perfil');
 						break;
 
 				}
 			} else { //mostrar todos los elementos
-				require_once('Mappers/reservaMapper.php');
 				$reservaMapper = new ReservaMapper();
                 $listaReservas = $reservaMapper->getReservasByLogin($_SESSION['Usuario']);
-                require_once('Mappers/partidoMapper.php');
                 $partidoMapper = new PartidoMapper();
 				$listaPartidos = $partidoMapper->getPartidosByLogin($_SESSION['Usuario']);
-				require_once('Mappers/campeonatoMapper.php');
                 $campeonatoMapper = new CampeonatoMapper();
 				$listaCampeonatos = $campeonatoMapper->getCampeonatosByLogin($_SESSION['Usuario']);  
 				require_once('Views/usuario/perfilView.php');

@@ -1,9 +1,13 @@
 <?php	
-
-	// include '../Views/Users_Views/USUARIO_ADD.php';
-	// include '../Views/Users_Views/USUARIO_EDIT.php';
 	require_once('Services/sessionMensajes.php');
 	require_once("Services/validarExcepciones.php");
+	require_once('Models/partidoModel.php');
+	require_once('Mappers/partidoMapper.php');
+	require_once('Models/reservaModel.php');
+	require_once('Mappers/reservaMapper.php');
+	require_once('Mappers/pistaMapper.php');
+	require_once('Mappers/horaMapper.php');
+
 
 	class AdminPartidoController {
 
@@ -14,19 +18,14 @@
 
 					case 'ADD': 
 						try {
-							require_once('Models/partidoModel.php');
 							$partido = new PartidoModel('',$_POST["inputHora"],$_POST["inputFecha"],'','','','','','');
 							$errores =  $partido->validarRegistro();
-							require_once('Mappers/partidoMapper.php');
 							$partidoMapper = new PartidoMapper();
-							require_once('Models/reservaModel.php');
 							$reserva = new ReservaModel();
 							$reserva->setHora($_POST["inputHora"]);
 							$reserva->setFecha($_POST["inputFecha"]);
-							require_once('Mappers/reservaMapper.php');
 							$reservaMapper = new ReservaMapper();
 							$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
-							require_once('Mappers/pistaMapper.php');
 							$pistaMapper = new PistaMapper();
 							$pistasActivas = $pistaMapper->getNumPistasActivas(); 
 							if($reservasEnFecha == $pistasActivas){
@@ -48,14 +47,12 @@
 
 					case 'fecha':	
 						if(isset($_REQUEST["fecha"])){
-							require_once('Mappers/horaMapper.php');
 							$horaMapper = new HoraMapper();
 							$listaHoras = $horaMapper->mostrarTodos();
 							require_once('Views/partido/partidoADDView.php');
 							(new PartidoADDView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,$_REQUEST["fecha"]))->render();
 						}
 						else{
-							require_once('Mappers/horaMapper.php');
 							$horaMapper = new HoraMapper();
 							$listaHoras = $horaMapper->mostrarTodos();
 							require_once('Views/partido/partidoADDView.php');
@@ -65,10 +62,8 @@
 						
 
 					case 'DELETE': 
-						require_once('Models/partidoModel.php');
 						$partido = new PartidoModel();
 						$partido->setId($_REQUEST['idpartido']);
-						require_once('Mappers/partidoMapper.php');
 						$partidoMapper = new PartidoMapper();
 						$respuesta = $partidoMapper->DELETE($partido); 
 						SessionMessage::setMessage($respuesta); 
@@ -77,10 +72,8 @@
 						
 
 					case 'DETAILS': 
-						require_once('Models/partidoModel.php');
 						$partido = new PartidoModel();
 						$partido->setId($_REQUEST['idpartido']);
-						require_once('Mappers/partidoMapper.php');
 						$partidoMapper = new PartidoMapper();
 						$datos = $partidoMapper->consultarDatos($partido);
 						require_once('Views/partido/partidoDetailsView.php');
@@ -89,10 +82,8 @@
 
 
                     case 'PROMOCION':
-						require_once('Models/partidoModel.php');
 						$partido = new PartidoModel();
                         $partido->setId($_REQUEST['idpartido']);
-						require_once('Mappers/partidoMapper.php');
 						$partidoMapper = new PartidoMapper();
 						$partidoMapper->cambiarPromocion($partido);
 						header('Location: index.php?controller=adminPartidos'); 
@@ -105,10 +96,8 @@
 
 				}
 			} else { //mostrar todos los elementos
-				require_once('Mappers/partidoMapper.php');
 				$partidoMapper = new PartidoMapper();
 				$listaPartidos = $partidoMapper->mostrarTodos();
-				require_once('Mappers/horaMapper.php');
 				$horaMapper = new HoraMapper();
 				$listaHoras = $horaMapper->mostrarTodos(); 
 				require_once('Views/partido/adminPartidoView.php');

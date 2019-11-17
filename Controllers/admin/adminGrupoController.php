@@ -1,7 +1,14 @@
 <?php	
 
 	require_once('Services/sessionMensajes.php');
-    require_once("Services/validarExcepciones.php");
+	require_once("Services/validarExcepciones.php");
+	require_once('Models/enfrentamientoModel.php');
+	require_once('Mappers/enfrentamientoMapper.php');
+	require_once('Models/parejaModel.php');
+	require_once('Mappers/parejaMapper.php');
+	require_once('Models/setModel.php');
+	require_once('Models/grupoModel.php');
+	require_once('Mappers/grupoMapper.php');
 
 	class AdminGrupoController {
 
@@ -13,7 +20,6 @@
 					case 'addResultado': 
 						if ($_POST){
 							try {
-								require_once('Models/setModel.php');
 
 								if($_POST["S1P1"] == null || $_POST["S1P2"] == null || $_POST["S2P1"] == null|| $_POST["S2P2"] == null){
 									SessionMessage::setMessage("Los primeros dos sets no pueden estar vacíos.");
@@ -40,9 +46,8 @@
 									$set3->validarSet();
 
 									$resultado = Utils::calcularResultado($set1, $set2, $set3);
-									require_once('Models/enfrentamientoModel.php');
+
 									$enfrentamiento = new EnfrentamientoModel($_REQUEST["idenfrentamiento"]);
-									require_once('Mappers/enfrentamientoMapper.php');
 									$enfrentamientoMapper = new EnfrentamientoMapper();
 
 									$result = $resultado['puntos1'] . "-" . $resultado['puntos2'];
@@ -61,13 +66,11 @@
 
 									$respuesta = $enfrentamientoMapper->addResultado($enfrentamiento);
 
-									require_once('Models/parejaModel.php');
 									$pareja1 = new ParejaModel();
 									$pareja2 = new ParejaModel();
 									$pareja1->setId($_REQUEST['pareja1']);
 									$pareja2->setId($_REQUEST['pareja2']);
 
-									require_once('Mappers/parejaMapper.php');
 									$parejaMapper = new ParejaMapper();
 
 									if($_REQUEST['resultado'] != null){
@@ -109,10 +112,8 @@
 									header($goto);
 							}
 						}else{
-							require_once('Models/enfrentamientoModel.php');
 							$enf = new EnfrentamientoModel();
 							$enf->setId($_REQUEST["idenfrentamiento"]);
-							require_once('Mappers/enfrentamientoMapper.php');
 							$enfMapper = new EnfrentamientoMapper();
 							$datos = $enfMapper->consultarDatos($enf);
 							require_once('Views/campeonato/gestionResultadoView.php');
@@ -122,10 +123,8 @@
 
 					
 					case 'DETAILS': 
-						require_once('Models/enfrentamientoModel.php');
 						$enfrentamiento = new EnfrentamientoModel();
 						$enfrentamiento->setId($_REQUEST['idenfrentamiento']);
-						require_once('Mappers/enfrentamientoMapper.php');
 						$enfrentamientoMapper = new EnfrentamientoMapper();
 						$datos = $enfrentamientoMapper->consultarDatos($enfrentamiento);
 						require_once('Views/campeonato/enfrentamientoDetailsView.php');
@@ -140,10 +139,8 @@
 
 				}
             } else { //mostrar todos los elementos
-                require_once('Models/grupoModel.php');
                 $grupo = new GrupoModel();
                 $grupo->setId($_REQUEST['idgrupo']);
-				require_once('Mappers/grupoMapper.php');
 				$grupoMapper = new GrupoMapper();
 				$parejas = $grupoMapper->getParejasByGrupo($grupo); 
 				$enfrentamientos = $grupoMapper->getEnfrentamientosByGrupo($grupo);

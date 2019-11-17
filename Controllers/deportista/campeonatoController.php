@@ -1,7 +1,17 @@
 <?php	
 
 	require_once('Services/sessionMensajes.php');
-    require_once("Services/validarExcepciones.php");
+	require_once("Services/validarExcepciones.php");
+	require_once('Models/campeonatoModel.php');
+	require_once('Mappers/campeonatoMapper.php');
+	require_once('Models/campeonatoCategoriaModel.php');
+	require_once('Mappers/campeonatoCategoriaMapper.php');
+	require_once('Models/enfrentamientoModel.php');
+	require_once('Mappers/enfrentamientoMapper.php');
+	require_once('Models/parejaModel.php');
+	require_once('Mappers/parejaMapper.php');
+	require_once('Models/grupoModel.php');
+	require_once('Mappers/grupoMapper.php');
 
 	class CampeonatoController {
 
@@ -14,10 +24,8 @@
 						if(isset($_REQUEST['idcampeonato'])){
 							if ($_POST){
 								$hoy = date('Y-m-d H:i:s');
-								require_once('Models/campeonatoModel.php');
 								$campeonato = new CampeonatoModel();
 								$campeonato->setId($_REQUEST['idcampeonato']);
-								require_once('Mappers/campeonatoMapper.php');
 								$campeonatoMapper = new CampeonatoMapper();
 								$fechaFinInsc = $campeonatoMapper->getFechaFinInsById($campeonato);
 
@@ -26,11 +34,8 @@
 									header('Location: index.php?');
 								}
 								else{
-
-									require_once('Models/campeonatoCategoriaModel.php');
 									$catcamp = new CampeonatoCategoriaModel();
 									$catcamp->setId($_REQUEST['categoria']);
-									require_once('Mappers/campeonatoCategoriaMapper.php');
 									$catcampMapper = new CampeonatoCategoriaMapper();
 									$numParejas = $catcampMapper->getNumParejas($catcamp);
 									if($numParejas == 96){
@@ -38,7 +43,6 @@
 										header('Location: index.php?');
 									}else{
 										try {
-											require_once('Models/parejaModel.php');
 											$pareja = new ParejaModel();
 											$pareja->setNombre($_REQUEST['nombre']);
 											$pareja->setCapitan($_SESSION['Usuario']->getLogin());
@@ -46,7 +50,6 @@
 											$pareja->setCatCamp($_REQUEST['categoria']);
 											$pareja->setFechaInscrip($hoy);
 											$errores =  $pareja->validarRegistro();
-											require_once('Mappers/parejaMapper.php');
 											$parejaMapper = new ParejaMapper();
 											$catcampMapper->addParejas($catcamp);
 											$respuesta = $parejaMapper->ADD($pareja);
@@ -63,10 +66,8 @@
 									}
 								}
 							}else{
-								require_once('Models/campeonatoModel.php');
 								$campeonato = new CampeonatoModel();
 								$campeonato->setId($_REQUEST['idcampeonato']);
-								require_once('Mappers/campeonatoMapper.php');
 								$campeonatoMapper = new CampeonatoMapper();
 								$categorias = $campeonatoMapper->getCategoriasByCampeonato($campeonato);
 								$camp = array($campeonatoMapper->getNombreById($campeonato),$_REQUEST['idcampeonato']);;
@@ -89,10 +90,8 @@
 							header('Location: index.php?controller=perfil');
 						}
 						else{
-							require_once('Models/parejaModel.php');
 							$pareja = new ParejaModel();
 							$pareja->setId($_REQUEST['idpareja']);
-							require_once('Mappers/parejaMapper.php');
 							$parejaMapper = new ParejaMapper();
 							$respuesta = $parejaMapper->DELETE($pareja); 
 							SessionMessage::setMessage($respuesta);
@@ -102,10 +101,8 @@
 						
 
                     case 'DETAILS': 
-                        require_once('Models/campeonatoModel.php');
 						$campeonato = new CampeonatoModel();
 						$campeonato->setId($_REQUEST['idcampeonato']);
-						require_once('Mappers/campeonatoMapper.php');
 						$campeonatoMapper = new CampeonatoMapper();
 						$datos = $campeonatoMapper->consultarDatos($campeonato);
 						require_once('Views/campeonato/campeonatoDetailsView.php');
@@ -115,10 +112,8 @@
 
 
 					case 'grupo':
-						require_once('Models/grupoModel.php');
 						$grupo = new GrupoModel();
 						$grupo->setId($_REQUEST['idgrupo']);
-						require_once('Mappers/grupoMapper.php');
 						$grupoMapper = new GrupoMapper();
 						$parejas = $grupoMapper->getParejasByGrupo($grupo); 
 						$enfrentamientos = $grupoMapper->getEnfrentamientosByGrupo($grupo);
@@ -129,10 +124,8 @@
 
 
 					case 'clasificacionCategoria':
-						require_once('Models/CampeonatoCategoriaModel.php');
 						$catcamp = new CampeonatoCategoriaModel();
 						$catcamp->setId($_REQUEST['idcatcamp']);
-						require_once('Mappers/CampeonatoCategoriaMapper.php');
 						$catcampMapper = new CampeonatoCategoriaMapper();
 						$parejas = $catcampMapper->getParejasByCategoria($catcamp);
 						$datos = $catcampMapper->getDatosCampeonatoYCategoria($catcamp);  
@@ -142,10 +135,8 @@
 					
 
 					case 'clasificacionCampeonato':
-						require_once('Models/CampeonatoModel.php');
 						$campeonato = new CampeonatoModel();
 						$campeonato->setId($_REQUEST['idcampeonato']);
-						require_once('Mappers/CampeonatoMapper.php');
 						$campeonatoMapper = new CampeonatoMapper();
 						$parejas = $campeonatoMapper->getParejasByCampeonato($campeonato);
 						$datos = $campeonatoMapper->consultarDatos($campeonato);  
@@ -155,10 +146,8 @@
 
 
 					case 'enfDETAILS': 
-						require_once('Models/enfrentamientoModel.php');
 						$enfrentamiento = new EnfrentamientoModel();
 						$enfrentamiento->setId($_REQUEST['idenfrentamiento']);
-						require_once('Mappers/enfrentamientoMapper.php');
 						$enfrentamientoMapper = new EnfrentamientoMapper();
 						$datos = $enfrentamientoMapper->consultarDatos($enfrentamiento);
 						require_once('Views/campeonato/enfrentamientoDetailsView.php');
@@ -173,7 +162,6 @@
 
 				}
 			} else { //mostrar todos los elementos
-				require_once('Mappers/campeonatoMapper.php');
 				$campeonatoMapper = new CampeonatoMapper();
 				$listaCampeonatos = $campeonatoMapper->mostrarTodos(); 
 				require_once('Views/campeonato/campeonatoView.php');
