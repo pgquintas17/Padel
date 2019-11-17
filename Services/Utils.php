@@ -79,10 +79,7 @@ class Utils {
 	
 				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
 			}
-
 		}
-
-
 	}
     
 }

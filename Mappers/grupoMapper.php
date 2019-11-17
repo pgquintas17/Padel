@@ -132,7 +132,27 @@
                 $result = $resultado->fetch_array(MYSQLI_NUM);
                 return $result;
             }
+        }
 
+
+        function comprobarGrupos($id){
+
+            $sql = "SELECT id_grupo 
+                    FROM grupo INNER JOIN 
+                            (campeonato_categoria INNER JOIN campeonato 
+                            ON campeonato_categoria.ID_CAMPEONATO = campeonato.ID_CAMPEONATO) 
+                    ON grupo.ID_CATCAMP = campeonato_categoria.ID_CATCAMP 
+                    WHERE campeonato.ID_CAMPEONATO = '$id'";
+    
+            if (!$result = $this->mysqli->query($sql))
+            return 'No se ha podido conectar con la base de datos'; 
+    
+            if ($result->num_rows == 0){
+                return false;
+            } 
+            else{
+                return true;
+            }
         }
         
 

@@ -4,6 +4,7 @@
     require_once('Models/usuarioModel.php');
     require_once('Views/mensajeView.php');
     require_once('Models/campeonatoModel.php');
+    require_once('Mappers/grupoMapper.php');
 
     class CampeonatoView extends baseView {
 
@@ -53,8 +54,15 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Fecha inicio</th>
                         <th scope="col">Fecha fin</th>
-                        <th scope="col1">Periodo inscripciones</th>
-                        <th scope="col1"></th>
+                        <th scope="col">Periodo inscripciones</th>
+                        <th scope="col"></th>
+                        <?php
+                            if(Utils::nivelPermiso(2)){
+                        ?>
+                        <th scope="col"></th>
+                        <?php
+                            }
+                        ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,11 +82,11 @@
                         if($this->fila['fecha_inicio'] <= $hoy && $this->fila['fecha_fin'] > $hoy){ // EN CURSO
                         ?>
                         <tr class='table-warning clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                            <td><?php echo $this->fila['nombre']; ?></td>
-                            <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
-                            <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_fin'])); ?></td>
-                            <td>Cerrado</td>
-                            <td>
+                            <td style="vertical-align: middle";><?php echo $this->fila['nombre']; ?></td>
+                            <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
+                            <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_fin'])); ?></td>
+                            <td style="vertical-align: middle";>Cerrado</td>
+                            <td style="vertical-align: middle";>
                                 <?php
                                     if(Utils::nivelPermiso(2)){
                                         $url = "/index.php?controller=adminCampeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
@@ -90,17 +98,24 @@
                                 ?>
                                 <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a>
                             </td>
+                            <?php
+                                if(Utils::nivelPermiso(2)){
+                                    ?>
+                                    <td></td>
+                                    <?php
+                                }
+                                ?>
                         </tr>
 
                         <?php
                         } else if($this->fila['fecha_fin'] < $hoy){ // FINALIZADOS
                             ?>
                             <tr class='table-secondary clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                                <td><?php echo $this->fila['nombre']; ?></td>
-                                <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
-                                <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_fin'])); ?></td>
-                                <td>Cerrado</td>
-                                <td>
+                                <td style="vertical-align: middle";><?php echo $this->fila['nombre']; ?></td>
+                                <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
+                                <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_fin'])); ?></td>
+                                <td style="vertical-align: middle";>Cerrado</td>
+                                <td style="vertical-align: middle";>
                                     <?php
                                         if(Utils::nivelPermiso(2)){
                                             $url = "/index.php?controller=adminCampeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
@@ -112,6 +127,13 @@
                                     ?>
                                     <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a>
                                 </td>
+                                <?php
+                                if(Utils::nivelPermiso(2)){
+                                    ?>
+                                    <td></td>
+                                    <?php
+                                }
+                                ?>
                             </tr>
     
                             <?php
@@ -119,26 +141,36 @@
                         else{ // PERIODO INSCRIPCIÓN O ESPERANDO A EMPEZAR
                         ?>
                             <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                                <td><?php echo $this->fila['nombre']; ?></td>
-                                <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
-                                <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_fin'])); ?></td>
-                                <td><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio_inscripciones'])); ?> - <?php echo date('d/m H:i',strtotime($this->fila['fecha_fin_inscripciones'])); ?></td>
-                                <td>
+                                <td style="vertical-align: middle";><?php echo $this->fila['nombre']; ?></td>
+                                <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio'])); ?></td>
+                                <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_fin'])); ?></td>
+                                <td style="vertical-align: middle";><?php echo date('d/m H:i',strtotime($this->fila['fecha_inicio_inscripciones'])); ?> - <?php echo date('d/m H:i',strtotime($this->fila['fecha_fin_inscripciones'])); ?></td>
+                                <td style="vertical-align: middle";>
                                     <?php
                                         if(Utils::nivelPermiso(2)){
-                                            $url = "/index.php?controller=adminCampeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
-                                        ?>
-                                            <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a>
+                                            if($this->fila['fecha_inicio_inscripciones'] > $hoy){
+                                            ?>
+                                                Pendiente de abrir
+                                            <?php
+                                            }else{
+                                                $url = "/index.php?controller=adminCampeonatos&action=clasificacionCampeonato&idcampeonato=".$this->fila['id_campeonato'];
+                                            ?>
+                                                <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a>
                                         <?php
+                                            }
                                         }
                                         else{
-                                            if($this->fila['fecha_fin_inscripciones'] >= $hoy){
+                                            if($this->fila['fecha_fin_inscripciones'] >= $hoy & $this->fila['fecha_inicio_inscripciones'] <= $hoy){
                                                 $url = "index.php?controller=campeonatos&action=inscripcion&idcampeonato=" .$this->fila['id_campeonato'];
                                             ?>
                                                 <a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Inscribirse</a>
                                             <?php
 
-                                            } else{
+                                            } else if($this->fila['fecha_inicio_inscripciones'] > $hoy){
+                                                ?>
+                                                Pendiente de abrir
+                                            <?php
+                                            } else {
                                                 $url = "index.php?controller=campeonatos&action=clasificacionCampeonato&idcampeonato=" .$this->fila['id_campeonato'];
                                             ?>
                                                 <a class="text-dark" href='<?php echo $url; ?>'><i class="fas fa-list-alt"></i></a>
@@ -148,6 +180,19 @@
                                         }
                                     ?>
                                 </td>
+                                <?php
+                                if(Utils::nivelPermiso(2) && $this->fila['fecha_fin_inscripciones'] <= $hoy && !(new GrupoMapper())->comprobarGrupos($this->fila['id_campeonato'])){
+                                    $url = 'index.php?controller=adminCampeonatos&action=crearGrupos&idcampeonato=' . $this->fila['id_campeonato'];
+                                    ?>
+                                        <td style="vertical-align: middle";><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Crear grupos</a></td>
+                                    <?php
+                                }
+                                else{
+                                    ?>
+                                    <td></td>
+                                    <?php
+                                }
+                                ?>
                             </tr>
                         <?php
                         }           
