@@ -87,7 +87,7 @@
                                                     }
                                                     else{
                                                     ?>
-                                                        <td class="table-light text-dark" style="text-align: -webkit-center";><input class="form-check-input" type="radio" name="inputHora" value="<?php echo $hora;?>"><?php echo date('H:i',strtotime($this->filaHoras['hora'])); ?></td>
+                                                        <td class="table-light text-dark" style="text-align: -webkit-center";><label><input class="form-check-input" type="radio" name="inputHora" value="<?php echo $hora;?>"><?php echo date('H:i',strtotime($this->filaHoras['hora'])); ?></label></td>
                                                     <?php
                                                     }
                                                 
