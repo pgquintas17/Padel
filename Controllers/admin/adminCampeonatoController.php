@@ -207,6 +207,8 @@
 							(new GrupoMapper())->generarGrupos($categoria);
 						}
 
+						SessionMessage::setMessage('Grupos creados para cada categoría del campeonato');
+						SessionMessage::setErrores('Las categorías con menos de 8 parejas inscritas han sido eliminadas.');
 						header('Location: index.php?controller=adminCampeonatos');
 						break;
 
