@@ -18,7 +18,7 @@
 
 					case 'ADD': 
 						try {
-							$partido = new PartidoModel('',$_POST["inputHora"],$_POST["inputFecha"],'','','','','','');
+							$partido = new PartidoModel('',$_POST["hora"],$_POST["fecha"],'','','','','','');
 							$errores =  $partido->validarRegistro();
 							$partidoMapper = new PartidoMapper();
 							$reserva = new ReservaModel();
@@ -41,7 +41,7 @@
 						catch (ValidationException $e){
 							SessionMessage::setErrores($e->getErrores());
 							SessionMessage::setMessage($e->getMessage());
-							header('Location: index.php?controller=adminPartidos&action=ADD');
+							header('Location: index.php?controller=adminPartidos&action=fecha');
 						}
 						break;
 
