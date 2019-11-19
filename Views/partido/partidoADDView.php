@@ -52,7 +52,7 @@
                         <!-- Formulario datos usuario -->
                         <form action="/" method="POST" name="formReservaPista">
 
-                        <input type="hidden" name="controller" value="partidos">
+                        <input type="hidden" name="controller" value="adminPartidos">
 
                             <div class="justify-content-md-center">
                                 <div class="form-group col-md-6">
