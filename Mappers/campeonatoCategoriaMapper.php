@@ -131,12 +131,12 @@ require_once('Models/campeonatoCategoriaModel.php');
                 $tupla = $resultado->fetch_array(MYSQLI_NUM);
                 $id_cat = $tupla['2'];
 
-                $sql2 = "SELECT sexonivel FROM CATEGORIA WHERE id_categoria = '$id_cat'";
+                $sql = "SELECT sexonivel FROM CATEGORIA WHERE id_categoria = '$id_cat'";
             
-                $resultado2 = $this->mysqli->query($sql2);
-                $tupla2 = $resultado->fetch_array(MYSQLI_NUM);
+                $resultado = $this->mysqli->query($sql);
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
                 
-                return $tupla2['0'];
+                return $tupla['0'];
             }
         }
 

@@ -85,11 +85,11 @@
                         }
                         else{
                         ?>
-                        <tr class='clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                        <td class="table-secondary"><?php echo date('d/m',strtotime($this->filaPartidos['fecha'])); ?></td>
-                        <td class="table-secondary"><?php echo date('H:i',strtotime($this->filaPartidos['hora'])); ?></td>
-                        <td class="table-secondary"></td>
-                        <td class="table-secondary"></td>
+                        <tr class='table-secondary clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
+                        <td><?php echo date('d/m',strtotime($this->filaPartidos['fecha'])); ?></td>
+                        <td><?php echo date('H:i',strtotime($this->filaPartidos['hora'])); ?></td>
+                        <td></td>
+                        <td></td>
                         <?php    
                         }
                         ?>
