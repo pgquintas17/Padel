@@ -9,6 +9,7 @@
 	require_once('Mappers/partidoMapper.php');
 	require_once('Models/reservaModel.php');
 	require_once('Mappers/reservaMapper.php');
+	require_once('Mappers/enfrentamientoMapper.php');
 	require_once('Mappers/pistaMapper.php');
 
 
@@ -31,7 +32,9 @@
 						$reservaMapper = new ReservaMapper();
 						$validacion1 = $partidoMapper->comprobarDisponibilidadUsuario($reserva);
 						$validacion2 = $reservaMapper->comprobarDisponibilidadUsuario($reserva);
-						if($validacion1 && $validacion2){
+						$enfrentamientoMapper = new EnfrentamientoMapper();
+						$validacion3 = $enfrentamientoMapper->comprobarDisponibilidadUsuario($reserva);
+						if($validacion1 && $validacion2 && $validacion3){
 							$respuesta = $partidoMapper->añadirParticipante($partido,$usuario);
 							$numPlazas = $partidoMapper->getNumPlazasLibres($_REQUEST["idpartido"]);
 							if($numPlazas == 0){

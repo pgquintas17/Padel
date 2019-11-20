@@ -82,8 +82,33 @@
             }
             else 
                 return 'No existe en la base de datos';
+        }
 
 
+        function comprobarDisponibilidadUsuario($reserva){
+
+            $hora = $reserva->getHora();
+            $fecha = $reserva->getFecha();
+            $login = $reserva->getLogin();   
+
+            $sql2 = "SELECT * FROM  ENFRENTAMIENTO 
+                        INNER JOIN PAREJA pareja1 on pareja1.ID_PAREJA = enfrentamiento.PAREJA1 
+                        INNER JOIN PAREJA pareja2 on pareja2.ID_PAREJA = enfrentamiento.PAREJA1
+                    WHERE (hora = '$hora' AND fecha = '$fecha' 
+                        AND (pareja1.capitan = '$login' OR pareja2.capitan = '$login' 
+                            OR pareja1.miembro = '$login' OR pareja2.miembro = '$login'))";
+
+            if (!($resultado = $this->mysqli->query($sql2))){
+                return false;
+            }
+            else{
+                if ($resultado->num_rows == 0) {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
 
         }
         
