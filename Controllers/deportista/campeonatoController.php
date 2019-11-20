@@ -49,9 +49,9 @@
 											$pareja->setMiembro($_REQUEST['miembro']);
 											$pareja->setCatCamp($_REQUEST['categoria']);
 											$pareja->setFechaInscrip($hoy);
-											$errores =  $pareja->validarRegistro();
+											$errores = $pareja->validarRegistro();
 											$parejaMapper = new ParejaMapper();
-											$catcampMapper->addParejas($catcamp);
+											$catcampMapper->addParejas($catcamp); 
 											$respuesta = $parejaMapper->ADD($pareja);
 											
 											SessionMessage::setMessage($respuesta);

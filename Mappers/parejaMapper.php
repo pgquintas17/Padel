@@ -187,10 +187,57 @@ require_once('Models/horaModel.php');
             $miembro = $pareja->getMiembro();
             $id_catcamp = $pareja->getCatCamp();
 
-            $sql = "SELECT * FROM PAREJA 
-                    WHERE id_catcamp = '$id_catcamp' AND 
-                    (capitan = '$capitan' OR miembro = '$capitan' OR capitan = '$miembro' OR miembro = '$miembro')";
-            
+            require_once('Models/campeonatoCategoriaModel.php');
+            require_once('Mappers/campeonatoCategoriaMapper.php');
+
+            $catcamp = new CampeonatoCategoriaModel();
+            $catcamp->setId($id_catcamp);
+
+            $catcampMapper = new CampeonatoCategoriaMapper();
+            $sexonivel = $catcampMapper->getSexonivelById($catcamp);
+
+            if($sexonivel = 'M1' || $sexonivel = 'M2' || $sexonivel = 'M3'){
+
+                $sql = "SELECT * FROM PAREJA 
+                        INNER JOIN (CAMPEONATO_CATEGORIA 
+                                    INNER JOIN CATEGORIA ON categoria.id_categoria = campeonato_categoria.id_categoria)
+                        ON pareja.id_catcamp = campeonato_categoria.id_catcamp 
+                        WHERE (capitan = '$capitan' 
+                                OR miembro = '$capitan' 
+                                OR capitan = '$miembro' 
+                                OR miembro = '$miembro')
+                            AND (sexonivel = 'M1' 
+                                OR sexonivel = 'M2'
+                                OR sexonivel = 'M3')";
+            }
+            else if($sexonivel = 'F1' || $sexonivel = 'F2' || $sexonivel = 'F3'){
+
+                $sql = "SELECT * FROM PAREJA 
+                        INNER JOIN (CAMPEONATO_CATEGORIA 
+                                    INNER JOIN CATEGORIA ON categoria.id_categoria = campeonato_categoria.id_categoria)
+                        ON pareja.id_catcamp = campeonato_categoria.id_catcamp 
+                        WHERE (capitan = '$capitan' 
+                                OR miembro = '$capitan' 
+                                OR capitan = '$miembro' 
+                                OR miembro = '$miembro')
+                            AND (sexonivel = 'F1' 
+                                OR sexonivel = 'F2'
+                                OR sexonivel = 'F3')";
+            } 
+            else{
+                $sql = "SELECT * FROM PAREJA 
+                        INNER JOIN (CAMPEONATO_CATEGORIA 
+                                    INNER JOIN CATEGORIA ON categoria.id_categoria = campeonato_categoria.id_categoria)
+                        ON pareja.id_catcamp = campeonato_categoria.id_catcamp 
+                        WHERE (capitan = '$capitan' 
+                                OR miembro = '$capitan' 
+                                OR capitan = '$miembro' 
+                                OR miembro = '$miembro')
+                            AND (sexonivel = 'MX1' 
+                                OR sexonivel = 'MX2'
+                                OR sexonivel = 'MX3')";
+            }
+
             $resultado = $this->mysqli->query($sql);
             
             if ($resultado->num_rows != 0){
@@ -199,8 +246,9 @@ require_once('Models/horaModel.php');
             else{
                 return false;
             }
-
+            
         }
+
 
 
         function getNombreById($pareja){
