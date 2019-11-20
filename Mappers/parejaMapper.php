@@ -196,6 +196,8 @@ require_once('Models/horaModel.php');
             $catcampMapper = new CampeonatoCategoriaMapper();
             $sexonivel = $catcampMapper->getSexonivelById($catcamp);
 
+            $id_camp = $catcampMapper->getCampeonatoByCategoria($catcamp);
+
             if($sexonivel = 'M1' || $sexonivel = 'M2' || $sexonivel = 'M3'){
 
                 $sql = "SELECT * FROM PAREJA 
@@ -208,7 +210,7 @@ require_once('Models/horaModel.php');
                                 OR miembro = '$miembro')
                             AND (sexonivel = 'M1' 
                                 OR sexonivel = 'M2'
-                                OR sexonivel = 'M3')";
+                                OR sexonivel = 'M3') AND id_campeonato = '$id_camp'";
             }
             else if($sexonivel = 'F1' || $sexonivel = 'F2' || $sexonivel = 'F3'){
 
@@ -222,7 +224,7 @@ require_once('Models/horaModel.php');
                                 OR miembro = '$miembro')
                             AND (sexonivel = 'F1' 
                                 OR sexonivel = 'F2'
-                                OR sexonivel = 'F3')";
+                                OR sexonivel = 'F3') AND id_campeonato = '$id_camp'";
             } 
             else{
                 $sql = "SELECT * FROM PAREJA 
@@ -235,7 +237,7 @@ require_once('Models/horaModel.php');
                                 OR miembro = '$miembro')
                             AND (sexonivel = 'MX1' 
                                 OR sexonivel = 'MX2'
-                                OR sexonivel = 'MX3')";
+                                OR sexonivel = 'MX3') AND id_campeonato = '$id_camp'";
             }
 
             $resultado = $this->mysqli->query($sql);
