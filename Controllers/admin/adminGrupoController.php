@@ -38,12 +38,22 @@
 									$set2->setPareja1($_POST["S2P1"]);
 									$set2->setPareja2($_POST["S2P2"]);
 
-									$set3->setPareja1($_POST["S3P1"]);
-									$set3->setPareja2($_POST["S3P2"]);
+									if(empty($_POST["S3P1"]) && $_POST["S3P1"] != 0){
+										$set3->setPareja1(null);
+									}else{
+										$set3->setPareja1($_POST["S3P1"]);
+									}
+
+									if(empty($_POST["S3P2"]) && $_POST["S3P2"] != 0){
+										$set3->setPareja2(null);
+									}else{
+										$set3->setPareja2($_POST["S3P2"]);
+									}
 
 									$set1->validarSet();
 									$set2->validarSet();
 									$set3->validarSet();
+
 
 									$resultado = Utils::calcularResultado($set1, $set2, $set3);
 
@@ -59,8 +69,11 @@
 									$set2enf = $_POST["S2P1"] . "-" . $_POST["S2P2"];
 									$enfrentamiento->setSet2($set2enf);
 									
-									if( $_POST["S3P1"] != null){
+									if(!empty($_POST["S3P1"])){
 										$set3enf = $_POST["S3P1"] . "-" . $_POST["S3P2"];
+										$enfrentamiento->setSet3($set3enf);
+									}else{
+										$set3enf = null;
 										$enfrentamiento->setSet3($set3enf);
 									}
 
@@ -106,6 +119,8 @@
 
 							}
 							catch (ValidationException $e){
+
+								
 									SessionMessage::setErrores($e->getErrores());
 									SessionMessage::setMessage($e->getMessage());
 									$goto = 'Location: index.php?controller=adminGrupos&action=addResultado&idenfrentamiento='. $_REQUEST["idenfrentamiento"];
@@ -117,7 +132,7 @@
 							$enfMapper = new EnfrentamientoMapper();
 							$datos = $enfMapper->consultarDatos($enf);
 							require_once('Views/campeonato/gestionResultadoView.php');
-							(new GestionResultadoView(SessionMessage::getMessage(),'','',$datos))->render();
+							(new GestionResultadoView(SessionMessage::getMessage(),SessionMessage::getErrores(),'',$datos))->render();
 						}
 						break;
 

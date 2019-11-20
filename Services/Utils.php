@@ -57,14 +57,20 @@ class Utils {
 				
 				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>1);
 			}
-			else{
+			
+			if($puntosPareja1 > $puntosPareja2){
 				
 				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
 			}
 		} 
 		else if (($puntosPareja1 == 2 || $puntosPareja2 == 2) && $set3->getPareja1() != null){
 			$errores = array();
-			$errores['puntuación'] = "Puntuación de set no válida.";
+			$errores['puntuación1'] = "Puntuación de set no válida.";
+			throw new ValidationException($errores, "Datos no válidos");
+		}
+		else if (($puntosPareja1 < 2 && $puntosPareja2 < 2) && $set3->getPareja1() == null){
+			$errores = array();
+			$errores['puntuación2'] = "Puntuación de set no válida.";
 			throw new ValidationException($errores, "Datos no válidos");
 		}
 		else{
@@ -74,7 +80,8 @@ class Utils {
 	
 				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>1);
 			}
-			else{
+
+			if($set3->getPareja1() < $set3->getPareja2()){
 				$puntosPareja2++;
 	
 				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
