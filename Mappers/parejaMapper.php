@@ -196,11 +196,11 @@ require_once('Models/horaModel.php');
             $catcampMapper = new CampeonatoCategoriaMapper();
             $sexonivel = $catcampMapper->getSexonivelById($catcamp);
 
+            var_dump($sexonivel);
+
             $id_camp = $catcampMapper->getCampeonatoByCategoria($catcamp);
 
-            echo "sexonivel   "; var_dump($sexonivel);
-
-            if($sexonivel = 'M1' || $sexonivel = 'M2' || $sexonivel = 'M3'){
+            if($sexonivel == 'M1' || $sexonivel == 'M2' || $sexonivel == 'M3'){
 
                 $sql = "SELECT * FROM PAREJA 
                         INNER JOIN (CAMPEONATO_CATEGORIA 
@@ -215,7 +215,7 @@ require_once('Models/horaModel.php');
                                 OR sexonivel = 'M3') AND id_campeonato = '$id_camp'";
             }
             
-            if($sexonivel = 'F1' || $sexonivel = 'F2' || $sexonivel = 'F3'){
+            if($sexonivel == 'F1' || $sexonivel == 'F2' || $sexonivel == 'F3'){
 
                 $sql = "SELECT * FROM PAREJA 
                         INNER JOIN (CAMPEONATO_CATEGORIA 
@@ -230,7 +230,8 @@ require_once('Models/horaModel.php');
                                 OR sexonivel = 'F3') AND id_campeonato = '$id_camp'";
             }
 
-            if($sexonivel = 'MX1' || $sexonivel = 'MX2' || $sexonivel = 'MX3'){
+            if($sexonivel == 'MX1' || $sexonivel == 'MX2' || $sexonivel == 'MX3'){
+                
                 $sql = "SELECT * FROM PAREJA 
                         INNER JOIN (CAMPEONATO_CATEGORIA 
                                     INNER JOIN CATEGORIA ON categoria.id_categoria = campeonato_categoria.id_categoria)
@@ -245,6 +246,8 @@ require_once('Models/horaModel.php');
             }
 
             $resultado = $this->mysqli->query($sql);
+
+            var_dump($sql);
             
             if ($resultado->num_rows != 0){
                 return true;
