@@ -52,7 +52,10 @@
 
 									$set1->validarSet();
 									$set2->validarSet();
-									$set3->validarSet();
+
+									if($set3->getPareja1() != null){
+										$set3->validarSet();
+									}
 
 
 									$resultado = Utils::calcularResultado($set1, $set2, $set3);
