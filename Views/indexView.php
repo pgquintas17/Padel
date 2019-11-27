@@ -33,7 +33,40 @@ class IndexView extends baseView {
          
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
-            <h1>Noticias</h1><br>
+    </br>
+            <!--Carrousel-->
+            <div id="demo" class="carousel slide" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src="Views/imgs/pelota.png">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="Views/imgs/pista.png">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="Views/imgs/raquetas.png">
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev " href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon text-black"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+                </div>
+            </br></br>
+
             <!-- Example row of columns -->
             <div class="row">
                 <!--PARTIDOS-->
