@@ -88,6 +88,10 @@
                                 
                                 echo $idpista['0']; ?></td>
                             </tr>
+                            <tr>
+                                <th class="bg-dark text-white">Creador</th>
+                                <td class="table-light"><?php echo $this->datos['9']; ?></td>
+                            </tr>
                         </table>
                         <br><button type="button" class="btn btn-link text-dark" data-toggle="modal" data-target="#confirmDelete"><i class="fas fa-trash-alt fa-2x"></i></button>
                     </div>

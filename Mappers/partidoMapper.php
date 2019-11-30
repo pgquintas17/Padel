@@ -25,11 +25,13 @@ require_once('Models/partidoModel.php');
                     
                     $sql = "INSERT INTO PARTIDO (
                             hora,
-                            fecha
+                            fecha,
+                            creador
                         )
                         VALUES (
                             '$hora',
-                            '$fecha'
+                            '$fecha',
+                            '$creador',
                         )";
 
                     if (!$this->mysqli->query($sql)){
@@ -76,7 +78,8 @@ require_once('Models/partidoModel.php');
                         login2,
                         login3,
                         login4,
-                        id_reserva
+                        id_reserva,
+                        creador
 
                     FROM PARTIDO
                     ORDER BY fecha DESC";
@@ -250,6 +253,23 @@ require_once('Models/partidoModel.php');
         }
 
 
+        function getCreadorById($partido){
+
+            $id_partido = $partido->getId();
+
+            $sql = "SELECT * FROM PARTIDO WHERE id_partido = '$id_partido'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['9'];
+        }
+
+
         function añadirParticipante($partido,$usuario){
 
             $login = $usuario->getLogin();
@@ -369,7 +389,9 @@ require_once('Models/partidoModel.php');
                             login2,
                             login3,
                             login4,
-                            id_reserva 
+                            id_reserva,
+                            creador
+                             
                     FROM PARTIDO 
                     WHERE promocion = 1 AND fecha >= '$fecha' 
                     ORDER BY fecha";
@@ -399,7 +421,9 @@ require_once('Models/partidoModel.php');
                             login2,
                             login3,
                             login4,
-                            id_reserva 
+                            id_reserva,
+                            creador
+
                     FROM PARTIDO 
                     WHERE   (login1 = '$login' OR login2 = '$login' 
                             OR login3 = '$login' OR login4 = '$login') 

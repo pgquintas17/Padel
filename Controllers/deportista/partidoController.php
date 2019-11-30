@@ -38,8 +38,8 @@
 							$respuesta = $partidoMapper->añadirParticipante($partido,$usuario);
 							$numPlazas = $partidoMapper->getNumPlazasLibres($_REQUEST["idpartido"]);
 							if($numPlazas == 0){
-								$admin = (new UsuarioMapper())->getAdmin();
-								$reserva->setLogin($admin->getLogin());
+								$login = $partidoMapper->getCreadorById($partido);;
+								$reserva->setLogin($login);
 								$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
 								$pistaMapper = new PistaMapper();
 								$pistasActivas = $pistaMapper->getNumPistasActivas();

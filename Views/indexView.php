@@ -4,6 +4,7 @@ require_once('Views/baseView.php');
 require_once('Views/mensajeView.php');
 require_once('Mappers/partidoMapper.php');
 require_once('Models/usuarioModel.php');
+require_once('Mappers/usuarioMapper.php');
 require_once('Services/Utils.php');
 
 class IndexView extends baseView {
@@ -18,7 +19,7 @@ class IndexView extends baseView {
         $this->msg = $msg;
         $this->errs = $errs;
         parent::__construct($this->usuario);
-        $this->fila = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
+        $this->fila = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva','creador');
         $this->partidos = $partidos;
         $this->filaC = array('id_campeonato','nombre','fecha_inicio','fecha_fin','fecha_inicio_inscripciones','fecha_fin_inscripciones');
         $this->campeonatos = $campeonatos;
@@ -87,6 +88,12 @@ class IndexView extends baseView {
                                 ?>
                                 <li class="list-group-item">
                                     <strong><?php echo date('d/m/Y',strtotime($this->fila['fecha'])); ?></strong><br>
+                                    <?php if((new UsuarioMapper())->getPermisoByLogin($this->fila['creador']) == 0){
+                                    ?>
+                                        <p id="centrar" class="text-danger">Partido creado por: <?php echo $this->fila['creador']; ?></p>
+                                    <?php
+                                    }
+                                    ?>
                                     <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     ¡Quedan <?php echo $numPlazas; ?> plazas libres!</p>
                                     <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Apuntarse</a></p>

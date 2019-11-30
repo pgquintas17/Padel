@@ -11,10 +11,11 @@ class PartidoModel {
     var $login2;
     var $login3;
 	var $login4;
-	var $id_reserva; 
+	var $id_reserva;
+	var $creador; 
 	
 
- 	function __construct($id_partido=null,$hora=null,$fecha=null,$promocion=null,$login1=null,$login2=null,$login3=null,$login4=null,$id_reserva=null){
+ 	function __construct($id_partido=null,$hora=null,$fecha=null,$promocion=null,$login1=null,$login2=null,$login3=null,$login4=null,$id_reserva=null,$creador=null){
 		$this->id_partido = $id_partido;
         $this->hora = $hora; 
 		$this->fecha = $fecha;
@@ -24,6 +25,7 @@ class PartidoModel {
         $this->login3 = $login3;
 		$this->login4 = $login4;
 		$this->id_reserva = $id_reserva;
+		$this->creador = $creador;
 	}
 
 
@@ -65,6 +67,10 @@ class PartidoModel {
 		return $this->id_reserva;
 	}
 
+	public function getCreador(){
+		return $this->creador;
+	}
+
 
 	// setters
 
@@ -102,6 +108,10 @@ class PartidoModel {
 
 	public function setIdReserva($id_reserva){
 		$this->id_reserva = $id_reserva;
+	}
+
+	public function setCreador($creador){
+		$this->creador = $creador;
 	}
 
 
