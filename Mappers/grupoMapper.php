@@ -126,11 +126,14 @@
 
             $id_grupo = $grupo->getId();
     
-            $sql = "SELECT numero, id_campeonato, sexonivel 
-                    FROM GRUPO INNER JOIN (campeonato_categoria 
-                                        INNER JOIN categoria 
-                                                ON categoria.id_categoria = campeonato_categoria.id_categoria)
-                                ON grupo.id_catcamp = campeonato_categoria.id_catcamp
+            $sql = "SELECT numero, campeonato.id_campeonato, sexonivel, campeonato.fecha_fin 
+                    FROM GRUPO 
+                        INNER JOIN (campeonato_categoria 
+                                    INNER JOIN categoria 
+                                    ON categoria.id_categoria = campeonato_categoria.id_categoria 
+                                    INNER JOIN campeonato 
+                                    ON campeonato_categoria.id_campeonato = campeonato.id_campeonato) 
+                        ON grupo.id_catcamp = campeonato_categoria.id_catcamp 
                     WHERE id_grupo = '$id_grupo'";
                 
             if (!($resultado = $this->mysqli->query($sql)))
