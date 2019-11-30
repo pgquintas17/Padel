@@ -245,6 +245,40 @@ require_once('Models/usuarioModel.php');
                 }
         }
 
+        function getPermisoByLogin($login){
+
+            $sql = "SELECT * FROM USUARIO WHERE login = '$login'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['7'];
+        }
+
+
+        function capitanPareja($usuario,$pareja1,$pareja2){
+
+            $id_pareja1 = $pareja1->getId();
+            $id_pareja2 = $pareja2->getId();
+
+            $login = $usuario->getLogin();
+
+            $sql = "SELECT capitan FROM PAREJA WHERE capitan = '$login' AND (id_pareja = '$id_pareja1' OR id_pareja = '$id_pareja2')";
+
+            $resultado = $this->mysqli->query($sql);
+            
+            if ($resultado->num_rows == 0)
+                    return false;
+                else{
+                    return true;        
+                }
+
+        }
+
 
     }
 

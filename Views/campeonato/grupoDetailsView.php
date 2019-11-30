@@ -4,6 +4,7 @@ require_once('Views/baseView.php');
 require_once('Views/mensajeView.php');
 require_once('Models/parejaModel.php');
 require_once('Mappers/parejaMapper.php');
+require_once('Mappers/usuarioMapper.php');
 require_once('Services/Utils.php');
 
 class GrupoDetailsView extends baseView {
@@ -156,14 +157,31 @@ class GrupoDetailsView extends baseView {
                                       
                         ?>
                             <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
-                                <td><?php $pareja = new ParejaModel(); $pareja->setId($this->filaE['pareja1']); $parejaMapper = new ParejaMapper(); echo $parejaMapper->getNombreById($pareja); ?></td>
-                                <td><?php $pareja = new ParejaModel(); $pareja->setId($this->filaE['pareja2']); $parejaMapper = new ParejaMapper(); echo $parejaMapper->getNombreById($pareja); ?></td>
-                                <td><?php if($this->filaE['fecha'] != null){echo $this->filaE['fecha'];} else{ echo "Pendiente de acordar";} ?></td>
+                                <td><?php $pareja1 = new ParejaModel(); $pareja1->setId($this->filaE['pareja1']); $parejaMapper1 = new ParejaMapper(); echo $parejaMapper1->getNombreById($pareja1); ?></td>
+                                <td><?php $pareja2 = new ParejaModel(); $pareja2->setId($this->filaE['pareja2']); $parejaMapper2 = new ParejaMapper(); echo $parejaMapper2->getNombreById($pareja2); ?></td>
+                                <td><?php 
+                                            if($this->filaE['fecha'] != null){
+                                                echo $this->filaE['fecha'];
+                                            } 
+                                            else{ 
+                                                $usuarioM = new UsuarioMapper(); 
+                                                $capi = $usuarioM->capitanPareja($_SESSION['Usuario'],$pareja1,$pareja2);
+                                                if($capi){
+                                    ?>
+                                                    <a class="btn btn-dark" href='/index.php?controller=enfrentamientos&action=Propuesta&idenfrentamiento=<?php echo $this->filaE['id_enfrentamiento'];?>' role="button">Proponer fecha</a>
+                                    <?php
+                                                } 
+                                                else{
+                                                    echo "Pendiente de acordar";
+                                                }
+                                            } 
+                                    ?>
+                                </td>
                                 <td><?php if($this->filaE['resultado'] != null){echo $this->filaE['resultado'];} else{ echo "Pendiente de jugar";} ?></td>
                         <?php
                             $hoy = date('Y-m-d');
                             if(Utils::nivelPermiso(2)){
-                                if($this->filaE['id_reserva'] != null && $this->filaE['fecha'] < $hoy){
+                                if($this->filaE['id_reserva'] != null && $this->filaE['fecha'] < $hoy && $this->datos['3'] > $hoy){
                         ?>
                                     <td><a class="bg-ligth text-dark" href='/index.php?controller=adminGrupos&action=addResultado&idenfrentamiento=<?php echo $this->filaE['id_enfrentamiento']; ?>'><i class="fas fa-trophy"></i></a></td>
                         <?php
