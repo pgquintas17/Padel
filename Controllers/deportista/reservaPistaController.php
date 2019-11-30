@@ -111,13 +111,11 @@
 						break;
 
 					default: 
-						echo "default";
 						header('Location: index.php');
 						break;
 
 				}
 			} else {
-				echo "sin action";
 				header('Location: index.php');
 			}
 		}

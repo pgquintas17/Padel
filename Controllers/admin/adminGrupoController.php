@@ -151,8 +151,7 @@
 
 
 					default: 
-						echo "hey, estoy viniendo aquí";
-						header('Location: index.php?controller=adminUsuarios');
+						header('Location: index.php?controller=adminGrupos');
 						break;
 
 				}
