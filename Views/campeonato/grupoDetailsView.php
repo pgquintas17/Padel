@@ -20,7 +20,7 @@ class GrupoDetailsView extends baseView {
         $this->msg = $msg;
         $this->errs = $errs;
         parent::__construct($this->usuario);
-        $this->filaE = array('id_enfrentamiento','resultado','fecha','hora','set1','set2','set3','pareja1','pareja2','id_reserva','id_grupo');
+        $this->filaE = array('id_enfrentamiento','resultado','fecha','hora','set1','set2','set3','pareja1','pareja2','id_reserva','id_grupo','propuesta1','propuesta2');
         $this->enfrentamientos = $enfrentamientos;
         $this->filaP = array('id_pareja','nombre_pareja','capitan','miembro','fecha_inscrip','id_grupo','id_catcamp','puntos');
         $this->parejas = $parejas;
@@ -168,7 +168,7 @@ class GrupoDetailsView extends baseView {
                                                 $capi = $usuarioM->capitanPareja($_SESSION['Usuario'],$pareja1,$pareja2);
                                                 if($capi){
                                     ?>
-                                                    <a class="btn btn-dark" href='/index.php?controller=enfrentamientos&action=Propuesta&idenfrentamiento=<?php echo $this->filaE['id_enfrentamiento'];?>' role="button">Proponer fecha</a>
+                                                    <a class="btn btn-dark" href='/index.php?controller=enfrentamientos&idenfrentamiento=<?php echo $this->filaE['id_enfrentamiento'];?>' role="button">Proponer fecha</a>
                                     <?php
                                                 } 
                                                 else{
