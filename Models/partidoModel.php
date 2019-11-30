@@ -3,16 +3,16 @@
     
 class PartidoModel {
 	
-	var $id_partido; 
- 	var $hora;
-	var $fecha; 
-	var $promocion;
-    var $login1;
-    var $login2;
-    var $login3;
-	var $login4;
-	var $id_reserva;
-	var $creador; 
+	private $id_partido; 
+ 	private $hora;
+	private $fecha; 
+	private $promocion;
+    private $login1;
+    private $login2;
+    private $login3;
+	private $login4;
+	private $id_reserva;
+	private $creador; 
 	
 
  	function __construct($id_partido=null,$hora=null,$fecha=null,$promocion=null,$login1=null,$login2=null,$login3=null,$login4=null,$id_reserva=null,$creador=null){
