@@ -135,7 +135,8 @@ require_once('Models/usuarioModel.php');
                         email,
                         genero,
                         permiso 
-                    FROM USUARIO";
+                    FROM USUARIO
+                    ORDER BY permiso DESC";
     
             if (!($resultado = $this->mysqli->query($sql)))
                 return null;

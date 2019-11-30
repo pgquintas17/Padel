@@ -52,8 +52,27 @@
                     while($this->fila = ($this->listaUsuarios)->fetch_assoc()) {
                         $login = $this->fila['login'];          
                         $url = "/index.php?controller=adminUsuarios&action=DETAILS&username=". $login;
+
+                        if($this->fila['permiso'] == 0){ //DEPORTISTA
+                        ?>
+                            <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
+                        <?php
+                        }
+
+                        if($this->fila['permiso'] == 1){ //ENTRENADOR
+                        ?>
+                            <tr class='table-warning clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
+                        <?php
+
+                        }
+
+                        if($this->fila['permiso'] == 2){ //ADMIN
+                        ?>
+                            <tr class='table-success clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
+                        <?php
+
+                        }
             ?>
-                        <tr class='table-light clickeable-row' onclick="window.location.assign('<?php echo $url ?>');" style="cursor:pointer;">
                             <td><?php echo $this->fila['login']; ?></td>
                             <td><?php echo $this->fila['nombre']; ?></td>
                             <td><?php echo $this->fila['email']; ?></td>
