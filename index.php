@@ -60,6 +60,11 @@
                     new PartidoController();
                     exit;
                     break;
+                case "enfrentamientos":
+                    require_once('Controllers/deportista/enfrentamientoController.php');
+                    new EnfrentamientoController();
+                    exit;
+                    break;
                 }
 
             }else{ //SI ES ENTRENADOR
