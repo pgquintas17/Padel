@@ -3,12 +3,12 @@
     
 class CampeonatoModel {
 
- 	var $id_campeonato; 
- 	var $nombre;
- 	var $fecha_inicio; 
-    var $fecha_fin;
-    var $fecha_inicio_inscripciones;
- 	var $fecha_fin_inscripciones;
+ 	private $id_campeonato; 
+ 	private $nombre;
+ 	private $fecha_inicio; 
+    private $fecha_fin;
+    private $fecha_inicio_inscripciones;
+ 	private $fecha_fin_inscripciones;
 	
 
  	function __construct($id_campeonato=null,$nombre=null,$fecha_inicio=null,$fecha_fin=null,$fecha_inicio_inscripciones=null,$fecha_fin_inscripciones=null){

@@ -3,8 +3,8 @@
     
 class SetModel {
 
-    var $pareja1;  
-	var $pareja2; 
+    private $pareja1;  
+	private $pareja2; 
 	
 
  	function __construct($pareja1=null,$pareja2=null){

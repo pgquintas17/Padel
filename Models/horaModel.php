@@ -3,8 +3,8 @@
     
 class HoraModel {
 
- 	var $id; 
-    var $hora;
+ 	private $id; 
+   private $hora;
 	
 
  	function __construct($id,$hora){

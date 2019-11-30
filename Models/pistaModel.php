@@ -3,8 +3,8 @@
     
 class PistaModel {
 
- 	var $id_pista; 
-    var $estado;   
+ 	private $id_pista; 
+    private $estado;   
 	
 
  	function __construct($id_pista=null,$estado=null){
