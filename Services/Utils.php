@@ -1,5 +1,12 @@
 <?php
 
+require_once('Models/usuarioModel.php');
+require_once('Mappers/usuarioMapper.php');
+require_once('Models/reservaModel.php');
+require_once('Mappers/reservaMapper.php');
+require_once('Mappers/partidoMapper.php');
+require_once('Mappers/enfrentamientoMapper.php');
+
 class Utils {
 
     static function conectado(){
@@ -16,11 +23,10 @@ class Utils {
 	}
 	
 	static function nivelPermiso($nivelRequerido){
-		require_once('Models/usuarioModel.php');
+		
 		$login = $_SESSION['Usuario']->getLogin();
 		$control = new UsuarioModel();
 		$control->setLogin($login);
-		require_once('Mappers/usuarioMapper.php');
 		$controlMapper = new UsuarioMapper();
 		$resultado = $controlMapper->comprobarNivelAcceso($control,$nivelRequerido);
 		if($resultado == true)
@@ -86,6 +92,28 @@ class Utils {
 	
 				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
 			}
+		}
+	}
+
+
+	static function validarDisponibilidad($login,$fecha,$hora){
+
+		$reserva = new ReservaModel();
+		$reserva->setLogin($login);
+		$reserva->setFecha($fecha);
+		$reserva->setHora($hora);
+		$reservaMapper = new ReservaMapper();
+		$validacion1 = $reservaMapper->comprobarDisponibilidadUsuario($reserva);
+		$partidoMapper = new PartidoMapper();
+		$validacion2 = $partidoMapper->comprobarDisponibilidadUsuario($reserva);
+		$enfrentamientoMapper = new EnfrentamientoMapper();
+		$validacion3 = $enfrentamientoMapper->comprobarDisponibilidadUsuario($reserva);
+
+		if($validacion1 && $validacion2 && $validacion3){
+			return true;
+		}
+		else{
+			return false;
 		}
 	}
     

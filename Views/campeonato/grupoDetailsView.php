@@ -164,9 +164,10 @@ class GrupoDetailsView extends baseView {
                                                 echo $this->filaE['fecha'];
                                             } 
                                             else{ 
+                                                $hoy = date('Y-m-d');
                                                 $usuarioM = new UsuarioMapper(); 
                                                 $capi = $usuarioM->capitanPareja($_SESSION['Usuario'],$pareja1,$pareja2);
-                                                if($capi){
+                                                if($capi && $this->datos['3'] > $hoy){
                                     ?>
                                                     <a class="btn btn-dark" href='/index.php?controller=enfrentamientos&idenfrentamiento=<?php echo $this->filaE['id_enfrentamiento'];?>' role="button">Proponer fecha</a>
                                     <?php

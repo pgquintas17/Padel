@@ -132,6 +132,78 @@
                 return $result;
             }
         }
+
+
+        function addPropuesta1($enfrentamiento){
+
+            $id = $enfrentamiento->getId();
+            $propuesta = $enfrentamiento->getPropuesta1(); 
+            
+            
+            $sql = "SELECT * FROM ENFRENTAMIENTO  WHERE (id_enfrentamiento = '$id')";
+            $result = $this->mysqli->query($sql);
+        
+            if ($result->num_rows == 1) {	
+    
+                $sql = "UPDATE ENFRENTAMIENTO  SET propuesta1 = '$propuesta'
+                        WHERE ( id_enfrentamiento = '$id')";
+    
+                if (!($resultado = $this->mysqli->query($sql)))
+                    return 'Error en la modificación';
+                else
+                    return 'Propuesta añadida correctamente.';
+            }
+            else 
+                return 'No existe en la base de datos';
+        }
+
+
+        function addPropuesta2($enfrentamiento){
+
+            $id = $enfrentamiento->getId();
+            $propuesta = $enfrentamiento->getPropuesta2(); 
+            
+            
+            $sql = "SELECT * FROM ENFRENTAMIENTO  WHERE (id_enfrentamiento = '$id')";
+            $result = $this->mysqli->query($sql);
+        
+            if ($result->num_rows == 1) {	
+    
+                $sql = "UPDATE ENFRENTAMIENTO  SET propuesta2 = '$propuesta'
+                        WHERE ( id_enfrentamiento = '$id')";
+    
+                if (!($resultado = $this->mysqli->query($sql)))
+                    return 'Error en la modificación';
+                else
+                    return 'Propuesta añadida correctamente.';
+            }
+            else 
+                return 'No existe en la base de datos';
+        }
+
+
+        function getNumParejaCapi($enfrentamiento,$pareja){
+
+            $id = $enfrentamiento->getId();
+            $idpareja = $pareja->getId();
+            $capi = $pareja->getCapitan();
+
+            $sql= "SELECT * 
+                   FROM enfrentamiento
+                        INNER JOIN pareja ON pareja.id_pareja = enfrentamiento.pareja1 
+                   WHERE id_enfrentamiento = '$id' AND pareja1 = '$idpareja' AND capitan = '$capi'";
+
+            $resultado = $this->mysqli->query($sql);
+
+            var_dump($sql);
+
+            if ($resultado->num_rows != 0){
+                return 1;
+            }
+            else{
+                return 2;
+            }
+        }
         
 
     }

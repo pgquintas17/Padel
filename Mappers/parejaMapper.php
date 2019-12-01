@@ -271,9 +271,10 @@ require_once('Models/horaModel.php');
             }
             else{
                 $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                return $tupla['1'];
             }
 
-            return $tupla['1'];
+            
         }
 
 
@@ -322,8 +323,42 @@ require_once('Models/horaModel.php');
                         $parejas[] = $pareja;
                 }
 
-                    return $parejas;
+                return $parejas;
 
+            }
+        }
+
+
+        function getMiembroById($pareja){
+
+            $id = $pareja->getId();
+
+            $sql= "SELECT miembro FROM pareja WHERE id_pareja = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                return $tupla['0'];
+            }
+        }
+
+
+        function esCapiDe($pareja){
+
+            $id = $pareja->getId();
+            $capi = $pareja->getCapitan();
+
+            $sql= "SELECT * FROM pareja WHERE id_pareja = '$id' AND capitan = '$capi'";
+
+            $resultado = $this->mysqli->query($sql);
+
+            if ($resultado->num_rows != 0){
+                return true;
+            }
+            else{
+                return false;
             }
         }
 

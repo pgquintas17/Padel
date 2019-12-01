@@ -3,8 +3,8 @@
     require_once('Views/baseView.php');
     require_once('Models/usuarioModel.php');
     require_once('Views/mensajeView.php');
-    require_once('Models/reservaModel.php');
-    require_once('Mappers/reservaMapper.php');
+    require_once('Models/parejaModel.php');
+    require_once('Mappers/parejaMapper.php');
     require_once('Mappers/pistaMapper.php');
     
     class EnfrentamientoPropuestaView extends baseView {
@@ -49,8 +49,43 @@
                     <a class="bg-ligth text-dark" href='/index.php?controller=campeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
                 </div>
             <div class="col-6">
-                <p style="text-align: right";><strong><?php echo "Campeonato, categoría, grupo" ;?></strong><br>
-                <strong>Parejas:</strong><?php echo "Pareja 1 VS. Pareja 2" ;?><br></p>
+                <p style="text-align: right";><strong><?php echo $this->datos['5'] . ", "; if($this->datos['6'] == 'M1'){
+                                                                                                echo "1ª masculina";
+                                                                                            }
+                                                                                                
+                                                                                            if($this->datos['6'] == 'M2'){
+                                                                                                echo "2ª masculina";
+                                                                                            }
+                                                                                            
+                                                                                            if($this->datos['6'] == 'M3'){
+                                                                                                echo "3ª masculina";
+                                                                                            }
+                                                                                            
+                                                                                            if($this->datos['6'] == 'F1'){
+                                                                                                echo "1ª femenina";
+                                                                                            }
+                                                                                                
+                                                                                            if($this->datos['6'] == 'F2'){
+                                                                                                echo "2ª femenina";
+                                                                                            }
+                                                                                            
+                                                                                            if($this->datos['6'] == 'F3'){
+                                                                                                echo "3ª femenina";
+                                                                                            }
+
+                                                                                            if($this->datos['6'] == 'MX1'){
+                                                                                                echo "1ª mixta";
+                                                                                            }
+                                                                                                
+                                                                                            if($this->datos['6'] == 'MX2'){
+                                                                                                echo "2ª mixta";
+                                                                                            }
+                                                                                            
+                                                                                            if($this->datos['6'] == 'MX3'){
+                                                                                                echo "3ª mixta";
+                                                                                            }; echo ", grupo nº " . $this->datos['7'] ;?></strong><br>
+                <strong>Parejas: </strong><?php echo (new ParejaMapper())->getNombreById((new ParejaModel($this->datos['3']))) . " vs. " . (new ParejaMapper())->getNombreById((new ParejaModel($this->datos['4'])))  ;?><br>
+                <div class="text-danger" style="text-align: right";>No se pueden proponer fechas con menos de cinco días de antelación.</div></p>
             </div>
             </div>
 
@@ -59,11 +94,27 @@
                     <div class="col-lg-2"></div>
                     <div class="bg-dark text-white rounded p-3 col-md-8" id="perfilform">
 
-                        <!-- Formulario datos usuario -->
+                        <!-- Formulario datos propuesta -->
                         <form action="/" method="POST" name="formPropuestaEnfrentamiento">
 
                         <input type="hidden" name="controller" value="enfrentamientos">
                         <input type="hidden" name="idenfrentamiento" value="<?php echo $this->datos['0']; ?>">
+                        
+                        <?php
+                            $pareja = new ParejaModel();
+                            $pareja->setId($this->datos['3']);
+                            $pareja->setCapitan($_SESSION['Usuario']->getLogin());
+                            if((new ParejaMapper())->esCapiDe($pareja)){
+                        ?>
+                                <input type="hidden" name="pareja" value="<?php echo $this->datos['3']; ?>">
+                        <?php
+                            }
+                            else{
+                        ?>
+                                <input type="hidden" name="pareja" value="<?php echo $this->datos['4']; ?>">
+                        <?php
+                            }
+                        ?>
 
                             <div class="justify-content-md-center">
                                 <div class="form-group col-md-6">
@@ -98,7 +149,7 @@
                                                     }
                                                     else{
                                                     ?>
-                                                        <td class="table-light text-dark" style="text-align: -webkit-center";><label><input class="form-check-input" type="radio" name="inputHora" value="<?php echo $hora;?>"><?php echo date('H:i',strtotime($this->filaHoras['hora'])); ?></label></td>
+                                                        <td class="table-light text-dark" style="text-align: -webkit-center";><label><input class="form-check-input" type="radio" name="hora" value="<?php echo $hora;?>"><?php echo date('H:i',strtotime($this->filaHoras['hora'])); ?></label></td>
                                                     <?php
                                                     }
                                                 
