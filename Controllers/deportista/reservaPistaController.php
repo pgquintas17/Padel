@@ -59,8 +59,7 @@
 											$reservaHecha = "La reserva para el partido ha sido registrada en la pista: " . $idPista;
 											SessionMessage::setMessage($reservaHecha);
 											header('Location: index.php?controller=reservas&action=reservar');
-										}
-										
+										}	
 									}
 									else{
 										SessionMessage::setMessage("Tienes otra reserva/partido en ese día y hora.");
