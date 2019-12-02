@@ -59,17 +59,30 @@
                                     $enfrentamientoMapper = new EnfrentamientoMapper();
 
                                     $pareja->setCapitan($capi);
+                                    $parejas = $enfrentamientoMapper->getParejasById($enfrentamiento);
 
                                     if($enfrentamientoMapper->getNumParejaCapi($enfrentamiento,$pareja) == 1){
                                         $enfrentamiento->setPropuesta1($propuesta);
                                         $respuesta = $enfrentamientoMapper->addPropuesta1($enfrentamiento);
+                                        $parejaR = new ParejaModel($parejas['1']);
+                                        $emails = $parejaMapper->getEmailsPareja($parejaR);
                                     }
                                     else{
                                         $enfrentamiento->setPropuesta2($propuesta);
                                         $respuesta = $enfrentamientoMapper->addPropuesta2($enfrentamiento);
+                                        $parejaR = new ParejaModel($parejas['0']);
+                                        $emails = $parejaMapper->getEmailsPareja($parejaR);
                                     }
 
-                                    //mandar mail a los cuatros jugadores
+                                    $to_email_address = $emails . ', paulagonzalez1996@hotmail.com';
+                                    $subject = 'Se ha propuesto una fecha para uno de tus partidos.';
+                                    $partido = $parejaMapper->getNombreById(new ParejaModel($parejas['0'])). ' vs. ' . $parejaMapper->getNombreById(new ParejaModel($parejas['1']));
+                                    $campeonato = $enfrentamientoMapper->getDatosEnfrentamiento($enfrentamiento);
+                                    $message = '<html><head></head><body>Hola,<br>Te informamos de que se ha realizado una propuesta de fecha para tu partido ' . $partido .' en el Campeonato '. $campeonato['5'] .'. <br>La propuesta es: ' . date('d/m H:i',strtotime($propuesta)) . '. <br>Recuerda que el capitan de tu pareja debe conectarse para aceptar o rechazar la propuesta. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+                                    $headers  = 'MIME-Version: 1.0' . "\r\n";
+                                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                                    $headers .= 'From: noreply@padelweb.com';
+                                    mail($to_email_address,$subject,$message,$headers);
                                     
                                     SessionMessage::setMessage($respuesta);
                                     header('Location: index.php');
@@ -133,16 +146,41 @@
                 $enfrentamiento = new EnfrentamientoModel($_REQUEST['idenfrentamiento']);
                 $enfrentamientoMapper = new EnfrentamientoMapper();
                 $datos = $enfrentamientoMapper->getDatosEnfrentamiento($enfrentamiento);
-
+                
                 if($datos['1'] == null && $datos['2'] == null){
                     require_once('Views/campeonato/enfrentamientoPropuestaView.php');
                     (new EnfrentamientoPropuestaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,'',$datos))->render();
                 }
                 else{
-                    //si ya hay una propuesta:
-                    //de la otra pareja: botón de aceptar/rechazar
-                    //propia: cambiar
-                    echo "existe propuesta";
+                    $pareja = new ParejaModel();
+                    $pareja->setCapitan($_SESSION['Usuario']->getLogin());
+
+                    if($datos['1'] != null && $enfrentamientoMapper->getNumParejaCapi($enfrentamiento,$pareja) == 1){
+
+                        require_once('Views/campeonato/enfrentamientoPropuestaView.php');
+                        (new EnfrentamientoPropuestaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,'',$datos))->render();
+
+                    }else if($datos['1'] != null && $enfrentamientoMapper->getNumParejaCapi($enfrentamiento,$pareja) == 2){
+
+                        echo '2ya existe porpuesta';
+                        var_dump($datos['1']);
+
+                        //require_once('Views/campeonato/enfPropuestaView.php');
+                        //(new EnfPropuestaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,'',$datos))->render();
+
+                    }else if($datos['2'] != null && $enfrentamientoMapper->getNumParejaCapi($enfrentamiento,$pareja) == 1){
+
+                        echo '3ya existe porpuesta';
+
+                        //require_once('Views/campeonato/enfPropuestaView.php');
+                        //(new EnfPropuestaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,'',$datos))->render();
+
+                    }else{
+
+                        require_once('Views/campeonato/enfrentamientoPropuestaView.php');
+                        (new EnfrentamientoPropuestaView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,'',$datos))->render();
+
+                    }
                 }
 			}
 		}

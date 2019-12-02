@@ -195,8 +195,6 @@
 
             $resultado = $this->mysqli->query($sql);
 
-            var_dump($sql);
-
             if ($resultado->num_rows != 0){
                 return 1;
             }
@@ -204,7 +202,21 @@
                 return 2;
             }
         }
-        
+
+
+        function getParejasById($enfrentamiento){
+
+            $id = $enfrentamiento->getId();
+    
+            $sql = "SELECT pareja1, pareja2 FROM ENFRENTAMIENTO WHERE (id_enfrentamiento = '$id')";
+                
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'No existe en la base de datos'; 
+            else{ 
+                $result = $resultado->fetch_array(MYSQLI_NUM);
+                return $result;
+            }
+        }
 
     }
 

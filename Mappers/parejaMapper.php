@@ -362,6 +362,28 @@ require_once('Models/horaModel.php');
             }
         }
 
+        
+        function getEmailsPareja($pareja){
+
+            $id = $pareja->getId();
+
+            $sql= "SELECT usuario1.email as email1, usuario2.email as email2
+                   FROM pareja 
+                        INNER JOIN usuario usuario1 ON usuario1.login = pareja.capitan
+                        INNER JOIN usuario usuario2 ON usuario2.login = pareja.miembro
+                   WHERE id_pareja = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                return $tupla['0'] . ', ' . $tupla['1'];
+            }
+
+
+        }
+
 
     }
 

@@ -85,6 +85,10 @@
                                                                                                 echo "3ª mixta";
                                                                                             }; echo ", grupo nº " . $this->datos['7'] ;?></strong><br>
                 <strong>Parejas: </strong><?php echo (new ParejaMapper())->getNombreById((new ParejaModel($this->datos['3']))) . " vs. " . (new ParejaMapper())->getNombreById((new ParejaModel($this->datos['4'])))  ;?><br>
+                <?php 
+                    if($this->datos['1'] != null){echo "<strong>Propuesta actual: </strong>" . date('d/m H:i',strtotime($this->datos['1']));}
+                    if($this->datos['2'] != null){echo "<strong>Propuesta actual: </strong>" . date('d/m H:i',strtotime($this->datos['2']));}
+                ?>
                 <div class="text-danger" style="text-align: right";>No se pueden proponer fechas con menos de cinco días de antelación.</div></p>
             </div>
             </div>
@@ -160,7 +164,18 @@
                                     </table>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-light" name="action" value="addPropuesta" id="submit">Proponer fecha</button>
+                            <?php
+                                if($this->datos['1'] == null && $this->datos['2'] == null){
+                            ?>
+                                    <button type="submit" class="btn btn-light" name="action" value="addPropuesta" id="submit">Proponer fecha</button>
+                            <?php
+                                }
+                                else{
+                            ?>
+                                    <button type="submit" class="btn btn-light" name="action" value="rechazar" id="submit">Proponer fecha</button>
+                            <?php
+                                } 
+                            ?>
                         </form>
                     </div>
                     <div class="col-lg-2"></div>
