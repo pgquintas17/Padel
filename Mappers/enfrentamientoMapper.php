@@ -290,6 +290,35 @@
             }      
         }
 
+
+        function getEmails($enfrentamiento){
+
+            $id = $enfrentamiento->getId();
+
+            $sql= "SELECT usuario1.email as email1, usuario2.email as email2, usuario3.email as email3, usuario4.email as email4
+                   FROM enfrentamiento
+                        INNER JOIN (pareja pareja1 
+                                INNER JOIN usuario usuario1 ON usuario1.login = pareja1.capitan
+                                INNER JOIN usuario usuario2 ON usuario2.login = pareja1.miembro) 
+                        ON pareja1.id_pareja = enfrentamiento.pareja1
+
+                        INNER JOIN (pareja pareja2 
+                                INNER JOIN usuario usuario3 ON usuario3.login = pareja2.capitan
+                                INNER JOIN usuario usuario4 ON usuario4.login = pareja2.miembro) 
+                        ON pareja2.id_pareja = enfrentamiento.pareja2
+                   WHERE id_enfrentamiento = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                return $tupla['0'] . ', ' . $tupla['1'] . ', ' . $tupla['2'] . ', ' . $tupla['3'];
+            }
+
+
+        }
+
     }
 
 ?>

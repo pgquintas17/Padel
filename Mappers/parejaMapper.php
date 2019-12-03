@@ -380,8 +380,6 @@ require_once('Models/horaModel.php');
                 $tupla = $resultado->fetch_array(MYSQLI_NUM);
                 return $tupla['0'] . ', ' . $tupla['1'];
             }
-
-
         }
 
 
