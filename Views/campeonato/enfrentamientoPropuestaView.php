@@ -118,6 +118,10 @@
                                 <input type="hidden" name="pareja" value="<?php echo $this->datos['4']; ?>">
                         <?php
                             }
+
+                            if($this->datos['1'] != null){?> <input type="hidden" name="propuesta1" value="<?php echo $this->datos['1']; ?>"> <?php }
+                            if($this->datos['2'] != null){?> <input type="hidden" name="propuesta2" value="<?php echo $this->datos['2']; ?>"> <?php }
+
                         ?>
 
                             <div class="justify-content-md-center">
@@ -164,18 +168,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <?php
-                                if($this->datos['1'] == null && $this->datos['2'] == null){
-                            ?>
                                     <button type="submit" class="btn btn-light" name="action" value="addPropuesta" id="submit">Proponer fecha</button>
-                            <?php
-                                }
-                                else{
-                            ?>
-                                    <button type="submit" class="btn btn-light" name="action" value="rechazar" id="submit">Proponer fecha</button>
-                            <?php
-                                } 
-                            ?>
                         </form>
                     </div>
                     <div class="col-lg-2"></div>
