@@ -204,6 +204,43 @@
         }
 
 
+        function getNumPareja($enfrentamiento,$pareja){
+
+            $id = $enfrentamiento->getId();
+            $capi = $pareja->getCapitan();
+
+            $sql= "SELECT pareja1, pareja2 
+                   FROM enfrentamiento 
+                   WHERE id_enfrentamiento = '$id'";
+
+            $resultado = $this->mysqli->query($sql);
+            $tupla = $resultado->fetch_array(MYSQLI_NUM);
+
+            $pareja1 = $tupla['0'];
+            $pareja2 = $tupla['1'];
+
+            $sql2 = "SELECT *
+                     FROM pareja
+                     WHERE capitan = '$capi' AND id_pareja = '$pareja1'";
+
+            $resultado = $this->mysqli->query($sql2);
+
+            if ($resultado->num_rows != 0){
+                return 1;
+            }
+
+            $sql2 = "SELECT *
+                     FROM pareja
+                     WHERE capitan = '$capi' AND id_pareja = '$pareja2'";
+
+            $resultado = $this->mysqli->query($sql2);
+            
+            if ($resultado->num_rows != 0){
+                return 2;
+            }
+        }
+
+
         function getParejasById($enfrentamiento){
 
             $id = $enfrentamiento->getId();
@@ -216,6 +253,41 @@
                 $result = $resultado->fetch_array(MYSQLI_NUM);
                 return $result;
             }
+        }
+
+
+        function añadirReserva($enfrentamiento){
+
+            $id_reserva = $enfrentamiento->getIdReserva();
+            $id_enfrentamiento = $enfrentamiento->getId();
+
+            $sql = "UPDATE ENFRENTAMIENTO  SET id_reserva = '$id_reserva' 
+                    WHERE ( id_enfrentamiento = '$id_enfrentamiento' )";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la modificación';
+            }      
+            else{
+                return true;
+            }      
+        }
+
+
+        function añadirFechaHora($enfrentamiento){
+
+            $fecha = $enfrentamiento->getFecha();
+            $hora = $enfrentamiento->getHora();
+            $id_enfrentamiento = $enfrentamiento->getId();
+
+            $sql = "UPDATE ENFRENTAMIENTO  SET fecha = '$fecha', hora = '$hora' 
+                    WHERE ( id_enfrentamiento = '$id_enfrentamiento' )";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la modificación';
+            }      
+            else{
+                return true;
+            }      
         }
 
     }
