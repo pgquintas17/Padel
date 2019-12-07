@@ -36,6 +36,7 @@ class GrupoDetailsView extends baseView {
          
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
+            <h1> <?php echo $this->datos['4']; ?></h1>
             <h1>Grupo <?php echo $this->datos['0']; ?>, <?php 
                                 if($this->datos['2'] == 'M1'){
                                     echo "1ª masculina";
@@ -72,7 +73,7 @@ class GrupoDetailsView extends baseView {
                                 if($this->datos['2'] == 'MX3'){
                                     echo "3ª mixta";
                                 }
-                                ?>:</h1><br>
+                                ?>:</h1>
 
             <div class="row">
                 <div class="col-2" style="align-self: center;"><p>

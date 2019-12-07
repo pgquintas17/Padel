@@ -126,7 +126,7 @@
 
             $id_grupo = $grupo->getId();
     
-            $sql = "SELECT numero, campeonato.id_campeonato, sexonivel, campeonato.fecha_fin 
+            $sql = "SELECT numero, campeonato.id_campeonato, sexonivel, campeonato.fecha_fin, campeonato.nombre 
                     FROM GRUPO 
                         INNER JOIN (campeonato_categoria 
                                     INNER JOIN categoria 
