@@ -204,6 +204,54 @@
         }
 
 
+        function borrarPropuesta1($enfrentamiento){
+
+            $id = $enfrentamiento->getId();
+            $propuesta = $enfrentamiento->getPropuesta1(); 
+            
+            
+            $sql = "SELECT * FROM ENFRENTAMIENTO  WHERE (id_enfrentamiento = '$id')";
+            $result = $this->mysqli->query($sql);
+        
+            if ($result->num_rows == 1) {	
+    
+                $sql = "UPDATE ENFRENTAMIENTO  SET propuesta1 = NULL
+                        WHERE ( id_enfrentamiento = '$id')";
+    
+                if (!($resultado = $this->mysqli->query($sql)))
+                    return 'Error en la modificación';
+                else
+                    return 'Propuesta añadida correctamente.';
+            }
+            else 
+                return 'No existe en la base de datos';
+        }
+
+
+        function borrarPropuesta2($enfrentamiento){
+
+            $id = $enfrentamiento->getId();
+            $propuesta = $enfrentamiento->getPropuesta2(); 
+            
+            
+            $sql = "SELECT * FROM ENFRENTAMIENTO  WHERE (id_enfrentamiento = '$id')";
+            $result = $this->mysqli->query($sql);
+        
+            if ($result->num_rows == 1) {	
+    
+                $sql = "UPDATE ENFRENTAMIENTO  SET propuesta2 = NULL
+                        WHERE ( id_enfrentamiento = '$id')";
+    
+                if (!($resultado = $this->mysqli->query($sql)))
+                    return 'Error en la modificación';
+                else
+                    return 'Propuesta añadida correctamente.';
+            }
+            else 
+                return 'No existe en la base de datos';
+        }
+
+
         function getNumParejaCapi($enfrentamiento,$pareja){
 
             $id = $enfrentamiento->getId();

@@ -180,12 +180,14 @@
                                             if($enfrentamientoMapper->getNumParejaCapi($enfrentamiento,$pareja) == 1){
                                                 $enfrentamiento->setPropuesta1($propuesta);
                                                 $respuesta = $enfrentamientoMapper->addPropuesta1($enfrentamiento);
+                                                $respuesta = $enfrentamientoMapper->borrarPropuesta2($enfrentamiento);
                                                 $parejaR = new ParejaModel($parejas['1']);
                                                 $emails = $parejaMapper->getEmailsPareja($parejaR);
                                             }
                                             else{
                                                 $enfrentamiento->setPropuesta2($propuesta);
                                                 $respuesta = $enfrentamientoMapper->addPropuesta2($enfrentamiento);
+                                                $respuesta = $enfrentamientoMapper->borrarPropuesta1($enfrentamiento);
                                                 $parejaR = new ParejaModel($parejas['0']);
                                                 $emails = $parejaMapper->getEmailsPareja($parejaR);
                                             }
