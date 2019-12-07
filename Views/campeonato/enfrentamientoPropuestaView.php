@@ -46,7 +46,7 @@
 
             <div class="row justify-content-md-center">
                 <div class="col-2" style="align-self: center;">
-                    <a class="bg-ligth text-dark" href='/index.php?controller=campeonatos'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                    <a class="bg-ligth text-dark" href='/index.php?controller=campeonatos&action=grupo&idgrupo=<?php echo $this->datos['8']; ?>'><i class="fas fa-arrow-circle-left fa-2x"></i></a>
                 </div>
             <div class="col-6">
                 <p style="text-align: right";><strong><?php echo $this->datos['5'] . ", "; if($this->datos['6'] == 'M1'){

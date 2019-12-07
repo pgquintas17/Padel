@@ -116,7 +116,7 @@
 
             $id = $enfrentamiento->getId();
 
-            $sql = "SELECT id_enfrentamiento, propuesta1, propuesta2, pareja1, pareja2, campeonato.nombre, categoria.sexonivel, grupo.numero
+            $sql = "SELECT id_enfrentamiento, propuesta1, propuesta2, pareja1, pareja2, campeonato.nombre, categoria.sexonivel, grupo.numero, grupo.id_grupo
                     FROM enfrentamiento
                         INNER JOIN (grupo 
                                 INNER JOIN (campeonato_categoria 
@@ -130,6 +130,28 @@
             else{ 
                 $result = $resultado->fetch_array(MYSQLI_NUM);
                 return $result;
+            }
+        }
+
+
+        function getFechaFinCampeonato($enfrentamiento){
+
+            $id = $enfrentamiento->getId();
+
+            $sql = "SELECT campeonato.fecha_fin
+                    FROM enfrentamiento
+                        INNER JOIN (grupo 
+                                INNER JOIN (campeonato_categoria 
+                                        INNER JOIN categoria ON categoria.id_categoria = campeonato_categoria.id_categoria INNER JOIN campeonato ON campeonato.id_campeonato = campeonato_categoria.id_campeonato ) 
+                                ON campeonato_categoria.id_catcamp = grupo.id_catcamp) 
+                        ON enfrentamiento.id_grupo = grupo.id_grupo
+                    WHERE id_enfrentamiento = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql)))
+                return 'No existe en la base de datos'; 
+            else{ 
+                $result = $resultado->fetch_array(MYSQLI_NUM);
+                return $result['0'];
             }
         }
 
