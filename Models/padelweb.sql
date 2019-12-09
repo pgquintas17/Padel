@@ -48,6 +48,7 @@ CREATE TABLE `usuario` (
   `EMAIL` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
   `GENERO` varchar(9) COLLATE latin1_spanish_ci NOT NULL,
   `PERMISO` int NOT NULL,
+  `SUSCRIPCION` tinyint NOT NULL,
 
   PRIMARY KEY(`LOGIN`),
   UNIQUE KEY `EMAIL` (`EMAIL`)
@@ -112,6 +113,21 @@ CREATE TABLE `categoria` (
   `SEXONIVEL` varchar(3) COLLATE latin1_spanish_ci NOT NULL,
 
 PRIMARY KEY (`ID_CATEGORIA`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+
+--
+-- Estructura de tabla para la tabla `reserva`
+--
+
+CREATE TABLE `noticia` (
+  `ID_NOTICIA` int NOT NULL AUTO_INCREMENT,
+  `TITULO` varchar(45) COLLATE latin1_spanish_ci NOT NULL,
+  `CUERPO` text COLLATE latin1_spanish_ci NOT NULL,
+  `fecha_creacion` datetime NOT NULL,
+
+PRIMARY KEY (`ID_NOTICIA`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 

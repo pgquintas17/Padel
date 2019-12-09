@@ -22,6 +22,7 @@ require_once('Models/usuarioModel.php');
             $email = $usuario->getEmail();
             $genero = $usuario->getGenero();
             $permiso = $usuario->getPermiso();
+            $suscripcion = $usuario->getSuscripcion();
 
             if (($login <> '')){ 
     
@@ -40,7 +41,8 @@ require_once('Models/usuarioModel.php');
                                 telefono,
                                 email,
                                 genero,
-                                permiso
+                                permiso,
+                                suscripcion
                             )
                             VALUES (
                                 '$login',
@@ -50,7 +52,8 @@ require_once('Models/usuarioModel.php');
                                 '$telefono',
                                 '$email',
                                 '$genero',
-                                '$permiso'
+                                '$permiso',
+                                '$suscripcion'
                             )";
     
                         if (!$this->mysqli->query($sql)) 
@@ -77,6 +80,7 @@ require_once('Models/usuarioModel.php');
             $telefono = $usuario->getTelefono();
             $email = $usuario->getEmail();
             $genero = $usuario->getGenero();
+            $suscripcion = $usuario->getSuscripcion();
 	
             $sql = "SELECT * FROM USUARIO  WHERE (login = '$login')";
             $result = $this->mysqli->query($sql);
@@ -89,7 +93,8 @@ require_once('Models/usuarioModel.php');
                             fecha_nac = '$fechaNac',
                             telefono = '$telefono',
                             email = '$email',
-                            genero = '$genero'
+                            genero = '$genero',
+                            suscripcion = '$suscripcion'
     
                         WHERE ( login = '$login')";
     
@@ -134,7 +139,8 @@ require_once('Models/usuarioModel.php');
                         telefono,
                         email,
                         genero,
-                        permiso 
+                        permiso,
+                        suscripcion 
                     FROM USUARIO
                     ORDER BY permiso DESC";
     
@@ -175,7 +181,7 @@ require_once('Models/usuarioModel.php');
                 return null;
             else{
                 $tupla = $resultado->fetch_array(MYSQLI_NUM);
-                return new UsuarioModel($tupla[0], $tupla[1], $tupla[2], $tupla[3], $tupla[4], $tupla[5], $tupla[6], $tupla[7]);        
+                return new UsuarioModel($tupla[0], $tupla[1], $tupla[2], $tupla[3], $tupla[4], $tupla[5], $tupla[6], $tupla[7], $tupla[8]);        
             }
         }
     
@@ -278,6 +284,20 @@ require_once('Models/usuarioModel.php');
                     return true;        
                 }
 
+        }
+
+
+        function getEmailsSuscripcion() {
+		
+            $sql = "SELECT 
+                        email, 
+                    FROM USUARIO
+                    WHERE suscripcion = '1'";
+    
+            if (!($resultado = $this->mysqli->query($sql)))
+                return null;
+            else
+                return $resultado;
         }
 
 
