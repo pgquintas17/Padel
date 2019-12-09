@@ -16,8 +16,6 @@ require_once('Models/pistaModel.php');
 
             $id_pista = $pista->getId();
             $estado = $pista->getEstado();
-            echo "id_pista: ", $id_pista;
-            echo "    estado: ", $estado;
     
             $sql = "SELECT * FROM PISTA";
 

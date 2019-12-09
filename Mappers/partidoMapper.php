@@ -15,7 +15,8 @@ require_once('Models/partidoModel.php');
         function ADD($partido){
 
             $hora = $partido->getHora();
-            $fecha = $partido->getFecha(); 
+            $fecha = $partido->getFecha();
+            $creador = $partido->getCreador();
     
                 $sql = "SELECT * FROM PARTIDO";
     
@@ -26,16 +27,18 @@ require_once('Models/partidoModel.php');
                     $sql = "INSERT INTO PARTIDO (
                             hora,
                             fecha,
+                            promocion,
                             creador
                         )
                         VALUES (
                             '$hora',
                             '$fecha',
-                            '$creador',
+                            '0',
+                            '$creador'
                         )";
 
                     if (!$this->mysqli->query($sql)){
-                        return 'Error en la inserción';
+                        return $sql;
                     } 
                     else {
                         return 'Registro completado con éxito. Recuerda promocionar el partido para darle difusión.';
