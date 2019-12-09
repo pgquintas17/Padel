@@ -36,35 +36,41 @@
                         new AdminGrupoController();
                         exit;
                         break;
+                    case "adminNoticias":
+                        require_once('Controllers/admin/adminNoticiaController.php');
+                        new AdminNoticiaController();
+                        exit;
+                        break;
                 }
+
             }else if($_SESSION['Usuario']->getPermiso() == 0){ //SI ES DEPORTISTA
 
                 switch($_REQUEST["controller"]) {
-                case "perfil":
-                    require_once('Controllers/deportista/perfilController.php');
-                    new PerfilController();
-                    exit;
-                    break;
-                case "reservas":
-                    require_once('Controllers/deportista/reservaPistaController.php');
-                    new ReservaPistaController();
-                    exit;
-                    break;
-                case "campeonatos":
-                    require_once('Controllers/deportista/campeonatoController.php');
-                    new CampeonatoController();
-                    exit;
-                    break;
-                case "partidos":
-                    require_once('Controllers/deportista/partidoController.php');
-                    new PartidoController();
-                    exit;
-                    break;
-                case "enfrentamientos":
-                    require_once('Controllers/deportista/enfrentamientoController.php');
-                    new EnfrentamientoController();
-                    exit;
-                    break;
+                    case "perfil":
+                        require_once('Controllers/deportista/perfilController.php');
+                        new PerfilController();
+                        exit;
+                        break;
+                    case "reservas":
+                        require_once('Controllers/deportista/reservaPistaController.php');
+                        new ReservaPistaController();
+                        exit;
+                        break;
+                    case "campeonatos":
+                        require_once('Controllers/deportista/campeonatoController.php');
+                        new CampeonatoController();
+                        exit;
+                        break;
+                    case "partidos":
+                        require_once('Controllers/deportista/partidoController.php');
+                        new PartidoController();
+                        exit;
+                        break;
+                    case "enfrentamientos":
+                        require_once('Controllers/deportista/enfrentamientoController.php');
+                        new EnfrentamientoController();
+                        exit;
+                        break;
                 }
 
             }else{ //SI ES ENTRENADOR
