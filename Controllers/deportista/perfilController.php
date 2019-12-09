@@ -19,7 +19,7 @@
 					case 'EDIT': 
 						if ($_POST){
 							try {
-								$usuario = new UsuarioModel($_SESSION["Usuario"]->getLogin(),$_POST["inputNombre"],$_POST["inputPassword"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_SESSION["Usuario"]->getPermiso());
+								$usuario = new UsuarioModel($_SESSION["Usuario"]->getLogin(),$_POST["inputNombre"],$_POST["inputPassword"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_SESSION["Usuario"]->getPermiso(),$_POST['inputSuscripcion']);
 								$errores =  $usuario->validarRegistro();
                             	$usuarioMapper = new UsuarioMapper();
 								$respuesta = $usuarioMapper->EDIT($usuario);
