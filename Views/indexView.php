@@ -121,14 +121,6 @@ class IndexView extends baseView {
                                     <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     Quedan <?php echo $numPlazas; ?> plazas libres</p>
                                     <?php
-                                    if($numPlazas == 0){
-                                        $id = $this->fila['id_partido'];
-                                        $url = "index.php?controller=adminPartidos&action=CERRAR&idpartido=" . $id;
-                                        ?>
-                                    <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Cerrar partido</a></p>
-                                    </li>
-                                <?php
-                                }
                             }    
                         }
                             ?>
