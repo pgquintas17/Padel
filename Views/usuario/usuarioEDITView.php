@@ -45,26 +45,26 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label>Nombre</label>
+                                        <label><strong>Nombre</strong></label>
                                         <input type="text" class="form-control" name="inputNombre" readonly value=<?php echo $this->datos['1'];?>>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label>Password</label>
+                                        <label><strong>Password</strong></label>
                                         <input type="password" class="form-control" name="inputPassword" value=<?php echo $this->datos['2'];?>>
                                     </div>
                                 </div>    
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="inputFechaNac">Fecha de Nacimiento</label>
+                                        <label for="inputFechaNac"><strong>Fecha de Nacimiento</strong></label>
                                         <input type="date" class="form-control" name="inputFechaNac" value=<?php echo $this->datos['3'];?>>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputTelefono">Telefono</label>
+                                        <label for="inputTelefono"><strong>Telefono</strong></label>
                                         <input type="text" class="form-control" name="inputTelefono" value=<?php echo $this->datos['4'];?>>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="inputGenero">Género</label>
+                                    <label for="inputGenero"><strong>Género</strong></label>
                                     <div class="form-check row">
                                     <label><div class="col-md-1">
                                             <input class="form-check-input" type="radio" name="inputGenero" value="femenino" <?php if($this->datos['6'] == "femenino"){ ?> checked <?php } ?>>Mujer
@@ -75,8 +75,20 @@
                                     </div>  
                                 </div>
                                 <div class="form-group">
-                                    <label>Email</label>
+                                    <label><strong>Email</strong></label>
                                     <input type="email" class="form-control" name="inputEmail" value=<?php echo $this->datos['5']; ?>>
+                                </div>
+                                <div class="form-group col-md-12" style="text-align: left;">
+                                    <label for="inputSus"><strong>Suscripción a noticias</strong></label>
+                                    <div class="form-check row">
+                                    <label><div class="col">
+                                            <input class="form-check-input" type="radio" name="inputSuscripcion" value="1" <?php if($this->datos['8'] == "1"){ ?> checked <?php } ?>>Sí, deseo recibir noticias por email.
+                                        </div></label>
+                                    <label><div class="col">
+                                            <input class="form-check-input" type="radio" name="inputSuscripcion" value="0" <?php if($this->datos['8'] == "0"){ ?> checked<?php } ?>>No, no quiero recibir noticias por email
+                                            <p class="text-danger" style="font-size: 11px;">Seguirás recibiendo emails relacionados con tus reservas, partidos y campeonatos.</p>
+                                        </div></label>
+                                    </div>  
                                 </div>
                                 <button type="submit" class="btn btn-light" name="submit" id="submit">Editar</button>
                             </form>

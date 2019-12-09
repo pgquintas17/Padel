@@ -16,7 +16,7 @@
             $this->msg = $msg;
             $this->errs = $errs;
             parent::__construct($this->usuario);
-            $this->fila = array('login','nombre','apellidos','passwd','fecha_nac','telefono','email','genero','permiso');
+            $this->fila = array('login','nombre','apellidos','passwd','fecha_nac','telefono','email','genero','permiso','suscripcion');
             $this->listaUsuarios = $listaUsuarios;
         }
 
