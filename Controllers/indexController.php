@@ -4,6 +4,7 @@
 	require_once('Views/indexView.php');
 	require_once('Mappers/partidoMapper.php');
 	require_once('Mappers/campeonatoMapper.php');
+	require_once('Mappers/noticiaMapper.php');
 	require_once('Services/sessionMensajes.php');
 
 class IndexController {
@@ -16,11 +17,13 @@ class IndexController {
 
 		$campeonatos = (new CampeonatoMapper())->getCampeonatosEnInscripcion();
 
+		$noticias = (new NoticiaMapper())->getNoticiasRecientes($fecha);
+
 		if (Utils::conectado()) {
 			$usuario = $_SESSION['Usuario'];
 		}
 		
-		(new IndexView(SessionMessage::getMessage(),SessionMessage::getErrores(),$usuario,'',$partidos,'',$campeonatos))->render();
+		(new IndexView(SessionMessage::getMessage(),SessionMessage::getErrores(),$usuario,'',$partidos,'',$campeonatos,'',$noticias))->render();
 	}
 }
 
