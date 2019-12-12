@@ -97,15 +97,19 @@
                                                 $emails = $parejaMapper->getEmailsPareja($parejaR);
                                             }
 
-                                            $to_email_address = $emails . ', paulagonzalez1996@hotmail.com';
-                                            $subject = 'Se ha propuesto una fecha para uno de tus partidos.';
-                                            $partido = $parejaMapper->getNombreById(new ParejaModel($parejas['0'])). ' vs. ' . $parejaMapper->getNombreById(new ParejaModel($parejas['1']));
-                                            $campeonato = $enfrentamientoMapper->getDatosEnfrentamiento($enfrentamiento);
-                                            $message = '<html><head></head><body>Hola,<br>Te informamos de que se ha realizado una propuesta de fecha para tu partido ' . $partido .' en el Campeonato '. $campeonato['5'] .'. <br>La propuesta es: ' . date('d/m H:i',strtotime($propuesta)) . '. <br>Recuerda que el capit&#225;n de tu pareja debe conectarse para aceptar o rechazar la propuesta. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
-                                            $headers  = 'MIME-Version: 1.0' . "\r\n";
-                                            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                                            $headers .= 'From: noreply@padelweb.com';
-                                            mail($to_email_address,$subject,$message,$headers);
+                                            
+
+                                            foreach($emails as $email){
+                                                $to_email_address = $email;
+                                                $subject = 'Se ha propuesto una fecha para uno de tus partidos.';
+                                                $partido = $parejaMapper->getNombreById(new ParejaModel($parejas['0'])). ' vs. ' . $parejaMapper->getNombreById(new ParejaModel($parejas['1']));
+                                                $campeonato = $enfrentamientoMapper->getDatosEnfrentamiento($enfrentamiento);
+                                                $message = '<html><head></head><body>Hola,<br>Te informamos de que se ha realizado una propuesta de fecha para tu partido ' . $partido .' en el Campeonato '. $campeonato['5'] .'. <br>La propuesta es: ' . date('d/m H:i',strtotime($propuesta)) . '. <br>Recuerda que el capit&#225;n de tu pareja debe conectarse para aceptar o rechazar la propuesta. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+                                                $headers  = 'MIME-Version: 1.0' . "\r\n";
+                                                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                                                $headers .= 'From: noreply@padelweb.com';
+                                                mail($to_email_address,$subject,$message,$headers);
+                                            }
                                             
                                             SessionMessage::setMessage($respuesta);
                                             header('Location: index.php');
@@ -202,15 +206,17 @@
                                                     $emails = $parejaMapper->getEmailsPareja($parejaR);
                                                 }
 
-                                                $to_email_address = $emails . ', paulagonzalez1996@hotmail.com';
-                                                $subject = 'Se ha propuesto una fecha para uno de tus partidos.';
-                                                $partido = $parejaMapper->getNombreById(new ParejaModel($parejas['0'])). ' vs. ' . $parejaMapper->getNombreById(new ParejaModel($parejas['1']));
-                                                $campeonato = $enfrentamientoMapper->getDatosEnfrentamiento($enfrentamiento);
-                                                $message = '<html><head></head><body>Hola,<br>Te informamos de que tu propuesta para el partido ' . $partido .' en el Campeonato '. $campeonato['5'] .' ha sido rechazada. <br>En su lugar se ha propuesto: ' . date('d/m H:i',strtotime($propuesta)) . '. <br>Recuerda que el capit&#225;n de tu pareja debe conectarse para aceptar o rechazar la propuesta. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
-                                                $headers  = 'MIME-Version: 1.0' . "\r\n";
-                                                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                                                $headers .= 'From: noreply@padelweb.com';
-                                                mail($to_email_address,$subject,$message,$headers);
+                                                foreach($emails as $email){
+                                                    $to_email_address = $email;
+                                                    $subject = 'Se ha propuesto una fecha para uno de tus partidos.';
+                                                    $partido = $parejaMapper->getNombreById(new ParejaModel($parejas['0'])). ' vs. ' . $parejaMapper->getNombreById(new ParejaModel($parejas['1']));
+                                                    $campeonato = $enfrentamientoMapper->getDatosEnfrentamiento($enfrentamiento);
+                                                    $message = '<html><head></head><body>Hola,<br>Te informamos de que tu propuesta para el partido ' . $partido .' en el Campeonato '. $campeonato['5'] .' ha sido rechazada. <br>En su lugar se ha propuesto: ' . date('d/m H:i',strtotime($propuesta)) . '. <br>Recuerda que el capit&#225;n de tu pareja debe conectarse para aceptar o rechazar la propuesta. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+                                                    $headers  = 'MIME-Version: 1.0' . "\r\n";
+                                                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                                                    $headers .= 'From: noreply@padelweb.com';
+                                                    mail($to_email_address,$subject,$message,$headers);
+                                                }
                                                 
                                                 SessionMessage::setMessage($respuesta);
                                                 header('Location: index.php');
@@ -252,6 +258,10 @@
 
                         $validacionCapitan = Utils::validarDisponibilidad($capi,$fecha,$hora);
                         $validacionMiembro = Utils::validarDisponibilidad($capi,$fecha,$hora);
+
+                        $enfrentamiento = new EnfrentamientoModel($_REQUEST['idenfrentamiento']);
+                        $enfrentamientoMapper = new EnfrentamientoMapper();
+                        $parejas = ($enfrentamientoMapper)->getParejasById($enfrentamiento);
                         
                         if($validacionCapitan && $validacionMiembro){
                             $reserva = new ReservaModel();
@@ -263,8 +273,6 @@
                             $pistaMapper = new PistaMapper();
                             $pistasActivas = $pistaMapper->getNumPistasActivas();
 
-                            $enfrentamiento = new EnfrentamientoModel();
-                            $enfrentamiento->setId($_REQUEST['idenfrentamiento']);
                             $enfrentamiento->setPropuesta1($_REQUEST['propuesta']);
                             $enfrentamiento->setPropuesta2($_REQUEST['propuesta']);
                             $enfrentamiento->setFecha($fecha);
@@ -276,15 +284,18 @@
                                 $enfrentamientoMapper->borrarPropuesta($enfrentamiento);
 
                                 $emails = $enfrentamientoMapper->getEmails($enfrentamiento);
-                                $to_email_address = $emails . ', paulagonzalez1996@hotmail.com';
-                                $subject = 'Propuesta borrada.';
-                                $partido = $parejaMapper->getNombreById(new ParejaModel($parejas['0'])). ' vs. ' . $parejaMapper->getNombreById(new ParejaModel($parejas['1']));
-                                $campeonato = $enfrentamientoMapper->getDatosEnfrentamiento($enfrentamiento);
-                                $message = '<html><head></head><body>Hola,<br>Te informamos de que no quedan pistas libres para llevar a cabo tu partido ' . $partido .' en el Campeonato '. $campeonato['5'] .' en la fecha pedida (' . date('d/m H:i',strtotime($_REQUEST['propuesta'])) . ').<br>Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
-                                $headers  = 'MIME-Version: 1.0' . "\r\n";
-                                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                                $headers .= 'From: noreply@padelweb.com';
-                                mail($to_email_address,$subject,$message,$headers);
+
+                                foreach($emails as $email){
+                                    $to_email_address = $email;
+                                    $subject = 'Propuesta borrada.';
+                                    $partido = $parejaMapper->getNombreById(new ParejaModel($parejas['0'])). ' vs. ' . $parejaMapper->getNombreById(new ParejaModel($parejas['1']));
+                                    $campeonato = $enfrentamientoMapper->getDatosEnfrentamiento($enfrentamiento);
+                                    $message = '<html><head></head><body>Hola,<br>Te informamos de que no quedan pistas libres para llevar a cabo tu partido ' . $partido .' en el Campeonato '. $campeonato['5'] .' en la fecha pedida (' . date('d/m H:i',strtotime($_REQUEST['propuesta'])) . ').<br>Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+                                    $headers  = 'MIME-Version: 1.0' . "\r\n";
+                                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                                    $headers .= 'From: noreply@padelweb.com';
+                                    mail($to_email_address,$subject,$message,$headers);
+                                }
 
                                 SessionMessage::setMessage("No hay pistas disponibles para ese día y hora. La propuesta de fecha se ha cancelado.");
                                 $goto = 'Location: index.php?controller=enfrentamientos&idenfrentamiento=' . $_REQUEST['idenfrentamiento'];
@@ -305,15 +316,18 @@
 
 
                                 $emails = $enfrentamientoMapper->getEmails($enfrentamiento);
-                                $to_email_address = $emails . ', paulagonzalez1996@hotmail.com';
-                                $subject = 'Fecha elegida para partido.';
-                                $partido = $parejaMapper->getNombreById(new ParejaModel($parejas['0'])). ' vs. ' . $parejaMapper->getNombreById(new ParejaModel($parejas['1']));
-                                $campeonato = $enfrentamientoMapper->getDatosEnfrentamiento($enfrentamiento);
-                                $message = '<html><head></head><body>Hola,<br>Te informamos de que se ha aceptado la propuesta de fecha para tu partido ' . $partido .' en el Campeonato '. $campeonato['5'] .'. <br>La fecha definitiva es: ' . date('d/m H:i',strtotime($_REQUEST['propuesta'])) . '. El enfrentamiento se llevar&#225; a cabo en la pista ' . $idPista .'. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
-                                $headers  = 'MIME-Version: 1.0' . "\r\n";
-                                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                                $headers .= 'From: noreply@padelweb.com';
-                                mail($to_email_address,$subject,$message,$headers);
+
+                                foreach($emails as $email){
+                                    $to_email_address = $email;
+                                    $subject = 'Fecha elegida para partido.';
+                                    $partido = $parejaMapper->getNombreById(new ParejaModel($parejas['0'])). ' vs. ' . $parejaMapper->getNombreById(new ParejaModel($parejas['1']));
+                                    $campeonato = $enfrentamientoMapper->getDatosEnfrentamiento($enfrentamiento);
+                                    $message = '<html><head></head><body>Hola,<br>Te informamos de que se ha aceptado la propuesta de fecha para tu partido ' . $partido .' en el Campeonato '. $campeonato['5'] .'. <br>La fecha definitiva es: ' . date('d/m H:i',strtotime($_REQUEST['propuesta'])) . '. El enfrentamiento se llevar&#225; a cabo en la pista ' . $idPista .'. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+                                    $headers  = 'MIME-Version: 1.0' . "\r\n";
+                                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                                    $headers .= 'From: noreply@padelweb.com';
+                                    mail($to_email_address,$subject,$message,$headers);
+                                }
                                 
                                 $reservaHecha = "La reserva para el partido ha sido registrada en la pista: " . $idPista;
                                 SessionMessage::setMessage($reservaHecha);

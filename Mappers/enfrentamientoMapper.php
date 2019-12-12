@@ -382,8 +382,15 @@
                 return 'Error en la consulta sobre la base de datos';
             }
             else{
+
                 $tupla = $resultado->fetch_array(MYSQLI_NUM);
-                return $tupla['0'] . ', ' . $tupla['1'] . ', ' . $tupla['2'] . ', ' . $tupla['3'];
+                $emails = array();
+                $emails[] = $tupla['0'];
+                $emails[] = $tupla['1'];
+                $emails[] = $tupla['2'];
+                $emails[] = $tupla['3'];
+
+                return $emails;
             }
 
 
