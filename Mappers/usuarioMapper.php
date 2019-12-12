@@ -287,17 +287,27 @@ require_once('Models/usuarioModel.php');
         }
 
 
-        function getEmailsSuscripcion() {
-		
+        function getEmailsSuscripcion(){
+
             $sql = "SELECT 
-                        email, 
+                        email 
                     FROM USUARIO
                     WHERE suscripcion = '1'";
-    
-            if (!($resultado = $this->mysqli->query($sql)))
-                return null;
-            else
-                return $resultado;
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            } else{
+                $emails = array();
+                $fila = array('email');
+
+                while($fila = ($resultado)->fetch_assoc()){
+
+                        $emails[] = $fila['email'];
+                }
+
+                    return $emails;
+
+            }
         }
 
 
