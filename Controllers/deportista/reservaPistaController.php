@@ -56,7 +56,17 @@
 											$idPista = $pistaMapper->findPistaLibre($reserva);
 											$reserva->setIdPista($idPista);
 											$reservaMapper->ADD($reserva);
-											$reservaHecha = "La reserva para el partido ha sido registrada en la pista: " . $idPista;
+											$reservaHecha = "La reserva ha sido registrada en la pista: " . $idPista;
+
+											$to_email_address = $_SESSION['Usuario']->getEmail();
+											$subject = 'Reserva de pista realizada.';
+											$message = '<html><head></head><body>Hola,<br>Te informamos de que has reservado pista para la fecha ' . date('d/m',strtotime($_POST["fecha"])) . ' y hora ' . date('H:i',strtotime($_POST["hora"])) . 'Tu reserva es en la pista ' . $idPista .'. Recuerda que puedes cancelarla desde tu pefil. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+											$headers  = 'MIME-Version: 1.0' . "\r\n";
+											$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+											$headers .= 'From: noreply@padelweb.com';
+											mail($to_email_address,$subject,$message,$headers);
+											
+
 											SessionMessage::setMessage($reservaHecha);
 											header('Location: index.php?controller=reservas&action=reservar');
 										}	
