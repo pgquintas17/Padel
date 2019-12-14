@@ -63,19 +63,28 @@
 
 
 					case 'EDIT': 
-						try {
-							$noticia = new NoticiaModel($_POST['idnoticia'],$_POST['titulo'],$_POST['cuerpo']);
-							$errores =  $noticia->validarRegistro();
-							$noticiaMapper = new NoticiaMapper();
-							$respuesta = $noticiaMapper->EDIT($noticia);
-
-							SessionMessage::setMessage($respuesta);
-							header('Location: index.php?controller=adminNoticias');
+						if($_POST){
+							try {
+								$noticia = new NoticiaModel($_POST['idnoticia'],$_POST['titulo'],$_POST['cuerpo']);
+								$errores =  $noticia->validarRegistro();
+								$noticiaMapper = new NoticiaMapper();
+								$respuesta = $noticiaMapper->EDIT($noticia);
+	
+								SessionMessage::setMessage($respuesta);
+								header('Location: index.php?controller=adminNoticias');
+							}
+							catch (ValidationException $e){
+								SessionMessage::setErrores($e->getErrores());
+								SessionMessage::setMessage($e->getMessage());
+								header('Location: index.php?controller=adminNoticias&action=EDIT');
+							}
 						}
-						catch (ValidationException $e){
-							SessionMessage::setErrores($e->getErrores());
-							SessionMessage::setMessage($e->getMessage());
-							header('Location: index.php?controller=adminNoticias&action=EDIT');
+						else{
+							$noticia = new NoticiaModel($_REQUEST['idnoticia']);
+							$noticiaMapper = new NoticiaMapper();
+                            $datos = $noticiaMapper->consultarDatos($noticia);
+							require_once('Views/noticia/noticiaEDITView.php');
+							(new NoticiaEDITView(SessionMessage::getMessage(),SessionMessage::getErrores(),'',$datos))->render();
 						}
 						
 						break;
