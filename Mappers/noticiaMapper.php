@@ -18,31 +18,59 @@ require_once('Models/noticiaModel.php');
             $cuerpo = $noticia->getCuerpo();
             $fecha_creacion = $noticia->getFechaCreacion();
     
-                $sql = "SELECT * FROM NOTICIA";
+            $sql = "SELECT * FROM NOTICIA";
+
+            if (!$result = $this->mysqli->query($sql)) 
+                return 'No se ha podido conectar con la base de datos'; 
+            else { 
+                
+                $sql = "INSERT INTO NOTICIA (
+                        titulo,
+                        cuerpo,
+                        fecha_creacion
+                    )
+                    VALUES (
+                        '$titulo',
+                        '$cuerpo',
+                        '$fecha_creacion'
+                    )";
+
+                if (!$this->mysqli->query($sql)){
+                    return $sql;
+                } 
+                else {
+                    return 'Noticia añadida con éxito al sistema.';
+                } 
+            }
+
+        }
+
+
+        function EDIT($noticia) {
+
+            $id = $noticia->getId();
+            $titulo = $noticia->getTitulo();
+            $cuerpo = $noticia->getCuerpo();
+            
+	
+            $sql = "SELECT * FROM NOTICIA  WHERE (id_noticia = '$id')";
+            $result = $this->mysqli->query($sql);
+        
+            if ($result->num_rows == 1) {	
     
-                if (!$result = $this->mysqli->query($sql)) 
-                    return 'No se ha podido conectar con la base de datos'; 
-                else { 
-                    
-                    $sql = "INSERT INTO NOTICIA (
-                            titulo,
-                            cuerpo,
-                            fecha_creacion
-                        )
-                        VALUES (
-                            '$titulo',
-                            '$cuerpo',
-                            '$fecha_creacion'
-                        )";
-
-                    if (!$this->mysqli->query($sql)){
-                        return $sql;
-                    } 
-                    else {
-                        return 'Noticia añadida con éxito al sistema.';
-                    } 
-                }
-
+                $sql = "UPDATE NOTICIA  SET
+                            titulo = '$titulo',
+                            cuerpo = '$cuerpo'
+    
+                        WHERE ( id_noticia = '$id')";
+    
+                if (!($resultado = $this->mysqli->query($sql)))
+                    return 'Error en la modificación';
+                else
+                    return 'Noticia modificada correctamente';
+            }
+            else 
+                return 'No existe en la base de datos';
         }
 
 

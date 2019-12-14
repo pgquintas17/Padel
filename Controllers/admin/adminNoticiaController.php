@@ -53,16 +53,41 @@
 						
 
 					case 'DELETE': 
-						echo "delete";
+						$noticia = new NoticiaModel();
+						$noticia->setId($_REQUEST['idnoticia']);
+						$noticiaMapper = new NoticiaMapper();
+						$respuesta = $noticiaMapper->DELETE($noticia); 
+						SessionMessage::setMessage($respuesta);
+						header('Location: index.php?controller=adminNoticias');
 						break;
 
+
 					case 'EDIT': 
-						echo "edit";
+						try {
+							$noticia = new NoticiaModel($_POST['idnoticia'],$_POST['titulo'],$_POST['cuerpo']);
+							$errores =  $noticia->validarRegistro();
+							$noticiaMapper = new NoticiaMapper();
+							$respuesta = $noticiaMapper->EDIT($noticia);
+
+							SessionMessage::setMessage($respuesta);
+							header('Location: index.php?controller=adminNoticias');
+						}
+						catch (ValidationException $e){
+							SessionMessage::setErrores($e->getErrores());
+							SessionMessage::setMessage($e->getMessage());
+							header('Location: index.php?controller=adminNoticias&action=EDIT');
+						}
+						
 						break;
 						
 
 					case 'mostrar': 
-						echo "mostrar";
+						$noticia = new NoticiaModel();
+						$noticia->setId($_REQUEST['idnoticia']);
+						$noticiaMapper = new NoticiaMapper();
+						$datos = $noticiaMapper->consultarDatos($noticia);
+						require_once('Views/noticia/noticiaDetailsView.php');
+						(new NoticiaDetailsView('','','',$datos))->render();
 						break;
 
 
