@@ -92,7 +92,18 @@ header a:hover {
 
 	background-color: #222;
 	border-style: solid;
+	
 
+}
+
+#noticia{
+	margin: inherit;
+    text-align: justify;
+	background-color: white;
+	border-style: solid;
+	border-width: 0.5px;
+	border-radius: 1%;
+	padding: 20px;
 }
 
 #tablas{

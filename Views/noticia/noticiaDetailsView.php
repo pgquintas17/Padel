@@ -55,12 +55,17 @@
             <div class="col-6">
                 <p style="text-align: right";><strong>Fecha de creación:</strong> <?php echo date('d/m',strtotime($this->datos['3'])); ?></p>
             </div>
-            </div>
+            </div><br>
             
 
         <!-- Noticia -->
+            <div class="row justify-content-md-center">
+                <div class="col"></div>
+                <div class="col-8" id="noticia"><?php echo $this->datos['2']; ?></div>
+                <div class="col"></div>
+            </div>
             <!----->
-    </div>
+        </div>
 
 
 

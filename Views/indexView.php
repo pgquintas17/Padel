@@ -248,10 +248,10 @@ class IndexView extends baseView {
                                 while($this->filaN = ($this->noticias)->fetch_assoc()) {
                                     $id = $this->filaN['id_noticia'];
                                     if(Utils::nivelPermiso(0)){
-                                        $url = "index.php?controller=noticias&action=details&idnoticia=" . $id;
+                                        $url = "index.php?controller=noticias&idnoticia=" . $id;
                                     }
-                                    if(Utils::nivelPermiso(0)){
-                                        $url = "index.php?controller=adminNoticias&action=details&idnoticia=" . $id;
+                                    if(Utils::nivelPermiso(2)){
+                                        $url = "index.php?controller=adminNoticias&action=mostrar&idnoticia=" . $id;
                                     }
                                     ?>
                                     <li class="list-group-item">

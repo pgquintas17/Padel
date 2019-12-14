@@ -70,6 +70,10 @@
                         require_once('Controllers/deportista/enfrentamientoController.php');
                         new EnfrentamientoController();
                         exit;
+                    case "noticias":
+                        require_once('Controllers/deportista/noticiaController.php');
+                        new NoticiaController();
+                        exit;
                         break;
                 }
 
