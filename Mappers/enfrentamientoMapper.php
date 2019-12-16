@@ -111,6 +111,46 @@
             }
         }
 
+        function comprobarDisponibilidadPropuestaUsuario($reserva){
+
+            $hora = $reserva->getHora();
+            $fecha = $reserva->getFecha();
+            $propuesta = $fecha . ' ' . $hora;
+            $login = $reserva->getLogin();   
+
+            $sql = "SELECT * FROM  ENFRENTAMIENTO 
+                        INNER JOIN PAREJA pareja1 on pareja1.ID_PAREJA = enfrentamiento.PAREJA1 
+                    WHERE (propuesta1 = '$propuesta' 
+                        AND (pareja1.capitan = '$login' OR pareja1.miembro = '$login'))";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return false;
+            }
+            else{
+                if ($resultado->num_rows == 0) {
+                    
+                    $sql2 = "SELECT * FROM  ENFRENTAMIENTO 
+                                INNER JOIN PAREJA pareja2 on pareja2.ID_PAREJA = enfrentamiento.PAREJA2 
+                            WHERE (propuesta2 = '$propuesta' 
+                                AND (pareja2.capitan = '$login' OR pareja2.miembro = '$login'))";
+                    if (!($resultado = $this->mysqli->query($sql2))){
+                        return false;
+                    }
+                    else{
+                        if ($resultado->num_rows == 0) {
+                            return true;
+                        }
+                        else{
+                            return false;
+                        }
+                    }
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
 
         function getDatosEnfrentamiento($enfrentamiento){
 

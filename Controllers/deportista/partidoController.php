@@ -30,11 +30,8 @@
 						$reserva->setHora($partidoMapper->getHoraById($partido));
 						$reserva->setFecha($partidoMapper->getFechaById($partido));
 						$reservaMapper = new ReservaMapper();
-						$validacion1 = $partidoMapper->comprobarDisponibilidadUsuario($reserva);
-						$validacion2 = $reservaMapper->comprobarDisponibilidadUsuario($reserva);
-						$enfrentamientoMapper = new EnfrentamientoMapper();
-						$validacion3 = $enfrentamientoMapper->comprobarDisponibilidadUsuario($reserva);
-						if($validacion1 && $validacion2 && $validacion3){
+						$validacion = Utils::validarDisponibilidad($_SESSION['Usuario']->getLogin(),$partidoMapper->getFechaById($partido),$partidoMapper->getHoraById($partido));
+						if($validacion){
 							$respuesta = $partidoMapper->añadirParticipante($partido,$usuario);
 							$numPlazas = $partidoMapper->getNumPlazasLibres($_REQUEST["idpartido"]);
 							if($numPlazas == 0){

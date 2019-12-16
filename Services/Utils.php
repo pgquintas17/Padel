@@ -108,8 +108,9 @@ class Utils {
 		$validacion2 = $partidoMapper->comprobarDisponibilidadUsuario($reserva);
 		$enfrentamientoMapper = new EnfrentamientoMapper();
 		$validacion3 = $enfrentamientoMapper->comprobarDisponibilidadUsuario($reserva);
+		$validacion4 = $enfrentamientoMapper->comprobarDisponibilidadPropuestaUsuario($reserva);
 
-		if($validacion1 && $validacion2 && $validacion3){
+		if($validacion1 && $validacion2 && $validacion3 && $validacion4){
 			return true;
 		}
 		else{

@@ -39,12 +39,8 @@
 									$reserva->setLogin($_SESSION['Usuario']->getLogin());
 									$reserva->setFecha($_POST["fecha"]);
 									$reserva->setHora($_POST["inputHora"]);
-									$validacion1 = $reservaMapper->comprobarDisponibilidadUsuario($reserva);
-									$partidoMapper = new PartidoMapper();
-									$validacion2 = $partidoMapper->comprobarDisponibilidadUsuario($reserva);
-									$enfrentamientoMapper = new EnfrentamientoMapper();
-									$validacion3 = $enfrentamientoMapper->comprobarDisponibilidadUsuario($reserva);
-									if($validacion1 && $validacion2 && $validacion3){
+									$validacion = Utils::validarDisponibilidad($_SESSION['Usuario']->getLogin(),$_REQUEST['fecha'],$_REQUEST['inputHora']);
+									if($validacion){
 										$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
 										$pistaMapper = new PistaMapper();
 										$pistasActivas = $pistaMapper->getNumPistasActivas();
