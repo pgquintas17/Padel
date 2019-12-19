@@ -7,84 +7,84 @@ USE `abp35_padelweb`;
 
 -- tabla USUARIO
 
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('gacelasoto','Andres','contraseña','1995-01-29','666666666','gacelasoto@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('asconcepcion','Andrew','contraseña','1995-01-29','666666666','andrew@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('john','John','contraseña','1995-01-29','666666666','john@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('tommy','Thomas','contraseña','1995-01-29','666666666','thomas@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('arthur','Arturo','contraseña','1995-01-29','666666666','arturo@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('elliot','Elias','contraseña','1995-01-29','666666666','elias@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('joaquin','Joaquin','contraseña','1995-01-29','666666666','joaquin@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('benancio','Benancio','contraseña','1995-01-29','666666666','benancio@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('adam','Adam','contraseña','1995-01-29','666666666','adam@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('paul','Pablo','contraseña','1995-01-29','666666666','pablo@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('walther','Walter','contraseña','1995-01-29','666666666','walther@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('jesse','Jesse','contraseña','1995-01-29','666666666','jesse@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('gus','Gus','contraseña','1995-01-29','666666666','gus@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('hank','Hank','contraseña','1995-01-29','666666666','hank@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('todd','Todd','contraseña','1995-01-29','666666666','todd@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('max','Max','contraseña','1995-01-29','666666666','max@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('alex','Alex','contraseña','1995-01-29','666666666','alex@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('oscar','Oscar','contraseña','1995-01-29','666666666','oscar@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('robert','Robert','contraseña','1995-01-29','666666666','robert@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('patricio','Patricio','contraseña','1995-01-29','666666666','patricio@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('pitbull','Pitbull','contraseña','1995-01-29','666666666','pitbull@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('axel','Axel','contraseña','1995-01-29','666666666','axel@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('slash','Slash','contraseña','1995-01-29','666666666','slash@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('izzy','Izzy','contraseña','1995-01-29','666666666','izzy@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('ozzy','Ozzy','contraseña','1995-01-29','666666666','ozzy@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('jimmy','Jimmy','contraseña','1995-01-29','666666666','jimmy@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('stevie','Stevie','contraseña','1995-01-29','666666666','stevie@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('rodolfo','Rodolfo','contraseña','1995-01-29','666666666','rodolfo@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('omar','Omar','contraseña','1995-01-29','666666666','omar@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('javier','Javier','contraseña','1995-01-29','666666666','javier@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('alvaro','Alvaro','contraseña','1995-01-29','666666666','alvaro@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('jaime','Jaime','contraseña','1995-01-29','666666666','jaime@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('rodrigo','Rodrigo','contraseña','1995-01-29','666666666','rodrigo@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('luis','Luis','contraseña','1995-01-29','666666666','luis@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('yago','Yago','contraseña','1995-01-29','666666666','yago@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('iago','Iago','contraseña','1995-01-29','666666666','iago@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user1','user1','contraseña','1995-01-29','666666666','user1@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user2','user2','contraseña','1995-01-29','666666666','user2@padelweb.net','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user3','user3','contraseña','1995-01-29','666666666','gacelasoto@hotmail.com','masculino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user4','user4','contraseña','1995-01-29','666666666','user4@padelweb.net','masculino',0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('gacelasoto','Andres','contraseña','1995-01-29','666666666','gacelasoto@hotmail.com','masculino',0,1);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('asconcepcion','Andrew','contraseña','1995-01-29','666666666','andrew@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('john','John','contraseña','1995-01-29','666666666','john@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('tommy','Thomas','contraseña','1995-01-29','666666666','thomas@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('arthur','Arturo','contraseña','1995-01-29','666666666','arturo@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('elliot','Elias','contraseña','1995-01-29','666666666','elias@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('joaquin','Joaquin','contraseña','1995-01-29','666666666','joaquin@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('benancio','Benancio','contraseña','1995-01-29','666666666','benancio@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('adam','Adam','contraseña','1995-01-29','666666666','adam@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('paul','Pablo','contraseña','1995-01-29','666666666','pablo@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('walther','Walter','contraseña','1995-01-29','666666666','walther@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('jesse','Jesse','contraseña','1995-01-29','666666666','jesse@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('gus','Gus','contraseña','1995-01-29','666666666','gus@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('hank','Hank','contraseña','1995-01-29','666666666','hank@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('todd','Todd','contraseña','1995-01-29','666666666','todd@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('max','Max','contraseña','1995-01-29','666666666','max@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('alex','Alex','contraseña','1995-01-29','666666666','alex@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('oscar','Oscar','contraseña','1995-01-29','666666666','oscar@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('robert','Robert','contraseña','1995-01-29','666666666','robert@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('patricio','Patricio','contraseña','1995-01-29','666666666','patricio@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('pitbull','Pitbull','contraseña','1995-01-29','666666666','pitbull@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('axel','Axel','contraseña','1995-01-29','666666666','axel@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('slash','Slash','contraseña','1995-01-29','666666666','slash@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('izzy','Izzy','contraseña','1995-01-29','666666666','izzy@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('ozzy','Ozzy','contraseña','1995-01-29','666666666','ozzy@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('jimmy','Jimmy','contraseña','1995-01-29','666666666','jimmy@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('stevie','Stevie','contraseña','1995-01-29','666666666','stevie@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('rodolfo','Rodolfo','contraseña','1995-01-29','666666666','rodolfo@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('omar','Omar','contraseña','1995-01-29','666666666','omar@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('javier','Javier','contraseña','1995-01-29','666666666','javier@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('alvaro','Alvaro','contraseña','1995-01-29','666666666','alvaro@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('jaime','Jaime','contraseña','1995-01-29','666666666','jaime@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('rodrigo','Rodrigo','contraseña','1995-01-29','666666666','rodrigo@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('luis','Luis','contraseña','1995-01-29','666666666','luis@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('yago','Yago','contraseña','1995-01-29','666666666','yago@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('iago','Iago','contraseña','1995-01-29','666666666','iago@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('adrian','Adrian','contraseña','1995-01-29','666666666','adrian@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('amoedo','Amoedo','contraseña','1995-01-29','666666666','amoedo@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('aston','Aston','contraseña','1995-01-29','666666666','aston@padelweb.net','masculino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('apolo','Apolo','contraseña','1995-01-29','666666666','apolo@padelweb.net','masculino',0,0);
 
 
 
 
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('paulapeppers','Paula','contraseña','1995-01-29','666666666','paula@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('darlene','Darlene','contraseña','1995-01-29','666666666','darlene@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('lucia','Lucia','contraseña','1995-01-29','666666666','lucia@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('leslie','Uxia','contraseña','1995-01-29','666666666','uxia@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('marie','Marie','contraseña','1995-01-29','666666666','marie@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('skyler','Skyler','contraseña','1995-01-29','666666666','skyler@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('sarah','Sarah','contraseña','1995-01-29','666666666','sarah@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('laura','Laura','contraseña','1995-01-29','666666666','laura@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('bea','Bea','contraseña','1995-01-29','666666666','bea@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('lucy','Lucy','contraseña','1995-01-29','666666666','lucy@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('clara','Clara','contraseña','1995-01-29','666666666','clara@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('leticia','Leticia','contraseña','1995-01-29','666666666','leticia@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('paloma','Paloma','contraseña','1995-01-29','666666666','paloma@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('ana','Ana','contraseña','1995-01-29','666666666','ana@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('claudia','Claudia','contraseña','1995-01-29','666666666','claudia@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('mar','Mar','contraseña','1995-01-29','666666666','mar@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('lara','Lara','contraseña','1995-01-29','666666666','lara@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('marga','Marga','contraseña','1995-01-29','666666666','marga@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('concha','Concha','contraseña','1995-01-29','666666666','concha@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('marta','Marta','contraseña','1995-01-29','666666666','marta@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user5','user5','contraseña','1995-01-29','666666666','user5@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user6','user6','contraseña','1995-01-29','666666666','user6@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user7','user7','contraseña','1995-01-29','666666666','user7@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user8','user8','contraseña','1995-01-29','666666666','user8@padelweb.net','femenino',0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('paulapeppers','Paula','contraseña','1995-01-29','666666666','paula@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('darlene','Darlene','contraseña','1995-01-29','666666666','darlene@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('lucia','Lucia','contraseña','1995-01-29','666666666','lucia@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('leslie','Uxia','contraseña','1995-01-29','666666666','uxia@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('marie','Marie','contraseña','1995-01-29','666666666','marie@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('skyler','Skyler','contraseña','1995-01-29','666666666','skyler@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('sarah','Sarah','contraseña','1995-01-29','666666666','sarah@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('laura','Laura','contraseña','1995-01-29','666666666','laura@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('bea','Bea','contraseña','1995-01-29','666666666','bea@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('lucy','Lucy','contraseña','1995-01-29','666666666','lucy@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('clara','Clara','contraseña','1995-01-29','666666666','clara@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('leticia','Leticia','contraseña','1995-01-29','666666666','leticia@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('paloma','Paloma','contraseña','1995-01-29','666666666','paloma@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('ana','Ana','contraseña','1995-01-29','666666666','ana@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('claudia','Claudia','contraseña','1995-01-29','666666666','claudia@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('mar','Mar','contraseña','1995-01-29','666666666','mar@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('lara','Lara','contraseña','1995-01-29','666666666','lara@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('marga','Marga','contraseña','1995-01-29','666666666','marga@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('concha','Concha','contraseña','1995-01-29','666666666','concha@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('marta','Marta','contraseña','1995-01-29','666666666','marta@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('andrea','Andrea','contraseña','1995-01-29','666666666','andrea@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('antonia','Antonia','contraseña','1995-01-29','666666666','antonia@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('analia','Analia','contraseña','1995-01-29','666666666','analia@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('paulina','Paulina','contraseña','1995-01-29','666666666','paulina@padelweb.net','femenino',0,0);
 
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user9','user9','contraseña','1995-01-29','666666666','user9@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user10','user10','contraseña','1995-01-29','666666666','user10@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user11','user11','contraseña','1995-01-29','666666666','user11@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user12','user12','contraseña','1995-01-29','666666666','user12@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user13','user13','contraseña','1995-01-29','666666666','user13@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user14','user14','contraseña','1995-01-29','666666666','user14@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user15','user15','contraseña','1995-01-29','666666666','user15@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user16','user16','contraseña','1995-01-29','666666666','user16@padelweb.net','femenino',0);
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('user17','user17','contraseña','1995-01-29','666666666','user17@padelweb.net','femenino',0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('alejandra','Alejandra','contraseña','1995-01-29','666666666','alejandra@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('carolina','Carolina','contraseña','1995-01-29','666666666','carolina@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('sheila','Sheila','contraseña','1995-01-29','666666666','sheila@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('atenea','Atenea','contraseña','1995-01-29','666666666','atenea@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('venus','Venus','contraseña','1995-01-29','666666666','venus@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('esmeralda','Esmeralda','contraseña','1995-01-29','666666666','esmeralda@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('africa','Africa','contraseña','1995-01-29','666666666','africa@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('nefertiti','Nefertiti','contraseña','1995-01-29','666666666','nefertiti@padelweb.net','femenino',0,0);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('khafre','Khafre','contraseña','1995-01-29','666666666','khafre@padelweb.net','femenino',0,0);
 
 
 
@@ -428,36 +428,36 @@ INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUP
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (15,'cuevis','lara','marga','2019-09-01 09:00:25',4,2,9); -- 1F
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (16,'pares','concha','marta','2019-09-01 09:00:26',4,2,7); -- 1F
 
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (17,'asesDG','paulapeppers','gacelasoto','2019-09-01 09:00:00',7,3,21); -- 1MX
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (17,'asesDG','paulapeppers','aston','2019-09-01 09:00:00',7,3,21); -- 1MX
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (18,'robotics','darlene','elliot','2019-09-01 09:00:01',7,3,19); -- 1MX
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (19,'partners','sarah','alex','2019-09-01 09:00:11',7,3,17); -- 1MX
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (20,'happys','ana','javier','2019-09-01 09:00:21',7,3,15); -- 1MX
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (21,'users1','user1','user5','2019-09-01 09:00:28',7,3,13); -- 1MX
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (22,'users2','user2','user6','2019-09-01 09:00:29',7,3,11); -- 1MX
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (23,'users3','user3','user7','2019-09-01 09:00:30',7,3,9); -- 1MX
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (24,'users4','user4','user8','2019-09-01 09:00:31',7,3,7); -- 1MX
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (21,'adan','adrian','andrea','2019-09-01 09:00:28',7,3,13); -- 1MX
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (22,'aman','amoedo','antonia','2019-09-01 09:00:29',7,3,11); -- 1MX
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (23,'gaan','gacelasoto','analia','2019-09-01 09:00:30',7,3,9); -- 1MX
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (24,'appa','apolo','paulina','2019-09-01 09:00:31',7,3,7); -- 1MX
 
 
 
 -- campeonato 2 MASTERS
 
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (25,'peakys','gacelasoto','arthur','2019-10-01 09:00:02',10,4,15); -- 1M
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (25,'peakys','aston','arthur','2019-10-01 09:00:02',10,4,15); -- 1M
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (26,'aspirantes','asconcepcion','john','2019-10-01 09:00:03',10,4,13); -- 1M
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (27,'blinders','joaquin','benancio','2019-10-01 09:00:04',10,4,14); -- 1M
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (28,'ukers','adam','paul','2019-10-01 09:00:05',10,4,15); -- 1M
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (29,'meth','walther','jesse','2019-10-01 09:00:07',10,4,13); -- 1M
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (30,'antimeth','gus','hank','2019-10-01 09:00:08',10,4,11); -- 1M
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (31,'assistants','user3','max','2019-10-01 09:00:10',10,4,7); -- 1M
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (31,'assistants','gacelasoto','max','2019-10-01 09:00:10',10,4,7); -- 1M
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (32,'tochos','oscar','robert','2019-10-01 09:00:12',10,4,4); -- 1M
 
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (33,'asesDG','gacelasoto','paulapeppers','2019-10-01 09:00:06',13,5,15); -- 1MX
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (33,'asesDG','aston','paulapeppers','2019-10-01 09:00:06',13,5,15); -- 1MX
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (34,'robotics','darlene','elliot','2019-10-01 09:00:09',13,5,13); -- 1MX
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (35,'partners','sarah','alex','2019-10-01 09:00:13',13,5,14); -- 1MX
 INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (36,'happys','ana','javier','2019-10-01 09:00:14',13,5,15); -- 1MX
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (37,'users1','user1','user5','2019-10-01 09:00:20',13,5,13); -- 1MX
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (38,'users2','user2','user6','2019-10-01 09:00:24',13,5,11); -- 1MX
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (39,'users3','user3','user7','2019-10-01 09:00:25',13,5,7); -- 1MX
-INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (40,'users4','user4','user8','2019-10-01 09:00:26',13,5,4); -- 1MX
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (37,'adan','adrian','andrea','2019-10-01 09:00:20',13,5,13); -- 1MX
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (38,'aman','amoedo','antonia','2019-10-01 09:00:24',13,5,11); -- 1MX
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (39,'gaan','gacelasoto','analia','2019-10-01 09:00:25',13,5,7); -- 1MX
+INSERT INTO pareja(ID_PAREJA,NOMBRE_PAREJA,CAPITAN,MIEMBRO,FECHA_INSCRIP,ID_GRUPO,ID_CATCAMP,PUNTOS) VALUES (40,'appa','apolo','paulina','2019-10-01 09:00:26',13,5,4); -- 1MX
 
 
 
@@ -709,5 +709,12 @@ INSERT INTO reserva (ID_RESERVA,ID_PISTA,HORA,FECHA,LOGIN) VALUES (156,2,'18:00:
 INSERT INTO reserva (ID_RESERVA,ID_PISTA,HORA,FECHA,LOGIN) VALUES (157,3,'18:00:00','2020-02-14','admin');
 INSERT INTO reserva (ID_RESERVA,ID_PISTA,HORA,FECHA,LOGIN) VALUES (158,4,'18:00:00','2020-02-14','admin');
 INSERT INTO reserva (ID_RESERVA,ID_PISTA,HORA,FECHA,LOGIN) VALUES (159,5,'18:00:00','2020-02-14','admin');
+
+
+-- tabla NOTICIAS
+INSERT INTO noticia (ID_NOTICIA,TITULO,CUERPO,fecha_creacion) VALUES (1,'Actualizacion de la politica de datos', 'Como la mayoría sabréis, la nueva directiva de la Unión Europea <b>nos obliga</b> a realizar cambios en cuanto a nuestra política de protección de datos para que dichos datos sean más seguros. Por ello, os rogamos que asistáis al club con la mayor brevedad posible para dejar este asunto zanjado cuanto antes y podamos seguir con nuestras actividades habituales.<br>Un saludo a todos.','2019-12-15 18:00:00');
+INSERT INTO noticia (ID_NOTICIA,TITULO,CUERPO,fecha_creacion) VALUES (2,'Cambios del campeonato de invierno', 'Un año más ya está aquí. El ansiado campeonato de invierno. Sin embargo, este año se realizarán algunos cambios respecto a los años anteriores:<br><br>- Las parejas deberán registrarse <b>antes del 16 de diciembre</b><br>- No podrán estar inscritas en los campeonatos de carácter regional<br>- Deberán haber participado en el torneo de la semana pasada <br><br>Muchas gracias por vuestra atención una vez más.','2019-12-09 18:00:00');
+INSERT INTO noticia (ID_NOTICIA,TITULO,CUERPO,fecha_creacion) VALUES (3,'¡Felices fiestas!', 'De parte de toda la organización del club queríamos destinar unos momentos para desearos a todos unas felices fiestas y un próspero año. ¡Que sigamos disfrutando el próximo año todos juntos una vez más con este gran deporte!','2019-19-09 00:00:00');
+INSERT INTO noticia (ID_NOTICIA,TITULO,CUERPO,fecha_creacion) VALUES (4,'Finalización campeonato local', 'Este fin de semana ha llegado a su fin el campeonato local dejando grandes éxitos para nuestro club. Queríamos agradecer a todos vosotros vuestra implicación a todos los participantes, tanto a los que caísteis luchando en las rondas previas como los que habéis logrado llegar más lejos.<br>¡Para el siguiente torneo nos haremos con la victoria!','2019-10-09 09:00:00');
 
 
