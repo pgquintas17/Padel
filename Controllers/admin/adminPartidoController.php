@@ -20,7 +20,7 @@
 
 					case 'ADD': 
 						try {
-							$partido = new PartidoModel('',$_POST["hora"],$_POST["fecha"],'','','','','','',$_SESSION['Usuario']->getLogin());
+							$partido = new PartidoModel('',$_POST["hora"],$_POST["fecha"],0,'','','','','',$_SESSION['Usuario']->getLogin());
 							$errores =  $partido->validarRegistro();
 							$partidoMapper = new PartidoMapper();
 							$reserva = new ReservaModel();
