@@ -44,7 +44,7 @@
 										$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
 										$pistaMapper = new PistaMapper();
 										$pistasActivas = $pistaMapper->getNumPistasActivas();
-										if($reservasEnFecha == $pistasActivas){
+										if($reservasEnFecha >= $pistasActivas){
 											SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
 											header('Location: index.php?controller=reservas&action=reservar');
 										}

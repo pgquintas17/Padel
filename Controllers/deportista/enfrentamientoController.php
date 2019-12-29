@@ -74,7 +74,7 @@
                                         $reservasEnFecha = (new ReservaMapper())->getNumReservasByDiaYHora($reserva);
                                         $pistaMapper = new PistaMapper();
                                         $pistasActivas = $pistaMapper->getNumPistasActivas();
-                                        if($reservasEnFecha == $pistasActivas){
+                                        if($reservasEnFecha >= $pistasActivas){
                                             SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
                                             $goto = 'Location: index.php?controller=enfrentamientos&idenfrentamiento=' . $_REQUEST['idenfrentamiento'];
                                             header($goto);
@@ -178,7 +178,7 @@
                                             $reservasEnFecha = (new ReservaMapper())->getNumReservasByDiaYHora($reserva);
                                             $pistaMapper = new PistaMapper();
                                             $pistasActivas = $pistaMapper->getNumPistasActivas();
-                                            if($reservasEnFecha == $pistasActivas){
+                                            if($reservasEnFecha >= $pistasActivas){
                                                 SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
                                                 $goto = 'Location: index.php?controller=enfrentamientos&idenfrentamiento=' . $_REQUEST['idenfrentamiento'];
                                                 header($goto);
@@ -279,7 +279,7 @@
                             $enfrentamiento->setHora($hora);
                             $enfrentamientoMapper = new EnfrentamientoMapper();
 
-                            if($reservasEnFecha == $pistasActivas){
+                            if($reservasEnFecha >= $pistasActivas){
                                 
                                 $enfrentamientoMapper->borrarPropuesta($enfrentamiento);
 

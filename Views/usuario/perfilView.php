@@ -52,7 +52,7 @@
                     <?php
                     while($this->filaPartidos = ($this->listaPartidos)->fetch_assoc()) {
                         $id = $this->filaPartidos['id_partido'];
-                        $urlP = "index.php?controller=partidos&action=borrar&idpartido=" . $id;
+                        $urlP = "index.php?controller=partidos&action=desapuntarse&idpartido=" . $id;
                         $hoy = date('Y-m-d');
 
                         if($this->filaPartidos['fecha'] > $hoy){

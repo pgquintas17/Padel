@@ -77,7 +77,7 @@
                                                     $pistaMapper = new PistaMapper();
                                                     $pistasActivas = $pistaMapper->getNumPistasActivas();
 
-                                                    if($reservasEnFecha == $pistasActivas){
+                                                    if($reservasEnFecha >= $pistasActivas){
                                                     ?>
                                                         <td class="table-danger text-dark" style="text-align: -webkit-center";><?php echo date('H:i',strtotime($this->filaHoras['hora'])); ?></td>
                                                     <?php
