@@ -125,7 +125,7 @@ CREATE TABLE `noticia` (
   `ID_NOTICIA` int NOT NULL AUTO_INCREMENT,
   `TITULO` varchar(45) COLLATE latin1_spanish_ci NOT NULL,
   `CUERPO` text COLLATE latin1_spanish_ci NOT NULL,
-  `fecha_creacion` datetime NOT NULL,
+  `FECHA_CREACION` datetime NOT NULL,
 
 PRIMARY KEY (`ID_NOTICIA`)
 

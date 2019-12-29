@@ -23,7 +23,7 @@
             parent::__construct($this->usuario);
             $this->filaReservas = array('id_reserva','id_pista','hora','fecha','login');
             $this->listaReservas = $listaReservas;
-            $this->filaPartidos = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
+            $this->filaPartidos = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva','creador');
             $this->listaPartidos = $listaPartidos;
             $this->filaCampeonatos = array('fecha_fin','id_campeonato', 'nombre', 'fecha_fin_inscripciones','sexonivel', 'nombre_pareja', 'capitan', 'miembro', 'id_pareja');
             $this->listaCampeonatos = $listaCampeonatos;
@@ -39,7 +39,7 @@
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
             <h1>Hola, <?php echo $_SESSION['Usuario']->getNombre(); ?></h1><br>
-            <p>Haz click <a href='index.php?controller=perfil&action=EDIT'>aquí</a> para editar tus datos.
+            <p>Haz click <a href='index.php?controller=perfil&action=EDIT'>aquí</a> para editar tus datos.</p>
 
             <div class="row">
                 <div id="seccion" class="col-lg-4">
@@ -49,16 +49,23 @@
                     <!---SECCIÓN PARTIDOS--->
                     <h5>Tus partidos</h5>
                     <p id="justificar">
+                    <p style="font-size:11px";>Si te desapuntas de un partido que tú has creado se borrará.</p>
                     <?php
                     while($this->filaPartidos = ($this->listaPartidos)->fetch_assoc()) {
                         $id = $this->filaPartidos['id_partido'];
-                        $urlP = "index.php?controller=partidos&action=borrar&idpartido=" . $id;
+                        $urlP = "index.php?controller=partidos&action=desapuntarse&idpartido=" . $id;
                         $hoy = date('Y-m-d');
 
                         if($this->filaPartidos['fecha'] > $hoy){
                             ?>
                         <li class="list-group-item">
                             <strong><?php echo date('d/m',strtotime($this->filaPartidos['fecha'])); ?></strong><br>
+                            <?php if((new UsuarioMapper())->getPermisoByLogin($this->filaPartidos['creador']) == 0){
+                        ?>
+                            <p id="centrar" class="text-danger">Partido creado por: <?php echo $this->filaPartidos['creador']; ?></p>
+                        <?php
+                        }
+                        ?>
                             <p>Se jugará a las <?php echo date('H:i',strtotime($this->filaPartidos['hora'])); ?>. <br>
                         <?php
                         if($this->filaPartidos['id_reserva'] != NULL){

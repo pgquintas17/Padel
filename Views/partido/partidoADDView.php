@@ -51,8 +51,18 @@
 
                         <!-- Formulario datos usuario -->
                         <form action="/" method="POST" name="formReservaPista">
-
-                        <input type="hidden" name="controller" value="adminPartidos">
+                    <?php 
+                        if(Utils::nivelPermiso(2)){
+                    ?>
+                            <input type="hidden" name="controller" value="adminPartidos">
+                    <?php
+                        }
+                        else{
+                    ?>
+                            <input type="hidden" name="controller" value="partidos">
+                    <?php
+                        }
+                    ?>            
 
                             <div class="justify-content-md-center">
                                 <div class="form-group col-md-6">
@@ -80,7 +90,7 @@
                                                     $pistaMapper = new PistaMapper();
                                                     $pistasActivas = $pistaMapper->getNumPistasActivas();
 
-                                                    if($reservasEnFecha == $pistasActivas){
+                                                    if($reservasEnFecha >= $pistasActivas){
                                                     ?>
                                                         <td class="table-danger text-dark" style="text-align: -webkit-center";><?php echo date('H:i',strtotime($this->filaHoras['hora'])); ?></td>
                                                     <?php

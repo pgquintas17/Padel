@@ -75,6 +75,9 @@
                                 <a class="nav-link" href="/index.php?controller=reservas&action=reservar">RESERVAR PISTA</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="/index.php?controller=partidos&action=fecha">AÑADIR PARTIDO</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/index.php?controller=campeonatos">CAMPEONATOS</a>
                             </li>
                             <li class="nav-item">

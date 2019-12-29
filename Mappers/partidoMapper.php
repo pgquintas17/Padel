@@ -16,6 +16,7 @@ require_once('Models/partidoModel.php');
 
             $hora = $partido->getHora();
             $fecha = $partido->getFecha();
+            $promocion = $partido->getpromocion();
             $creador = $partido->getCreador();
     
                 $sql = "SELECT * FROM PARTIDO";
@@ -33,7 +34,7 @@ require_once('Models/partidoModel.php');
                         VALUES (
                             '$hora',
                             '$fecha',
-                            '0',
+                            '$promocion',
                             '$creador'
                         )";
 
@@ -41,7 +42,47 @@ require_once('Models/partidoModel.php');
                         return $sql;
                     } 
                     else {
-                        return 'Registro completado con éxito. Recuerda promocionar el partido para darle difusión.';
+                        return 'Partido añadido con éxito. Recuerda promocionar el partido para darle difusión.';
+                    } 
+                }
+
+        }
+
+
+        function ADDDeportista($partido){
+
+            $hora = $partido->getHora();
+            $fecha = $partido->getFecha();
+            $promocion = $partido->getpromocion();
+            $creador = $partido->getCreador();
+            $login1 = $partido->getLogin1();
+    
+                $sql = "SELECT * FROM PARTIDO";
+    
+                if (!$result = $this->mysqli->query($sql)) 
+                    return 'No se ha podido conectar con la base de datos'; 
+                else { 
+                    
+                    $sql = "INSERT INTO PARTIDO (
+                            hora,
+                            fecha,
+                            promocion,
+                            creador,
+                            login1
+                        )
+                        VALUES (
+                            '$hora',
+                            '$fecha',
+                            '$promocion',
+                            '$creador',
+                            '$login1'
+                        )";
+
+                    if (!$this->mysqli->query($sql)){
+                        return $sql;
+                    } 
+                    else {
+                        return 'Partido añadido con éxito.';
                     } 
                 }
 
@@ -442,8 +483,51 @@ require_once('Models/partidoModel.php');
                     return $resultado;
                 }
             }
-
         }
+
+        function getEmailParticipantes($partido){
+
+            $id = $partido->getId();
+
+            $sql = "SELECT usuario1.email as email1, usuario2.email as email2, usuario3.email as email3, usuario4.email as email4
+                    FROM partido 
+                        INNER JOIN usuario as usuario1 ON usuario1.LOGIN = partido.LOGIN1
+                        INNER JOIN usuario as usuario2 ON usuario2.LOGIN = partido.LOGIN2
+                        INNER JOIN usuario as usuario3 ON usuario3.LOGIN = partido.LOGIN3
+                        INNER JOIN usuario as usuario4 ON usuario4.LOGIN = partido.LOGIN4
+                    WHERE partido.ID_PARTIDO = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                $emails = array();
+                $emails[] = $tupla['0'];
+                $emails[] = $tupla['1'];
+                $emails[] = $tupla['2'];
+                $emails[] = $tupla['3'];
+
+                return $emails;
+            }
+        }
+
+
+        function getNumPartidosByCreador($login){
+
+            $sql = "SELECT COUNT(*) FROM PARTIDO WHERE creador = '$login'";
+
+            if (!($resultado = $this->mysqli->query($sql))) {
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $result = $resultado->fetch_array(MYSQLI_NUM);
+                return $result['0'];
+            }
+        }
+
+
     }
 
 ?>
