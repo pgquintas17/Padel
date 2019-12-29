@@ -51,8 +51,18 @@
 
                         <!-- Formulario datos usuario -->
                         <form action="/" method="POST" name="formReservaPista">
-
-                        <input type="hidden" name="controller" value="adminPartidos">
+                    <?php 
+                        if(Utils::nivelPermiso(2)){
+                    ?>
+                            <input type="hidden" name="controller" value="adminPartidos">
+                    <?php
+                        }
+                        else{
+                    ?>
+                            <input type="hidden" name="controller" value="partidos">
+                    <?php
+                        }
+                    ?>            
 
                             <div class="justify-content-md-center">
                                 <div class="form-group col-md-6">

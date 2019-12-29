@@ -11,6 +11,7 @@
 	require_once('Mappers/reservaMapper.php');
 	require_once('Mappers/enfrentamientoMapper.php');
 	require_once('Mappers/pistaMapper.php');
+	require_once('Mappers/horaMapper.php');
 
 
 	class PartidoController {
@@ -19,6 +20,62 @@
 
 			if(isset($_REQUEST["action"])) {
 				switch($_REQUEST["action"]) {
+
+					case 'ADD': 
+
+						$partidosActivosCreador = (new PartidoMapper())->getNumPartidosByCreador($_SESSION['Usuario']->getLogin());
+
+						if($partidosActivosCreador == 3){
+							SessionMessage::setMessage('Has alcanzado el número máximo posibles de partidos de creación propia.');
+							header('Location: index.php');
+
+						}else{
+							
+							try {
+								$partido = new PartidoModel('',$_POST["hora"],$_POST["fecha"],1,$_SESSION['Usuario']->getLogin(),'','','','',$_SESSION['Usuario']->getLogin());
+								$errores =  $partido->validarRegistro();
+								$partidoMapper = new PartidoMapper();
+								$reserva = new ReservaModel();
+								$reserva->setHora($_POST["inputHora"]);
+								$reserva->setFecha($_POST["inputFecha"]);
+								$reservaMapper = new ReservaMapper();
+								$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
+								$pistaMapper = new PistaMapper();
+								$pistasActivas = $pistaMapper->getNumPistasActivas();
+								
+								if($reservasEnFecha >= $pistasActivas){
+									SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
+									header('Location: index.php');
+								}
+								else{
+									$respuesta = $partidoMapper->ADDDeportista($partido);
+									SessionMessage::setMessage($respuesta);
+									header('Location: index.php');
+								}
+							}
+							catch (ValidationException $e){
+								SessionMessage::setErrores($e->getErrores());
+								SessionMessage::setMessage($e->getMessage());
+								header('Location: index.php?controller=partidos&action=fecha');
+							}
+						}
+						break;
+
+						case 'fecha':	
+							if(isset($_REQUEST["fecha"])){
+								$horaMapper = new HoraMapper();
+								$listaHoras = $horaMapper->mostrarTodos();
+								require_once('Views/partido/partidoADDView.php');
+								(new PartidoADDView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,$_REQUEST["fecha"]))->render();
+							}
+							else{
+								$horaMapper = new HoraMapper();
+								$listaHoras = $horaMapper->mostrarTodos();
+								require_once('Views/partido/partidoADDView.php');
+								(new PartidoADDView(SessionMessage::getMessage(), SessionMessage::getErrores(),'','',$listaHoras,''))->render();
+							}
+							break;
+							
 
 					case 'APUNTARSE': 
 						$usuario = $_SESSION["Usuario"];
@@ -139,7 +196,13 @@
 								}
 							}
 							else{
-								$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']); 
+								$creador = $partidoMapper->getCreadorByID($partido);
+
+								if($creador == $_SESSION['Usuario']->getLogin()){
+									$respuesta = $partidoMapper->DELETE($partido);
+								}else{
+									$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']);
+								} 
 							}
 							SessionMessage::setMessage($respuesta); 
 							header('Location: index.php?controller=perfil');
