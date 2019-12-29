@@ -52,9 +52,10 @@
             <?php
             }
             ?>
-            <div class="col-6">
+            <div class="col-4">
                 <p style="text-align: right";><strong>Fecha de creación:</strong> <?php echo date('d/m',strtotime($this->datos['3'])); ?></p>
             </div>
+            <div class="col-2"></div>
             </div><br>
             
 

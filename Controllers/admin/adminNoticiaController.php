@@ -29,7 +29,7 @@
 								
 								foreach($emails as $email){
 									$to_email_address = $email;
-									$subject = 'Se ha a&#241;adido una noticia.';
+									$subject = 'Nueva noticia disponible.';
 									$message = '<html><head></head><body>Hola,<br>Te informamos de que ha sido a&#241;adida una noticia al sistema: <strong>'. $_REQUEST['titulo'] .'</strong><br><br>Un saludo,<br>Padelweb.</p><br><br><p style="font-size:10px";>Si no deseas seguir recibiendo noticias puedes cancelar la suscripci&#243;n desde tu perfil. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
 									$headers  = 'MIME-Version: 1.0' . "\r\n";
 									$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
