@@ -40,8 +40,26 @@
 								$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
 								$pistaMapper = new PistaMapper();
 								$pistasActivas = $pistaMapper->getNumPistasActivas();
-								if($reservasEnFecha == $pistasActivas){
+								
+								if($reservasEnFecha >= $pistasActivas){
+
+									$emails = $partidoMapper->getEmailParticipantes($partido);
+
+									$fecha = $partidoMapper->getFechaById($partido);
+									$hora = $partidoMapper->getHoraById($partido);
+
+									foreach($emails as $email){
+										$to_email_address = $email;
+										$subject = 'Partido cancelado.';
+										$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que no quedan pistas libres tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+										$headers  = 'MIME-Version: 1.0' . "\r\n";
+										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+										$headers .= 'From: noreply@padelweb.com';
+										mail($to_email_address,$subject,$message,$headers);
+									}
+
 									$partidoMapper->DELETE($partido);
+
 									SessionMessage::setMessage("No hay pistas disponibles para ese día y hora. El partido se ha eliminado.");
 									header('Location: index.php');
 								}
@@ -51,6 +69,22 @@
 									$reservaMapper->ADD($reserva);
 									$partido->setIdReserva($reservaMapper->getIdReserva($reserva));
 									$partidoMapper->añadirReserva($partido);
+
+									$emails = $partidoMapper->getEmailParticipantes($partido);
+
+									$fecha = $partidoMapper->getFechaById($partido);
+									$hora = $partidoMapper->getHoraById($partido);
+								
+									foreach($emails as $email){
+										$to_email_address = $email;
+										$subject = 'Reservada pista para tu partido.';
+										$message = '<html><head></head><body>Hola,<br>Te informamos de que se han completado las plazas para tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . '.<br>Se llevará acabo en la pista ' . $idPista . '<br><br>Un saludo,<br>Padelweb.</p></body></html>';
+										$headers  = 'MIME-Version: 1.0' . "\r\n";
+										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+										$headers .= 'From: noreply@padelweb.com';
+										mail($to_email_address,$subject,$message,$headers);
+									}
+
 									SessionMessage::setMessage($respuesta);
 									header('Location: index.php');
 								}
@@ -67,7 +101,7 @@
 						break;
 						
 
-					case 'borrar': 
+					case 'desapuntarse': 
 						$partido = new PartidoModel();
 						$partido->setId($_REQUEST['idpartido']);
 						$partidoMapper = new PartidoMapper();
@@ -86,9 +120,27 @@
 
 							$numPlazas = $partidoMapper->getNumPlazasLibres($_REQUEST["idpartido"]);
 							if($numPlazas == 0){
+								$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']);
 								$partidoMapper->borrarReserva($partido);
+
+								$emails = $partidoMapper->getEmailParticipantes($partido);
+
+								$fecha = $partidoMapper->getFechaById($partido);
+								$hora = $partidoMapper->getHoraById($partido);
+
+								foreach($emails as $email){
+									$to_email_address = $email;
+									$subject = 'Reserva cancelada.';
+									$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que alguien se ha desapuntado de tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' la reserva ha sido cancelada. Cuando se vuelvan a completar las plazas te avisaremos con la nueva pista. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+									$headers  = 'MIME-Version: 1.0' . "\r\n";
+									$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+									$headers .= 'From: noreply@padelweb.com';
+									mail($to_email_address,$subject,$message,$headers);
+								}
 							}
-							$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']); 
+							else{
+								$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']); 
+							}
 							SessionMessage::setMessage($respuesta); 
 							header('Location: index.php?controller=perfil');
 						}
