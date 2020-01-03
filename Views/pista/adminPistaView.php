@@ -16,7 +16,7 @@
             $this->msg = $msg;
             $this->errs = $errs;
             parent::__construct($this->usuario);
-            $this->fila = array('idpista','estado');
+            $this->fila = array('idpista','estado','estado');
             $this->listaPistas = $listaPistas;
         }
 
@@ -34,11 +34,12 @@
             <button type="button" class="btn btn-link text-dark" data-toggle="modal" data-target="#addPista"><i class="fas fa-plus-circle fa-2x"></i></button><br><br>
             <div class="row justify-content-md-center">
                 <!-- Tabla pistas -->
-                <div class="col-md-4" id="tablas">
+                <div class="col-md-6" id="tablas">
                     <table class="table table-hover table-bordered"  style="border-radius: 25px; text-align: center;">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Número de pista</th>
+                                <th scope="col">Tipo de superficie</th>
                                 <th scope="col">Abrir/cerrar</th>
                             </tr>
                         </thead>
@@ -54,6 +55,10 @@
                                 ?>
                                 <tr class="table-light clickeable-row" onclick="window.location.assign('<?php echo $url ?>');">
                                     <td><?php echo $this->fila['id_pista']; ?></td>
+                                    <td><?php if($this->fila['tipo'] == 1){ echo "Césped artificial";}
+                                              if($this->fila['tipo'] == 2){ echo "Resina Sintética";}
+                                              if($this->fila['tipo'] == 3){ echo "Hormigón poroso";}
+                                              if($this->fila['tipo'] == 4){ echo "Cemento";} ?></td>
                                     <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-on fa-2x"></i></a></td>
                                 <?php
                                     }
@@ -61,6 +66,10 @@
                                 ?>
                                 <tr class="table-danger clickeable-row" onclick="window.location.assign('<?php echo $url ?>');">
                                     <td><?php echo $this->fila['id_pista']; ?></td>
+                                    <td><?php if($this->fila['tipo'] == 1){ echo "Césped artificial";}
+                                              if($this->fila['tipo'] == 2){ echo "Resina Sintética";}
+                                              if($this->fila['tipo'] == 3){ echo "Hormigón poroso";}
+                                              if($this->fila['tipo'] == 4){ echo "Cemento";} ?></td>
                                     <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-off fa-2x"></i></a></td>
                                 <?php    
                                     }
@@ -96,6 +105,40 @@
                         <div class="form-group">
                         <label>Número de pista</label>
                         <input type="text" class="form-control" name="inputID">
+                        </div>
+                        <div class="form-group">
+                        <label>Tipo de superficie</label>
+                            <div class="form-check row">
+                            <label><div class="col-md-12">
+                                <input class="form-check-input" type="radio" name="inputTipo" value="1">
+                            </div>
+                            <div class="col-md-12">
+                                Césped artificial
+                            </div></label>
+                            </div>
+                            <div class="form-check row">
+                            <label><div class="col-md-12">
+                                <input class="form-check-input" type="radio" name="inputTipo" value="2">
+                            </div>
+                            <div class="col-md-12">
+                                Resina Sintética
+                            </div></label>
+                            </div>
+                            <div class="form-check row">
+                            <label><div class="col-md-12">
+                                <input class="form-check-input" type="radio" name="inputTipo" value="3">
+                            </div>
+                            <div class="col-md-12">
+                                Hormigón Poroso
+                            </div></label>
+                            </div>
+                            <label><div class="col-md-12">
+                                <input class="form-check-input" type="radio" name="inputTipo" value="4">
+                            </div>
+                            <div class="col-md-12">
+                                Cemento
+                            </div></label>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <div class="form-group">

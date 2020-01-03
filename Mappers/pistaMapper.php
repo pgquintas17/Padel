@@ -15,21 +15,22 @@ require_once('Models/pistaModel.php');
         function ADD($pista){
 
             $id_pista = $pista->getId();
+            $tipo = $pista->getTipo();
             $estado = $pista->getEstado();
     
-            $sql = "SELECT * FROM PISTA";
-
-            if (!$result = $this->mysqli->query($sql)){ 
-                return false; 
-            }
-            else { 
-                $sql2 = "INSERT INTO PISTA (id_pista, estado)
-                        VALUES ('$id_pista', '$estado')";
+            $sql = "SELECT * FROM PISTA  WHERE (id_pista = '$id_pista') ";
+            $result = $this->mysqli->query($sql);
+    
+            if ($result->num_rows == 1) {
+                return 'Ya existe una pista con ese número';
+            }else{ 
+                $sql2 = "INSERT INTO PISTA (id_pista, tipo, estado)
+                        VALUES ('$id_pista', '$tipo', '$estado')";
 
                 if (!$this->mysqli->query($sql2)){ 
-                    return false;
+                    return $sql2;
                 }else{ 
-                    return true;
+                    return "La pista ha sido añadida. Recuerda activarla para su uso.";
                 } 
             } 
         }
@@ -37,7 +38,7 @@ require_once('Models/pistaModel.php');
 
         function mostrarTodos() {
 		
-            $sql = "SELECT id_pista, estado FROM PISTA";
+            $sql = "SELECT id_pista, tipo, estado FROM PISTA";
     
             if (!($resultado = $this->mysqli->query($sql)))
                 return 'Error en la consulta sobre la base de datos';
@@ -72,7 +73,7 @@ require_once('Models/pistaModel.php');
                 
                 $tupla = $result->fetch_array(MYSQLI_NUM);
                 
-                if($tupla['1'] == 0){
+                if($tupla['2'] == 0){
                     $sql2 = "UPDATE PISTA  SET estado = 1 WHERE ( id_pista = '$id_pista')";
                 }
                 else{
@@ -102,17 +103,33 @@ require_once('Models/pistaModel.php');
             } 
         }
 
+        function getNumPistasActivasPorTipo($pista){
 
-        function findPistaLibre($reserva){
+            $tipo = $pista->getTipo();
+
+            $sql = "SELECT COUNT(*) FROM PISTA WHERE estado = '1' AND tipo = '$tipo'";
+
+            if (!($resultado = $this->mysqli->query($sql))) {
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $result = $resultado->fetch_array(MYSQLI_NUM);
+                return $result['0'];
+            } 
+        }
+
+
+        function findPistaLibre($reserva,$pista){
 
             $hora = $reserva->getHora();
             $fecha = $reserva->getFecha();
+            $tipo = $pista->getTipo();
 
             $sql="SELECT PISTA.ID_PISTA FROM PISTA 
                   WHERE NOT EXISTS(SELECT 1 FROM RESERVA 
                                    WHERE RESERVA.ID_PISTA=PISTA.ID_PISTA 
                                    AND RESERVA.HORA= '$hora' 
-                                   AND RESERVA.FECHA= '$fecha') AND estado = 1 LIMIT 1";
+                                   AND RESERVA.FECHA= '$fecha') AND tipo = '$tipo' AND estado = 1 LIMIT 1";
 
             $result = $this->mysqli->query($sql);
             $tupla = $result->fetch_array(MYSQLI_NUM);

@@ -39,17 +39,19 @@
 									$reserva->setLogin($_SESSION['Usuario']->getLogin());
 									$reserva->setFecha($_POST["fecha"]);
 									$reserva->setHora($_POST["inputHora"]);
+									$pista = new PistaModel();
+									$pista->setTipo($_POST["inputTipo"]);
 									$validacion = Utils::validarDisponibilidad($_SESSION['Usuario']->getLogin(),$_REQUEST['fecha'],$_REQUEST['inputHora']);
 									if($validacion){
 										$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
 										$pistaMapper = new PistaMapper();
-										$pistasActivas = $pistaMapper->getNumPistasActivas();
+										$pistasActivas = $pistaMapper->getNumPistasActivasPorTipo($pista);
 										if($reservasEnFecha >= $pistasActivas){
-											SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
+											SessionMessage::setMessage("No hay pistas del tipo seleccionado disponibles para ese día y hora.");
 											header('Location: index.php?controller=reservas&action=reservar');
 										}
 										else{
-											$idPista = $pistaMapper->findPistaLibre($reserva);
+											$idPista = $pistaMapper->findPistaLibre($reserva,$pista);
 											$reserva->setIdPista($idPista);
 											$reservaMapper->ADD($reserva);
 											$reservaHecha = "La reserva ha sido registrada en la pista: " . $idPista;
