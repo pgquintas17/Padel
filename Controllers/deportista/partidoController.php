@@ -36,20 +36,29 @@
 								$errores =  $partido->validarRegistro();
 								$partidoMapper = new PartidoMapper();
 								$reserva = new ReservaModel();
-								$reserva->setHora($_POST["inputHora"]);
-								$reserva->setFecha($_POST["inputFecha"]);
-								$reservaMapper = new ReservaMapper();
-								$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
-								$pistaMapper = new PistaMapper();
-								$pistasActivas = $pistaMapper->getNumPistasActivas();
-								
-								if($reservasEnFecha >= $pistasActivas){
-									SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
-									header('Location: index.php');
+								$reserva->setHora($_POST["hora"]);
+								$reserva->setFecha($_POST["fecha"]);
+								$reserva->setLogin($_SESSION['Usuario']->getLogin());
+
+								$validacion = Utils::validarDisponibilidad($_SESSION['Usuario']->getLogin(),$_POST["fecha"],$_POST["hora"]);
+								if($validacion){
+									$reservaMapper = new ReservaMapper();
+									$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
+									$pistaMapper = new PistaMapper();
+									$pistasActivas = $pistaMapper->getNumPistasActivas();
+									
+									if($reservasEnFecha >= $pistasActivas){
+										SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
+										header('Location: index.php');
+									}
+									else{
+										$respuesta = $partidoMapper->ADDDeportista($partido);
+										SessionMessage::setMessage($respuesta);
+										header('Location: index.php');
+									}
 								}
 								else{
-									$respuesta = $partidoMapper->ADDDeportista($partido);
-									SessionMessage::setMessage($respuesta);
+									SessionMessage::setMessage("Ya tienes un partido/reserva en ese día y hora.");
 									header('Location: index.php');
 								}
 							}
