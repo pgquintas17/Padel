@@ -184,6 +184,9 @@
 						}
 						else{
 
+							$fecha = $partidoMapper->getFechaById($partido);
+							$hora = $partidoMapper->getHoraById($partido);
+
 							$numPlazas = $partidoMapper->getNumPlazasLibres($_REQUEST["idpartido"]);
 							if($numPlazas == 0){
 								$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']);
@@ -191,30 +194,60 @@
 
 								$emails = $partidoMapper->getEmailParticipantes($partido);
 
-								$fecha = $partidoMapper->getFechaById($partido);
-								$hora = $partidoMapper->getHoraById($partido);
+								$creador = $partidoMapper->getCreadorByID($partido);
 
-								foreach($emails as $email){
-									$to_email_address = $email;
-									$subject = 'Reserva cancelada.';
-									$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que alguien se ha desapuntado de tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' la reserva ha sido cancelada. Cuando se vuelvan a completar las plazas te avisaremos con la nueva pista. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
-									$headers  = 'MIME-Version: 1.0' . "\r\n";
-									$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-									$headers .= 'From: noreply@padelweb.com';
-									mail($to_email_address,$subject,$message,$headers);
-								}
+								if($creador == $_SESSION['Usuario']->getLogin()){
+									$respuesta = $partidoMapper->DELETE($partido);
+									foreach($emails as $email){
+										$to_email_address = $email;
+										$subject = 'Partido cancelado.';
+										$message = '<html><head></head><body>Hola,<br>Te informamos de que tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+										$headers  = 'MIME-Version: 1.0' . "\r\n";
+										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+										$headers .= 'From: noreply@padelweb.com';
+										mail($to_email_address,$subject,$message,$headers);
+									}
+								}else{
+									foreach($emails as $email){
+										$to_email_address = $email;
+										$subject = 'Reserva cancelada.';
+										$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que alguien se ha desapuntado de tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' la reserva ha sido cancelada. Cuando se vuelvan a completar las plazas te avisaremos con la nueva pista. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+										$headers  = 'MIME-Version: 1.0' . "\r\n";
+										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+										$headers .= 'From: noreply@padelweb.com';
+										mail($to_email_address,$subject,$message,$headers);
+									}
+								}	
 							}
 							else{
 								$creador = $partidoMapper->getCreadorByID($partido);
 
 								if($creador == $_SESSION['Usuario']->getLogin()){
 									$respuesta = $partidoMapper->DELETE($partido);
+									foreach($emails as $email){
+										$to_email_address = $email;
+										$subject = 'Partido cancelado.';
+										$message = '<html><head></head><body>Hola,<br>Te informamos de que tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+										$headers  = 'MIME-Version: 1.0' . "\r\n";
+										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+										$headers .= 'From: noreply@padelweb.com';
+										mail($to_email_address,$subject,$message,$headers);
+									}
 								}else{
 									$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']);
-								} 
+									foreach($emails as $email){
+										$to_email_address = $email;
+										$subject = 'Reserva cancelada.';
+										$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que alguien se ha desapuntado de tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' la reserva ha sido cancelada. Cuando se vuelvan a completar las plazas te avisaremos con la nueva pista. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+										$headers  = 'MIME-Version: 1.0' . "\r\n";
+										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+										$headers .= 'From: noreply@padelweb.com';
+										mail($to_email_address,$subject,$message,$headers);
+									} 
+								}
 							}
 							SessionMessage::setMessage($respuesta); 
-							header('Location: index.php?controller=perfil');
+								header('Location: index.php?controller=perfil');
 						}
 						break;
 					
