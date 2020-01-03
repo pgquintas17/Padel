@@ -62,6 +62,7 @@ CREATE TABLE `usuario` (
 
 CREATE TABLE `pista` (
   `ID_PISTA` int  NOT NULL,
+  `TIPO` int NOT NULL,
   `ESTADO` tinyint NOT NULL,
 
 PRIMARY KEY(`ID_PISTA`)  
