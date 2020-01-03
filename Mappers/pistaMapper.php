@@ -119,7 +119,25 @@ require_once('Models/pistaModel.php');
         }
 
 
-        function findPistaLibre($reserva,$pista){
+        function findPistaLibre($reserva){
+
+            $hora = $reserva->getHora();
+            $fecha = $reserva->getFecha();
+
+            $sql="SELECT PISTA.ID_PISTA FROM PISTA 
+                  WHERE NOT EXISTS(SELECT 1 FROM RESERVA 
+                                   WHERE RESERVA.ID_PISTA=PISTA.ID_PISTA 
+                                   AND RESERVA.HORA= '$hora' 
+                                   AND RESERVA.FECHA= '$fecha') AND estado = 1 LIMIT 1";
+
+            $result = $this->mysqli->query($sql);
+            $tupla = $result->fetch_array(MYSQLI_NUM);
+
+            return $tupla['0'];
+            
+        }
+
+        function findPistaLibrePorTipo($reserva,$pista){
 
             $hora = $reserva->getHora();
             $fecha = $reserva->getFecha();

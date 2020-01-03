@@ -51,7 +51,7 @@
 											header('Location: index.php?controller=reservas&action=reservar');
 										}
 										else{
-											$idPista = $pistaMapper->findPistaLibre($reserva,$pista);
+											$idPista = $pistaMapper->findPistaLibrePorTipo($reserva,$pista);
 											$reserva->setIdPista($idPista);
 											$reservaMapper->ADD($reserva);
 											$reservaHecha = "La reserva ha sido registrada en la pista: " . $idPista;
