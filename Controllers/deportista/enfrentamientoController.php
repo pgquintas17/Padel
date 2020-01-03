@@ -107,7 +107,7 @@
                                                 $message = '<html><head></head><body>Hola,<br>Te informamos de que se ha realizado una propuesta de fecha para tu partido ' . $partido .' en el Campeonato '. $campeonato['5'] .'. <br>La propuesta es: ' . date('d/m H:i',strtotime($propuesta)) . '. <br>Recuerda que el capit&#225;n de tu pareja debe conectarse para aceptar o rechazar la propuesta. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
                                                 $headers  = 'MIME-Version: 1.0' . "\r\n";
                                                 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                                                $headers .= 'From: noreply@padelweb.com';
+                                                $headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
                                                 mail($to_email_address,$subject,$message,$headers);
                                             }
                                             
@@ -214,7 +214,7 @@
                                                     $message = '<html><head></head><body>Hola,<br>Te informamos de que tu propuesta para el partido ' . $partido .' en el Campeonato '. $campeonato['5'] .' ha sido rechazada. <br>En su lugar se ha propuesto: ' . date('d/m H:i',strtotime($propuesta)) . '. <br>Recuerda que el capit&#225;n de tu pareja debe conectarse para aceptar o rechazar la propuesta. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
                                                     $headers  = 'MIME-Version: 1.0' . "\r\n";
                                                     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                                                    $headers .= 'From: noreply@padelweb.com';
+                                                    $headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
                                                     mail($to_email_address,$subject,$message,$headers);
                                                 }
                                                 
@@ -293,7 +293,7 @@
                                     $message = '<html><head></head><body>Hola,<br>Te informamos de que no quedan pistas libres para llevar a cabo tu partido ' . $partido .' en el Campeonato '. $campeonato['5'] .' en la fecha pedida (' . date('d/m H:i',strtotime($_REQUEST['propuesta'])) . ').<br>Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
                                     $headers  = 'MIME-Version: 1.0' . "\r\n";
                                     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                                    $headers .= 'From: noreply@padelweb.com';
+                                    $headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
                                     mail($to_email_address,$subject,$message,$headers);
                                 }
 
@@ -325,7 +325,7 @@
                                     $message = '<html><head></head><body>Hola,<br>Te informamos de que se ha aceptado la propuesta de fecha para tu partido ' . $partido .' en el Campeonato '. $campeonato['5'] .'. <br>La fecha definitiva es: ' . date('d/m H:i',strtotime($_REQUEST['propuesta'])) . '. El enfrentamiento se llevar&#225; a cabo en la pista ' . $idPista .'. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
                                     $headers  = 'MIME-Version: 1.0' . "\r\n";
                                     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                                    $headers .= 'From: noreply@padelweb.com';
+                                    $headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
                                     mail($to_email_address,$subject,$message,$headers);
                                 }
                                 

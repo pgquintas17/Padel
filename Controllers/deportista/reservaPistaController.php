@@ -59,7 +59,7 @@
 											$message = '<html><head></head><body>Hola,<br>Te informamos de que has reservado pista para la fecha ' . date('d/m',strtotime($_POST["fecha"])) . ' y hora ' . date('H:i',strtotime($_POST["inputHora"])) . '.<br>Tu reserva es en la pista ' . $idPista .'.<br>Recuerda que puedes cancelarla desde tu pefil. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
 											$headers  = 'MIME-Version: 1.0' . "\r\n";
 											$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-											$headers .= 'From: noreply@padelweb.com';
+											$headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
 											mail($to_email_address,$subject,$message,$headers);
 											
 

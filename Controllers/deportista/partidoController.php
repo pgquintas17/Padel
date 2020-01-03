@@ -120,7 +120,7 @@
 										$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que no quedan pistas libres tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
 										$headers  = 'MIME-Version: 1.0' . "\r\n";
 										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-										$headers .= 'From: noreply@padelweb.com';
+										$headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
 										mail($to_email_address,$subject,$message,$headers);
 									}
 
@@ -144,10 +144,10 @@
 									foreach($emails as $email){
 										$to_email_address = $email;
 										$subject = 'Reservada pista para tu partido.';
-										$message = '<html><head></head><body>Hola,<br>Te informamos de que se han completado las plazas para tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . '.<br>Se llevará acabo en la pista ' . $idPista . '<br><br>Un saludo,<br>Padelweb.</p></body></html>';
+										$message = '<html><head></head><body>Hola,<br>Te informamos de que se han completado las plazas para tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . '.<br>Se llevar&#225; acabo en la pista ' . $idPista . '<br><br>Un saludo,<br>Padelweb.</p></body></html>';
 										$headers  = 'MIME-Version: 1.0' . "\r\n";
 										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-										$headers .= 'From: noreply@padelweb.com';
+										$headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
 										mail($to_email_address,$subject,$message,$headers);
 									}
 
@@ -189,14 +189,12 @@
 
 							$numPlazas = $partidoMapper->getNumPlazasLibres($_REQUEST["idpartido"]);
 							if($numPlazas == 0){
-								$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']);
-								$partidoMapper->borrarReserva($partido);
-
 								$emails = $partidoMapper->getEmailParticipantes($partido);
 
 								$creador = $partidoMapper->getCreadorByID($partido);
 
 								if($creador == $_SESSION['Usuario']->getLogin()){
+									var_dump($emails);
 									$respuesta = $partidoMapper->DELETE($partido);
 									foreach($emails as $email){
 										$to_email_address = $email;
@@ -204,17 +202,19 @@
 										$message = '<html><head></head><body>Hola,<br>Te informamos de que tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
 										$headers  = 'MIME-Version: 1.0' . "\r\n";
 										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-										$headers .= 'From: noreply@padelweb.com';
+										$headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
 										mail($to_email_address,$subject,$message,$headers);
 									}
 								}else{
+									$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']);
+									$partidoMapper->borrarReserva($partido);
 									foreach($emails as $email){
 										$to_email_address = $email;
 										$subject = 'Reserva cancelada.';
 										$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que alguien se ha desapuntado de tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' la reserva ha sido cancelada. Cuando se vuelvan a completar las plazas te avisaremos con la nueva pista. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
 										$headers  = 'MIME-Version: 1.0' . "\r\n";
 										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-										$headers .= 'From: noreply@padelweb.com';
+										$headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
 										mail($to_email_address,$subject,$message,$headers);
 									}
 								}	
@@ -222,6 +222,10 @@
 							else{
 								$creador = $partidoMapper->getCreadorByID($partido);
 
+								$emails = $partidoMapper->getEmailParticipantes($partido);
+
+								var_dump($emails);
+
 								if($creador == $_SESSION['Usuario']->getLogin()){
 									$respuesta = $partidoMapper->DELETE($partido);
 									foreach($emails as $email){
@@ -230,24 +234,15 @@
 										$message = '<html><head></head><body>Hola,<br>Te informamos de que tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
 										$headers  = 'MIME-Version: 1.0' . "\r\n";
 										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-										$headers .= 'From: noreply@padelweb.com';
+										$headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
 										mail($to_email_address,$subject,$message,$headers);
 									}
 								}else{
-									$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']);
-									foreach($emails as $email){
-										$to_email_address = $email;
-										$subject = 'Reserva cancelada.';
-										$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que alguien se ha desapuntado de tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' la reserva ha sido cancelada. Cuando se vuelvan a completar las plazas te avisaremos con la nueva pista. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
-										$headers  = 'MIME-Version: 1.0' . "\r\n";
-										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-										$headers .= 'From: noreply@padelweb.com';
-										mail($to_email_address,$subject,$message,$headers);
-									} 
+									$respuesta = $partidoMapper->cancelarInscripcion($partido,$_SESSION['Usuario']); 
 								}
 							}
 							SessionMessage::setMessage($respuesta); 
-								header('Location: index.php?controller=perfil');
+							header('Location: index.php?controller=perfil');
 						}
 						break;
 					
