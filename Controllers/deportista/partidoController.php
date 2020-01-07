@@ -117,7 +117,7 @@
 									foreach($emails as $email){
 										$to_email_address = $email;
 										$subject = 'Partido cancelado.';
-										$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que no quedan pistas libres tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+										$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que no quedan pistas libres tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado.<br>Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
 										$headers  = 'MIME-Version: 1.0' . "\r\n";
 										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 										$headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
@@ -199,7 +199,7 @@
 									foreach($emails as $email){
 										$to_email_address = $email;
 										$subject = 'Partido cancelado.';
-										$message = '<html><head></head><body>Hola,<br>Te informamos de que tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+										$message = '<html><head></head><body>Hola,<br>Te informamos de que tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado.<br>Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
 										$headers  = 'MIME-Version: 1.0' . "\r\n";
 										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 										$headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
@@ -211,7 +211,7 @@
 									foreach($emails as $email){
 										$to_email_address = $email;
 										$subject = 'Reserva cancelada.';
-										$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que alguien se ha desapuntado de tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' la reserva ha sido cancelada. Cuando se vuelvan a completar las plazas te avisaremos con la nueva pista. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+										$message = '<html><head></head><body>Hola,<br>Te informamos de que debido a que alguien se ha desapuntado de tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' la reserva ha sido cancelada. Cuando se vuelvan a completar las plazas te avisaremos con la nueva pista.<br>Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
 										$headers  = 'MIME-Version: 1.0' . "\r\n";
 										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 										$headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
@@ -231,7 +231,7 @@
 									foreach($emails as $email){
 										$to_email_address = $email;
 										$subject = 'Partido cancelado.';
-										$message = '<html><head></head><body>Hola,<br>Te informamos de que tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado. Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+										$message = '<html><head></head><body>Hola,<br>Te informamos de que tu partido del d&#237;a ' . date('d/m',strtotime($fecha)) . ' a las ' . date('H:i',strtotime($hora)) . ' ha sido cancelado.<br>Lamentamos las molestias. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
 										$headers  = 'MIME-Version: 1.0' . "\r\n";
 										$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 										$headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
