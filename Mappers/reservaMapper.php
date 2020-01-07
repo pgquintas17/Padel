@@ -273,6 +273,38 @@ require_once('Models/reservaModel.php');
         }
 
 
+        function getReservaCanceladaByPista($pista){
+
+            $hoy = date('Y-m-d');
+
+            $sql = "SELECT id_reserva, hora, fecha, login 
+                    FROM RESERVA
+                    WHERE ID_PISTA = '$pista' AND fecha >= '$hoy'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return "Error en la base de datos";
+            } else{
+                $reservas = array();
+                $fila = array('id_reserva', 'hora', 'fecha', 'login');
+
+                while($fila = ($resultado)->fetch_assoc()){
+
+                        $reserva = new ReservaModel();
+                        $reserva->setId($fila['id_reserva']);
+                        $reserva->setHora($fila['hora']);
+                        $reserva->setFecha($fila['fecha']);
+                        $reserva->setLogin($fila['login']);
+                        $reservas[] = $reserva;
+                }
+
+                    return $reservas;
+
+            }
+
+            
+        }
+
+
     }
 
 ?>

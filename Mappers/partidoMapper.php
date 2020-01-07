@@ -528,6 +528,36 @@ require_once('Models/partidoModel.php');
         }
 
 
+        function getPartidoByPista($pista){
+
+            $hoy = date('Y-m-d');
+
+            $sql = "SELECT id_partido, partido.hora, partido.fecha, partido.id_reserva 
+                    FROM partido 
+                        INNER JOIN RESERVA ON partido.ID_RESERVA=reserva.ID_RESERVA 
+                    WHERE reserva.ID_PISTA = '$pista' AND partido.fecha >= '$hoy' ";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return "Error en la base de datos";
+            } else{
+                $partidos = array();
+                $fila = array('id_partido', 'hora', 'fecha', 'id_reserva');
+
+                while($fila = ($resultado)->fetch_assoc()){
+
+                        $partido = new PartidoModel();
+                        $partido->setId($fila['id_partido']);
+                        $partido->setHora($fila['hora']);
+                        $partido->setFecha($fila['fecha']);
+                        $partido->setIdReserva($fila['id_reserva']);
+                        $partidos[] = $partido;
+                }
+
+                    return $partidos;
+
+            }
+        }
+
     }
 
 ?>

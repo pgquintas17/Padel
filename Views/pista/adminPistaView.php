@@ -59,7 +59,7 @@
                                               if($this->fila['tipo'] == 2){ echo "Resina Sintética";}
                                               if($this->fila['tipo'] == 3){ echo "Hormigón poroso";}
                                               if($this->fila['tipo'] == 4){ echo "Cemento";} ?></td>
-                                    <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-on fa-2x"></i></a></td>
+                                    <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>&estado=<?php echo $this->fila['estado']; ?>'><i class="fas fa-toggle-on fa-2x"></i></a></td>
                                 <?php
                                     }
                                     else{
@@ -70,7 +70,7 @@
                                               if($this->fila['tipo'] == 2){ echo "Resina Sintética";}
                                               if($this->fila['tipo'] == 3){ echo "Hormigón poroso";}
                                               if($this->fila['tipo'] == 4){ echo "Cemento";} ?></td>
-                                    <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>'><i class="fas fa-toggle-off fa-2x"></i></a></td>
+                                    <td><a class="bg-ligth text-dark" href='/index.php?controller=adminPistas&action=ESTADO&idpista=<?php echo $this->fila['id_pista']; ?>&estado=<?php echo $this->fila['estado']; ?>'><i class="fas fa-toggle-off fa-2x"></i></a></td>
                                 <?php    
                                     }
                                 ?>

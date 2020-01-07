@@ -289,8 +289,7 @@ require_once('Models/usuarioModel.php');
 
         function getEmailsSuscripcion(){
 
-            $sql = "SELECT 
-                        email 
+            $sql = "SELECT email 
                     FROM USUARIO
                     WHERE suscripcion = '1'";
 
@@ -308,6 +307,23 @@ require_once('Models/usuarioModel.php');
                     return $emails;
 
             }
+        }
+
+
+        function getEmailByLogin($login){
+
+            $sql = "SELECT email
+                    FROM USUARIO
+                    WHERE login = '$login'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['0'];
         }
 
 
