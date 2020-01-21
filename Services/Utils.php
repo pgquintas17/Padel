@@ -64,7 +64,7 @@ class Utils {
 				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>1);
 			}
 			
-			if($puntosPareja1 > $puntosPareja2){
+			if($puntosPareja2 > $puntosPareja1){
 				
 				return array("puntos1"=>$puntosPareja1, "puntos2"=>$puntosPareja2, "ganador"=>2);
 			}
