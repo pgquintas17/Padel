@@ -39,28 +39,35 @@
 									$reserva->setLogin($_SESSION['Usuario']->getLogin());
 									$reserva->setFecha($_POST["fecha"]);
 									$reserva->setHora($_POST["inputHora"]);
-									$validacion1 = $reservaMapper->comprobarDisponibilidadUsuario($reserva);
-									$partidoMapper = new PartidoMapper();
-									$validacion2 = $partidoMapper->comprobarDisponibilidadUsuario($reserva);
-									$enfrentamientoMapper = new EnfrentamientoMapper();
-									$validacion3 = $enfrentamientoMapper->comprobarDisponibilidadUsuario($reserva);
-									if($validacion1 && $validacion2 && $validacion3){
+									$pista = new PistaModel();
+									$pista->setTipo($_POST["inputTipo"]);
+									$validacion = Utils::validarDisponibilidad($_SESSION['Usuario']->getLogin(),$_REQUEST['fecha'],$_REQUEST['inputHora']);
+									if($validacion){
 										$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
 										$pistaMapper = new PistaMapper();
-										$pistasActivas = $pistaMapper->getNumPistasActivas();
-										if($reservasEnFecha == $pistasActivas){
-											SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
+										$pistasActivas = $pistaMapper->getNumPistasActivasPorTipo($pista);
+										if($reservasEnFecha >= $pistasActivas){
+											SessionMessage::setMessage("No hay pistas del tipo seleccionado disponibles para ese día y hora.");
 											header('Location: index.php?controller=reservas&action=reservar');
 										}
 										else{
-											$idPista = $pistaMapper->findPistaLibre($reserva);
+											$idPista = $pistaMapper->findPistaLibrePorTipo($reserva,$pista);
 											$reserva->setIdPista($idPista);
 											$reservaMapper->ADD($reserva);
-											$reservaHecha = "La reserva para el partido ha sido registrada en la pista: " . $idPista;
+											$reservaHecha = "La reserva ha sido registrada en la pista: " . $idPista;
+
+											$to_email_address = $_SESSION['Usuario']->getEmail();
+											$subject = 'Reserva de pista realizada.';
+											$message = '<html><head></head><body>Hola,<br>Te informamos de que has reservado pista para la fecha ' . date('d/m',strtotime($_POST["fecha"])) . ' y hora ' . date('H:i',strtotime($_POST["inputHora"])) . '.<br>Tu reserva es en la pista ' . $idPista .'.<br>Recuerda que puedes cancelarla desde tu pefil. <br><br>Un saludo,<br>Padelweb.</p></body></html>';
+											$headers  = 'MIME-Version: 1.0' . "\r\n";
+											$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+											$headers .= 'From: Padelweb <noreply@padelweb.com>' . "\r\n";
+											mail($to_email_address,$subject,$message,$headers);
+											
+
 											SessionMessage::setMessage($reservaHecha);
 											header('Location: index.php?controller=reservas&action=reservar');
-										}
-										
+										}	
 									}
 									else{
 										SessionMessage::setMessage("Tienes otra reserva/partido en ese día y hora.");
@@ -111,13 +118,11 @@
 						break;
 
 					default: 
-						echo "default";
 						header('Location: index.php');
 						break;
 
 				}
 			} else {
-				echo "sin action";
 				header('Location: index.php');
 			}
 		}

@@ -77,7 +77,7 @@
                                                     $pistaMapper = new PistaMapper();
                                                     $pistasActivas = $pistaMapper->getNumPistasActivas();
 
-                                                    if($reservasEnFecha == $pistasActivas){
+                                                    if($reservasEnFecha >= $pistasActivas){
                                                     ?>
                                                         <td class="table-danger text-dark" style="text-align: -webkit-center";><?php echo date('H:i',strtotime($this->filaHoras['hora'])); ?></td>
                                                     <?php
@@ -93,6 +93,41 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                            <div class="form-group" style="text-align: justify;">
+                                <label><strong>Tipo de superficie</strong></label>
+                                <div class="form-check row">
+                                    <label><div class="col-md-2">
+                                        <input class="form-check-input" type="radio" name="inputTipo" value="1">
+                                    </div>
+                                    <div class="col-md-12">
+                                        Césped artificial
+                                    </div></label>
+                                </div>
+                                <div class="form-check row">
+                                    <label><div class="col-md-2">
+                                        <input class="form-check-input" type="radio" name="inputTipo" value="2">
+                                    </div>
+                                    <div class="col-md-12">
+                                        Resina sintética
+                                    </div></label>
+                                </div>
+                                <div class="form-check row">
+                                    <label><div class="col-md-2">
+                                        <input class="form-check-input" type="radio" name="inputTipo" value="3">
+                                    </div>
+                                    <div class="col-md-12">
+                                        Hormigón poroso
+                                    </div></label>
+                                </div>
+                                <div class="form-check row">
+                                    <label><div class="col-md-2">
+                                        <input class="form-check-input" type="radio" name="inputTipo" value="4">
+                                    </div>
+                                    <div class="col-md-12">
+                                        Cemento
+                                    </div></label>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-light" name="action" value="ADD" id="submit">Reservar</button>

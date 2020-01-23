@@ -7,6 +7,8 @@
 	require_once('Mappers/reservaMapper.php');
 	require_once('Mappers/pistaMapper.php');
 	require_once('Mappers/horaMapper.php');
+	require_once('Models/usuarioModel.php');
+	require_once('Mappers/usuarioMapper.php');
 
 
 	class AdminPartidoController {
@@ -18,7 +20,7 @@
 
 					case 'ADD': 
 						try {
-							$partido = new PartidoModel('',$_POST["hora"],$_POST["fecha"],'','','','','','');
+							$partido = new PartidoModel('',$_POST["hora"],$_POST["fecha"],0,'','','','','',$_SESSION['Usuario']->getLogin());
 							$errores =  $partido->validarRegistro();
 							$partidoMapper = new PartidoMapper();
 							$reserva = new ReservaModel();
@@ -28,7 +30,7 @@
 							$reservasEnFecha = $reservaMapper->getNumReservasByDiaYHora($reserva);
 							$pistaMapper = new PistaMapper();
 							$pistasActivas = $pistaMapper->getNumPistasActivas(); 
-							if($reservasEnFecha == $pistasActivas){
+							if($reservasEnFecha >= $pistasActivas){
 								SessionMessage::setMessage("No hay pistas disponibles para ese día y hora.");
 								header('Location: index.php?controller=adminPartidos');
 							}

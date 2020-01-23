@@ -73,6 +73,17 @@
                                     ?>
                                 </td>
                             </tr>
+                            <tr>
+                                <th class="bg-dark text-white">Suscripción</th>
+                                <td class="table-light">
+                                    <?php 
+                                        if($this->datos['8'] == 0)
+                                            echo "No";
+                                        if($this->datos['8'] == 1)
+                                            echo "Sí";
+                                    ?>
+                                </td>
+                            </tr>
                         </table>
                         <br><button type="button" class="btn btn-link text-dark" data-toggle="modal" data-target="#confirmDelete"><i class="fas fa-trash-alt fa-2x"></i></button>
                     </div>

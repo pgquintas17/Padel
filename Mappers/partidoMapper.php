@@ -15,7 +15,9 @@ require_once('Models/partidoModel.php');
         function ADD($partido){
 
             $hora = $partido->getHora();
-            $fecha = $partido->getFecha(); 
+            $fecha = $partido->getFecha();
+            $promocion = $partido->getpromocion();
+            $creador = $partido->getCreador();
     
                 $sql = "SELECT * FROM PARTIDO";
     
@@ -25,18 +27,62 @@ require_once('Models/partidoModel.php');
                     
                     $sql = "INSERT INTO PARTIDO (
                             hora,
-                            fecha
+                            fecha,
+                            promocion,
+                            creador
                         )
                         VALUES (
                             '$hora',
-                            '$fecha'
+                            '$fecha',
+                            '$promocion',
+                            '$creador'
                         )";
 
                     if (!$this->mysqli->query($sql)){
-                        return 'Error en la inserción';
+                        return $sql;
                     } 
                     else {
-                        return 'Registro completado con éxito. Recuerda promocionar el partido para darle difusión.';
+                        return 'Partido añadido con éxito. Recuerda promocionar el partido para darle difusión.';
+                    } 
+                }
+
+        }
+
+
+        function ADDDeportista($partido){
+
+            $hora = $partido->getHora();
+            $fecha = $partido->getFecha();
+            $promocion = $partido->getpromocion();
+            $creador = $partido->getCreador();
+            $login1 = $partido->getLogin1();
+    
+                $sql = "SELECT * FROM PARTIDO";
+    
+                if (!$result = $this->mysqli->query($sql)) 
+                    return 'No se ha podido conectar con la base de datos'; 
+                else { 
+                    
+                    $sql = "INSERT INTO PARTIDO (
+                            hora,
+                            fecha,
+                            promocion,
+                            creador,
+                            login1
+                        )
+                        VALUES (
+                            '$hora',
+                            '$fecha',
+                            '$promocion',
+                            '$creador',
+                            '$login1'
+                        )";
+
+                    if (!$this->mysqli->query($sql)){
+                        return $sql;
+                    } 
+                    else {
+                        return 'Partido añadido con éxito.';
                     } 
                 }
 
@@ -76,7 +122,8 @@ require_once('Models/partidoModel.php');
                         login2,
                         login3,
                         login4,
-                        id_reserva
+                        id_reserva,
+                        creador
 
                     FROM PARTIDO
                     ORDER BY fecha DESC";
@@ -250,6 +297,23 @@ require_once('Models/partidoModel.php');
         }
 
 
+        function getCreadorById($partido){
+
+            $id_partido = $partido->getId();
+
+            $sql = "SELECT * FROM PARTIDO WHERE id_partido = '$id_partido'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['9'];
+        }
+
+
         function añadirParticipante($partido,$usuario){
 
             $login = $usuario->getLogin();
@@ -369,7 +433,9 @@ require_once('Models/partidoModel.php');
                             login2,
                             login3,
                             login4,
-                            id_reserva 
+                            id_reserva,
+                            creador
+                             
                     FROM PARTIDO 
                     WHERE promocion = 1 AND fecha >= '$fecha' 
                     ORDER BY fecha";
@@ -399,7 +465,9 @@ require_once('Models/partidoModel.php');
                             login2,
                             login3,
                             login4,
-                            id_reserva 
+                            id_reserva,
+                            creador
+
                     FROM PARTIDO 
                     WHERE   (login1 = '$login' OR login2 = '$login' 
                             OR login3 = '$login' OR login4 = '$login') 
@@ -415,8 +483,81 @@ require_once('Models/partidoModel.php');
                     return $resultado;
                 }
             }
-
         }
+
+        function getEmailParticipantes($partido){
+
+            $id = $partido->getId();
+
+            $sql = "SELECT usuario1.email as email1, usuario2.email as email2, usuario3.email as email3, usuario4.email as email4
+                    FROM partido 
+                        INNER JOIN usuario as usuario1 ON usuario1.LOGIN = partido.LOGIN1
+                        INNER JOIN usuario as usuario2 ON usuario2.LOGIN = partido.LOGIN2
+                        INNER JOIN usuario as usuario3 ON usuario3.LOGIN = partido.LOGIN3
+                        INNER JOIN usuario as usuario4 ON usuario4.LOGIN = partido.LOGIN4
+                    WHERE partido.ID_PARTIDO = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                $emails = array();
+                $emails[] = $tupla['0'];
+                $emails[] = $tupla['1'];
+                $emails[] = $tupla['2'];
+                $emails[] = $tupla['3'];
+
+                return $emails;
+            }
+        }
+
+
+        function getNumPartidosByCreador($login){
+
+            $sql = "SELECT COUNT(*) FROM PARTIDO WHERE creador = '$login'";
+
+            if (!($resultado = $this->mysqli->query($sql))) {
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $result = $resultado->fetch_array(MYSQLI_NUM);
+                return $result['0'];
+            }
+        }
+
+
+        function getPartidoByPista($pista){
+
+            $hoy = date('Y-m-d');
+
+            $sql = "SELECT id_partido, partido.hora, partido.fecha, partido.id_reserva 
+                    FROM partido 
+                        INNER JOIN RESERVA ON partido.ID_RESERVA=reserva.ID_RESERVA 
+                    WHERE reserva.ID_PISTA = '$pista' AND partido.fecha >= '$hoy' ";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return "Error en la base de datos";
+            } else{
+                $partidos = array();
+                $fila = array('id_partido', 'hora', 'fecha', 'id_reserva');
+
+                while($fila = ($resultado)->fetch_assoc()){
+
+                        $partido = new PartidoModel();
+                        $partido->setId($fila['id_partido']);
+                        $partido->setHora($fila['hora']);
+                        $partido->setFecha($fila['fecha']);
+                        $partido->setIdReserva($fila['id_reserva']);
+                        $partidos[] = $partido;
+                }
+
+                    return $partidos;
+
+            }
+        }
+
     }
 
 ?>

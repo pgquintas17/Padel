@@ -4,6 +4,7 @@ require_once('Views/baseView.php');
 require_once('Views/mensajeView.php');
 require_once('Mappers/partidoMapper.php');
 require_once('Models/usuarioModel.php');
+require_once('Mappers/usuarioMapper.php');
 require_once('Services/Utils.php');
 
 class IndexView extends baseView {
@@ -13,15 +14,18 @@ class IndexView extends baseView {
     private $errs;
     private $partidos;
     private $campeonatos;
+    private $noticias;
 
-    function __construct($msg=null, $errs=null, $usuario=null, $fila=null, $partidos=null, $filaC=null, $campeonatos=null) {
+    function __construct($msg=null, $errs=null, $usuario=null, $fila=null, $partidos=null, $filaC=null, $campeonatos=null, $filaN=null, $noticias=null) {
         $this->msg = $msg;
         $this->errs = $errs;
         parent::__construct($this->usuario);
-        $this->fila = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
+        $this->fila = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva','creador');
         $this->partidos = $partidos;
         $this->filaC = array('id_campeonato','nombre','fecha_inicio','fecha_fin','fecha_inicio_inscripciones','fecha_fin_inscripciones');
         $this->campeonatos = $campeonatos;
+        $this->filaN = array('id_noticia','titulo','fecha_creacion');
+        $this->noticias = $noticias;
     }
 
     function _render() { 
@@ -33,7 +37,40 @@ class IndexView extends baseView {
          
         <!-- Jumbotron -->
         <div  id="espacio_info" class="jumbotron">
-            <h1>Noticias</h1><br>
+    </br>
+            <!--Carrousel-->
+            <div id="demo" class="carousel slide" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src="Views/imgs/pelota.png">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="Views/imgs/pista.png">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="Views/imgs/raquetas.png">
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev " href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon text-black"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+                </div>
+            </br></br>
+
             <!-- Example row of columns -->
             <div class="row">
                 <!--PARTIDOS-->
@@ -54,6 +91,12 @@ class IndexView extends baseView {
                                 ?>
                                 <li class="list-group-item">
                                     <strong><?php echo date('d/m/Y',strtotime($this->fila['fecha'])); ?></strong><br>
+                                    <?php if((new UsuarioMapper())->getPermisoByLogin($this->fila['creador']) == 0){
+                                    ?>
+                                        <p id="centrar" class="text-danger">Partido creado por: <?php echo $this->fila['creador']; ?></p>
+                                    <?php
+                                    }
+                                    ?>
                                     <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     ¡Quedan <?php echo $numPlazas; ?> plazas libres!</p>
                                     <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Apuntarse</a></p>
@@ -81,14 +124,6 @@ class IndexView extends baseView {
                                     <p>Se jugará a las <?php echo date('H:i',strtotime($this->fila['hora'])); ?><br>
                                     Quedan <?php echo $numPlazas; ?> plazas libres</p>
                                     <?php
-                                    if($numPlazas == 0){
-                                        $id = $this->fila['id_partido'];
-                                        $url = "index.php?controller=adminPartidos&action=CERRAR&idpartido=" . $id;
-                                        ?>
-                                    <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Cerrar partido</a></p>
-                                    </li>
-                                <?php
-                                }
                             }    
                         }
                             ?>
@@ -199,11 +234,59 @@ class IndexView extends baseView {
                     ?>
                 </div>
 
-                <!--GENERIC-->
-                <div class="col-lg-4">
-                    <h5>Clases particulares y escuelas deportivas</h5>
-                    <p><img src="Views/imgs/padel.jpg" class="img-fluid" alt="Responsive image"></p>
-                    <p style="text-align:justify;">¡Dentro de muy poco podrás disfrutar aprendiendo y mejorando tu técnica de la mano de nuestros expertos profesores! Se impartirán clases particulares y también grupos adaptados por nivel. ¡No te lo pierdas!</p>
+                <!--NOTICIAS-->
+                <div id="seccion" class="col-lg-4">
+                    <?php
+                        if($this->noticias != null) {
+                            ?>
+                            <h5>Noticias</h5>
+                            <?php
+                            if(Utils::conectado()){
+                            ?>
+                                <p id="justificar">
+                                <?php
+                                while($this->filaN = ($this->noticias)->fetch_assoc()) {
+                                    $id = $this->filaN['id_noticia'];
+                                    if(Utils::nivelPermiso(0)){
+                                        $url = "index.php?controller=noticias&idnoticia=" . $id;
+                                    }
+                                    if(Utils::nivelPermiso(2)){
+                                        $url = "index.php?controller=adminNoticias&action=mostrar&idnoticia=" . $id;
+                                    }
+                                    ?>
+                                    <li class="list-group-item">
+                                        <p style="text-align:left;text-transform: uppercase;";><strong><?php echo $this->filaN['titulo']; ?></strong></p>
+                                        <p><a class="btn btn-dark" href="<?php echo $url; ?>" role="button">Leer más</a></p>
+                                    </li>
+                                    <?php
+                                    
+                                }
+                            ?>
+                            </p>
+                            <?php
+                        }
+                        else{
+                            ?>
+                                <p id="justificar">
+                                <?php
+                                while($this->filaN = ($this->noticias)->fetch_assoc()) {
+                                ?>
+                                    <li class="list-group-item">
+                                        <p style="text-align:left;text-transform: uppercase;";><strong><?php echo $this->filaN['titulo']; ?></strong></p><br>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                                </p>
+                        <?php
+                        }
+                    }
+                    else{
+                        ?>
+                        <h5>No hay noticias.</h5>
+                    <?php
+                    }
+                        ?>
                 </div>
             </div>
         </div>

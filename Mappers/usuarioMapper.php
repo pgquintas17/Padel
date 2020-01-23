@@ -22,6 +22,7 @@ require_once('Models/usuarioModel.php');
             $email = $usuario->getEmail();
             $genero = $usuario->getGenero();
             $permiso = $usuario->getPermiso();
+            $suscripcion = $usuario->getSuscripcion();
 
             if (($login <> '')){ 
     
@@ -40,7 +41,8 @@ require_once('Models/usuarioModel.php');
                                 telefono,
                                 email,
                                 genero,
-                                permiso
+                                permiso,
+                                suscripcion
                             )
                             VALUES (
                                 '$login',
@@ -50,7 +52,8 @@ require_once('Models/usuarioModel.php');
                                 '$telefono',
                                 '$email',
                                 '$genero',
-                                '$permiso'
+                                '$permiso',
+                                '$suscripcion'
                             )";
     
                         if (!$this->mysqli->query($sql)) 
@@ -77,6 +80,7 @@ require_once('Models/usuarioModel.php');
             $telefono = $usuario->getTelefono();
             $email = $usuario->getEmail();
             $genero = $usuario->getGenero();
+            $suscripcion = $usuario->getSuscripcion();
 	
             $sql = "SELECT * FROM USUARIO  WHERE (login = '$login')";
             $result = $this->mysqli->query($sql);
@@ -89,7 +93,8 @@ require_once('Models/usuarioModel.php');
                             fecha_nac = '$fechaNac',
                             telefono = '$telefono',
                             email = '$email',
-                            genero = '$genero'
+                            genero = '$genero',
+                            suscripcion = '$suscripcion'
     
                         WHERE ( login = '$login')";
     
@@ -134,8 +139,10 @@ require_once('Models/usuarioModel.php');
                         telefono,
                         email,
                         genero,
-                        permiso 
-                    FROM USUARIO";
+                        permiso,
+                        suscripcion 
+                    FROM USUARIO
+                    ORDER BY permiso DESC";
     
             if (!($resultado = $this->mysqli->query($sql)))
                 return null;
@@ -174,7 +181,7 @@ require_once('Models/usuarioModel.php');
                 return null;
             else{
                 $tupla = $resultado->fetch_array(MYSQLI_NUM);
-                return new UsuarioModel($tupla[0], $tupla[1], $tupla[2], $tupla[3], $tupla[4], $tupla[5], $tupla[6], $tupla[7]);        
+                return new UsuarioModel($tupla[0], $tupla[1], $tupla[2], $tupla[3], $tupla[4], $tupla[5], $tupla[6], $tupla[7], $tupla[8]);        
             }
         }
     
@@ -243,6 +250,80 @@ require_once('Models/usuarioModel.php');
                     $tupla = $resultado->fetch_array(MYSQLI_NUM);
                     return new UsuarioModel($tupla[0], $tupla[1], $tupla[2], $tupla[3], $tupla[4], $tupla[5], $tupla[6], $tupla[7]);        
                 }
+        }
+
+        function getPermisoByLogin($login){
+
+            $sql = "SELECT * FROM USUARIO WHERE login = '$login'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['7'];
+        }
+
+
+        function capitanPareja($usuario,$pareja1,$pareja2){
+
+            $id_pareja1 = $pareja1->getId();
+            $id_pareja2 = $pareja2->getId();
+
+            $login = $usuario->getLogin();
+
+            $sql = "SELECT capitan FROM PAREJA WHERE capitan = '$login' AND (id_pareja = '$id_pareja1' OR id_pareja = '$id_pareja2')";
+
+            $resultado = $this->mysqli->query($sql);
+            
+            if ($resultado->num_rows == 0)
+                    return false;
+                else{
+                    return true;        
+                }
+
+        }
+
+
+        function getEmailsSuscripcion(){
+
+            $sql = "SELECT email 
+                    FROM USUARIO
+                    WHERE suscripcion = '1'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            } else{
+                $emails = array();
+                $fila = array('email');
+
+                while($fila = ($resultado)->fetch_assoc()){
+
+                        $emails[] = $fila['email'];
+                }
+
+                    return $emails;
+
+            }
+        }
+
+
+        function getEmailByLogin($login){
+
+            $sql = "SELECT email
+                    FROM USUARIO
+                    WHERE login = '$login'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+            }
+
+            return $tupla['0'];
         }
 
 

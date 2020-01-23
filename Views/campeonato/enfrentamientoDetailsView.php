@@ -53,11 +53,11 @@
                             </tr>
                             <tr>
                             <th class="bg-dark text-white">Fecha</th>
-                                <td class="table-light"><?php echo date('d/m',strtotime($this->datos['2'])); ?></td>
+                                <td class="table-light"><?php if($this->datos['2'] != null){echo date('d/m',strtotime($this->datos['2']));}else{echo "Pendiente de acordar";} ?></td>
                             </tr>
                             <tr>    
                                 <th class="bg-dark text-white">Hora</th>
-                                <td class="table-light"><?php echo date('H:i',strtotime($this->datos['3'])); ?></td>
+                                <td class="table-light"><?php if($this->datos['3'] != null){echo date('H:i',strtotime($this->datos['3']));}else{echo "Pendiente de acordar";} ?></td>
                             </tr>
                             <tr>
                                 <th class="bg-dark text-white">Pareja 1</th>

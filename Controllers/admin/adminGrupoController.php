@@ -52,7 +52,10 @@
 
 									$set1->validarSet();
 									$set2->validarSet();
-									$set3->validarSet();
+
+									if($set3->getPareja1() != null){
+										$set3->validarSet();
+									}
 
 
 									$resultado = Utils::calcularResultado($set1, $set2, $set3);
@@ -148,8 +151,7 @@
 
 
 					default: 
-						echo "hey, estoy viniendo aquí";
-						header('Location: index.php?controller=adminUsuarios');
+						header('Location: index.php?controller=adminGrupos');
 						break;
 
 				}

@@ -16,7 +16,7 @@
 					case 'ADD': 
 						if ($_POST){
 							try {
-								$usuario = new UsuarioModel($_POST["inputLogin"],$_POST["inputNombre"],$_POST["inputLogin"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_REQUEST["inputPermiso"]);
+								$usuario = new UsuarioModel($_POST["inputLogin"],$_POST["inputNombre"],$_POST["inputLogin"],$_POST["inputFechaNac"],$_POST["inputTelefono"],$_POST["inputEmail"],$_POST["inputGenero"],$_REQUEST["inputPermiso"],'1');
 								$errores =  $usuario->validarRegistro();
                             	$usuarioMapper = new UsuarioMapper();
 								$respuesta = $usuarioMapper->ADD($usuario);

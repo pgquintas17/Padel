@@ -13,9 +13,11 @@ class EnfrentamientoModel {
     private $pareja1;
 	private $pareja2;  
 	private $id_reserva;
+	private $propuesta1;
+	private $propuesta2;
 	
 
- 	function __construct($id_enfrentamiento=null,$resultado=null,$fecha=null,$hora=null,$set1=null,$set2=null,$set3=null,$pareja1=null,$pareja2=null,$id_reserva=null){
+ 	function __construct($id_enfrentamiento=null,$resultado=null,$fecha=null,$hora=null,$set1=null,$set2=null,$set3=null,$pareja1=null,$pareja2=null,$id_reserva=null,$propuesta1=null,$propuesta2=null){
         $this->id_enfrentamiento = $id_enfrentamiento;
         $this->resultado = $resultado; 
 		$this->fecha = $fecha; 
@@ -25,7 +27,9 @@ class EnfrentamientoModel {
         $this->set3 = $set3; 
         $this->pareja1 = $pareja1;
 		$this->pareja2 = $pareja2;
-		$this->id_reserva = $id_reserva; 
+		$this->id_reserva = $id_reserva;
+		$this->propuesta1 = $propuesta1;
+		$this->propuesta2 = $propuesta2; 
 	}
 
 
@@ -77,6 +81,14 @@ class EnfrentamientoModel {
 		return $this->id_grupo;
 	}
 
+	public function getPropuesta1(){
+		return $this->propuesta1;
+	}
+
+	public function getPropuesta2(){
+		return $this->propuesta2;
+	}
+
 
 	// setter
 
@@ -122,6 +134,14 @@ class EnfrentamientoModel {
 
 	public function setIdGrupo($id_grupo){
 		$this->id_grupo = $id_grupo;
+	}
+
+	public function setPropuesta2($propuesta2){
+		$this->propuesta2 = $propuesta2;
+	}
+
+	public function setPropuesta1($propuesta1){
+		$this->propuesta1 = $propuesta1;
 	}
 
 

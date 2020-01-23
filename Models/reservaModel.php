@@ -2,11 +2,12 @@
 <?php
     
 class ReservaModel {
- 	var $id_reserva; 
- 	var $id_pista;
- 	var $hora; 
-    var $fecha;
-    var $login;
+	
+ 	private $id_reserva; 
+ 	private $id_pista;
+ 	private $hora; 
+    private $fecha;
+    private $login;
 	
 
  	function __construct($id_reserva=null,$id_pista=null,$hora=null,$fecha=null,$login=null){

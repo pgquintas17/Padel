@@ -18,7 +18,7 @@
             $this->msg = $msg;
             $this->errs = $errs;
             parent::__construct($this->usuario);
-            $this->filaPartidos = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva');
+            $this->filaPartidos = array('id_partido','hora','fecha','promocion','login1','login2','login3','login4','id_reserva','creador');
             $this->listaPartidos = $listaPartidos;
             $this->filaHoras = array('id','hora');
             $this->listaHoras = $listaHoras;

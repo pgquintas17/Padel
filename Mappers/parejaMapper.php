@@ -196,11 +196,11 @@ require_once('Models/horaModel.php');
             $catcampMapper = new CampeonatoCategoriaMapper();
             $sexonivel = $catcampMapper->getSexonivelById($catcamp);
 
+            var_dump($sexonivel);
+
             $id_camp = $catcampMapper->getCampeonatoByCategoria($catcamp);
 
-            echo "sexonivel   "; var_dump($sexonivel);
-
-            if($sexonivel = 'M1' || $sexonivel = 'M2' || $sexonivel = 'M3'){
+            if($sexonivel == 'M1' || $sexonivel == 'M2' || $sexonivel == 'M3'){
 
                 $sql = "SELECT * FROM PAREJA 
                         INNER JOIN (CAMPEONATO_CATEGORIA 
@@ -215,7 +215,7 @@ require_once('Models/horaModel.php');
                                 OR sexonivel = 'M3') AND id_campeonato = '$id_camp'";
             }
             
-            if($sexonivel = 'F1' || $sexonivel = 'F2' || $sexonivel = 'F3'){
+            if($sexonivel == 'F1' || $sexonivel == 'F2' || $sexonivel == 'F3'){
 
                 $sql = "SELECT * FROM PAREJA 
                         INNER JOIN (CAMPEONATO_CATEGORIA 
@@ -230,7 +230,8 @@ require_once('Models/horaModel.php');
                                 OR sexonivel = 'F3') AND id_campeonato = '$id_camp'";
             }
 
-            if($sexonivel = 'MX1' || $sexonivel = 'MX2' || $sexonivel = 'MX3'){
+            if($sexonivel == 'MX1' || $sexonivel == 'MX2' || $sexonivel == 'MX3'){
+                
                 $sql = "SELECT * FROM PAREJA 
                         INNER JOIN (CAMPEONATO_CATEGORIA 
                                     INNER JOIN CATEGORIA ON categoria.id_categoria = campeonato_categoria.id_categoria)
@@ -245,6 +246,8 @@ require_once('Models/horaModel.php');
             }
 
             $resultado = $this->mysqli->query($sql);
+
+            var_dump($sql);
             
             if ($resultado->num_rows != 0){
                 return true;
@@ -268,9 +271,10 @@ require_once('Models/horaModel.php');
             }
             else{
                 $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                return $tupla['1'];
             }
 
-            return $tupla['1'];
+            
         }
 
 
@@ -319,8 +323,67 @@ require_once('Models/horaModel.php');
                         $parejas[] = $pareja;
                 }
 
-                    return $parejas;
+                return $parejas;
 
+            }
+        }
+
+
+        function getMiembroById($pareja){
+
+            $id = $pareja->getId();
+
+            $sql= "SELECT miembro FROM pareja WHERE id_pareja = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                return $tupla['0'];
+            }
+        }
+
+
+        function esCapiDe($pareja){
+
+            $id = $pareja->getId();
+            $capi = $pareja->getCapitan();
+
+            $sql= "SELECT * FROM pareja WHERE id_pareja = '$id' AND capitan = '$capi'";
+
+            $resultado = $this->mysqli->query($sql);
+
+            if ($resultado->num_rows != 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+        
+        function getEmailsPareja($pareja){
+
+            $id = $pareja->getId();
+
+            $sql= "SELECT usuario1.email as email1, usuario2.email as email2
+                   FROM pareja 
+                        INNER JOIN usuario usuario1 ON usuario1.login = pareja.capitan
+                        INNER JOIN usuario usuario2 ON usuario2.login = pareja.miembro
+                   WHERE id_pareja = '$id'";
+
+            if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+            else{
+
+                $tupla = $resultado->fetch_array(MYSQLI_NUM);
+                $emails = array();
+                $emails[] = $tupla['0'];
+                $emails[] = $tupla['1'];
+
+                return $emails;
             }
         }
 

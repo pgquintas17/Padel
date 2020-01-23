@@ -6,7 +6,7 @@ USE `abp35_padelweb`;
 
 -- admin
 
-INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO) VALUES ('admin','admin','admin','1995-01-29','666666666','admin@support.com','femenino',2);
+INSERT INTO usuario(LOGIN,NOMBRE,PASSWORD,FECHA_NAC,TELEFONO,EMAIL,GENERO,PERMISO,SUSCRIPCION) VALUES ('admin','admin','admin','1995-01-29','666666666','admin@support.com','femenino',2,0);
 
 -- horas
 

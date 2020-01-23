@@ -92,7 +92,18 @@ header a:hover {
 
 	background-color: #222;
 	border-style: solid;
+	
 
+}
+
+#noticia{
+	margin: inherit;
+    text-align: justify;
+	background-color: white;
+	border-style: solid;
+	border-width: 0.5px;
+	border-radius: 1%;
+	padding: 20px;
 }
 
 #tablas{
@@ -122,3 +133,37 @@ body {
 	margin-bottom: 0px;
 	padding-bottom: 0px;
 }
+
+.carousel-inner > .carousel-item {
+	width: 800; /* width of container */
+	height: 350px; /* height of container */
+    object-fit: cover;
+ }
+
+ .carousel-inner > .carousel-item > img {
+	height: 350px;
+ }
+
+
+ .carousel-control-prev-icon,
+ .carousel-control-next-icon {
+   height: 100px;
+   width: 100px;
+   background-size: 100%, 100%;
+   background-image: none;
+ }
+ 
+ .carousel-control-next-icon:after
+ {
+   content: '»';
+   font-size: 35px;
+   font-weight: bolder;
+   color: black;
+ }
+ 
+ .carousel-control-prev-icon:after {
+   content: '«';
+   font-size: 35px;
+   font-weight: bolder;
+   color: black;
+ }

@@ -10,10 +10,11 @@ class UsuarioModel {
  	private $telefono; 
     private $email; 
     private $genero; 
-    private $permiso; 
+	private $permiso;
+	private $suscripcion;
 	
 	
- 	function __construct($login=null,$nombre=null,$password=null,$fecha_nac=null,$telefono=null,$email=null,$genero=null,$permiso=null){
+ 	function __construct($login=null,$nombre=null,$password=null,$fecha_nac=null,$telefono=null,$email=null,$genero=null,$permiso=null,$suscripcion=null){
         $this->login = $login;
         $this->nombre = $nombre;
  		$this->password = $password; 
@@ -21,7 +22,8 @@ class UsuarioModel {
         $this->telefono = $telefono;  
 		$this->email = $email; 
         $this->genero = $genero;
-        $this->permiso = $permiso;  
+		$this->permiso = $permiso;
+		$this->suscripcion = $suscripcion;  
 	}
 
 	
@@ -59,6 +61,10 @@ class UsuarioModel {
 		return $this->permiso;
 	}
 
+	public function getSuscripcion(){
+		return $this->suscripcion;
+	}
+
 	//setters
 
 	public function setLogin($login){
@@ -91,7 +97,11 @@ class UsuarioModel {
 
 	public function setPermiso($permiso){
 		$this->permiso = $permiso;
-	} 
+	}
+	
+	public function setSuscripcion($suscripcion){
+		$this->suscripcion = $suscripcion;
+	}
 	
 	
 

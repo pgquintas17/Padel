@@ -29,6 +29,14 @@
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+                
+                <link type="text/css" rel="stylesheet" href="./Views/css/widgEditor/info.css">
+                <link type="text/css" rel="stylesheet" href="./Views/css/widgEditor/main.css">
+                <link type="text/css" rel="stylesheet" href="./Views/css/widgEditor/widgEditor.css">
+                <script type="text/javascript" src="./Services/widgEditor/widgEditor.js"></script>
+            
             </head>
             <body>
             <header>
@@ -44,6 +52,9 @@
                         if(Utils::conectado()){ //Si está conectado
                             if(Utils::nivelPermiso(2)){ //Si es admin
                         ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/index.php?controller=adminNoticias">NOTICIAS</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/index.php?controller=adminPistas">PISTAS</a>
                             </li>
@@ -62,6 +73,9 @@
                         ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="/index.php?controller=reservas&action=reservar">RESERVAR PISTA</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/index.php?controller=partidos&action=fecha">AÑADIR PARTIDO</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/index.php?controller=campeonatos">CAMPEONATOS</a>

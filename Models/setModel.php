@@ -3,8 +3,8 @@
     
 class SetModel {
 
-    var $pareja1;  
-	var $pareja2; 
+    private $pareja1;  
+	private $pareja2; 
 	
 
  	function __construct($pareja1=null,$pareja2=null){
@@ -40,7 +40,7 @@ class SetModel {
 		$errores = array();
 		
 		if(($this->pareja1 == null && $this->pareja2 != null) || ($this->pareja1 != null && $this->pareja2 == null)){
-			$errores['puntuacion0'] = "Puntuación de set no válida.";
+			$errores['puntuacion0'] = "1Puntuación de set no válida.";
 		}
 
 		if($this->pareja1 < 6 && $this->pareja2 < 6){
@@ -51,11 +51,11 @@ class SetModel {
 			$errores['puntuacion2'] = "Puntuación de set no válida.";
 		}
 
-		if($this->pareja1 == 7 && ($this->pareja2 != 5 && $this->pareja2 != 6)){
+		if(($this->pareja1 == 7 && ($this->pareja2 != 5 && $this->pareja2 != 6)) || ($this->pareja2 == 7 && ($this->pareja1 != 5 && $this->pareja1 != 6))){
 			$errores['puntuacion3'] = "Puntuación de set no válida.";
 		}
 
-		if($this->pareja1 == 6 & $this->pareja2 > 4){
+		if(($this->pareja1 == 6 && $this->pareja2 > 4 && $this->pareja2 != 7) || ($this->pareja2 == 6 && $this->pareja1 > 4 && $this->pareja1 != 7)){
 			$errores['puntuacion4'] = "Puntuación de set no válida.";
 		}
 
